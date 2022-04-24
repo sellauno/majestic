@@ -21201,7 +21201,8 @@ fieldset:disabled .btn {
   border-radius: 0.5rem;
   border-top-left-radius: 0.5rem !important;
   border-bottom-left-radius: 0.5rem !important;
-  padding-left: 35px !important;
+  /* padding-left: 35px !important; */
+  padding-left: 10px !important;
   border-left-width: 1px;
 }
 

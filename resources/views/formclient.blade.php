@@ -6,62 +6,85 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>New Client</h6>
+                    <h5>Client Baru</h5>
                 </div>
                 <div class="card-body">
                     <form role="form text-left">
-                    <div class="row form-group">
-                        <div class="col col-md-2"><label>Nama client</label></div>
-                        <div class="col-12 col-md-9">
-                            <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Nama client</label></div>
+                            <div class="col-12 col-md-6">
+                                <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-1"><label>Reels</label></div>
-                        <div class="col-12 col-md-1">
-                            <input type="number" class="form-control" placeholder="Name" aria-label="Name">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Tanggal Mulai</label></div>
+                            <div class="col-12 col-md-3">
+                                <input type="date" class="form-control" placeholder="Name" aria-label="Name">
+                            </div>
                         </div>
-                        <div class="col col-md-1"><label>Tiktok</label></div>
-                        <div class="col-12 col-md-1">
-                            <input type="number" class="form-control" placeholder="Name" aria-label="Name">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Tanggal Selesai</label></div>
+                            <div class="col-12 col-md-3">
+                                <input type="date" class="form-control" placeholder="Name" aria-label="Name">
+                            </div>
                         </div>
-                        <div class="col col-md-1"><label>Feeds</label></div>
-                        <div class="col-12 col-md-1">
-                            <input type="number" class="form-control" placeholder="Name" aria-label="Name">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Reels</label></div>
+                            <div class="col-12 col-md-2">
+                                <input type="number" class="form-control" placeholder="0" aria-label="Name">
+                            </div>
+                            <div class="col col-md-2"><label>Tiktok</label></div>
+                            <div class="col-12 col-md-2">
+                                <input type="number" class="form-control" placeholder="0" aria-label="Name">
+                            </div>
                         </div>
-                        <div class="col col-md-1"><label>Stories</label></div>
-                        <div class="col-12 col-md-1">
-                            <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Feeds</label></div>
+                            <div class="col-12 col-md-2">
+                                <input type="number" class="form-control" placeholder="0" aria-label="Name">
+                            </div>
+                            <div class="col col-md-2"><label>Stories</label></div>
+                            <div class="col-12 col-md-2">
+                                <input type="text" class="form-control" placeholder="0" aria-label="Name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-2"><label>Nama client</label></div>
-                        <div class="col-12 col-md-9">
-                            <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        <br>
+                        <div class="row form-group">
+                            <h6>Team</h6>
                         </div>
-                    </div>
-                        <div class="mb-3">
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Penanggung Jawab</label></div>
+                            <div class="col-12 col-md-6 nav-item">
+                                <select id="role" name="role" class="dropdown form-control">
+                                    <option value="admin1">Admin Front Office</option>
+                                    <option value="admin2">Admin Back Office</option>
+                                    <option value="superadmin">Super Admin</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Email">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
-                        </div>
-                        <div class="form-check form-check-info text-left">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                            </label>
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Anggota</label></div>
+                            <div class="col-12 col-md-6">
+                                <div class="dropdown pe-4">
+                                    <button type="button" name="add" id="add" class="btn btn-success btn-xs cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-plus"></i> Add
+                                    </button>
+                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="text-center">
-                            <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
+                            <button type="button" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                         </div>
-                        <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
