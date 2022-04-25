@@ -65,9 +65,10 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Anggota</label></div>
                             <div class="col-12 col-md-6">
+                                
                                 <div class="dropdown pe-4">
                                     <button type="button" name="add" id="add" class="btn btn-success btn-xs cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-plus"></i> Add
+                                        <i class="fas fa-plus"></i> Tambah Anggota
                                     </button>
                                     <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                                         <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
