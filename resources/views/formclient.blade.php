@@ -1,5 +1,11 @@
 @extends('layouts.layout')
 
+@section('title', 'Form Client')
+
+@section('breadcrumb')
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Form Client</li>
+@endsection
+
 @section('content')
 <div class="container-fluid py-4">
     <div class="row">

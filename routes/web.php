@@ -30,3 +30,7 @@ Route::get('/client', function () {
 Route::get('/form', function () {
     return view('formclient');
 })->name('formclient');
+
+Route::get('/navs', function () {
+    return view('navs');
+})->name('navs');
