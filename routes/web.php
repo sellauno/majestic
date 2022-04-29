@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +35,7 @@ Route::get('/form', function () {
 Route::get('/navs', function () {
     return view('navs');
 })->name('navs');
+
+Route::get('test', function() {
+    Storage::disk('google')->put('test.txt', 'Hello World');
+});
