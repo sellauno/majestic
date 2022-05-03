@@ -2,6 +2,8 @@
 
 @section('title', 'Dashboard')
 
+@section('dashboard', 'active')
+
 @section('breadcrumb')
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
 @endsection
@@ -37,7 +39,7 @@
           <tbody>
             <tr>
               <td>
-                <a href="{{route('client')}}">
+                <a href="{{route('readClient')}}">
                   <div class="d-flex px-2">
                     <div>
                       <img src="{{asset('btsr/assets/img/small-logos/logo-spotify.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
@@ -49,16 +51,52 @@
                 </a>
               </td>
               <td>
-                <p class="text-sm font-weight-bold mb-0">5</p>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">5</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
               </td>
               <td>
-                <p class="text-sm font-weight-bold mb-0">5</p>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">5</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
               </td>
               <td>
-                <p class="text-sm font-weight-bold mb-0">5</p>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">5</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
               </td>
               <td>
-                <p class="text-sm font-weight-bold mb-0">5</p>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">5</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
               </td>
               <td class="align-middle text-center">
                 <div class="d-flex align-items-center justify-content-center">
