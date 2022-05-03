@@ -18,7 +18,7 @@
             <h6 class="mb-0">Projects</h6>
           </div>
           <div class="col-6 text-end">
-            <a class="btn bg-gradient-primary mb-0" href="{{route('formclient')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
+            <a class="btn bg-gradient-primary mb-0" href="{{route('addProject')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
           </div>
         </div>
       </div>

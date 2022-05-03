@@ -49,6 +49,6 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         $client->delete();
-        return redirect('/dashboard');
+        return redirect('/clients');
     }
 }

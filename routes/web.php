@@ -35,10 +35,10 @@ Route::post('/updateclient/{id}', 'ClientController@updateClient')->name('update
 Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient');
 
 // Project
-Route::get('/form', function () {
-    return view('addproject');
-})->name('formclient');
+Route::get('/addproject', 'ProjectController@addProject')->name('addProject');
 
+
+// Percobaan
 Route::get('/navs', function () {
     return view('navs');
 })->name('navs');
