@@ -15,23 +15,30 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Dashboard
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 
-Route::get('/client', function () {
-    return view('client');
-})->name('client');
+// Client
+Route::get('/clients', 'ClientController@allClient')->name('allClient');
+Route::get('/client', 'ClientController@readClient')->name('readClient');
+Route::get('/addclient', 'ClientController@addClient')->name('addClient');
+Route::post('/createclient', 'ClientController@createClient')->name('createClient');
+Route::get('/editclient/{id}', 'ClientController@editClient')->name('editClient');
+Route::post('/updateclient/{id}', 'ClientController@updateClient')->name('updateClient');
+Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient');
 
-Route::get('/form', function () {
-    return view('formclient');
-})->name('formclient');
+// Project
+Route::get('/addproject', 'ProjectController@addProject')->name('addProject');
 
+
+// Percobaan
 Route::get('/navs', function () {
     return view('navs');
 })->name('navs');

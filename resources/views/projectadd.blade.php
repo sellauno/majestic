@@ -2,6 +2,8 @@
 
 @section('title', 'Form Client')
 
+@section('dashboard', 'active')
+
 @section('breadcrumb')
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Form Client</li>
 @endsection
@@ -16,10 +18,23 @@
                 </div>
                 <div class="card-body">
                     <form role="form text-left">
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Nama client</label></div>
+                        @csrf
+                        <!-- <div class="row form-group">
+                            <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">
                                 <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                            </div>
+                        </div> -->
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Client</label></div>
+                            <div class="col-12 col-md-6">
+                                <div class="dropdown">
+                                    <select id="role" name="role" class="form-control">
+                                        @foreach($clients as $client)
+                                        <option value="{{$client->idClient}}">{{$client->namaClient}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -62,24 +77,24 @@
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
                                 <select id="role" name="role" class="dropdown form-control">
-                                    <option value="admin1">Admin Front Office</option>
-                                    <option value="admin2">Admin Back Office</option>
-                                    <option value="superadmin">Super Admin</option>
+                                    @foreach($employees as $employee)
+                                    <option value="{{$employee->id}}">{{$employee->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Anggota</label></div>
                             <div class="col-12 col-md-6">
-                                
+
                                 <div class="dropdown pe-4">
                                     <button type="button" name="add" id="add" class="btn btn-success btn-xs cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-plus"></i> Tambah Anggota
                                     </button>
                                     <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
+                                        @foreach($employees as $employee)
+                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">{{$employee->name}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
