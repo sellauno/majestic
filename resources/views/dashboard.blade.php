@@ -1,5 +1,11 @@
 @extends('layouts.layout')
 
+@section('title', 'Dashboard')
+
+@section('breadcrumb')
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+@endsection
+
 @section('content')
 <div class="row">
   <div class="col-12">
@@ -10,7 +16,7 @@
             <h6 class="mb-0">Projects</h6>
           </div>
           <div class="col-6 text-end">
-            <a class="btn bg-gradient-primary mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
+            <a class="btn bg-gradient-primary mb-0" href="{{route('formclient')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
           </div>
         </div>
       </div>
@@ -183,6 +189,18 @@
               </td>
               <td>
                 <p class="text-sm font-weight-bold mb-0">5</p>
+                <!-- <td class="align-middle">
+                <div class="dropdown float-lg-end pe-4">
+                  <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-exclamation-circle text-xs"></i>
+                  </button>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
+                  </ul>
+                </div>
+              </td> -->
               </td>
               <td>
                 <p class="text-sm font-weight-bold mb-0">5</p>

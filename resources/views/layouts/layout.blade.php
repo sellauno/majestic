@@ -33,10 +33,11 @@
   <link href="{{asset('btsr/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('btsr/assets/css/soft-ui-dashboard.css?v=1.0.5')}}" rel="stylesheet" />
+  <!-- <link href="{{asset('btsr/assets/css/soft-ui-dashboard.min.css')}}" rel="stylesheet" /> -->
   <!-- JQUERY -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -52,7 +53,7 @@
     <div>
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/dashboard.html">
+          <a class="nav-link  active" href="">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -71,6 +72,7 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+        
         <!-- <li class="nav-item">
           <a class="nav-link  " href="../pages/tables.html">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -229,9 +231,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+            @yield('breadcrumb')
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder mb-0">@yield('title')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -375,9 +377,36 @@
       </footer>
     </div>
   </main>
+  <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+    <div class="container">
+        <a class="navbar-brand" href="#">Laravel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+   
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                    </li>
+                @endguest
+            </ul>
+  
+        </div>
+    </div>
+</nav>
   <!--   Core JS Files   -->
   <script src="{{asset('btsr/assets/js/core/popper.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/core/bootstrap.min.js')}}"></script>
+  <script src="{{asset('btsr/assets/js/core/soft-ui-dashboard.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>

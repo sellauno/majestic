@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +31,29 @@ Route::get('/client', function () {
 Route::get('/form', function () {
     return view('formclient');
 })->name('formclient');
+
+Route::get('/navs', function () {
+    return view('navs');
+})->name('navs');
+
+Route::get('test', function() {
+    Storage::disk('google')->put('test.txt', 'Hello World');
+});
+Route::get('/post/create', 'PostController@create')->name('post.create');
+Route::post('/post/store', 'PostController@store')->name('post.store');
+
+Route::get('/posts', 'PostController@index')->name('posts');
+Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
+
+Route::get('login', 'AuthController@index')->name('login');
+Route::post('post-login', 'AuthController@postLogin')->name('login.post'); 
+Route::get('registration', 'AuthController@registration')->name('register');
+Route::post('post-registration', 'AuthController@postRegistration')->name('register.post'); 
+Route::get('dashboard', 'AuthController@dashboard'); 
+Route::get('logout', 'AuthController@logout')->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('profile', 'ProfileController@edit')->name('profile.edit');
+    Route::patch('profile', 'ProfileController@update')
+    ->name('profile.update');
+});   
