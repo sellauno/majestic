@@ -59,7 +59,7 @@ Route::get('login', 'AuthController@index')->name('login');
 Route::post('post-login', 'AuthController@postLogin')->name('login.post'); 
 Route::get('registration', 'AuthController@registration')->name('register');
 Route::post('post-registration', 'AuthController@postRegistration')->name('register.post'); 
-Route::get('dashboard', 'AuthController@dashboard'); 
+// Route::get('dashboard', 'AuthController@dashboard'); 
 Route::get('logout', 'AuthController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function () {
