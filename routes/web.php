@@ -39,13 +39,13 @@ Route::get('/addproject', 'ProjectController@addProject')->name('addProject');
 
 
 // Percobaan
-Route::get('/navs', function () {
-    return view('navs');
-})->name('navs');
-
 Route::get('test', function() {
     Storage::disk('google')->put('test.txt', 'Hello World');
 });
+
+Route::get('cbx', function() {
+    return view('cbxcoba');
+})->name('cbx');
 
 Route::get('/add', function () {
     return view('addcoba');
