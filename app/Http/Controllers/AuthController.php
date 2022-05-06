@@ -67,8 +67,8 @@ class AuthController extends Controller
            
         $data = $request->all();
         $check = $this->create($data);
-         
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        return redirect('/dashboard');
+        // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
     
     /**

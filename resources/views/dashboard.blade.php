@@ -37,6 +37,100 @@
             </tr>
           </thead>
           <tbody>
+            @foreach($projects as $project)
+            <tr>
+              <td>
+                <a href="{{route('readClient')}}">
+                  <div class="d-flex px-2">
+                    <div>
+                      <img src="{{asset('btsr/assets/img/small-logos/logo-spotify.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                    </div>
+                    <div class="my-auto">
+                      <h6 class="mb-0 text-sm">{{$project->namaClient}}</h6>
+                    </div>
+                  </div>
+                </a>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">{{$project->reels}}</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">{{$project->tiktok}}</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">{{$project->feeds}}</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="dropdown">
+                  <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
+                    <p class="text-sm font-weight-bold mb-0">{{$project->stories}}</p>
+                  </div>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                  </ul>
+                </div>
+              </td>
+              <td class="align-middle text-center">
+                <div class="d-flex align-items-center justify-content-center">
+                  <span class="me-2 text-xs font-weight-bold">60%</span>
+                  <div>
+                    <div class="progress">
+                      <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle">
+                <div class="dropdown float-lg-end pe-4">
+                  <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-exclamation-circle text-xs"></i>
+                  </button>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
+                    <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
+                  </ul>
+                  <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
+                    Action
+                  </button>
+                  <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                    <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
+                    <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="javascript:;"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            @endforeach
             <tr>
               <td>
                 <a href="{{route('readClient')}}">
@@ -175,7 +269,7 @@
                 </div>
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>
                 <div class="d-flex px-2">
                   <div>
@@ -235,7 +329,7 @@
               </td>
               <td>
                 <p class="text-sm font-weight-bold mb-0">5</p>
-                <!-- <td class="align-middle">
+                <td class="align-middle">
                 <div class="dropdown float-lg-end pe-4">
                   <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-exclamation-circle text-xs"></i>
@@ -246,7 +340,7 @@
                     <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
                   </ul>
                 </div>
-              </td> -->
+              </td>
               </td>
               <td>
                 <p class="text-sm font-weight-bold mb-0">5</p>
@@ -374,7 +468,7 @@
                   </ul>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
         <!-- </div> -->

@@ -35,8 +35,31 @@ Route::post('/updateclient/{id}', 'ClientController@updateClient')->name('update
 Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient');
 
 // Project
+Route::get('/projects', 'ProjectController@allProject')->name('allProject');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject');
+Route::post('/createproject', 'ProjectController@createProject')->name('createProject');
+Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProject');
+Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject');
+Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject');
 
+
+// Komentar
+Route::get('/posts', 'PostController@index')->name('posts');
+Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
+
+// Authentication
+Route::get('login', 'AuthController@index')->name('login');
+Route::post('post-login', 'AuthController@postLogin')->name('login.post'); 
+Route::get('registration', 'AuthController@registration')->name('register');
+Route::post('post-registration', 'AuthController@postRegistration')->name('register.post'); 
+// Route::get('dashboard', 'AuthController@dashboard'); 
+Route::get('logout', 'AuthController@logout')->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('profile', 'ProfileController@edit')->name('profile.edit');
+    Route::patch('profile', 'ProfileController@update')
+    ->name('profile.update');
+});   
 
 // Percobaan
 Route::get('test', function() {
@@ -52,18 +75,7 @@ Route::get('cbx', function() {
 Route::get('/add', function () {
     return view('addcoba');
 })->name('add');
-Route::get('/posts', 'PostController@index')->name('posts');
-Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 
-Route::get('login', 'AuthController@index')->name('login');
-Route::post('post-login', 'AuthController@postLogin')->name('login.post'); 
-Route::get('registration', 'AuthController@registration')->name('register');
-Route::post('post-registration', 'AuthController@postRegistration')->name('register.post'); 
-// Route::get('dashboard', 'AuthController@dashboard'); 
-Route::get('logout', 'AuthController@logout')->name('logout');
-
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('profile', 'ProfileController@edit')->name('profile.edit');
-    Route::patch('profile', 'ProfileController@update')
-    ->name('profile.update');
-});   
+Route::get('/layout', function () {
+    return view('coba');
+})->name('layout');

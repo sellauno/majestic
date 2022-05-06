@@ -246,37 +246,23 @@
             <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="javascript:;"><i class="fa fa-trash text-xs"></i> Delete</a></li>
           </ul>
           <ul class="navbar-nav  justify-content-end">
-          <li class="nav-item dropdown pe-2 d-flex align-items-center">
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
+                <li class="mb-1">
                   <a class="dropdown-item border-radius-md" href="{{route('profile.edit')}}">
                     Profile
                   </a>
                 </li>
-                <li class="mb-2">
+                <li class="mb-0">
                   <a class="dropdown-item border-radius-md" href="{{route('logout')}}">
                     Logout
                   </a>
                 </li>
               </ul>
             </li>
-            <!-- <li class="nav-item d-flex align-items-center"> -->
-            <!-- <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a> -->
-            <!-- <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-user me-sm-1"></i>
-              </button>
-              <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
-              </ul> -->
-            <!-- </li> -->
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">

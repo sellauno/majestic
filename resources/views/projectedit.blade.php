@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Tambah Project')
+@section('title', 'Edit Project')
 
 @section('dashboard', 'active')
 
@@ -17,15 +17,9 @@
                     <h5>Project Baru</h5>
                 </div>
                 <div class="card-body">
-                    <form role="form text-left" action="{{route('createProject')}}" method="POST">
+                    <form role="form text-left" action="{{route('editProject')}}" method="POST">
                         @csrf
                         <input type="hidden" name="status" value="New Project!">
-                        <!-- <div class="row form-group">
-                            <div class="col col-md-2"><label>Client</label></div>
-                            <div class="col-12 col-md-6">
-                                <input type="text" class="form-control" placeholder="Name" aria-label="Name">
-                            </div>
-                        </div> -->
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">
@@ -78,8 +72,22 @@
                         </div>
                         <br>
 
-                        <!-- TEAM -->
                         <div class="row form-group">
+                            <div class="col col-md-2"><label>Penanggung Jawab</label></div>
+                            <div class="col-12 col-md-6 nav-item">
+                                <select id="idPJ" name="idPJ" class="dropdown form-control">
+                                    <option value="1" id="inlineCheckbox1">1</option>
+                                    <option value="2" id="inlineCheckbox2">2</option>
+                                    <option value="3" id="inlineCheckbox3">3</option>
+                                    <!-- @foreach($employees as $employee)
+                                    <option value="{{$employee->id}}" id="inlineCheckbox{{$employee->id}}">{{$employee->name}}</option>
+                                    @endforeach -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- TEAM -->
+                        <!-- <div class="row form-group">
                             <h6>Team</h6>
                         </div>
 
@@ -119,8 +127,8 @@
                                 </div>
                                 @endforeach
 
-                                <!-- TOMBOL + Tambah Anggota -->
-                                <!-- <div class="dropdown pe-4">
+                                TOMBOL + Tambah Anggota
+                                <div class="dropdown pe-4">
                                     <button type="button" name="add" id="add" class="btn btn-success btn-xs cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-plus"></i> Tambah Anggota
                                     </button>
@@ -129,9 +137,9 @@
                                         <li><a class="dropdown-item border-radius-md" href="javascript:;">{{$employee->name}}</a></li>
                                         @endforeach
                                     </ul>
-                                </div> -->
+                                </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- END TEAM -->
 
                         <div class="text-center">

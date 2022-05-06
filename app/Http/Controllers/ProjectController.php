@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+
+    public function allProject()
+    {
+        $projects = Project::all();
+        $clients = Client::all();
+        return view('dashboard', ['projects' => $projects, 'clients' => $clients]);
+    }
     public function addProject()
     {
         $clients = Client::all();
@@ -16,15 +23,17 @@ class ProjectController extends Controller
         return view('projectadd', ['clients' => $clients, 'employees' => $employees]);
     }
 
-    public function createProject(Request $request, $id)
+    public function createProject(Request $request)
     {
         Project::create([
+            'idClient' => $request->idClient,
             'reels' => $request->reels,
             'tiktok' => $request->tiktok,
             'feeds' => $request->feeds,
             'stories' => $request->stories,
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
+            'idPJ' => $request->idPJ,
             'status' => $request->status
         ]);
         return redirect('/dashboard');
@@ -32,7 +41,9 @@ class ProjectController extends Controller
 
     public function editProject($id)
     {
-        return view('projectedit');
+        $clients = Client::find($id);
+        $employees = User::all()->where('role', '=', '1');
+        return view('projectedit', ['clients' => $clients, 'employees' => $employees]);
     }
 
     public function updateProject(Request $request, $id)

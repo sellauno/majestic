@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    protected $fillable = ['idClient', 'reels', 'tiktok', 'feeds', 'stories', 'tglMulai', 'tglSelesai', 'status'];
+    protected $fillable = ['idClient', 'reels', 'tiktok', 'feeds', 'stories', 'tglMulai', 'tglSelesai', 'status', 'idPJ'];
     public $primaryKey = 'idProject';
 }
