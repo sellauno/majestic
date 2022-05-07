@@ -6,6 +6,7 @@ use App\Client;
 use App\Project;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -41,9 +42,11 @@ class ProjectController extends Controller
 
     public function editProject($id)
     {
-        $clients = Client::find($id);
+        $projects = DB::table('projects')
+        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->get();
         $employees = User::all()->where('role', '=', '1');
-        return view('projectedit', ['clients' => $clients, 'employees' => $employees]);
+        return view('projectedit', ['projects' => $projects, 'employees' => $employees]);
     }
 
     public function updateProject(Request $request, $id)
@@ -56,6 +59,7 @@ class ProjectController extends Controller
         $project->tglMulai = $request->tglMulai;
         $project->tglSelesai = $request->tglSelesai;
         $project->status = $request->status;
+        $project->idPJ = $request->idPJ;
         $project->save();
         return redirect('/dashboard');
     }
