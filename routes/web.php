@@ -27,7 +27,6 @@ Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 
 // Client
 Route::get('/clients', 'ClientController@allClient')->name('allClient');
-Route::get('/client', 'ClientController@readClient')->name('readClient');
 Route::get('/addclient', 'ClientController@addClient')->name('addClient');
 Route::post('/createclient', 'ClientController@createClient')->name('createClient');
 Route::get('/editclient/{id}', 'ClientController@editClient')->name('editClient');
@@ -42,6 +41,8 @@ Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProj
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject');
 
+
+Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project');
 
 // Komentar
 Route::get('/posts', 'PostController@index')->name('posts');

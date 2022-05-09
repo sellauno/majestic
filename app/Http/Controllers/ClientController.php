@@ -13,11 +13,6 @@ class ClientController extends Controller
         return view('clientall', ['clients' => $clients]);
     }
 
-    public function readClient()
-    {
-        return view('client');
-    }
-
     public function addClient()
     {
         return view('clientadd');
