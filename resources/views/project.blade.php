@@ -107,9 +107,17 @@
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">John Michael</h6>
-                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
                                                     </div>
                                                 </div>
+                                                <!-- <div class="d-flex px-2 py-1">
+                                                     <div>
+                                                        <img src="{{asset('btsr/assets/img/team-2.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">John Michael</h6>
+                                                        <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                                                    </div>
+                                                </div>  -->
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">Manager</p>
@@ -117,19 +125,38 @@
                                             </td>
                                             <td>
                                                 <form>
+                                                    @foreach($checklists as $checklist)
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">To Do 1</label>
+                                                        <label class="custom-control-label" for="customCheck1">{{$checklist->toDO}}</label>
                                                         &nbsp;
                                                         <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true">
                                                             <i class="fa fa-paperclip text-xs"></i>
                                                         </a>
                                                     </div>
+                                                    @endforeach
                                                 </form>
-                                                <form>
-                                                    <table id='tickets'>
-
-                                                    </table>
+                                                <form action="{{route('addChecklist')}}" method="POST">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <table id="tickets">
+                                                            <!-- <td>
+                                                                <div class="input-group input-group-sm">
+                                                                    <input class="form-control" type="text" name="toDo">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group input-group-sm">
+                                                                    <input class="form-control" type="datetime-local" name="deadline">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="input-group input-group-sm">
+                                                                    <button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button>
+                                                                </div>
+                                                            </td> -->
+                                                        </table>
+                                                    </div>
                                                 </form>
                                                 <div id="create-ticket-buttons">
                                                     <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
@@ -143,7 +170,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -187,7 +214,7 @@
                                                     Edit
                                                 </a>
                                             </td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -248,11 +275,11 @@
                 rootElement = document.createElement('tr'),
                 price = type === 'FREE' ? 0 : '';
 
-            elements.push('<input type="hidden" name="idProject" value={{$id}}/>');
-            elements.push('<input type="hidden" name="idUser" value={{$id}}/>');
-            elements.push('<td><input class="form-control" type="text" name="toDo" /></td>');
-            elements.push('<td><input class="form-control" type="datetime-local" name="deadline" /></td>');
-            elements.push('<td><button type="submit" class="btn text-secondary mb-0" data-container="body" data-animation="true"> Save </button></td > ');
+            elements.push('<input type="hidden" name="idProject" value={{$id}}>');
+            elements.push('<input type="hidden" name="idUser" value={{$id}}>');
+            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div></td>');
+            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></td>');
+            elements.push('<td><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div></td>');
 
             rootElement.innerHTML = elements.join('');
 

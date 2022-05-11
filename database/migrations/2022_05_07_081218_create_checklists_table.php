@@ -18,8 +18,8 @@ class CreateChecklistsTable extends Migration
             $table->integer('idProject');
             $table->integer('idUser');
             $table->string('toDO');
-            $table->date('deadline');
-            $table->string('linkFile');
+            $table->date('deadline')->nullable();
+            $table->string('linkFile')->nullable();
             $table->timestamps();
         });
     }

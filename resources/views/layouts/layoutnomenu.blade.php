@@ -35,7 +35,7 @@
     <link id="pagestyle" href="{{asset('btsr/assets/css/soft-ui-dashboard.css?v=1.0.5')}}" rel="stylesheet" />
 </head>
 
-<body class="g-sidenav-show  bg-gray-100 virtual-reality">
+<body class="g-sidenav-show  bg-gray-100">
     <div>
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">

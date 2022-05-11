@@ -26,7 +26,7 @@
                                     <input type="text" class="form-control" name="namaClient" placeholder="Name" aria-label="Name">
                                 </div>
                             </div>
-                            <div class="text-right">
+                            <div class="text-end">
                                 <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                             </div>
                         </form>
