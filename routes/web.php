@@ -44,6 +44,7 @@ Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('dele
 
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project');
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist');
+Route::post('/addfile', 'ChecklistController@addFile')->name('addFile');
 
 // Komentar
 Route::get('/posts', 'PostController@index')->name('posts');
