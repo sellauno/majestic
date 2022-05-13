@@ -81,3 +81,6 @@ Route::get('/add', function () {
 Route::get('/layout', function () {
     return view('coba');
 })->name('layout');
+
+Route::get('change-password', 'ChangePasswordController@index');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');

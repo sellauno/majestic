@@ -71,6 +71,11 @@
                                         Logout
                                     </a>
                                 </li>
+                                <li class="mb-3">
+                                    <a class="dropdown-item border-radius-md" href="{{route('change.password')}}">
+                                        Change Password
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
