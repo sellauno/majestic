@@ -132,7 +132,7 @@
                                                         <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
                                                         <label class="custom-control-label" for="customCheck1">{{$checklist->toDO}}</label>
                                                         &nbsp;
-                                                        <input type="file" id="file" name="file" style="display:none;">
+                                                        <input type="file" id="file" name="linkfile" style="display:none;">
                                                         <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
                                                             <i class="fa fa-paperclip text-xs"></i>
                                                         </a>
@@ -146,21 +146,7 @@
                                                     @csrf
                                                     <div class="form-group">
                                                         <table id="tickets">
-                                                            <!-- <td>
-                                                                <div class="input-group input-group-sm">
-                                                                    <input class="form-control" type="text" name="toDo">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group input-group-sm">
-                                                                    <input class="form-control" type="datetime-local" name="deadline">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group input-group-sm">
-                                                                    <button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button>
-                                                                </div>
-                                                            </td> -->
+                                                            
                                                         </table>
                                                     </div>
                                                 </form>
@@ -176,51 +162,6 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                        <!-- <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{asset('btsr/assets/img/team-3.jpg')}}" class="avatar avatar-sm me-3" alt="user2">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                                        <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                <p class="text-xs text-secondary mb-0">Organization</p>
-                                            </td>
-                                            <td>
-                                                <div class="form-check  mb-0">
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">To Do 1</label>
-                                                    <button class="btn btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="form-check  mb-0">
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">To Do 2</label>
-                                                    <button class="btn btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </button>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">To Do 3</label>
-                                                    <button class="btn btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>

@@ -31,9 +31,11 @@ class ChecklistController extends Controller
 
     public function addFile(Request $request)
     {
-        $filename = 'file' . '.' . $request->file->getClientOriginalExtension();
-        $data = file_get_contents($filename);
+        $filename = 'file';
+        $data = file_get_contents($request->linkfile);
         Storage::disk('google')->put($filename, $data);
+
+        
         return redirect('/checklist' . '/' . $request->idProject);
     }
 }

@@ -205,7 +205,7 @@
                   </td>
                   <td class="align-middle">
                     <div class="dropdown float-lg-end pe-4">
-                      <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <button class="btn btn-link text-secondary mb-0 cursor-pointer" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-exclamation-circle text-xs"></i>
                       </button>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
@@ -224,52 +224,6 @@
                     </div>
                   </td>
                 </tr>
-                <!-- <tr>
-                <td>
-                  <div class="d-flex px-2">
-                     <div>
-                      <img src="{{asset('btsr/assets/img/small-logos/logo-invision.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="invision">
-                    </div> 
-                    <div class="my-auto">
-                      <h6 class="mb-0 text-sm">Invision</h6>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <p class="text-sm font-weight-bold mb-0">5</p>
-                </td>
-                <td>
-                  <p class="text-sm font-weight-bold mb-0">5</p>
-                </td>
-                <td>
-                  <p class="text-sm font-weight-bold mb-0">5</p>
-                </td>
-                <td>
-                  <p class="text-sm font-weight-bold mb-0">5</p>
-                </td>
-                <td class="align-middle text-center">
-                  <div class="d-flex align-items-center justify-content-center">
-                    <span class="me-2 text-xs font-weight-bold">100%</span>
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="align-middle">
-                  <div class="dropdown float-lg-end pe-4">
-                    <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-exclamation-circle text-xs"></i>
-                    </button>
-                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                      <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                      <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                      <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                    </ul>
-                  </div>
-                </td>
-              </tr> -->
               </tbody>
             </table>
           </div>

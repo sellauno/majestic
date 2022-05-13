@@ -8,7 +8,7 @@ class ProfileController extends Controller
 {
     public function edit(Request $request)
     {
-        return view('profile.edit', [
+        return view('profiledit', [
             'user' => $request->user()
         ]);
     }
@@ -18,6 +18,6 @@ class ProfileController extends Controller
         $request->all()
     );
 
-    return redirect()->route('profile.edit');
+    return redirect()->route('profiledit');
     }
 }
