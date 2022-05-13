@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-  
+@section('register', 'active')  
 @section('content')
 <main class="login-form">
   <div class="cotainer">
@@ -11,6 +11,18 @@
   
                       <form action="{{ route('register.post') }}" method="POST">
                           @csrf
+                          <!-- <div class="form-group row">
+                              <label for="email_address" class="col-md-4 col-form-label text-md-right">Role</label>
+                              <div class="col-md-6">
+                                <div class="dropdown">
+                                    <select id="" name="role" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> -->
                           <div class="form-group row">
                               <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                               <div class="col-md-6">
