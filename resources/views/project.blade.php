@@ -106,7 +106,7 @@
                                                         <img src="{{asset('btsr/assets/img/team-2.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">John Michael</h6>
+                                                        <h6 class="mb-0 text-sm">Ismi</h6>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="d-flex px-2 py-1">
@@ -120,19 +120,25 @@
                                                 </div>  -->
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
+                                                <p class="text-xs text-secondary mb-0">Creative Director</p>
                                             </td>
                                             <td>
-                                                <form>
+                                                <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
+                                                    @csrf
                                                     @foreach($checklists as $checklist)
                                                     <div class="form-check">
+                                                    <input type="hidden" name="idProject" value={{$id}}>
                                                         <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
                                                         <label class="custom-control-label" for="customCheck1">{{$checklist->toDO}}</label>
                                                         &nbsp;
-                                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true">
+                                                        <input type="file" id="file" name="file" style="display:none;">
+                                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
                                                             <i class="fa fa-paperclip text-xs"></i>
                                                         </a>
+                                                        <button type="submit" class="btn btn-link text-secondary mb-0 btn-tooltip">
+                                                            save
+                                                        </button>
                                                     </div>
                                                     @endforeach
                                                 </form>
