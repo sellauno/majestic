@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeskripsiToClient extends Migration
+class AddHargaToProjects extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddDeskripsiToClient extends Migration
      */
     public function up()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('deskripsi')->after('namaClient')->nullable();
+        Schema::table('projects', function (Blueprint $table) {
+            $table->integer('harga')->after('idPJ')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddDeskripsiToClient extends Migration
      */
     public function down()
     {
-        Schema::table('client', function (Blueprint $table) {
+        Schema::table('projects', function (Blueprint $table) {
             //
         });
     }

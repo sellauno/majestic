@@ -35,6 +35,7 @@ class ProjectController extends Controller
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
             'idPJ' => $request->idPJ,
+            'harga' => $request->harga,
             'status' => $request->status
         ]);
         return redirect('/dashboard');
@@ -44,6 +45,7 @@ class ProjectController extends Controller
     {
         $projects = DB::table('projects')
         ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->where('projects.idproject', '=', $id)
         ->get();
         $employees = User::all()->where('role', '=', '1');
         return view('projectedit', ['projects' => $projects, 'employees' => $employees]);
@@ -60,6 +62,7 @@ class ProjectController extends Controller
         $project->tglSelesai = $request->tglSelesai;
         $project->status = $request->status;
         $project->idPJ = $request->idPJ;
+        $project->harga = $request->harga;
         $project->save();
         return redirect('/dashboard');
     }

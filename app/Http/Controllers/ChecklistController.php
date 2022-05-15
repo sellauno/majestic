@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Checklist;
+use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,8 +13,12 @@ class ChecklistController extends Controller
 {
     public function checklists($id)
     {
+        $project = DB::table('projects')
+        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->where('projects.idProject', '=', $id)
+        ->first();
         $checklists = DB::table('checklists')->where('checklists.idProject', '=', $id)->get();
-        return view('project', ['checklists' => $checklists, 'id' => $id]);
+        return view('project', ['checklists' => $checklists, 'project' => $project, 'id' => $id]);
     }
 
     public function createChecklist(Request $request)

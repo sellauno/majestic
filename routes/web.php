@@ -64,6 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
     ->name('profile.update');
 });   
 
+Route::get('change-password', 'ChangePasswordController@index');
+Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+
 // Percobaan
 Route::get('test', function() {
     Storage::disk('google')->put('test.txt', 'Hello World');
@@ -83,5 +86,6 @@ Route::get('/layout', function () {
     return view('coba');
 })->name('layout');
 
-Route::get('change-password', 'ChangePasswordController@index');
-Route::post('change-password', 'ChangePasswordController@store')->name('change.password');
+Route::get('/alert', function () {
+    return view('alert');
+})->name('alert');

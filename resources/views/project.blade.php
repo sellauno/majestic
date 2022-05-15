@@ -102,9 +102,191 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h3>Client A</h3>
+                            <h3>{{$project->namaClient}}</h3>
                             <br>
-                            <h6>Team table</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teams -->
+        <div class="container-fluid py-4">
+            <div class="card">
+                <div class="card-header pb-0 px-3">
+                    <h6 class="mb-0">Teams</h6>
+                </div>
+                <div class="card-body pt-4 p-3">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-3 text-sm">Oliver Liam</h6>
+
+                                <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
+                                    @csrf
+                                    @foreach($checklists as $checklist)
+                                    <div class="form-check">
+                                        <input type="hidden" name="idProject" value={{$id}}>
+                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                        <label class="custom-control-label <?php if($checklist->deadline < now()) echo 'text-danger'; ?>" for="customCheck1"> {{$checklist->toDO}}</label>
+                                        <span class="text-xs">{{$checklist->deadline}}</span>
+                                        &nbsp;
+                                        <input type="file" id="file" name="linkfile" style="display:none;">
+                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                            <i class="fa fa-paperclip text-xs"></i>
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </form>
+                                <form action="{{route('addChecklist')}}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <table id="tickets">
+
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="ms-auto text-end">
+                                <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
+                                <p class="text-xs text-secondary mb-0">Creative Director</p>
+                                <br>
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-3 text-sm">Lucas Harper</h6>
+                                <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
+                                <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
+                                <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                            </div>
+                            <div class="ms-auto text-end">
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-3 text-sm">Ethan James</h6>
+                                <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
+                                <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
+                                <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
+                            </div>
+                            <div class="ms-auto text-end">
+                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Teams -->
+
+        <!-- Table Teams 1 -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Team Table</h6>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="d-flex px-2 py-1">
+                                        <div>
+                                            <img src="{{asset('btsr/assets/img/team-2.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
+                                        </div>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">Ismi</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 text-center">
+                                    <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
+                                    <p class="text-xs text-secondary mb-0">Creative Director</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="{{asset('btsr/assets/img/team-2.jpg')}}" class="avatar avatar-sm me-3" alt="user1">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">Ismi</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
+                                        <p class="text-xs text-secondary mb-0">Creative Director</p>
+                                        <!-- </td>
+                                        <td class="align-middle">
+                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Edit
+                                            </a>
+                                        </td> -->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
+                                            @csrf
+                                            @foreach($checklists as $checklist)
+                                            <div class="form-check">
+                                                <input type="hidden" name="idProject" value={{$id}}>
+                                                <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                <label class="custom-control-label" for="customCheck1">{{$checklist->toDO}}</label>
+                                                <span class="text-xs">{{$checklist->deadline}}</span>
+                                                &nbsp;
+                                                <input type="file" id="file" name="linkfile" style="display:none;">
+                                                <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                    <i class="fa fa-paperclip text-xs"></i>
+                                                </a>
+                                            </div>
+                                            @endforeach
+                                        </form>
+                                        <form action="{{route('addChecklist')}}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <table id="tickets">
+
+                                                </table>
+                                            </div>
+                                        </form>
+                                        <div id="create-ticket-buttons">
+                                            <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
+                                                <i class="fa fa-plus-circle text-xs"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- End Table Teams 1 -->
+
+        <!-- Table Teams -->
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <h6>Team Table</h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -151,14 +333,15 @@
                                                         <input type="hidden" name="idProject" value={{$id}}>
                                                         <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
                                                         <label class="custom-control-label" for="customCheck1">{{$checklist->toDO}}</label>
+                                                        <span class="text-xs">{{$checklist->deadline}}</span>
                                                         &nbsp;
                                                         <input type="file" id="file" name="linkfile" style="display:none;">
                                                         <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
                                                             <i class="fa fa-paperclip text-xs"></i>
                                                         </a>
-                                                        <button type="submit" class="btn btn-link text-secondary mb-0 btn-tooltip">
+                                                        <!-- <button type="submit" class="btn btn-link text-secondary mb-0 btn-tooltip">
                                                             save
-                                                        </button>
+                                                        </button> -->
                                                     </div>
                                                     @endforeach
                                                 </form>
@@ -183,6 +366,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -190,6 +374,9 @@
                 </div>
             </div>
         </div>
+        <!-- End Table Teams -->
+
+        <!-- Table Files -->
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -227,6 +414,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Table Files -->
     </main>
     <script src="{{asset('btsr/assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/core/bootstrap.min.js')}}"></script>
