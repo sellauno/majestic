@@ -32,7 +32,24 @@
                                   @endif
                               </div>
                           </div>
-  
+                          <div class="form-group row">
+                              <label for="name" class="col-md-4 col-form-label text-md-right">Posisi</label>
+                              <div class="col-md-6">
+                              <div class="dropdown">
+                                <!-- <button onclick="myFunction()" class="dropbtn">Dropdown</button> -->
+                                <div id="myDropdown" class="dropdown-content">
+                                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                                    <a href="#about">About</a>
+                                    <a href="#base">Base</a>
+                                    <a href="#blog">Blog</a>
+                                 </div>
+                               </div>
+                                  <input type="text" id="name" class="form-control" name="name" required autofocus>
+                                  @if ($errors->has('name'))
+                                      <span class="text-danger">{{ $errors->first('name') }}</span>
+                                  @endif
+                              </div>
+                          </div>
                           <div class="form-group row">
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                               <div class="col-md-6">
@@ -76,4 +93,24 @@
       </div>
   </div>
 </main>
+<script>
+    function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+        function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+            } else {
+            a[i].style.display = "none";
+            }
+        }
+        }
+</script>
 @endsection

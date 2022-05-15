@@ -23,7 +23,7 @@ class ClientController extends Controller
         Client::create([
             'namaClient' => $request->namaClient
         ]);
-        return redirect('/dashboard');
+        return redirect('/clients');
     }
 
     public function editClient($id)

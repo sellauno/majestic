@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('auth.login');
+    $user = App\User::first();
+// $user->notify(new Newvisit("A new user has visited on your application."));
+//    return view('welcome');
 });
+
 
 Auth::routes();
 

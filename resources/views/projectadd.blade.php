@@ -38,12 +38,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <div class="col col-md-2"></div>
                             <div class="col-12 col-md-6">
                                <label class="custom-control-label"><a href="{{route('addClient')}}"><i class="fas fa-plus"></i> Tambah Client Baru</a></h6></label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Mulai</label></div>
                             <div class="col-12 col-md-3">
