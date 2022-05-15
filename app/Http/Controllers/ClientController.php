@@ -21,7 +21,8 @@ class ClientController extends Controller
     public function createClient(Request $request)
     {
         Client::create([
-            'namaClient' => $request->namaClient
+            'namaClient' => $request->namaClient,
+            'deskripsi' => $request->deskripsi
         ]);
         return redirect('/clients');
     }
@@ -36,6 +37,7 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         $client->namaClient = $request->namaClient;
+        $client->deskripsi = $request->deskripsi;
         $client->save();
         return redirect('/clients');
     }

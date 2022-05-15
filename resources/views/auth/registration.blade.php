@@ -32,16 +32,16 @@
                                   @endif
                               </div>
                           </div>
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                               <label for="name" class="col-md-4 col-form-label text-md-right">Posisi</label>
                               <div class="col-md-6">
                               <div class="dropdown">
-                                <!-- <button onclick="myFunction()" class="dropbtn">Dropdown</button> -->
+                                <button onclick="myFunction()" class="dropbtn">Dropdown</button> 
                                 <div id="myDropdown" class="dropdown-content">
                                     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-                                    <a href="#about">About</a>
-                                    <a href="#base">Base</a>
-                                    <a href="#blog">Blog</a>
+                                    <a href="#about">Admin</a>
+                                    <a href="#base">User</a>
+                                    <a href="#blog">C</a>
                                  </div>
                                </div>
                                   <input type="text" id="name" class="form-control" name="name" required autofocus>
@@ -49,7 +49,31 @@
                                       <span class="text-danger">{{ $errors->first('name') }}</span>
                                   @endif
                               </div>
-                          </div>
+                          </div> -->
+                          <div class="form-group row">
+                              <label for="email_address" class="col-md-4 col-form-label text-md-right">Role</label>
+                              <div class="col-md-6">
+                                <div class="dropdown">
+                                    <select id="role" name="role" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                              <label for="email_address" class="col-md-4 col-form-label text-md-right">Posisi</label>
+                              <div class="col-md-6">
+                                <div class="dropdown">
+                                    <select id="posisi" name="posisi" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                        <option value="client">Client</option>
+                                    </select>
+                                </div>
+                            </div>
+                                    </div>
                           <div class="form-group row">
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                               <div class="col-md-6">

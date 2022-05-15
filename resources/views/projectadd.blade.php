@@ -20,12 +20,6 @@
                     <form role="form text-left" action="{{route('createProject')}}" method="POST">
                         @csrf
                         <input type="hidden" name="status" value="New Project!">
-                        <!-- <div class="row form-group">
-                            <div class="col col-md-2"><label>Client</label></div>
-                            <div class="col-12 col-md-6">
-                                <input type="text" class="form-control" placeholder="Name" aria-label="Name">
-                            </div>
-                        </div> -->
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">
@@ -38,12 +32,15 @@
                                 </div>
                             </div>
                         </div>
+<<<<<<< HEAD
                         <!-- <div class="row form-group">
                             <div class="col col-md-2"></div>
                             <div class="col-12 col-md-6">
                                <label class="custom-control-label"><a href="{{route('addClient')}}"><i class="fas fa-plus"></i> Tambah Client Baru</a></h6></label>
                             </div>
                         </div> -->
+=======
+>>>>>>> fc70a9c334df0e524b5a6cfd15b56390f1af80fd
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Mulai</label></div>
                             <div class="col-12 col-md-3">
