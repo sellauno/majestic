@@ -26,6 +26,12 @@
                                     <input type="text" class="form-control" name="namaClient" placeholder="Name" aria-label="Name">
                                 </div>
                             </div>
+                            <div class="row form-group">
+                                <div class="col col-md-2"><label>Deskripsi</label></div>
+                                <div class="col-12 col-md-6">
+                                    <textarea class="form-control" name="deskripsi" placeholder="Deskripsi" aria-label="Deskripsi"></textarea>
+                                </div>
+                            </div>
                             <div class="text-end">
                                 <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                             </div>

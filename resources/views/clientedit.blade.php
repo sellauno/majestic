@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h5>Client Baru</h5>
+                    <h5>Edit Client</h5>
                 </div>
                 <div class="card-body">
                     <form role="form text-left" action="{{route('updateClient', ['id' => $client->idClient])}}" method="POST">
@@ -23,6 +23,12 @@
                             <div class="col col-md-2"><label>Nama client</label></div>
                             <div class="col-12 col-md-6">
                                 <input type="text" class="form-control" name="namaClient" aria-label="Name" value="{{$client->namaClient}}">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Deskripsi</label></div>
+                            <div class="col-12 col-md-6">
+                                <textarea class="form-control" name="deskripsi" aria-label="Deskripsi">{{$client->deskripsi}}</textarea>
                             </div>
                         </div>
                         <div class="text-center">
