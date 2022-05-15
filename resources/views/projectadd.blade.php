@@ -42,15 +42,21 @@
 =======
 >>>>>>> fc70a9c334df0e524b5a6cfd15b56390f1af80fd
                         <div class="row form-group">
+                            <div class="col col-md-2"><label>Harga</label></div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="harga" class="form-control" placeholder="Harga" aria-label="Harga">
+                            </div>
+                        </div>
+                        <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Mulai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglMulai" class="form-control" placeholder="Name" aria-label="Name">
+                                <input type="date" name="tglMulai" class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Selesai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglSelesai" class="form-control" placeholder="Name" aria-label="Name">
+                                <input type="date" name="tglSelesai" class="form-control">
                             </div>
                         </div>
                         <div class="row form-group">

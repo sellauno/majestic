@@ -27,9 +27,14 @@
                                 <div class="dropdown">
                                     <input type="text" name="namaClient" class="form-control" value="{{$project->namaClient}}" readonly>
                                     <input type="hidden" name="idClient" class="form-control" value="{{$project->idClient}}" readonly>
-                                    <!-- <option value="{{$project->idClient}}">{{$project->namaClient}}</option> -->
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Harga</label></div>
+                            <div class="col-12 col-md-3">
+                                <input type="number" name="harga" class="form-control" value="{{$project->harga}}" placeholder="Harga" aria-label="Harga">
                             </div>
                         </div>
                         <div class="row form-group">
