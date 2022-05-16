@@ -129,35 +129,84 @@
                                 </div>
             </div>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                     <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                    @csrf
-                                    @foreach($checklists as $checklist)
-                                    <div class="form-check">
-                                        <input type="hidden" name="idProject" value={{$id}}>
-                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                        <label class="custom-control-label <?php if (
-                                            $checklist->deadline < now()
-                                        ) {
-                                            echo "text-danger";
-                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                        &nbsp;
-                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                            <i class="fa fa-paperclip text-xs"></i>
-                                        </a>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <form enctype="multipart/form-data" action="addfile"
+                                    method="POST">
+                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @foreach ($checklists as $checklist)
+                                            <div class="form-check">
+                                                <input type="hidden" name="idProject" value=1>
+                                                <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                <label class="custom-control-label text-danger" for="customCheck1"> To do
+                                                    pertama</label>
+                                                <span class="text-xs"></span>
+                                                &nbsp;
+                                                <input type="file" id="file" name="linkfile" style="display:none;">
+                                                <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Tambahkan file" data-container="body"
+                                                    data-animation="true" onclick="document.getElementById('file').click();">
+                                                    <i class="fa fa-paperclip text-xs"></i>
+                                                </a>
+                                            </div>
+                                            @endforeach
+                                
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
+                                        </div>
                                     </div>
-                                    @endforeach
                                 </form>
-                                <form action="{{route('addChecklist')}}" method="POST">
-                                    @csrf
+                                <form action="addchecklist" method="POST">
+                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                     <div class="form-group">
                                         <table id="tickets">
                                         </table>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                <div class="card mb-4">
+                                    <div class="card-header pb-0">
+                                        <h6>Authors table</h6>
+                                    </div>
+                                    <div class="card-body px-0 pt-0 pb-2">
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="15%" class="align-middle text-center">
+                                                            <span
+                                                                class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                        </td>
+                                                        <td width="85%" class="justify-content-end">
+                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                            <p class="text-xs text-secondary mb-0">Organization</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="align-middle text-center">
+                                                            <span
+                                                                class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                            <p class="text-xs text-secondary mb-0">Organization</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 </div>
                             
             </div>
@@ -218,7 +267,7 @@
                                 <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                             </div>
                         </li>
-                <div class="card-body pt-4 p-3">
+                <!-- <div class="card-body pt-4 p-3">
                     <ul class="list-group">
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column">
@@ -287,7 +336,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- End Teams -->
 
