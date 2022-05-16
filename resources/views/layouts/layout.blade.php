@@ -38,6 +38,13 @@
   <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -390,8 +397,9 @@
   <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
   <script>
+     $(".select2").select2()
     var ctx = document.getElementById("chart-bars").getContext("2d");
-
+   
     new Chart(ctx, {
       type: "bar",
       data: {

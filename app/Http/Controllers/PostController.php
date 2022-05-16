@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post;
 use Illuminate\Http\Request;
+
 
 class PostController extends Controller
 {
@@ -23,6 +24,7 @@ class PostController extends Controller
         $post->body = $request->get('body');
 
         $post->save();
+        return redirect('posts');
     }
     public function index()
 {
