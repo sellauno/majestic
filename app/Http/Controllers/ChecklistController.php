@@ -27,9 +27,9 @@ class ChecklistController extends Controller
             'idProject' => $request->idProject,
             'idUser' => $request->idUser,
             'toDO' => $request->toDO,
-            'checked' => $request->checked,
+            'checked' => null,
             'deadline' => $request->deadline,
-            'linkFile' => $request->linkFile
+            'linkFile' => null
         ]);
         return redirect('/checklist' . '/' . $request->idProject);
     }
