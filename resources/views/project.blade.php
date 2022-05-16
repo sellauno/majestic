@@ -106,11 +106,128 @@
                             <br>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item bg-gray-100">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <h6>Link</h6>
+                                            <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
+                                        </div>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
+                                                @csrf
+                                                @foreach($checklists as $checklist)
+                                                <div class="form-check">
+                                                    <input type="hidden" name="idProject" value={{$id}}>
+                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                    <label class="custom-control-label <?php if (
+                                                                                            $checklist->deadline < now()
+                                                                                        ) {
+                                                                                            echo "text-danger";
+                                                                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
+                                                    <span class="text-xs">{{$checklist->deadline}}</span>
+                                                    &nbsp;
+                                                    <input type="file" id="file" name="linkfile" style="display:none;">
+                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                        <i class="fa fa-paperclip text-xs"></i>
+                                                    </a>
+                                                </div>
+                                                @endforeach
+                                            </form>
+                                            <form action="{{route('addChecklist')}}" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <table id="tickets">
+                                                    </table>
+                                                </div>
+                                            </form>
+                                            <div id="create-ticket-buttons">
+                                                <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
+                                                    <i class="fa fa-plus-circle text-xs"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Teams Accordion -->
+        <div class="container-fluid py-4">
+            <div class="card">
+                <div class="card-header pb-0 px-3">
+                    <h6 class="mb-0">Teams</h6>
+                </div>
+                <div class="card-body pt-4 p-3">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item bg-gray-100">
+                            <h2 class="accordion-header" id="headingOne">
+                                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h6>Ismi</h6>
+                                    <div class="ms-auto text-end position-absolute end-3 me-3">
+                                        <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
+                                        <p class="text-xs text-secondary mb-0">Creative Director</p>
+                                    </div>
+                                    <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
+                                </div>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
+                                        @csrf
+                                        @foreach($checklists as $checklist)
+                                        <div class="form-check">
+                                            <input type="hidden" name="idProject" value={{$id}}>
+                                            <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                            <label class="custom-control-label <?php if (
+                                                                                    $checklist->deadline < now()
+                                                                                ) {
+                                                                                    echo "text-danger";
+                                                                                } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
+                                            <span class="text-xs">{{$checklist->deadline}}</span>
+                                            &nbsp;
+                                            <input type="file" id="file" name="linkfile" style="display:none;">
+                                            <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                <i class="fa fa-paperclip text-xs"></i>
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                    </form>
+                                    <form action="{{route('addChecklist')}}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <table id="tickets">
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Accordion Item #2
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Teams Accordion -->
 
         <!-- Teams -->
         <div class="container-fluid py-4">
@@ -118,64 +235,7 @@
                 <div class="card-header pb-0 px-3">
                     <h6 class="mb-0">Teams</h6>
                 </div>
-                <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Oliver Liams
-                    <div class="float-end">
-                     <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
-                                <p class="text-xs text-secondary mb-0">Creative Director</p>
-                                </div>
-            </div>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                     <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                    @csrf
-                                    @foreach($checklists as $checklist)
-                                    <div class="form-check">
-                                        <input type="hidden" name="idProject" value={{$id}}>
-                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                        <label class="custom-control-label <?php if (
-                                            $checklist->deadline < now()
-                                        ) {
-                                            echo "text-danger";
-                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                        &nbsp;
-                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                            <i class="fa fa-paperclip text-xs"></i>
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </form>
-                                <form action="{{route('addChecklist')}}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <table id="tickets">
-                                        </table>
-                                    </div>
-                                </form>
-                                </div>
-                            
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Accordion Item #2
-                </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-                </div>
-            </div>
-    </div>
-  </div>
-</div><div class="card-body pt-4 p-3">
+                <div class="card-body pt-4 p-3">
                     <ul class="list-group">
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column">
@@ -188,10 +248,10 @@
                                         <input type="hidden" name="idProject" value={{$id}}>
                                         <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
                                         <label class="custom-control-label <?php if (
-                                            $checklist->deadline < now()
-                                        ) {
-                                            echo "text-danger";
-                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
+                                                                                $checklist->deadline < now()
+                                                                            ) {
+                                                                                echo "text-danger";
+                                                                            } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
                                         <span class="text-xs">{{$checklist->deadline}}</span>
                                         &nbsp;
                                         <input type="file" id="file" name="linkfile" style="display:none;">
@@ -214,49 +274,6 @@
                                         <i class="fa fa-plus-circle text-xs"></i>
                                     </button>
                                 </div>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
-                                <p class="text-xs text-secondary mb-0">Creative Director</p>
-                                <br>
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            </div>
-                        </li>
-                <div class="card-body pt-4 p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Oliver Liam</h6>
-
-                                <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                    @csrf
-                                    @foreach($checklists as $checklist)
-                                    <div class="form-check">
-                                        <input type="hidden" name="idProject" value={{$id}}>
-                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                        <label class="custom-control-label <?php if (
-                                            $checklist->deadline < now()
-                                        ) {
-                                            echo "text-danger";
-                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                        &nbsp;
-                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                            <i class="fa fa-paperclip text-xs"></i>
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </form>
-                                <form action="{{route('addChecklist')}}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <table id="tickets">
-
-                                        </table>
-                                    </div>
-                                </form>
                             </div>
                             <div class="ms-auto text-end">
                                 <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
