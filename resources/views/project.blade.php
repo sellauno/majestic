@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <!-- Sidebar -->
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -96,7 +97,10 @@
             </ul>
         </div>
     </aside>
+    <!-- End Sidebar -->
+
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Top -->
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -106,49 +110,76 @@
                             <br>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
-                            <div class="accordion" id="accordionExample">
+                            <div class="accordion" id="accordionLink">
                                 <div class="accordion-item bg-gray-100">
                                     <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                             <h6>Link</h6>
-                                            <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
-                                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
+                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                                         </div>
                                     </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
                                         <div class="accordion-body">
-                                            <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                                @csrf
-                                                @foreach($checklists as $checklist)
-                                                <div class="form-check">
-                                                    <input type="hidden" name="idProject" value={{$id}}>
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label <?php if (
-                                                                                            $checklist->deadline < now()
-                                                                                        ) {
-                                                                                            echo "text-danger";
-                                                                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                                    <span class="text-xs">{{$checklist->deadline}}</span>
-                                                    &nbsp;
-                                                    <input type="file" id="file" name="linkfile" style="display:none;">
-                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-                                            </form>
-                                            <form action="{{route('addChecklist')}}" method="POST">
+                                            <table class="table align-items-center mb-0 text-xs">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tanggal Upload</th>
+                                                        <th>Kategori</th>
+                                                        <th>Judul</th>
+                                                        <th>Link</th>
+                                                        <th>User</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    @foreach($links as $link)
+                                                    <td>{{$link->tglUpload}}</td>
+                                                    <td>{{$link->kategori}}</td>
+                                                    <td>{{$link->judul}}</td>
+                                                    <td>{{$link->link}}</td>
+                                                    <td>{{$link->name}}</td>
+                                                    @endforeach
+                                                </tr>
+                                            </table>
+                                            <form action="{{route('createLink')}}" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <table id="tickets">
+                                                    <table id="links" class="mb-2">
+                                                        <input type="hidden" name="idProject" value={{$id}}>
+                                                        <input type="hidden" name="idUser" value={{$id}}>
+                                                        <td>
+                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglUpload"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group input-group-sm">
+                                                                <select id="kategori" name="kategori" class="dropdown form-control" placeholder="Pilih Kategori">
+                                                                    <option value="reels" id="inlineCheckbox1">Reels</option>
+                                                                    <option value="tiktok" id="inlineCheckbox2">Tiktok</option>
+                                                                    <option value="feeds" id="inlineCheckbox3">Feeds</option>
+                                                                    <option value="stories" id="inlineCheckbox4">Stories</option>
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Judul" name="judul"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Link" name="link"></div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group input-group-sm">
+                                                                <select id="idUser" name="idUser" class="form-control select2">
+                                                                    @foreach($users as $user)
+                                                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
+                                                        </td>
                                                     </table>
                                                 </div>
                                             </form>
-                                            <div id="create-ticket-buttons">
-                                                <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
-                                                    <i class="fa fa-plus-circle text-xs"></i>
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -158,6 +189,7 @@
                 </div>
             </div>
         </div>
+        <!-- End Top -->
 
         <!-- Teams Accordion -->
         <div class="container-fluid py-4">
@@ -165,130 +197,199 @@
                 <div class="card-header pb-0 px-3">
                     <h6 class="mb-0">Teams</h6>
                 </div>
-                <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Oliver Liams
-                    <div class="float-end">
-                     <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
-                                <p class="text-xs text-secondary mb-0">Creative Director</p>
-                                </div>
-            </div>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <form enctype="multipart/form-data" action="addfile"
-                                    method="POST">
-                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            @foreach ($checklists as $checklist)
-                                            <div class="form-check">
-                                                <input type="hidden" name="idProject" value=1>
-                                                <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                <label class="custom-control-label text-danger" for="customCheck1"> To do
-                                                    pertama</label>
-                                                <span class="text-xs"></span>
-                                                &nbsp;
-                                                <input type="file" id="file" name="linkfile" style="display:none;">
-                                                <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Tambahkan file" data-container="body"
-                                                    data-animation="true" onclick="document.getElementById('file').click();">
-                                                    <i class="fa fa-paperclip text-xs"></i>
-                                                </a>
-                                            </div>
-                                            @endforeach
-                                
-                                        </div>
-                                        <div class="col-6">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                        </div>
+                <div class="card-body pt-4 p-3">
+                    <div class="accordion" id="accordionExample">
+                        @foreach($users as $user)
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    {{$user->name}}
+                                    <div class="ms-auto text-end position-absolute end-3 me-3">
+                                        <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{$user->posisi}}</p>
                                     </div>
-                                </form>
-                                <form action="addchecklist" method="POST">
-                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                    <div class="form-group">
-                                        <table id="tickets">
-                                        </table>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                <div class="card mb-4">
-                                    <div class="card-header pb-0">
-                                        <h6>Authors table</h6>
-                                    </div>
-                                    <div class="card-body px-0 pt-0 pb-2">
-                                        <div class="table-responsive p-0">
-                                            <table class="table align-items-center mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td width="15%" class="align-middle text-center">
-                                                            <span
-                                                                class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                        </td>
-                                                        <td width="85%" class="justify-content-end">
-                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                            <p class="text-xs text-secondary mb-0">Organization</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="align-middle text-center">
-                                                            <span
-                                                                class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                            <p class="text-xs text-secondary mb-0">Organization</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                                 </div>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                        @csrf
-                                        @foreach($checklists as $checklist)
-                                        <div class="form-check">
-                                            <input type="hidden" name="idProject" value={{$id}}>
-                                            <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                            <label class="custom-control-label <?php if (
-                                                                                    $checklist->deadline < now()
-                                                                                ) {
-                                                                                    echo "text-danger";
-                                                                                } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                            <span class="text-xs">{{$checklist->deadline}}</span>
-                                            &nbsp;
-                                            <input type="file" id="file" name="linkfile" style="display:none;">
-                                            <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                                <i class="fa fa-paperclip text-xs"></i>
-                                            </a>
+                                    <form enctype="multipart/form-data" action="addfile" method="POST">
+                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @foreach ($checklists as $checklist)
+                                                <?php if($checklist->idUser==$user->id){?>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="idProject" value={{$id}}>
+                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                    <label class="custom-control-label <?php if (
+                                                                                            $checklist->deadline < now()
+                                                                                        ) {
+                                                                                            echo "text-danger";
+                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
+                                                    <span class="text-xs">{{$checklist->deadline}}</span>
+                                                    &nbsp;
+                                                    <input type="file" id="file" name="linkfile" style="display:none;">
+                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                        <i class="fa fa-paperclip text-xs"></i>
+                                                    </a>
+                                                </div>
+                                                <?php }?>
+                                                @endforeach
+
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
+                                            </div>
                                         </div>
-                                        @endforeach
                                     </form>
-                                    <form action="{{route('addChecklist')}}" method="POST">
-                                        @csrf
+                                    <form action="addchecklist" method="POST">
+                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                         <div class="form-group">
                                             <table id="tickets">
                                             </table>
                                         </div>
                                     </form>
+                                    <div id="create-ticket-buttons">
+                                        <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
+                                            <i class="fa fa-plus-circle text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="card mb-4">
+                                        <div class="card-header pb-0">
+                                            <h6>Authors table</h6>
+                                        </div>
+                                        <div class="card-body px-0 pt-0 pb-2">
+                                            <div class="table-responsive p-0">
+                                                <table class="table align-items-center mb-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="15%" class="align-middle text-center">
+                                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                            </td>
+                                                            <td width="85%" class="justify-content-end">
+                                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="align-middle text-center">
+                                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-item">
+                        @endforeach
+                        @foreach($users as $user)
+                        <!-- <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    {{$user->name}}
+                                    <div class="ms-auto text-end position-absolute end-3 me-3">
+                                        <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{$user->posisi}}</p>
+                                    </div>
+                                </div>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <form enctype="multipart/form-data" action="addfile" method="POST">
+                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                @foreach ($checklists as $checklist)
+                                                <div class="form-check">
+                                                    <input type="hidden" name="idProject" value={{$id}}>
+                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                    <label class="custom-control-label <?php if (
+                                                                                            $checklist->deadline < now()
+                                                                                        ) {
+                                                                                            echo "text-danger";
+                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
+                                                    <span class="text-xs">{{$checklist->deadline}}</span>
+                                                    &nbsp;
+                                                    <input type="file" id="file" name="linkfile" style="display:none;">
+                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                        <i class="fa fa-paperclip text-xs"></i>
+                                                    </a>
+                                                </div>
+                                                @endforeach
+
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form action="addchecklist" method="POST">
+                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                        <div class="form-group">
+                                            <table id="tickets">
+                                            </table>
+                                        </div>
+                                    </form>
+                                    <div id="create-ticket-buttons">
+                                        <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
+                                            <i class="fa fa-plus-circle text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseTwo" class="accordion-collapse collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="card mb-4">
+                                        <div class="card-header pb-0">
+                                            <h6>Authors table</h6>
+                                        </div>
+                                        <div class="card-body px-0 pt-0 pb-2">
+                                            <div class="table-responsive p-0">
+                                                <table class="table align-items-center mb-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="15%" class="align-middle text-center">
+                                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                            </td>
+                                                            <td width="85%" class="justify-content-end">
+                                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="align-middle text-center">
+                                                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
+                                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        @endforeach
+                        <!-- <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     Accordion Item #2
@@ -299,7 +400,7 @@
                                     <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -307,7 +408,7 @@
         <!-- End Teams Accordion -->
 
         <!-- Teams -->
-        <div class="container-fluid py-4">
+        <!-- <div class="container-fluid py-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
                     <h6 class="mb-0">Teams</h6>
@@ -317,7 +418,6 @@
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column">
                                 <h6 class="mb-3 text-sm">Ismi</h6>
-
                                 <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
                                     @csrf
                                     @foreach($checklists as $checklist)
@@ -342,7 +442,6 @@
                                     @csrf
                                     <div class="form-group">
                                         <table id="tickets">
-
                                         </table>
                                     </div>
                                 </form>
@@ -360,77 +459,10 @@
                                 <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                             </div>
                         </li>
-                <!-- <div class="card-body pt-4 p-3">
-                    <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Oliver Liam</h6>
-
-                                <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                    @csrf
-                                    @foreach($checklists as $checklist)
-                                    <div class="form-check">
-                                        <input type="hidden" name="idProject" value={{$id}}>
-                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                        <label class="custom-control-label <?php if (
-                                            $checklist->deadline < now()
-                                        ) {
-                                            echo "text-danger";
-                                        } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                        &nbsp;
-                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                            <i class="fa fa-paperclip text-xs"></i>
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </form>
-                                <form action="{{route('addChecklist')}}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <table id="tickets">
-
-                                        </table>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <p class="text-xs font-weight-bold mb-0">Penanggung Jawab</p>
-                                <p class="text-xs text-secondary mb-0">Creative Director</p>
-                                <br>
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Lucas Harper</h6>
-                                <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span>
-                                <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">lucas@stone-tech.com</span></span>
-                                <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            </div>
-                        </li>
-                        <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                            <div class="d-flex flex-column">
-                                <h6 class="mb-3 text-sm">Ethan James</h6>
-                                <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Fiber Notion</span></span>
-                                <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">ethan@fiber.com</span></span>
-                                <span class="text-xs">VAT Number: <span class="text-dark ms-sm-2 font-weight-bold">FRB1235476</span></span>
-                            </div>
-                            <div class="ms-auto text-end">
-                                <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            </div>
-                        </li>
                     </ul>
                 </div>
-            </div> -->
-        </div>
+            </div>
+        </div> -->
         <!-- End Teams -->
 
         <!-- Table Files -->
@@ -472,6 +504,7 @@
             </div>
         </div>
         <!-- End Table Files -->
+
     </main>
     <script src="{{asset('btsr/assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/core/bootstrap.min.js')}}"></script>
@@ -489,9 +522,9 @@
 
             elements.push('<input type="hidden" name="idProject" value={{$id}}>');
             elements.push('<input type="hidden" name="idUser" value={{$id}}>');
-            elements.push('<div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>');
-            elements.push('<div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>');
-            elements.push('<div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>');
+            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div></td>');
+            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></td>');
+            elements.push('<td><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div></td>');
 
             rootElement.innerHTML = elements.join('');
 

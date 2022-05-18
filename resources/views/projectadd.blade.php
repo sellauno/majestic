@@ -81,9 +81,6 @@
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
                                 <select id="role" name="idPJ" class="dropdown form-control">
-                                    <option value="1" id="inlineCheckbox1">1</option>
-                                    <option value="2" id="inlineCheckbox2">2</option>
-                                    <option value="3" id="inlineCheckbox3">3</option>
                                     @foreach($employees as $employee)
                                     <option value="{{$employee->id}}" id="inlineCheckbox{{$employee->id}}">{{$employee->name}}</option>
                                     @endforeach
@@ -93,19 +90,6 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Anggota</label></div>
                             <div class="col-12 col-md-6">
-
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox1" name="idUser[]" value="1" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">1</label>
-                                </div>
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox2" name="idUser[]" value="2" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">2</label>
-                                </div>
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox3" name="idUser[]" value="3" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">3</label>
-                                </div>
                                 @foreach($employees as $employee)
                                 <div class="form-check  mb-0">
                                     <input class="form-check-input" name="idUser[]" value="{{$employee->idUser}}" type="checkbox" value="" id="fcustomCheck1">

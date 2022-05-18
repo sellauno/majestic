@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Link;
 use App\Project;
+use App\Team;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,12 +17,13 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         $clients = Client::all();
-        return view('dashboard', ['projects' => $projects, 'clients' => $clients]);
+        $links = Link::all();
+        return view('dashboard', ['projects' => $projects, 'clients' => $clients, 'links' => $links]);
     }
     public function addProject()
     {
         $clients = Client::all();
-        $employees = User::all()->where('role', '=', '1');
+        $employees = User::all()->where('role', '=', 'user');
         return view('projectadd', ['clients' => $clients, 'employees' => $employees]);
     }
 
@@ -38,6 +41,13 @@ class ProjectController extends Controller
             'harga' => $request->harga,
             'status' => $request->status
         ]);
+        
+        Team::create([
+            'idProject' => $request->idProject,
+            'idUser' => $request->idUser,
+            'jabatan' => $request->jabatan
+        ]);
+
         return redirect('/dashboard');
     }
 
@@ -47,7 +57,7 @@ class ProjectController extends Controller
         ->join('clients', 'projects.idClient', '=', 'clients.idClient')
         ->where('projects.idproject', '=', $id)
         ->get();
-        $employees = User::all()->where('role', '=', '1');
+        $employees = User::all()->where('role', '=', 'user');
         return view('projectedit', ['projects' => $projects, 'employees' => $employees]);
     }
 
@@ -64,6 +74,7 @@ class ProjectController extends Controller
         $project->idPJ = $request->idPJ;
         $project->harga = $request->harga;
         $project->save();
+
         return redirect('/dashboard');
     }
 
