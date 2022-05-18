@@ -54,7 +54,7 @@
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">Role</label>
                               <div class="col-md-6">
                                 <div class="dropdown">
-                                    <select id="role-regist" name="role" class="form-control select2">
+                                    <select id="role-regist" name="role" class="form-control">
                                         <option value="admin">Admin</option>
                                         <option value="user">User</option>
                                         <option value="client">Client</option>
@@ -67,9 +67,9 @@
                               <div class="col-md-6">
                                 <div class="dropdown">
                                     <select id="posisi" name="posisi" class="form-control select2">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                        <option value="client">Client</option>
+                                        @foreach($posisi as $p)
+                                        <option value="{{$p->id}}">{{$p->posisi}}</option>
+                                      @endforeach
                                     </select>
                                 </div>
                             </div>

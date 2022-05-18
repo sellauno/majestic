@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 use Hash;
+use App\Posisi;
 
 class AuthController extends Controller
 {
@@ -28,7 +29,8 @@ class AuthController extends Controller
      */
     public function registration()
     {
-        return view('auth.registration');
+        $posisi=Posisi::all();
+        return view('auth.registration', ['posisi'=>$posisi]);
     }
       
     /**

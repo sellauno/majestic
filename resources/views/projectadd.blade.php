@@ -32,15 +32,12 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
                         <!-- <div class="row form-group">
                             <div class="col col-md-2"></div>
                             <div class="col-12 col-md-6">
                                <label class="custom-control-label"><a href="{{route('addClient')}}"><i class="fas fa-plus"></i> Tambah Client Baru</a></h6></label>
                             </div>
                         </div> -->
-=======
->>>>>>> fc70a9c334df0e524b5a6cfd15b56390f1af80fd
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Harga</label></div>
                             <div class="col-12 col-md-3">
@@ -89,50 +86,24 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
-                                <select id="role" name="idPJ" class="dropdown form-control">
-                                    <option value="1" id="inlineCheckbox1">1</option>
-                                    <option value="2" id="inlineCheckbox2">2</option>
-                                    <option value="3" id="inlineCheckbox3">3</option>
-                                    @foreach($employees as $employee)
-                                    <option value="{{$employee->id}}" id="inlineCheckbox{{$employee->id}}">{{$employee->name}}</option>
+                            <div class="dropdown">
+                                    <select name="idPJ" class="form-control select2" multiple>
+                                    @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Anggota</label></div>
-                            <div class="col-12 col-md-6">
-
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox1" name="idUser[]" value="1" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">1</label>
-                                </div>
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox2" name="idUser[]" value="2" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">2</label>
-                                </div>
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" id="inlineCheckbox3" name="idUser[]" value="3" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">3</label>
-                                </div>
-                                @foreach($employees as $employee)
-                                <div class="form-check  mb-0">
-                                    <input class="form-check-input" name="idUser[]" value="{{$employee->idUser}}" type="checkbox" value="" id="fcustomCheck1">
-                                    <label class="custom-control-label" for="customCheck1">{{$employee->name}}</label>
-                                </div>
+                            <div class="col-12 col-md-6 nav-item">
+                            <div class="dropdown">
+                                    <select name="posisi" class="form-control select2" multiple>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
-
-                                <!-- TOMBOL + Tambah Anggota -->
-                                <!-- <div class="dropdown pe-4">
-                                    <button type="button" name="add" id="add" class="btn btn-success btn-xs cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-plus"></i> Tambah Anggota
-                                    </button>
-                                    <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                        @foreach($employees as $employee)
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">{{$employee->name}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div> -->
+                                </select>
                             </div>
                         </div>
                         <!-- END TEAM -->
