@@ -23,8 +23,8 @@ class ProjectController extends Controller
     public function addProject()
     {
         $clients = Client::all();
-        $employees = User::all()->where('role', '=', 'user');
-        return view('projectadd', ['clients' => $clients, 'employees' => $employees]);
+        $users = User::all();
+        return view('projectadd', ['clients' => $clients, 'users' => $users]);
     }
 
     public function createProject(Request $request)
