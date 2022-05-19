@@ -68,7 +68,7 @@
                                 <div class="dropdown">
                                     <select id="posisi" name="posisi" class="form-control select2">
                                         @foreach($posisi as $p)
-                                        <option value="{{$p->id}}">{{$p->posisi}}</option>
+                                        <option value="{{$p->posisi}}">{{$p->posisi}}</option>
                                       @endforeach
                                     </select>
                                 </div>
