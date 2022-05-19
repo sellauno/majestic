@@ -130,15 +130,15 @@
                                                         <th>User</th>
                                                     </tr>
                                                 </thead>
+                                                @foreach($links as $link)
                                                 <tr>
-                                                    @foreach($links as $link)
                                                     <td>{{$link->tglUpload}}</td>
                                                     <td>{{$link->kategori}}</td>
                                                     <td>{{$link->judul}}</td>
                                                     <td>{{$link->link}}</td>
                                                     <td>{{$link->name}}</td>
-                                                    @endforeach
                                                 </tr>
+                                                @endforeach
                                             </table>
                                             <form action="{{route('createLink')}}" method="POST">
                                                 @csrf
@@ -217,23 +217,24 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 @foreach ($checklists as $checklist)
-                                                <?php if($checklist->idUser==$user->id){?>
-                                                <div class="form-check">
-                                                    <input type="hidden" name="idProject" value={{$id}}>
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label <?php if (
-                                                                                            $checklist->deadline < now()
-                                                                                        ) {
-                                                                                            echo "text-danger";
-                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
-                                                    <span class="text-xs">{{$checklist->deadline}}</span>
-                                                    &nbsp;
-                                                    <input type="file" id="file" name="linkfile" style="display:none;">
-                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </a>
-                                                </div>
-                                                <?php }?>
+                                                <?php if ($checklist->idUser == $user->id) { ?>
+                                                    <div class="form-check">
+                                                        <input type="hidden" name="idProject" value="{{$id}}">
+                                                        <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                        <label class="custom-control-label <?php if (
+                                                                                                $checklist->deadline < now()
+                                                                                            ) {
+                                                                                                echo "text-danger";
+                                                                                            } ?>" for="customCheck1">{{$checklist->toDO}} </label>
+                                                        <span class="text-xs">{{$checklist->deadline}}</span>
+                                                        &nbsp;
+                                                        <input type="file" id="file" name="linkfile" style="display:none;">
+                                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                                            <i class="fa fa-paperclip text-xs"></i>
+                                                        </a>
+                                                    </div>
+                                                <?php } ?>
                                                 @endforeach
 
                                             </div>
@@ -244,16 +245,18 @@
                                             </div>
                                         </div>
                                     </form>
-                                    <form action="addchecklist" method="POST">
-                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                    <form action="{{route('addChecklist')}}" method="POST">
+                                        <input type="hidden" name="idUser" value="{{$user->id}}">
+                                        @csrf
                                         <div class="form-group">
                                             <table id="tickets">
+
                                             </table>
                                         </div>
                                     </form>
                                     <div id="create-ticket-buttons">
                                         <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
-                                            <i class="fa fa-plus-circle text-xs"></i>
+                                            <i class="fa fa-plus-circle text-xs"></i> Tambah list
                                         </button>
                                     </div>
                                 </div>
@@ -521,7 +524,6 @@
                 price = type === 'FREE' ? 0 : '';
 
             elements.push('<input type="hidden" name="idProject" value={{$id}}>');
-            elements.push('<input type="hidden" name="idUser" value={{$id}}>');
             elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div></td>');
             elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></td>');
             elements.push('<td><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div></td>');

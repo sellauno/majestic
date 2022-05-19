@@ -87,7 +87,7 @@
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
                             <div class="dropdown">
-                                    <select name="idPJ" class="form-control select2" multiple>
+                                    <select name="idPJ[]" class="dropdown form-control select2" multiple>
                                     @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
@@ -99,7 +99,7 @@
                             <div class="col col-md-2"><label>Anggota</label></div>
                             <div class="col-12 col-md-6 nav-item">
                             <div class="dropdown">
-                                    <select name="posisi" class="form-control select2" multiple>
+                                    <select name="anggota[]" class="form-control select2" multiple>
                                 @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach

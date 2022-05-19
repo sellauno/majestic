@@ -23,7 +23,7 @@ class ProjectController extends Controller
     public function addProject()
     {
         $clients = Client::all();
-        $users = User::all();
+        $users = User::all()->where('role', '=', 'user');
         return view('projectadd', ['clients' => $clients, 'users' => $users]);
     }
 
@@ -41,12 +41,23 @@ class ProjectController extends Controller
             'harga' => $request->harga,
             'status' => $request->status
         ]);
-        
-        Team::create([
-            'idProject' => $request->idProject,
-            'idUser' => $request->idUser,
-            'jabatan' => $request->jabatan
-        ]);
+
+        foreach ($request->idPJ as $idPj) {
+            Team::create([
+                'idProject' => $request->idProject,
+                'idUser' => $idPj,
+                'jabatan' => 'Penanggung Jawab'
+            ]);
+        }
+
+        foreach ($request->anggota as $idAnggota) {
+            Team::create([
+                'idProject' => $request->idProject,
+                'idUser' => $idAnggota,
+                'jabatan' => 'Anggota'
+            ]);
+        }
+
 
         return redirect('/dashboard');
     }
@@ -54,11 +65,20 @@ class ProjectController extends Controller
     public function editProject($id)
     {
         $projects = DB::table('projects')
-        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
-        ->where('projects.idproject', '=', $id)
-        ->get();
-        $employees = User::all()->where('role', '=', 'user');
-        return view('projectedit', ['projects' => $projects, 'employees' => $employees]);
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.idproject', '=', $id)
+            ->get();
+        $users = User::all()->where('role', '=', 'user');
+        $teams = DB::table('teams')
+            ->join('users', 'teams.idUser', '=', 'users.id')
+            ->where('teams.idproject', '=', $id)
+            ->get();
+
+        return view('projectedit', [
+            'projects' => $projects, 
+            'users' => $users,
+            'teams' => $teams
+        ]);
     }
 
     public function updateProject(Request $request, $id)
@@ -71,9 +91,25 @@ class ProjectController extends Controller
         $project->tglMulai = $request->tglMulai;
         $project->tglSelesai = $request->tglSelesai;
         $project->status = $request->status;
-        $project->idPJ = $request->idPJ;
+        // $project->idPJ = $request->idPJ;
         $project->harga = $request->harga;
         $project->save();
+
+        foreach ($request->idPJ as $idPj) {
+            Team::create([
+                'idProject' => $id,
+                'idUser' => $idPj,
+                'jabatan' => 'Penanggung Jawab'
+            ]);
+        }
+
+        foreach ($request->anggota as $idAnggota) {
+            Team::create([
+                'idProject' => $id,
+                'idUser' => $idAnggota,
+                'jabatan' => 'Anggota'
+            ]);
+        }
 
         return redirect('/dashboard');
     }

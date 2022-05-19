@@ -16,7 +16,19 @@ class DashboardController extends Controller
         ->get(); 
         $clients = Client::all();
         $links = Link::all();
-        return view('dashboard', ['projects' => $projects, 'clients' => $clients, 'links' => $links]);
+        $reels = DB::table('links')->where('kategori', '=', 'reels')->get();
+        $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
+        $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
+        $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
+        return view('dashboard', [
+            'projects' => $projects, 
+            'clients' => $clients, 
+            'links' => $links,
+            'feeds' => $feeds,
+            'tiktoks' => $tiktoks,
+            'reels' => $reels,
+            'stories' => $stories,
+        ]);
     
     }
 }

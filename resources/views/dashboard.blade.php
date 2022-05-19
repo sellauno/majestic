@@ -58,9 +58,13 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->reels}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                        <?php $no=0;?>
+                        @foreach($reels as $reel)
+                        <?php $no++;
+                        if($reel->idProject == $project->idProject){?>
+                        <li><a class="dropdown-item border-radius-md" href="{{$reel->link}}">{{$no}}. {{$reel->link}} </a></li>
+                        <?php } ?>
+                        @endforeach
                       </ul>
                     </div>
                   </td>
@@ -70,9 +74,13 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->tiktok}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                      <?php $no=0;?>
+                        @foreach($tiktoks as $tiktok)
+                        <?php $no++;
+                        if($tiktok->idProject == $project->idProject){?>
+                        <li><a class="dropdown-item border-radius-md" href="{{$tiktok->link}}">{{$no}}. {{$tiktok->link}} </a></li>
+                        <?php } ?>
+                        @endforeach
                       </ul>
                     </div>
                   </td>
@@ -82,9 +90,13 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->feeds}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                      <?php $no=0;?>
+                        @foreach($feeds as $feed)
+                        <?php $no++;
+                        if($feed->idProject == $project->idProject){?>
+                        <li><a class="dropdown-item border-radius-md" href="{{$feed->link}}">{{$no}}. {{$feed->link}} </a></li>
+                        <?php } ?>
+                        @endforeach
                       </ul>
                     </div>
                   </td>
@@ -94,9 +106,13 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->stories}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">1 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">2 http://localhost:8000/dashboard</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">3 http://localhost:8000/dashboard</a></li>
+                      <?php $no=0;?>
+                        @foreach($stories as $story)
+                        <?php $no++;
+                        if($story->idProject == $project->idProject){?>
+                        <li><a class="dropdown-item border-radius-md" href="{{$story->link}}">{{$no}}. {{$story->link}} </a></li>
+                        <?php } ?>
+                        @endforeach
                       </ul>
                     </div>
                   </td>
