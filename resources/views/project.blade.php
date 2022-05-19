@@ -142,6 +142,11 @@
                                             </table>
                                             <form action="{{route('createLink')}}" method="POST">
                                                 @csrf
+                                                <div id="create-ticket-buttons">
+                                                <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
+                                                    <i class="fa fa-plus-circle text-xs"></i>
+                                                </button>
+                                            </div>
                                                 <div class="form-group">
                                                     <table id="links" class="mb-2">
                                                         <input type="hidden" name="idProject" value={{$id}}>
@@ -189,8 +194,17 @@
                 </div>
             </div>
         </div>
-        <!-- End Top -->
-
+        <section class="form-box">
+        <form action="{{route('addChecklist')}}" class="col-md-5" enctype="multipart/form-data">
+          <div class="form-group">
+          <label for="photo">Attach a photograph</label>
+            <input type="file" name="photo" id="photo" class="form-control-file" required>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+          </div>
+        </form>
+      </section>
         <!-- Teams Accordion -->
         <div class="container-fluid py-4">
             <div class="card">

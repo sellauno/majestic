@@ -26,7 +26,17 @@ class ProjectController extends Controller
         $users = User::all()->where('role', '=', 'user');
         return view('projectadd', ['clients' => $clients, 'users' => $users]);
     }
-
+    protected function validator(array $data)
+{
+    // return Validator::make($data, [
+    //     'idClient' => ['required', 'int', 'max:255'],
+    //     'reels' => ['required', 'video'],
+    //     'tiktok' => ['required', 'video'],
+    //     'feeds' => ['required', 'image'],
+    //     'stories' => ['required', 'video'],
+        
+    // ]);
+}
     public function createProject(Request $request)
     {
         Project::create([
