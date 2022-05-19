@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    protected $fillable = ['idUser', 'jabatan'];
+    protected $fillable = ['idProject','idUser', 'jabatan'];
     public $primaryKey = 'idTeam';
 }
