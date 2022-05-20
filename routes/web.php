@@ -52,6 +52,7 @@ Route::post('/addfile', 'ChecklistController@addFile')->name('addFile');
 
 // Link
 Route::post('/createlink', 'LinkController@createLink')->name('createLink');
+Route::post('/cari', 'ProjectController@cari')->name('cari');
 
 // Teams
 Route::post('/createteam', 'TeamController@createTeam')->name('addTeam');

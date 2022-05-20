@@ -117,4 +117,31 @@ class ProjectController extends Controller
         $project->delete();
         return redirect('/dashboard');
     }
+    public function cari(Request $request)
+	{
+		$keyword = $request->cari;
+        $links = Link::where('kategori', "%" . $keyword . "%")->paginate(5);
+        $id=$request->id;
+        $project = DB::table('projects')
+        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->where('projects.idProject', '=', $id)
+        ->first();
+    $checklists = DB::table('checklists')->where('checklists.idProject', '=', $id)->get();
+    $links = DB::table('links')
+        ->join('users', 'users.id', '=', 'links.idUser')
+        ->where('links.idProject', '=', $id)
+        ->where('kategori','like', "%" . $keyword . "%")
+        ->get();
+    $users = DB::table('users')
+        ->join('teams', 'users.id', '=', 'teams.idUser')
+        ->where('teams.idProject', '=', $id)
+        ->get();
+    return view('project', [
+        'id' => $id,
+        'checklists' => $checklists,
+        'project' => $project,
+        'links' => $links,
+        'users' => $users
+    ]);
+	}
 }
