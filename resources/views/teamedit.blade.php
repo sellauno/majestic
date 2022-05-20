@@ -17,16 +17,18 @@
                     <h5>Edit Team</h5>
                 </div>
                 <div class="card-body">
-                    <form role="form text-left" action="{{route('updateClient', ['id' => $client->idClient])}}" method="POST">
+                    <form role="form text-left" action="{{route('updateTeam', ['id' => $team->idTeam])}}" method="POST">
                         @csrf
+                        <input type="hidden" name="idProject" value="{{$team->idProject}}">
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Nama</label></div>
                             <div class="col-12 col-md-6">
                                 <div class="dropdown">
                                     <select id="idUser" name="idUser" class="form-control">
                                         @foreach($users as $user)
-                                        <option value="{{$user->idUser}}">{{$user->name}}</option>
+                                        <option value="{{$user->id}}" <?php if($user->id==$team->idUser) {?> selected <?php } ?>>{{$user->name}} </option>
                                         @endforeach
+                                        <!-- <option  selected>Piih yang ini</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -36,8 +38,8 @@
                             <div class="col-12 col-md-6">
                                 <div class="dropdown">
                                     <select id="jabatan" name="jabatan" class="form-control">
-                                        <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                        <option value="Anggota">Anggota</option>
+                                    <option value="Penanggung Jawab" <?php if($team->jabatan=="Penanggung Jawab") {?> selected <?php } ?>>Penanggung Jawab</option>
+                                        <option value="Anggota" <?php if($team->jabatan=="Anggota") {?> selected <?php } ?>>Anggota</option>
                                     </select>
                                 </div>
                             </div>

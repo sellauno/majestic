@@ -50,8 +50,18 @@ Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project')
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist');
 Route::post('/addfile', 'ChecklistController@addFile')->name('addFile');
 
-//Link
+// Link
 Route::post('/createlink', 'LinkController@createLink')->name('createLink');
+
+// Teams
+Route::post('/createteam', 'TeamController@createTeam')->name('addTeam');
+Route::get('/editteam/{id}', 'TeamController@editTeam')->name('editTeam');
+Route::post('/updateteam/{id}', 'TeamController@updateTeam')->name('updateTeam');
+Route::get('/deleteteam/{id}', 'TeamController@deleteTeam')->name('deleteTeam');
+
+// File
+Route::get('/addfile/{id}', 'FileController@addFile')->name('addFile');
+Route::post('/uploadfile', 'FileController@uploadFile')->name('uploadFile');
 
 // Komentar
 Route::get('/posts', 'PostController@index')->name('posts');

@@ -69,83 +69,92 @@
                                 <input type="text" name="stories" class="form-control" value="{{$project->stories}}" placeholder="0" aria-label="Name">
                             </div>
                         </div>
-                        <br>
-
-                        <!-- TEAM -->
-                        <div class="row form-group">
-                            <h6>Team</h6>
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                         </div>
+                    </form>
+                    <br>
 
-                        <!-- Table Team -->
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center  mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jabatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posisi</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($teams as $team)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$team->name}}</h6>
-                                                </div>
+                    <!-- TEAM -->
+                    <div class="row form-group">
+                        <h6>Team</h6>
+                    </div>
+
+                    <!-- Table Team -->
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center  mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jabatan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posisi</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($teams as $team)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{$team->name}}</h6>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-xs text-secondary">{{$team->jabatan}}</div>
-                                        </td>
-                                        <td>
-                                            <div class="text-xs text-secondary">{{$team->posisi}}</div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a class="btn btn-link text-dark px-3 mb-0" href="{{route('editClient', ['id' => $project->idProject])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteClient', ['id' => $project->idProject])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- End Table Team -->
-                        <br>
-                        <div class="row form-group">
-                            <h6>Tambah Anggota</h6>
-                        </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-xs text-secondary">{{$team->jabatan}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-xs text-secondary">{{$team->posisi}}</div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="btn btn-link text-dark px-3 mb-0" href="{{route('editTeam', ['id' => $team->idTeam])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteTeam', ['id' => $team->idTeam])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Table Team -->
+                    <br>
+                    <form role="form text-left" action="{{route('addTeam')}}" method="POST">
+                        @csrf
+                    <div class="row form-group">
+                        <h6>Tambah Anggota</h6>
+                    </div>
 
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Nama</label></div>
-                            <div class="col-12 col-md-6">
-                                <div class="dropdown">
-                                    <select id="idUser" name="idUser" class="form-control">
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label>Nama</label></div>
+                        <div class="col-12 col-md-6">
+                            <div class="dropdown">
+                                <select id="idUser" name="idUser" class="form-control">
                                     <option>Pilih Nama</option>
 
-                                        @foreach($users as $user)
-                                        <option value="{{$user->idUser}}">{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    @foreach($users as $user)
+                                    <option value="{{$user->idUser}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Jabatan</label></div>
-                            <div class="col-12 col-md-6">
-                                <div class="dropdown">
-                                    <select id="jabatan" name="jabatan" class="form-control">
-                                        <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                        <option value="Anggota">Anggota</option>
-                                    </select>
-                                </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-2"><label>Jabatan</label></div>
+                        <div class="col-12 col-md-6">
+                            <div class="dropdown">
+                                <select id="jabatan" name="jabatan" class="form-control">
+                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
+                                    <option value="Anggota">Anggota</option>
+                                </select>
                             </div>
                         </div>
-                        <!-- <div class="row form-group">
+                    </div>
+                    <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Tambah Anggota</button>
+                        </div>
+                    <!-- <div class="row form-group">
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
                                 <div class="dropdown">
@@ -170,12 +179,9 @@
                             </div>
                         </div> -->
 
-                        <!-- END TEAM -->
-
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
-                        </div>
+                    <!-- END TEAM -->
                     </form>
+
                     @endforeach
                 </div>
             </div>

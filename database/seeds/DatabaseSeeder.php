@@ -14,23 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserSeeder::class);
         
-        DB::table('teams')->insert([
+        DB::table('posisi')->insert([
             
             [
-                'idProject' => '1',
-                'idUser' => '4',
-                'jabatan' => 'Penanggung Jawab',
+                'posisi' => 'KOL officer',
             ],
             [
-                'idProject' => '1',
-                'idUser' => '5',
-                'jabatan' => 'Anggota',
+                'posisi' => 'Finance',
             ],
             [
-                'idProject' => '1',
-                'idUser' => '6',
-                'jabatan' => 'Anggota',
-            ]
+                'posisi' => 'Graphic Designer',
+            ],
+            [
+                'posisi' => 'Creative Director',
+            ],
 
         ]);
     }
