@@ -27,19 +27,19 @@ class ProjectController extends Controller
         return view('projectadd', ['clients' => $clients, 'users' => $users]);
     }
     protected function validator(array $data)
-{
-    // return Validator::make($data, [
-    //     'idClient' => ['required', 'int', 'max:255'],
-    //     'reels' => ['required', 'video'],
-    //     'tiktok' => ['required', 'video'],
-    //     'feeds' => ['required', 'image'],
-    //     'stories' => ['required', 'video'],
-        
-    // ]);
-}
+    {
+        // return Validator::make($data, [
+        //     'idClient' => ['required', 'int', 'max:255'],
+        //     'reels' => ['required', 'video'],
+        //     'tiktok' => ['required', 'video'],
+        //     'feeds' => ['required', 'image'],
+        //     'stories' => ['required', 'video'],
+
+        // ]);
+    }
     public function createProject(Request $request)
     {
-        Project::create([
+        $insert = Project::create([
             'idClient' => $request->idClient,
             'reels' => $request->reels,
             'tiktok' => $request->tiktok,
@@ -52,22 +52,25 @@ class ProjectController extends Controller
             'status' => $request->status
         ]);
 
-        foreach ($request->idPJ as $idPj) {
-            Team::create([
-                'idProject' => $request->idProject,
-                'idUser' => $idPj,
-                'jabatan' => 'Penanggung Jawab'
-            ]);
+        if ($request->idPJ != null) {
+            foreach ($request->idPJ as $key => $value) {
+                Team::create([
+                    'idProject' => $insert->idProject,
+                    'idUser' => $value,
+                    'jabatan' => 'Penanggung Jawab'
+                ]);
+            }
         }
 
-        foreach ($request->anggota as $idAnggota) {
-            Team::create([
-                'idProject' => $request->idProject,
-                'idUser' => $idAnggota,
-                'jabatan' => 'Anggota'
-            ]);
+        if ($request->anggota != null) {
+            foreach ($request->anggota as $key => $value) {
+                Team::create([
+                    'idProject' => $insert->idProject,
+                    'idUser' => $value,
+                    'jabatan' => 'Anggota'
+                ]);
+            }
         }
-
 
         return redirect('/dashboard');
     }
@@ -85,7 +88,7 @@ class ProjectController extends Controller
             ->get();
 
         return view('projectedit', [
-            'projects' => $projects, 
+            'projects' => $projects,
             'users' => $users,
             'teams' => $teams
         ]);
@@ -104,22 +107,6 @@ class ProjectController extends Controller
         // $project->idPJ = $request->idPJ;
         $project->harga = $request->harga;
         $project->save();
-
-        foreach ($request->idPJ as $idPj) {
-            Team::create([
-                'idProject' => $id,
-                'idUser' => $idPj,
-                'jabatan' => 'Penanggung Jawab'
-            ]);
-        }
-
-        foreach ($request->anggota as $idAnggota) {
-            Team::create([
-                'idProject' => $id,
-                'idUser' => $idAnggota,
-                'jabatan' => 'Anggota'
-            ]);
-        }
 
         return redirect('/dashboard');
     }

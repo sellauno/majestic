@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    public function createProject(Request $request)
+    public function createTeam(Request $request)
     {
         Team::create([
             'idProject' => $request->idProject,

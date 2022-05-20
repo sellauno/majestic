@@ -215,8 +215,9 @@
             </div>
         </div>
         <!-- End Top -->
-        
-        <section class="form-box">
+
+        <!-- Attachment -->
+        <!-- <section class="form-box">
             <form action="{{route('addChecklist')}}" class="col-md-5" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="photo">Attach a photograph</label>
@@ -226,7 +227,9 @@
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </div>
             </form>
-        </section>
+        </section> -->
+        <!-- End Attachment -->
+
         <!-- Teams Accordion -->
         <div class="container-fluid py-4">
             <div class="card">
@@ -248,39 +251,40 @@
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <form enctype="multipart/form-data" action="addfile" method="POST">
-                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                @foreach ($checklists as $checklist)
-                                                <?php if ($checklist->idUser == $user->id) { ?>
-                                                    <div class="form-check">
-                                                        <input type="hidden" name="idProject" value="{{$id}}">
-                                                        <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                        <label class="custom-control-label <?php if (
-                                                                                                $checklist->deadline < now()
-                                                                                            ) {
-                                                                                                echo "text-danger";
-                                                                                            } ?>" for="customCheck1">{{$checklist->toDO}} </label>
-                                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                                        &nbsp;
-                                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            @foreach ($checklists as $checklist)
+                                            <?php if ($checklist->idUser == $user->id) { ?>
+                                                <div class="form-check">
+                                                    <input type="hidden" name="idProject" value="{{$id}}">
+                                                    <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                    <label class="custom-control-label <?php if (
+                                                                                            $checklist->deadline < now()
+                                                                                        ) {
+                                                                                            echo "text-danger";
+                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
+                                                    <span class="text-xs">{{$checklist->deadline}}</span>
+                                                    &nbsp;
+                                                    <input type="file" id="file" name="linkfile" style="display:none;">
+                                                    <!-- <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
                                                             <i class="fa fa-paperclip text-xs"></i>
-                                                        </a>
-                                                    </div>
-                                                <?php } ?>
-                                                @endforeach
+                                                        </a> -->
+                                                    <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-0" data-container="body" data-animation="true">
+                                                        <i class="fa fa-paperclip text-xs"></i>
+                                                    </a>
+                                                </div>
+                                            <?php } ?>
+                                            @endforeach
 
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                            </div>
                                         </div>
-                                    </form>
+                                        <div class="col-6">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
+                                        </div>
+                                    </div>
                                     <form action="{{route('addChecklist')}}" method="POST">
                                         <input type="hidden" name="idUser" value="{{$user->id}}">
                                         @csrf
@@ -345,52 +349,6 @@
                                     </div>
                                 </div>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <form enctype="multipart/form-data" action="addfile" method="POST">
-                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                @foreach ($checklists as $checklist)
-                                                <div class="form-check">
-                                                    <input type="hidden" name="idProject" value={{$id}}>
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                                    <label class="custom-control-label <?php if (
-                                                                                            $checklist->deadline < now()
-                                                                                        ) {
-                                                                                            echo "text-danger";
-                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
-                                                    <span class="text-xs">{{$checklist->deadline}}</span>
-                                                    &nbsp;
-                                                    <input type="file" id="file" name="linkfile" style="display:none;">
-                                                    <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </a>
-                                                </div>
-                                                @endforeach
-
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <form action="addchecklist" method="POST">
-                                        <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                        <div class="form-group">
-                                            <table id="tickets">
-                                            </table>
-                                        </div>
-                                    </form>
-                                    <div id="create-ticket-buttons">
-                                        <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
-                                            <i class="fa fa-plus-circle text-xs"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                             <div id="collapseTwo" class="accordion-collapse collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="card mb-4">
@@ -457,26 +415,7 @@
                         <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
                             <div class="d-flex flex-column">
                                 <h6 class="mb-3 text-sm">Ismi</h6>
-                                <form enctype="multipart/form-data" action="{{route('addFile')}}" method="POST">
-                                    @csrf
-                                    @foreach($checklists as $checklist)
-                                    <div class="form-check">
-                                        <input type="hidden" name="idProject" value={{$id}}>
-                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
-                                        <label class="custom-control-label <?php if (
-                                                                                $checklist->deadline < now()
-                                                                            ) {
-                                                                                echo "text-danger";
-                                                                            } ?>" for="customCheck1"> {{$checklist->toDO}}</label>
-                                        <span class="text-xs">{{$checklist->deadline}}</span>
-                                        &nbsp;
-                                        <input type="file" id="file" name="linkfile" style="display:none;">
-                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
-                                            <i class="fa fa-paperclip text-xs"></i>
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </form>
+                                
                                 <form action="{{route('addChecklist')}}" method="POST">
                                     @csrf
                                     <div class="form-group">

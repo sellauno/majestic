@@ -122,39 +122,37 @@
                     <br>
                     <form role="form text-left" action="{{route('addTeam')}}" method="POST">
                         @csrf
-                    <div class="row form-group">
-                        <h6>Tambah Anggota</h6>
-                    </div>
-
-                    <div class="row form-group">
+                        <div class="row form-group">
+                            <h6>Tambah Anggota</h6>
+                        </div>
+                        <input type="hidden" name="idProject" value="{{$project->idProject}}">
+                        <div class="row form-group">
                         <div class="col col-md-2"><label>Nama</label></div>
                         <div class="col-12 col-md-6">
                             <div class="dropdown">
                                 <select id="idUser" name="idUser" class="form-control">
-                                    <option>Pilih Nama</option>
-
                                     @foreach($users as $user)
-                                    <option value="{{$user->idUser}}">{{$user->name}}</option>
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-2"><label>Jabatan</label></div>
-                        <div class="col-12 col-md-6">
-                            <div class="dropdown">
-                                <select id="jabatan" name="jabatan" class="form-control">
-                                    <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                    <option value="Anggota">Anggota</option>
-                                </select>
-                            </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-2"><label>Jabatan</label></div>
+                    <div class="col-12 col-md-6">
+                        <div class="dropdown">
+                            <select id="jabatan" name="jabatan" class="form-control">
+                                <option value="Penanggung Jawab">Penanggung Jawab</option>
+                                <option value="Anggota">Anggota</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Tambah Anggota</button>
-                        </div>
-                    <!-- <div class="row form-group">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Tambah Anggota</button>
+                </div>
+                <!-- <div class="row form-group">
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
                                 <div class="dropdown">
@@ -179,14 +177,14 @@
                             </div>
                         </div> -->
 
-                    <!-- END TEAM -->
-                    </form>
+                <!-- END TEAM -->
+                </form>
 
-                    @endforeach
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     $("#inlineCheckbox1").click(function() {
