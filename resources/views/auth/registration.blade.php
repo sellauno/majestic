@@ -66,7 +66,7 @@
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">Posisi</label>
                               <div class="col-md-6">
                                 <div class="dropdown">
-                                    <select id="posisi" name="posisi" class="form-control select2">
+                                    <select id="posisi" name="posisi[]" class="form-control select2">
                                         @foreach($posisi as $p)
                                         <option value="{{$p->posisi}}">{{$p->posisi}}</option>
                                       @endforeach

@@ -282,20 +282,15 @@
           <h6 class="font-weight-bolder mb-0">@yield('title')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">    
           </div>
-          <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-            <li><a class="dropdown-item border-radius-md" href="javascript:;"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="javascript:;"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-          </ul>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-1">
+                <li class="mb-0">
                   <a class="dropdown-item border-radius-md" href="{{route('profile.edit')}}">
                     Profile
                   </a>
@@ -305,7 +300,7 @@
                     Logout
                   </a>
                 </li>
-                <li class="mb-3">
+                <li class="mb-0">
                   <a class="dropdown-item border-radius-md" href="{{route('change.password')}}">
                     Change Password
                   </a>

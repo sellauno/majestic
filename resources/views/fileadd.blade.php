@@ -18,7 +18,7 @@
                         <h5>File Baru</h5>
                     </div>
                     <div class="card-body">
-                        <form enctype="multipart/form-data" role="form text-left" action="{{route('createFile')}}" method="POST">
+                        <form enctype="multipart/form-data" role="form text-left" action="{{route('uploadFile')}}" method="POST">
                             @csrf
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Nama file</label></div>

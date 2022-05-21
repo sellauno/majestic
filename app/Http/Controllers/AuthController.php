@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\User;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\Posisi;
 
 class AuthController extends Controller
@@ -97,10 +97,21 @@ class AuthController extends Controller
     
     public function create(array $data)
     {
+        // $posisi = null;
+        // if(count($data['posisi'])<=1){
+        //     foreach($data['posisi'] as $d){
+        //         if ($loop->iteration != 1){
+        //             $posisi = $d;
+        //         }else{
+        //             $posisi = $posisi.' & '.$d;
+        //         }
+        //     }
+        // }
       return User::create([
         'name' => $data['name'],
         'role' => $data['role'],
         'posisi' => $data['posisi'],
+        // 'posisi' => $posisi,
         'email' => $data['email'],
         'password' => Hash::make($data['password'])
       ]);

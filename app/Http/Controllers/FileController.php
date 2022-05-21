@@ -11,4 +11,9 @@ class FileController extends Controller
         $todo = Checklist::find($id);
         return view('fileadd', ['todo' => $todo]);
     }
+
+    public function uploadFile()
+    {
+        # code...
+    }
 }

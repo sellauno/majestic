@@ -58,4 +58,35 @@ class ChecklistController extends Controller
 
         return redirect('/checklist' . '/' . $request->idProject);
     }
+
+    public function editChecklist($id)
+    {
+        $checklist = Checklist::find($id);
+        $string = str_replace(' ', 'T', $checklist->deadline);
+        $checklist->deadline = $string;
+        return view('checklistedit', ['checklist' => $checklist]);
+    }
+
+    public function updateChecklist(Request $request, $id)
+    {
+        $checklist = Checklist::find($id);
+        // $checklist->idProject = $request->idProject;
+        // $checklist->idUser = $request->idUser;
+        $checklist->toDO = $request->todo;
+        // $checklist->checked = $request->checked;
+        // $string = str_replace('T', ' ', $checklist->deadline);
+        // $checklist->deadline = $string;
+        $checklist->deadline = $request->deadline;
+        // $checklist->linkFile = $request->linkFile;
+        $checklist->save();
+        return redirect('/checklist' . '/' . $checklist->idProject);
+    }
+
+    public function deleteChecklist($id)
+    {
+        $checklist = Checklist::find($id);
+        $id = $checklist->idProject;
+        $checklist->delete();
+        return redirect('/checklist' . '/' . $id);
+    }
 }

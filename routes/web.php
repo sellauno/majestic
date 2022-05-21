@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+Route::get('/dashboarduser', 'DashboardController@dashboardUser')->name('dashboardUser');
 
 // Client
 Route::get('/clients', 'ClientController@allClient')->name('allClient');
@@ -45,10 +46,13 @@ Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProj
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject');
 
-
+// Checklist
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project');
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist');
 Route::post('/addfile', 'ChecklistController@addFile')->name('addFile');
+Route::get('/editchecklist/{id}', 'ChecklistController@editChecklist')->name('editChecklist');
+Route::post('/updatechecklist/{id}', 'ChecklistController@updateChecklist')->name('updateChecklist');
+Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name('deleteChecklist');
 
 // Link
 Route::post('/createlink', 'LinkController@createLink')->name('createLink');
@@ -111,3 +115,4 @@ Route::get('/layout', function () {
 Route::get('/alert', function () {
     return view('alert');
 })->name('alert');
+

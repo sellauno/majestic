@@ -39,6 +39,7 @@ class ProjectController extends Controller
     }
     public function createProject(Request $request)
     {
+        // dd($request->all());
         $insert = Project::create([
             'idClient' => $request->idClient,
             'reels' => $request->reels,
@@ -47,12 +48,11 @@ class ProjectController extends Controller
             'stories' => $request->stories,
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
-            'idPJ' => $request->idPJ,
             'harga' => $request->harga,
             'status' => $request->status
         ]);
 
-        if ($request->idPJ != null) {
+        if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
                 Team::create([
                     'idProject' => $insert->idProject,

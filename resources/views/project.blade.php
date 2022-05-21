@@ -162,11 +162,6 @@
                                             </table>
                                             <form action="{{route('createLink')}}" method="POST">
                                                 @csrf
-                                                <div id="create-ticket-buttons">
-                                                    <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
-                                                        <i class="fa fa-plus-circle text-xs"></i>
-                                                    </button>
-                                                </div>
                                                 <div class="form-group">
                                                     <table id="links" class="mb-2">
                                                         <input type="hidden" name="idProject" value={{$id}}>
@@ -265,15 +260,24 @@
                                                                                         ) {
                                                                                             echo "text-danger";
                                                                                         } ?>" for="customCheck1">{{$checklist->toDO}} </label>
-                                                    <span class="text-xs">{{$checklist->deadline}}</span>
-                                                    &nbsp;
-                                                    <input type="file" id="file" name="linkfile" style="display:none;">
-                                                    <!-- <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
+
+
+                                                    <p class="text-xs">{{$checklist->deadline}}
+                                                        &nbsp;
+                                                        <!-- <input type="file" id="file" name="linkfile" style="display:none;">
+                                                        <a class="btn-link text-secondary mb-0 btn-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambahkan file" data-container="body" data-animation="true" onclick="document.getElementById('file').click();">
                                                             <i class="fa fa-paperclip text-xs"></i>
                                                         </a> -->
-                                                    <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-0" data-container="body" data-animation="true">
-                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                    </a>
+                                                        <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                                                            <i class="fa fa-paperclip text-xs"></i>
+                                                        </a> &nbsp;
+                                                        <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                                                            <i class="fa fa-pencil text-xs"></i>
+                                                        </a> &nbsp;
+                                                        <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
+                                                            <i class="fa fa-trash text-xs"></i>
+                                                        </a>
+                                                    </p>
                                                 </div>
                                             <?php } ?>
                                             @endforeach

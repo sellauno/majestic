@@ -28,6 +28,30 @@ class DashboardController extends Controller
             'tiktoks' => $tiktoks,
             'reels' => $reels,
             'stories' => $stories,
+            'no' => 0,
+        ]);
+    
+    }
+
+    public function dashboardUser(){
+        $projects = DB::table('projects')
+        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->get(); 
+        $clients = Client::all();
+        $links = Link::all();
+        $reels = DB::table('links')->where('kategori', '=', 'reels')->get();
+        $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
+        $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
+        $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
+        return view('dashboarduser', [
+            'projects' => $projects, 
+            'clients' => $clients, 
+            'links' => $links,
+            'feeds' => $feeds,
+            'tiktoks' => $tiktoks,
+            'reels' => $reels,
+            'stories' => $stories,
+            'no' => 0,
         ]);
     
     }
