@@ -56,6 +56,7 @@ Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name
 
 // Link
 Route::post('/createlink', 'LinkController@createLink')->name('createLink');
+Route::post('/cari', 'ProjectController@cari')->name('cari');
 
 // Teams
 Route::post('/createteam', 'TeamController@createTeam')->name('addTeam');
