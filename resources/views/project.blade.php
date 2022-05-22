@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('btsr/assets/img/apple-icon.png')}}">
-    <link rel="icon" type="image/png" href="{{asset('btsr/assets/img/favicon.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('btsr/assets/img/logo/logo.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('btsr/assets/img/logo/logo.png')}}">
     <title>
         Majestic Creative
     </title>
@@ -26,8 +26,8 @@
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-                <img src="{{asset('btsr/assets/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+            <a class="navbar-brand m-0" href="{{route('dashboard')}}">
+                <img src="{{asset('btsr/assets/img/logo/logo.png')}}" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">Majestic Creative</span>
             </a>
         </div>
@@ -78,7 +78,7 @@
                     <a class="nav-link  @yield('register')" href="{{route('register')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>credit-card</title>
+                                <title>shop </title>
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                         <g transform="translate(1716.000000, 291.000000)">
@@ -135,7 +135,7 @@
                                     <h2 class="accordion-header" id="headingOne">
                                         <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                             <h6>Link</h6>
-                                            <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2" >
+                                            <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$id}}">
                                                 <input type="text" name="cari" placeholder="Cari Kategori .." value="">
@@ -143,8 +143,8 @@
                                             </form>
                                             <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                                         </div>
-                                            
-                                            
+
+
                                     </h2>
                                     <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
                                         <div class="accordion-body">
@@ -262,14 +262,26 @@
                                                 <div class="form-check">
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                    <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck{{$loop->iteration}}" onclick="checkedCheckbox()">
                                                     <label class="custom-control-label <?php if (
                                                                                             $checklist->deadline < now()
                                                                                         ) {
                                                                                             echo "text-danger";
-                                                                                        } ?>" for="customCheck1">{{$checklist->toDO}} </label>
+                                                                                        } ?>" for="todocheck{{$loop->iteration}}">{{$checklist->toDO}} </label>
 
+                                                    <p id="text{{$loop->iteration}}" style="display:none">Checkbox is CHECKED!</p>
 
+                                                    <script>
+                                                        function checkedCheckbox() {
+                                                            var checkBox = document.getElementById("todocheck{{$loop->iteration}}");
+                                                            var text = document.getElementById("text{{$loop->iteration}}");
+                                                            if (checkBox.checked == true) {
+                                                                text.style.display = "block";
+                                                            } else {
+                                                                text.style.display = "none";
+                                                            }
+                                                        }
+                                                    </script>
                                                     <p class="text-xs">{{$checklist->deadline}}
                                                         &nbsp;
                                                         <!-- <input type="file" id="file" name="linkfile" style="display:none;">
@@ -502,6 +514,17 @@
     <script src="{{asset('btsr/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
+    <!-- <script>
+        function checkedCheckbox() {
+            var checkBox = document.getElementById("todocheck");
+            var text = document.getElementById("text");
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+            } else {
+                text.style.display = "none";
+            }
+        }
+    </script> -->
     <script>
         function createTicketComponent(type) {
             type = type || null;

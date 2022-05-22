@@ -24,8 +24,8 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Posisi</th>
-                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,6 +39,9 @@
                                             </div>
                                         </div>
                                     </td>
+                                <td>
+                                    <div class="text-xs text-secondary">{{$users->role}}</div>
+                                </td>
                                 <td>
                                     <div class="text-xs text-secondary">{{$users->posisi}}</div>
                                 </td>
