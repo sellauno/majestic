@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/', function () {
     return view('auth.login');
     $user = App\User::first();
-// $user->notify(new Newvisit("A new user has visited on your application."));
-//    return view('welcome');
+    // $user->notify(new Newvisit("A new user has visited on your application."));
+    //    return view('welcome');
 });
 
 
@@ -28,6 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+Route::get('/dashboarduser', 'DashboardController@dashboardUser')->name('dashboardUser');
 
 // Client
 Route::get('/clients', 'ClientController@allClient')->name('allClient');
@@ -45,10 +46,13 @@ Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProj
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject');
 
-
+// Checklist
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project');
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist');
 Route::post('/addfile', 'ChecklistController@addFile')->name('addFile');
+Route::get('/editchecklist/{id}', 'ChecklistController@editChecklist')->name('editChecklist');
+Route::post('/updatechecklist/{id}', 'ChecklistController@updateChecklist')->name('updateChecklist');
+Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name('deleteChecklist');
 
 // Link
 Route::post('/createlink', 'LinkController@createLink')->name('createLink');
@@ -73,23 +77,23 @@ Route::get('/account', 'AccountController@allUser')->name('acc');
 
 // Authentication
 Route::get('login', 'AuthController@index')->name('login');
-Route::post('post-login', 'AuthController@postLogin')->name('login.post'); 
+Route::post('post-login', 'AuthController@postLogin')->name('login.post');
 Route::get('registration', 'AuthController@registration')->name('register');
-Route::post('post-registration', 'AuthController@postRegistration')->name('register.post'); 
+Route::post('post-registration', 'AuthController@postRegistration')->name('register.post');
 // Route::get('dashboard', 'AuthController@dashboard'); 
 Route::get('logout', 'AuthController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', 'ProfileController@edit')->name('profile.edit');
     Route::patch('profile', 'ProfileController@update')
-    ->name('profile.update');
-});   
+        ->name('profile.update');
+});
 
 Route::get('change-password', 'ChangePasswordController@index')->name('change.password');
 Route::post('change-password', 'ChangePasswordController@store');
 
 // Percobaan
-Route::get('test', function() {
+Route::get('test', function () {
     Storage::disk('google')->put('test.txt', 'Hello World');
 });
 Route::get('/post/create', 'PostController@create')->name('post.create');
@@ -97,7 +101,7 @@ Route::post('/post/store', 'PostController@store')->name('post.store');
 Route::get('/posts', 'PostController@index')->name('posts');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 
-Route::get('cbx', function() {
+Route::get('cbx', function () {
     return view('cbxcoba');
 })->name('cbx');
 
@@ -112,3 +116,14 @@ Route::get('/layout', function () {
 Route::get('/alert', function () {
     return view('alert');
 })->name('alert');
+
+Route::get('test1', function () {
+
+    $documentFiles = Storage::disk('tempatfileygakandiupload')->files('\\');
+    foreach ($documentFiles as $key => $documentFile) {
+        if ($key == 0) {
+            $path = Storage::disk('tempatfileygakandiupload')->get($documentFile);
+            $file_ftp = Storage::disk('google')->put($documentFile, $path);
+        }
+    }
+});

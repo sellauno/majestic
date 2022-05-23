@@ -58,11 +58,11 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->reels}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <?php $no=0;?>
+                        <?php $no = 0; ?>
                         @foreach($reels as $reel)
                         <?php $no++;
-                        if($reel->idProject == $project->idProject){?>
-                        <li><a class="dropdown-item border-radius-md" href="{{$reel->link}}">{{$no}}. {{$reel->link}} </a></li>
+                        if ($reel->idProject == $project->idProject) { ?>
+                          <li><a class="dropdown-item border-radius-md" href="{{$reel->link}}">{{$no}}. {{$reel->link}} </a></li>
                         <?php } ?>
                         @endforeach
                       </ul>
@@ -74,11 +74,11 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->tiktok}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                      <?php $no=0;?>
+                        <?php $no = 0; ?>
                         @foreach($tiktoks as $tiktok)
                         <?php $no++;
-                        if($tiktok->idProject == $project->idProject){?>
-                        <li><a class="dropdown-item border-radius-md" href="{{$tiktok->link}}">{{$no}}. {{$tiktok->link}} </a></li>
+                        if ($tiktok->idProject == $project->idProject) { ?>
+                          <li><a class="dropdown-item border-radius-md" href="{{$tiktok->link}}">{{$no}}. {{$tiktok->link}} </a></li>
                         <?php } ?>
                         @endforeach
                       </ul>
@@ -90,11 +90,11 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->feeds}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                      <?php $no=0;?>
+                        <?php $no = 0; ?>
                         @foreach($feeds as $feed)
                         <?php $no++;
-                        if($feed->idProject == $project->idProject){?>
-                        <li><a class="dropdown-item border-radius-md" href="{{$feed->link}}">{{$no}}. {{$feed->link}} </a></li>
+                        if ($feed->idProject == $project->idProject) { ?>
+                          <li><a class="dropdown-item border-radius-md" href="{{$feed->link}}">{{$no}}. {{$feed->link}} </a></li>
                         <?php } ?>
                         @endforeach
                       </ul>
@@ -106,11 +106,11 @@
                         <p class="text-sm font-weight-bold mb-0">{{$project->stories}}</p>
                       </div>
                       <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                      <?php $no=0;?>
+                        <?php $no = 0; ?>
                         @foreach($stories as $story)
                         <?php $no++;
-                        if($story->idProject == $project->idProject){?>
-                        <li><a class="dropdown-item border-radius-md" href="{{$story->link}}">{{$no}}. {{$story->link}} </a></li>
+                        if ($story->idProject == $project->idProject) { ?>
+                          <li><a class="dropdown-item border-radius-md" href="{{$story->link}}">{{$no}}. {{$story->link}} </a></li>
                         <?php } ?>
                         @endforeach
                       </ul>
@@ -127,24 +127,28 @@
                     </div>
                   </td>
                   <td class="align-middle">
-                    <div class="dropdown float-lg-end pe-4">
-                      <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-exclamation-circle text-xs"></i>
-                      </button>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
-                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
-                      </ul>
-                      <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
-                        Action
-                      </button>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                        <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="javascript:;"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                      </ul>
-                    </div>
+                    <?php if ($loop->iteration == count($projects)) { ?>
+                      <div class="dropup">
+                      <?php } else { ?>
+                        <div class="dropdown">
+                        <?php } ?>
+                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-exclamation-circle text-xs"></i>
+                        </button>
+                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable1">
+                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
+                          <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
+                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
+                        </ul>
+                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
+                          Action
+                        </button>
+                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                          <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
+                          <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                        </ul>
+                        </div>
                   </td>
                 </tr>
                 @endforeach

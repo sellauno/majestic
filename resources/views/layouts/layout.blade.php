@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('btsr/assets/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{asset('btsr/assets/img/favicon.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('btsr/assets/img/logo/logo.png')}}">
+  <link rel="icon" type="image/png" href="{{asset('btsr/assets/img/logo/logo.png')}}">
   <title>
     Majestic Creative
   </title>
@@ -34,10 +34,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('btsr/assets/css/soft-ui-dashboard.css?v=1.0.5')}}" rel="stylesheet" />
   <!-- <link href="{{asset('btsr/assets/css/soft-ui-dashboard.min.css')}}" rel="stylesheet" /> -->
-  <!-- JQUERY -->
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <!-- Sweet Alert -->
+    <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('sweetalert/animate.min.css')}}">
   <script
   src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
   integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
@@ -56,7 +55,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="{{route('dashboard')}}">
-        <img src="{{asset('btsr/assets/img/logo-ct.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{asset('btsr/assets/img/logo/logo.png')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Majestic Creative</span>
       </a>
     </div>
@@ -286,20 +285,15 @@
           <h6 class="font-weight-bolder mb-0">@yield('title')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">    
           </div>
-          <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-            <li><a class="dropdown-item border-radius-md" href="javascript:;"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="javascript:;"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-          </ul>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-1">
+                <li class="mb-0">
                   <a class="dropdown-item border-radius-md" href="{{route('profile.edit')}}">
                     Profile
                   </a>
@@ -309,7 +303,7 @@
                     Logout
                   </a>
                 </li>
-                <li class="mb-3">
+                <li class="mb-0">
                   <a class="dropdown-item border-radius-md" href="{{route('change.password')}}">
                     Change Password
                   </a>

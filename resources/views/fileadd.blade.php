@@ -18,18 +18,33 @@
                         <h5>File Baru</h5>
                     </div>
                     <div class="card-body">
-                        <form enctype="multipart/form-data" role="form text-left" action="{{route('createFile')}}" method="POST">
+                        <form enctype="multipart/form-data" role="form text-left" action="{{route('uploadFile')}}" method="POST">
                             @csrf
+                            <input type="hidden" name="idProject" value="{{$todo->idProject}}">
+                            <input type="hidden" name="idUser" value="{{$todo->idUser}}">
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Nama file</label></div>
+                                <div class="col col-md-2"><label>Judul</label></div>
                                 <div class="col-12 col-md-6">
-                                    <input type="text" class="form-control" name="namaFile" placeholder="Name" aria-label="Name">
+                                    <input type="text" class="form-control" name="judul" placeholder="Judul" aria-label="Judul">
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Deskripsi</label></div>
+                                <div class="col col-md-2"><label>Kategori</label></div>
                                 <div class="col-12 col-md-6">
-                                    <input type="file" class="form-control" name="fileUpload" placeholder="Name" aria-label="Name">
+                                    <select id="kategori" name="kategori" class="dropdown form-control"">
+                                    <option value="" disabled selected hidden>Pilih Kategori</option>
+                                        <option value="file" id="inlineCheckbox2">File</option>
+                                        <option value="video" id="inlineCheckbox2">Video</option>
+                                        <option value="reels" id="inlineCheckbox1">Reels</option>
+                                        <option value="feeds" id="inlineCheckbox3">Feeds</option>
+                                        <option value="stories" id="inlineCheckbox4">Stories</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-2"><label>File</label></div>
+                                <div class="col-12 col-md-6">
+                                    <input type="file" class="form-control" name="fileUpload" placeholder="File" aria-label="File">
                                 </div>
                             </div>
                             <div class="text-end">
