@@ -34,10 +34,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('btsr/assets/css/soft-ui-dashboard.css?v=1.0.5')}}" rel="stylesheet" />
   <!-- <link href="{{asset('btsr/assets/css/soft-ui-dashboard.min.css')}}" rel="stylesheet" /> -->
-  <!-- JQUERY -->
-  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <!-- Sweet Alert -->
+    <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('sweetalert/animate.min.css')}}">
   <script
   src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
   integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="

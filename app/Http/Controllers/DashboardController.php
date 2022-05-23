@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Project;
 use App\Link;
+use Google\Service\ServiceControl\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,8 +35,11 @@ class DashboardController extends Controller
     }
 
     public function dashboardUser(){
+        $idUser = auth()->user()->id;
         $projects = DB::table('projects')
         ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+        ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+        ->where('teams.idUser', '=', $idUser)
         ->get(); 
         $clients = Client::all();
         $links = Link::all();
@@ -43,6 +47,7 @@ class DashboardController extends Controller
         $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
         $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
         $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
+        $checklists = DB::table('checklists')->where('idUser', '=', $idUser)->get();
         return view('dashboarduser', [
             'projects' => $projects, 
             'clients' => $clients, 
@@ -51,7 +56,8 @@ class DashboardController extends Controller
             'tiktoks' => $tiktoks,
             'reels' => $reels,
             'stories' => $stories,
-            'no' => 0,
+            'checklists' => $checklists,
+            'idUser' => $idUser,
         ]);
     
     }
