@@ -44,6 +44,10 @@
   crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <link href="cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   
 </head>
 
@@ -336,9 +340,14 @@
   <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
   <script>
+    $(document).ready( function () {
+    $('.datatables').DataTable();
+} );
+
      $(".select2").select2()
     var ctx = document.getElementById("chart-bars").getContext("2d");
    
+    
     new Chart(ctx, {
       type: "bar",
       data: {

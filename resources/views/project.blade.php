@@ -135,7 +135,7 @@
                                     <h2 class="accordion-header" id="headingOne">
                                         <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                             <h6>Link</h6>
-                                            <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2" >
+                                            <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$id}}">
                                                 <input type="text" name="cari" placeholder="Cari Kategori .." value="">
@@ -148,7 +148,7 @@
                                     </h2>
                                     <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
                                         <div class="accordion-body">
-                                            <table class="table align-items-center mb-0 text-xs">
+                                            <table class="table align-items-center mb-0 text-xs datatables">
                                                 <thead>
                                                     <tr>
                                                         <th>Tanggal Upload</th>
@@ -249,7 +249,7 @@
                         @foreach($users as $user)
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$user->id}}" aria-expanded="true" aria-controls="collapseOne">
                                     {{$user->name}}
                                     <div class="ms-auto text-end position-absolute end-3 me-3">
                                         <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
@@ -257,7 +257,7 @@
                                     </div>
                                 </div>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div id="collapseOne{{$user->id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                     <div class="row">
