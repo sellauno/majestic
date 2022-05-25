@@ -14,11 +14,15 @@ class ChecklistController extends Controller
 {
     public function checklists($id)
     {
+        $idUser = auth()->user()->id;
+        $role = auth()->user()->role;
         $project = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
             ->where('projects.idProject', '=', $id)
             ->first();
-        $checklists = DB::table('checklists')->where('checklists.idProject', '=', $id)->get();
+        $checklists = DB::table('checklists')
+            ->where('checklists.idProject', '=', $id)
+            ->get();
         $links = DB::table('links')
             ->join('users', 'users.id', '=', 'links.idUser')
             ->where('links.idProject', '=', $id)
@@ -26,13 +30,29 @@ class ChecklistController extends Controller
         $users = DB::table('users')
             ->join('teams', 'users.id', '=', 'teams.idUser')
             ->where('teams.idProject', '=', $id)
+            ->where('teams.idUser', '!=', $idUser)
             ->get();
+        $myprofile = DB::table('users')
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->where('teams.idUser', '=', $idUser)
+            ->first();
+        $hak = false;
+
+        if($myprofile->jabatan == 'Penanggung Jawab'){
+            $hak = true;
+        }else if($role == 'admin'){
+            $hak = true;
+        }
+
         return view('project', [
             'id' => $id,
             'checklists' => $checklists,
+            'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
-            'users' => $users
+            'users' => $users,
+            'hak' => $hak
         ]);
     }
 

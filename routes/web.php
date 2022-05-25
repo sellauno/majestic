@@ -73,7 +73,7 @@ Route::get('/posts', 'PostController@index')->name('posts');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
 
 //Account 
-Route::get('/account', 'AccountController@allUser')->name('acc');
+Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('auth');
 
 // Authentication
 Route::get('login', 'AuthController@index')->name('login');
