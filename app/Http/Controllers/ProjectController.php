@@ -7,6 +7,7 @@ use App\Link;
 use App\Project;
 use App\Team;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -71,6 +72,13 @@ class ProjectController extends Controller
                 ]);
             }
         }
+
+        $client = Client::find($request->idClient);
+        $name = $insert->idProject.'_'.$client->namaClient;
+        Storage::disk('google')->makeDirectory($name);
+        $details = Storage::disk("google")->getMetadata($name);
+        $cek = $details['path'];
+        
 
         return redirect('/dashboard');
     }

@@ -38,12 +38,14 @@ class ChecklistController extends Controller
             ->where('teams.idUser', '=', $idUser)
             ->first();
         $hak = false;
-
-        if($myprofile->jabatan == 'Penanggung Jawab'){
-            $hak = true;
-        }else if($role == 'admin'){
+        if ($myprofile != null) {
+            if ($myprofile->jabatan == 'Penanggung Jawab') {
+                $hak = true;
+            }
+        } else if ($role == 'admin') {
             $hak = true;
         }
+
 
         return view('project', [
             'id' => $id,
