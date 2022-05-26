@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Folder;
 use App\Link;
 use App\Project;
 use App\Team;
@@ -77,8 +78,61 @@ class ProjectController extends Controller
         $name = $insert->idProject.'_'.$client->namaClient;
         Storage::disk('google')->makeDirectory($name);
         $details = Storage::disk("google")->getMetadata($name);
-        $cek = $details['path'];
+        $idFolderProject = $details['path'];
         
+        Folder::create([
+            'folderId' => $idFolderProject, 
+            'idProject' => $insert->idProject, 
+            'kategori' => 'main'
+        ]);
+
+        Storage::extend('google', function($app, $config) {
+            $client = new Google_Client();
+            $client->setClientId($config['clientId']);
+            $client->setClientSecret($config['clientSecret']);
+            $client->refreshToken($config['refreshToken']);
+            $service = new Google_Service_Drive($client);
+            $adapter = new GoogleDriveAdapter($service, $idFolderProject);
+
+            return new Filesystem($adapter);
+        });        
+
+        $file = 'file_'.$name;
+        $video = 'video_'.$name;
+        $gambar = 'gambar_'.$name;
+        // $feeds = 'feeds_'.$name;
+        // $reels = 'reels_'.$name;
+        // $story = 'story_'.$name;
+        // $tiktok = 'tiktok_'.$name;
+        Storage::disk('google')->makeDirectory($file);
+        $fileDetail = Storage::disk("google")->getMetadata($file);
+        $idFolderFile = $fileDetail['path'];
+
+        Folder::create([
+            'folderId' => $idFolderFile, 
+            'idProject' => $insert->idProject, 
+            'kategori' => 'file'
+        ]);
+
+        Storage::disk('google')->makeDirectory($video);
+        $videoDetail = Storage::disk("google")->getMetadata($video);
+        $idFolderVideo = $videoDetail['path'];
+
+        Folder::create([
+            'folderId' => $idFolderVideo, 
+            'idProject' => $insert->idProject, 
+            'kategori' => 'video'
+        ]);
+
+        Storage::disk('google')->makeDirectory($gambar);
+        $gambarDetail = Storage::disk("google")->getMetadata($gambar);
+        $idFolderGambar = $gambarDetail['path'];
+
+        Folder::create([
+            'folderId' => $idFolderGambar, 
+            'idProject' => $insert->idProject, 
+            'kategori' => 'gambar'
+        ]);
 
         return redirect('/dashboard');
     }

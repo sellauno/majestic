@@ -34,39 +34,39 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Harga</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="number" name="harga" class="form-control" value="{{$project->harga}}" placeholder="Harga" aria-label="Harga">
+                                <input type="number" name="harga" class="form-control" value="{{$project->harga}}" placeholder="Harga" aria-label="Harga" required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Mulai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglMulai" class="form-control" value="{{$project->tglMulai}}" placeholder="Name" aria-label="Name">
+                                <input type="date" name="tglMulai" class="form-control" value="{{$project->tglMulai}}" placeholder="Name" aria-label="Tanggal Mulai"  required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Selesai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglSelesai" class="form-control" value="{{$project->tglSelesai}}" placeholder="Name" aria-label="Name">
+                                <input type="date" name="tglSelesai" class="form-control" value="{{$project->tglSelesai}}" placeholder="Name" aria-label="Tanggal Selesai"  required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Reels</label></div>
                             <div class="col-12 col-md-2">
-                                <input type="number" name="reels" class="form-control" value="{{$project->reels}}" placeholder="0" aria-label="Name">
+                                <input type="number" name="reels" class="form-control" value="{{$project->reels}}" placeholder="0" aria-label="Reels">
                             </div>
                             <div class="col col-md-2"><label>Tiktok</label></div>
                             <div class="col-12 col-md-2">
-                                <input type="number" name="tiktok" class="form-control" value="{{$project->tiktok}}" placeholder="0" aria-label="Name">
+                                <input type="number" name="tiktok" class="form-control" value="{{$project->tiktok}}" placeholder="0" aria-label="Tiktok">
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Feeds</label></div>
                             <div class="col-12 col-md-2">
-                                <input type="number" name="feeds" class="form-control" value="{{$project->feeds}}" placeholder="0" aria-label="Name">
+                                <input type="number" name="feeds" class="form-control" value="{{$project->feeds}}" placeholder="0" aria-label="Feeds">
                             </div>
                             <div class="col col-md-2"><label>Stories</label></div>
                             <div class="col-12 col-md-2">
-                                <input type="text" name="stories" class="form-control" value="{{$project->stories}}" placeholder="0" aria-label="Name">
+                                <input type="text" name="stories" class="form-control" value="{{$project->stories}}" placeholder="0" aria-label="Stories">
                             </div>
                         </div>
                         <div class="text-center">

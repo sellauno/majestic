@@ -25,7 +25,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Judul</label></div>
                                 <div class="col-12 col-md-6">
-                                    <input type="text" class="form-control" name="judul" placeholder="Judul" aria-label="Judul">
+                                    <input type="text" class="form-control" name="judul" placeholder="Judul" aria-label="Judul"  required>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -44,7 +44,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>File</label></div>
                                 <div class="col-12 col-md-6">
-                                    <input type="file" class="form-control" name="fileUpload" placeholder="File" aria-label="File">
+                                    <input type="file" class="form-control" name="fileUpload" placeholder="File" aria-label="File"  required>
                                 </div>
                             </div>
                             <div class="text-end">
