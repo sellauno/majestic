@@ -763,6 +763,7 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
+                        window.location = "/dashboard";
                     }
                 })
             });
