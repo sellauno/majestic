@@ -6,6 +6,11 @@ use App\Checklist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\ServiceProvider;
+use Google_Client;
+use Google_Service_Drive;
+use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
+use League\Flysystem\Filesystem;
 
 class FileController extends Controller
 {
@@ -29,5 +34,22 @@ class FileController extends Controller
         //         $file_ftp = Storage::disk('google')->put($documentFile, $path);
         //     }
         // }
+    }
+
+    public function newFile(){
+        Storage::extend('google', function($app, $config) {
+            $client = new Google_Client();
+            $client->setClientId($config['clientId']);
+            $client->setClientSecret($config['clientSecret']);
+            $client->refreshToken($config['refreshToken']);
+            $service = new Google_Service_Drive($client);
+            $adapter = new GoogleDriveAdapter($service, '1KBuNtY_P4UEP0hwKkhuDQMUggYj8pH-n');
+
+            return new Filesystem($adapter);
+        });
+
+        // Storage::disk('google')->put('test1.txt', 'Hello World');
+        Storage::disk('google')->makeDirectory('NewFolder');
+
     }
 }

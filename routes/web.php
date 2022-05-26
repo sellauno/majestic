@@ -142,3 +142,5 @@ Route::get('test1', function () {
 Route::get('laporan', function () {
     return view('laporan');
 })->name('laporan');
+
+Route::get('/upload', 'FileController@newFile')->name('newFile');
