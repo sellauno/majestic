@@ -329,6 +329,7 @@
             'Notifikasi telah terkirim',
             'success'
           )
+          window.location="/send-mail";
         }
       })
     });

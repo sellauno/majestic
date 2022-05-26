@@ -263,7 +263,7 @@
                                                     <p id="text" style="display:none">Checkbox is CHECKED!</p>
                                                     <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                         Confirm
-                                                    </button>
+                                                    </bsutton>
                                                     <!-- <script>
                                                         function checkedCheckbox() {
                                                             var checkBox = document.getElementById("todocheck");
@@ -763,6 +763,7 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
+                        window.location="/send-mail";
                     }
                 })
             });

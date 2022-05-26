@@ -68,6 +68,8 @@ class ChecklistController extends Controller
             'deadline' => $request->deadline,
             'linkFile' => null
         ]);
+        $user->notify(new WelcomeEmailNotification());
+        return $user;
         return redirect('/checklist' . '/' . $request->idProject);
     }
 
