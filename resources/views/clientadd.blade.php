@@ -23,7 +23,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Nama client</label></div>
                                 <div class="col-12 col-md-6">
-                                    <input type="text" class="form-control" name="namaClient" placeholder="Name" aria-label="Name">
+                                    <input type="text" class="form-control" name="namaClient" placeholder="Name" aria-label="Name"  required>
                                 </div>
                             </div>
                             <div class="row form-group">

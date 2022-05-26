@@ -138,3 +138,7 @@ Route::get('test1', function () {
         }
     }
 });
+
+Route::get('laporan', function () {
+    return view('laporan');
+})->name('laporan');
