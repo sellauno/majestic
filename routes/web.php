@@ -139,8 +139,15 @@ Route::get('test1', function () {
     }
 });
 
-Route::get('laporan', function () {
-    return view('laporan');
-})->name('laporan');
-
-Route::get('/upload', 'FileController@newFile')->name('newFile');
+//Email
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+   return redirect('/dashboarduser');
+    //dd("Email is Sent.");
+});
