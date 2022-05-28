@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChecklistController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -77,6 +78,7 @@ Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('au
 
 // Report
 Route::get('/report', 'ReportController@generateReport');
+Route::get('/report1', 'ReportController@generateReport1');
 
 // Authentication
 Route::get('login', 'AuthController@index')->name('login');
@@ -113,6 +115,20 @@ Route::get('test', function () {
     dd($cek);
 
 });
+
+Route::get('testfolder', function () {
+    // Storage::disk('google')->put('test.txt', 'Hello World');
+    // $details = Storage::disk("google")->getMetadata('test.txt');
+    // $cek = $details['path'];
+    // dd($cek);
+    $id = '1BWpIR7YLfnDCh-bV1U9psaz5ZQjXnsib';
+    Storage::disk('google')->makeDirectory($id.'/folderbaru');
+    $details = Storage::disk("google")->getMetadata($id.'/folderbaru');
+    $cek = $details['path'];
+    dd($cek);
+
+});
+
 Route::get('/post/create', 'PostController@create')->name('post.create')->middleware('auth');
 Route::post('/post/store', 'PostController@store')->name('post.store')->middleware('auth');
 Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
@@ -145,15 +161,19 @@ Route::get('test1', function () {
     }
 });
 
+
+
 //Email
-Route::get('send-mail', function () {
+Route::get('send-mail/{id}', 'ChecklistController@sendMail')->name('send-mail');
+Route::get('send-mail2/', 'ChecklistController@sendMail2')->name('send-mail2');
+// Route::get('send-mail', function () {
    
     $details = [
         'title' => 'Mail from Majestic Creative',
         'body' => 'Testing email'
     ];
    
-    Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
-   return redirect('/dashboarduser');
-    //dd("Email is Sent.");
-});
+//     Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+//    return redirect('/dashboarduser');
+//     dd("Email is Sent.");
+// });

@@ -22,6 +22,7 @@
                             @csrf
                             <input type="hidden" name="idProject" value="{{$todo->idProject}}">
                             <input type="hidden" name="idUser" value="{{$todo->idUser}}">
+                            <input type="hidden" name="idChecklist" value="{{$todo->idChecklist}}">
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Judul</label></div>
                                 <div class="col-12 col-md-6">
@@ -34,10 +35,11 @@
                                     <select id="kategori" name="kategori" class="dropdown form-control"">
                                     <option value="" disabled selected hidden>Pilih Kategori</option>
                                         <option value="file" id="inlineCheckbox2">File</option>
+                                        <option value="gambar" id="inlineCheckbox3">Gambar</option>
                                         <option value="video" id="inlineCheckbox2">Video</option>
-                                        <option value="reels" id="inlineCheckbox1">Reels</option>
+                                        <!-- <option value="reels" id="inlineCheckbox1">Reels</option>
                                         <option value="feeds" id="inlineCheckbox3">Feeds</option>
-                                        <option value="stories" id="inlineCheckbox4">Stories</option>
+                                        <option value="stories" id="inlineCheckbox4">Stories</option> -->
                                     </select>
                                 </div>
                             </div>

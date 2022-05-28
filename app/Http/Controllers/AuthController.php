@@ -55,7 +55,7 @@ class AuthController extends Controller
                 return redirect()->intended('dashboarduser')
                     ->withSuccess('You have Successfully loggedin');
             } else {
-                return redirect()->intended('dashboard')
+                return redirect()->intended('client')
                 ->withSuccess('You have Successfully loggedin');
             }
         }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Google_Service_Drive_DriveFile;
+use Illuminate\Support\Facades\Mail;
 
 class ChecklistController extends Controller
 {
@@ -68,8 +69,8 @@ class ChecklistController extends Controller
             'deadline' => $request->deadline,
             'linkFile' => null
         ]);
-        $user->notify(new WelcomeEmailNotification());
-        return $user;
+        // $user->notify(new WelcomeEmailNotification());
+        // return $user;
         return redirect('/checklist' . '/' . $request->idProject);
     }
 
@@ -112,5 +113,31 @@ class ChecklistController extends Controller
         $id = $checklist->idProject;
         $checklist->delete();
         return redirect('/checklist' . '/' . $id);
+    }
+
+    public function sendMail($id)
+    {
+        $checklist = Checklist::find($id);
+        $checklist->checked = true;
+        $checklist->save();
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+
+        dd($checklist->toDO);
+
+        // Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+        // return redirect('/dashboarduser');
+    }
+    public function sendMail2()
+    {
+        $details = [
+            'title' => 'Mail from ItSolutionStuff.com',
+            'body' => 'This is for testing email using smtp'
+        ];
+
+        Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+        return redirect('/dashboarduser');
     }
 }

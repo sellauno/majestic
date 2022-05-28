@@ -254,7 +254,7 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="document.getElementById('confirm').click();">
+                                                    <input class="form-check-input" type="checkbox" id="todocheck" onclick="document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
 
 
                                                     <label class="custom-control-label <?php if (
@@ -264,9 +264,9 @@
                                                                                         } ?>" for="todocheck">{{$checklist->toDO}} {{$loop->iteration}}</label>
 
                                                     <p id="text" style="display:none">Checkbox is CHECKED!</p>
-                                                    <button type="button" style="display:none" class="btn btn-primary" id="confirm">
+                                                    <button type="button" data-id="{{$checklist->idChecklist}}" style="display:none" class="btn btn-primary" id="confirm">
                                                         Confirm
-                                                    </bsutton>
+                                                    </button>
                                                     <!-- <script>
                                                         function checkedCheckbox() {
                                                             var checkBox = document.getElementById("todocheck");
@@ -397,14 +397,14 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$user->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" disabled>
+                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($checklist->checked == true) checked  @endif disabled>
 
 
                                                     <label class="custom-control-label <?php if (
                                                                                             $checklist->deadline < now()
                                                                                         ) {
                                                                                             echo "text-danger";
-                                                                                        } ?>" for="todocheck">{{$checklist->toDO}} {{$loop->iteration}}</label>
+                                                                                        } ?>" for="todocheck">{{$checklist->toDO}}</label>
 
                                                     <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                         Confirm
@@ -757,6 +757,7 @@
             });
 
             $("#confirm").click(function() {
+                var idChecklist = $(this).data('id');
                 Swal.fire({
                     title: 'Tandai tugas selesai?',
                     text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
@@ -772,7 +773,7 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
-                        window.location="/send-mail";
+                        window.location="/send-mail/".$idChecklist;
                     }
                 })
             });
