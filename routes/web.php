@@ -83,6 +83,12 @@ Route::get('login', 'AuthController@index')->name('login');
 Route::post('post-login', 'AuthController@postLogin')->name('login.post');
 Route::get('registration', 'AuthController@registration')->name('register')->middleware('auth');
 Route::post('post-registration', 'AuthController@postRegistration')->name('register.post')->middleware('auth');
+
+//accountedit
+Route::get('accountedit/{id}', 'ProfileController@editAccount')->name('editAccount')->middleware('auth');
+Route::post('updateaccount/{id}', 'ProfileController@updateAccount')->name('updateAccount')->middleware('auth');
+Route::get('deleteedit/{id}', 'ProfileController@deleteAccount')->name('deleteAccount')->middleware('auth');
+
 // Route::get('dashboard', 'AuthController@dashboard')->middleware('auth'); 
 Route::get('logout', 'AuthController@logout')->name('logout')->middleware('auth');
 
@@ -143,8 +149,8 @@ Route::get('test1', function () {
 Route::get('send-mail', function () {
    
     $details = [
-        'title' => 'Mail from ItSolutionStuff.com',
-        'body' => 'This is for testing email using smtp'
+        'title' => 'Mail from Majestic Creative',
+        'body' => 'Testing email'
     ];
    
     Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));

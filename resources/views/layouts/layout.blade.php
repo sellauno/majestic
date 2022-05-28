@@ -290,7 +290,10 @@
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-user cursor-pointer"></i>
+              <h6>{{auth()->user()->name}} &nbsp;
+              <i class="fa fa-user cursor-pointer"></i>
+              </h6>
+                
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-0">

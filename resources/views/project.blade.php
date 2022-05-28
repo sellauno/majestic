@@ -165,7 +165,10 @@
                                                     <td>{{$link->tglUpload}}</td>
                                                     <td>{{$link->kategori}}</td>
                                                     <td>{{$link->judul}}</td>
-                                                    <td>{{$link->link}}</td>
+                                                    <td>
+                                                        <!-- {{$link->link}} -->
+                                                    <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
+                                                    <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button></td>
                                                     <td>{{$link->name}}</td>
                                                 </tr>
                                                 @endforeach
@@ -626,6 +629,12 @@
     <script src="{{asset('btsr/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
+    <script>
+    function copyToClipboard(id) {
+        document.getElementById(id).select();
+        document.execCommand('copy');
+    }
+</script>
     @foreach ($checklists as $checklist)
     <script>
         // function checkedCheckbox() {
