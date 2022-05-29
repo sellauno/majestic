@@ -66,6 +66,7 @@ class ChecklistController extends Controller
             'idUser' => $request->idUser,
             'toDO' => $request->toDO,
             'checked' => null,
+            'tglStart' => $request->tglStart
             'deadline' => $request->deadline,
             'linkFile' => null
         ]);
@@ -101,6 +102,7 @@ class ChecklistController extends Controller
         // $checklist->checked = $request->checked;
         // $string = str_replace('T', ' ', $checklist->deadline);
         // $checklist->deadline = $string;
+        $checklist->tglStart = $request->tglStart;
         $checklist->deadline = $request->deadline;
         // $checklist->linkFile = $request->linkFile;
         $checklist->save();

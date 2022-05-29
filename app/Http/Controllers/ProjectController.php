@@ -75,62 +75,51 @@ class ProjectController extends Controller
         }
 
         $client = Client::find($request->idClient);
-        $name = $insert->idProject.'_'.$client->namaClient;
+        $name = $insert->idProject . '_' . $client->namaClient;
         Storage::disk('google')->makeDirectory($name);
         $details = Storage::disk("google")->getMetadata($name);
         $idFolderProject = $details['path'];
-        
+
         Folder::create([
-            'folderId' => $idFolderProject, 
-            'idProject' => $insert->idProject, 
+            'folderId' => $idFolderProject,
+            'idProject' => $insert->idProject,
             'kategori' => 'main'
         ]);
 
-        Storage::extend('google', function($app, $config) {
-            $client = new Google_Client();
-            $client->setClientId($config['clientId']);
-            $client->setClientSecret($config['clientSecret']);
-            $client->refreshToken($config['refreshToken']);
-            $service = new Google_Service_Drive($client);
-            $adapter = new GoogleDriveAdapter($service, $idFolderProject);
-
-            return new Filesystem($adapter);
-        });        
-
-        $file = 'file_'.$name;
-        $video = 'video_'.$name;
-        $gambar = 'gambar_'.$name;
+        $file = 'file_' . $name;
+        $video = 'video_' . $name;
+        $gambar = 'gambar_' . $name;
         // $feeds = 'feeds_'.$name;
         // $reels = 'reels_'.$name;
         // $story = 'story_'.$name;
         // $tiktok = 'tiktok_'.$name;
-        Storage::disk('google')->makeDirectory($file);
-        $fileDetail = Storage::disk("google")->getMetadata($file);
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
+        $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
         $idFolderFile = $fileDetail['path'];
 
         Folder::create([
-            'folderId' => $idFolderFile, 
-            'idProject' => $insert->idProject, 
+            'folderId' => $idFolderFile,
+            'idProject' => $insert->idProject,
             'kategori' => 'file'
         ]);
 
-        Storage::disk('google')->makeDirectory($video);
-        $videoDetail = Storage::disk("google")->getMetadata($video);
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
+        $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
         $idFolderVideo = $videoDetail['path'];
 
         Folder::create([
-            'folderId' => $idFolderVideo, 
-            'idProject' => $insert->idProject, 
+            'folderId' => $idFolderVideo,
+            'idProject' => $insert->idProject,
             'kategori' => 'video'
         ]);
 
-        Storage::disk('google')->makeDirectory($gambar);
-        $gambarDetail = Storage::disk("google")->getMetadata($gambar);
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
+        $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
         $idFolderGambar = $gambarDetail['path'];
 
         Folder::create([
-            'folderId' => $idFolderGambar, 
-            'idProject' => $insert->idProject, 
+            'folderId' => $idFolderGambar,
+            'idProject' => $insert->idProject,
             'kategori' => 'gambar'
         ]);
 
@@ -180,30 +169,30 @@ class ProjectController extends Controller
         return redirect('/dashboard');
     }
     public function cari(Request $request)
-	{
-		$keyword = $request->cari;
+    {
+        $keyword = $request->cari;
         $links = Link::where('kategori', "%" . $keyword . "%")->paginate(5);
-        $id=$request->id;
+        $id = $request->id;
         $project = DB::table('projects')
-        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
-        ->where('projects.idProject', '=', $id)
-        ->first();
-    $checklists = DB::table('checklists')->where('checklists.idProject', '=', $id)->get();
-    $links = DB::table('links')
-        ->join('users', 'users.id', '=', 'links.idUser')
-        ->where('links.idProject', '=', $id)
-        ->where('kategori','like', "%" . $keyword . "%")
-        ->get();
-    $users = DB::table('users')
-        ->join('teams', 'users.id', '=', 'teams.idUser')
-        ->where('teams.idProject', '=', $id)
-        ->get();
-    return view('project', [
-        'id' => $id,
-        'checklists' => $checklists,
-        'project' => $project,
-        'links' => $links,
-        'users' => $users
-    ]);
-	}
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.idProject', '=', $id)
+            ->first();
+        $checklists = DB::table('checklists')->where('checklists.idProject', '=', $id)->get();
+        $links = DB::table('links')
+            ->join('users', 'users.id', '=', 'links.idUser')
+            ->where('links.idProject', '=', $id)
+            ->where('kategori', 'like', "%" . $keyword . "%")
+            ->get();
+        $users = DB::table('users')
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->get();
+        return view('project', [
+            'id' => $id,
+            'checklists' => $checklists,
+            'project' => $project,
+            'links' => $links,
+            'users' => $users
+        ]);
+    }
 }

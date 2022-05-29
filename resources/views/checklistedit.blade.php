@@ -1,4 +1,10 @@
+@if(auth()->user()->role == 'admin')
 @extends('layouts.layout')
+@endif
+
+@if(auth()->user()->role == 'user')
+@extends('layouts.layoutuser')
+@endif
 
 @section('title', 'Form Checklist')
 
@@ -23,6 +29,12 @@
                             <div class="col col-md-2"><label>To do</label></div>
                             <div class="col-12 col-md-6">
                                 <input type="text" class="form-control" name="todo" value="{{$checklist->toDO}}">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-2"><label>Start</label></div>
+                            <div class="col-12 col-md-3">
+                                <input type="datetime-local" name="tglStart" class="form-control" value="{{$checklist->tglStart}}">
                             </div>
                         </div>
                         <div class="row form-group">

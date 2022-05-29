@@ -58,6 +58,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
+                @if(auth()->user()->role == 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('allClient')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -118,6 +119,7 @@
                         <span class="nav-link-text ms-1">Account</span>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </aside>
@@ -167,8 +169,9 @@
                                                     <td>{{$link->judul}}</td>
                                                     <td>
                                                         <!-- {{$link->link}} -->
-                                                    <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
-                                                    <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button></td>
+                                                        <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
+                                                        <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button>
+                                                    </td>
                                                     <td>{{$link->name}}</td>
                                                 </tr>
                                                 @endforeach
@@ -322,6 +325,9 @@
                                                     <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
                                                 </td>
                                                 <td>
+                                                    <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div>
+                                                </td>
+                                                <td>
                                                     <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
                                                 </td>
                                                 <td>
@@ -397,7 +403,7 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$user->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($checklist->checked == true) checked  @endif disabled>
+                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($checklist->checked == true) checked @endif disabled>
 
 
                                                     <label class="custom-control-label <?php if (
@@ -630,11 +636,11 @@
     <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
-    function copyToClipboard(id) {
-        document.getElementById(id).select();
-        document.execCommand('copy');
-    }
-</script>
+        function copyToClipboard(id) {
+            document.getElementById(id).select();
+            document.execCommand('copy');
+        }
+    </script>
     @foreach ($checklists as $checklist)
     <script>
         // function checkedCheckbox() {
@@ -773,7 +779,7 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
-                        window.location="/send-mail/".$idChecklist;
+                        window.location = "/send-mail/".$idChecklist;
                     }
                 })
             });

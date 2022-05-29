@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <form role="form text-left" action="{{route('createProject')}}" method="POST">
                         @csrf
-                        <input type="hidden" name="status" value="New Project!">
+                        <input type="hidden" name="status" value="New">
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">
@@ -40,8 +40,8 @@
                         </div> -->
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Harga</label></div>
-                            <div class="col-12 col-md-3">
-                                <input type="number" name="harga" class="form-control" placeholder="Harga" aria-label="Harga" required>
+                            <div class="col-12 col-md-6">
+                                <input type="number" name="harga" step="100000" class="form-control" placeholder="Harga" aria-label="Harga" required>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -86,31 +86,31 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Penanggung Jawab</label></div>
                             <div class="col-12 col-md-6 nav-item">
-                            <div class="dropdown">
+                                <div class="dropdown">
                                     <select name="idPJ[]" class="dropdown form-control select2" multiple>
-                                    @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
-                                </select>
+                                        @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Anggota</label></div>
                             <div class="col-12 col-md-6 nav-item">
-                            <div class="dropdown">
+                                <div class="dropdown">
                                     <select name="anggota[]" class="form-control select2" multiple>
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                @endforeach
-                                </select>
+                                        @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <!-- END TEAM -->
+                            <!-- END TEAM -->
 
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
-                        </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
+                            </div>
                     </form>
                 </div>
             </div>
