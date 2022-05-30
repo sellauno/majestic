@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <form role="form text-left" action="{{route('createProject')}}" method="POST">
                         @csrf
-                        <input type="hidden" name="status" value="New">
+                        <input type="hidden" name="status" value="new">
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">

@@ -179,7 +179,7 @@
                 <input type="hidden" name="idProject" value="{{$project->idProject}}">
                 <input type="hidden" name="idUser" value="{{$idUser}}">
                 <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
+                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->checked == true) checked disabled @endif>
                 <label class="custom-control-label <?php if (
                                                       $checklist->deadline < now()
                                                     ) {
@@ -190,9 +190,7 @@
                     Confirm
                 </a>
                 <script type="text/javascript">
-                  $(document).ready(function() {
-                    $("#confirm").click(function() {
-                      var idChecklist = $(this).data('id');
+                    function confirm($id) {
                       Swal.fire({
                         title: 'Tandai tugas selesai?',
                         text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
@@ -208,11 +206,33 @@
                             'Notifikasi telah terkirim',
                             'success'
                           )
-                          window.location = "/send-mail/".$idChecklist;
+                          window.location = "/send-mail/"+$id;
                         }
                       })
-                    });
-                  });
+                    };
+                  // $(document).ready(function() {
+                  //   $("#confirm").click(function($id) {
+                  //     var idChecklist = $(this).data('id');
+                  //     Swal.fire({
+                  //       title: 'Tandai tugas selesai?',
+                  //       text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
+                  //       type: 'warning',
+                  //       showCancelButton: true,
+                  //       confirmButtonColor: '#3085d6',
+                  //       cancelButtonColor: '#d33',
+                  //       confirmButtonText: 'Ya'
+                  //     }).then((result) => {
+                  //       if (result.value) {
+                  //         Swal.fire(
+                  //           'Berhasil!'.$idChecklist,
+                  //           'Notifikasi telah terkirim',
+                  //           'success'
+                  //         )
+                  //         window.location = "/send-mail/".$id;
+                  //       }
+                  //     })
+                  //   });
+                  // });
                 </script>
                 <p class="text-xs">{{$checklist->deadline}}
                   &nbsp;

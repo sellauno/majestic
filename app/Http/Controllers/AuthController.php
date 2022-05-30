@@ -77,7 +77,23 @@ class AuthController extends Controller
         ]);
 
         $data = $request->all();
-        $check = $this->create($data);
+        // $check = $this->create($data);
+        $posisi ='';
+        foreach ($request->posisi as $key => $value) {
+            if($key>0){
+                $posisi = $posisi.' & '.$value;
+            }else{
+                $posisi = $posisi.$value;
+            }
+        }
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'posisi' => $posisi,
+            'role' => $request->role,
+            'idClient' => $request->idClient
+        ]);
         return redirect('/dashboard');
         // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }

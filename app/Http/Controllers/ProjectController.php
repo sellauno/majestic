@@ -51,7 +51,9 @@ class ProjectController extends Controller
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
             'harga' => $request->harga,
-            'status' => $request->status
+            'status' => $request->status,
+            'todo' => 0,
+            'finished' => 0
         ]);
 
         if ($request->input('idPJ') != null) {

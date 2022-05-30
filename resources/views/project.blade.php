@@ -257,7 +257,7 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" id="todocheck" onclick="document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" id="todocheck" data-id="{{$checklist->idChecklist}} onclick="document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
 
 
                                                     <label class="custom-control-label <?php if (
@@ -762,8 +762,8 @@
                 })
             });
 
-            $("#confirm").click(function() {
-                var idChecklist = $(this).data('id');
+            $("#confirm").click(function($id) {
+                // var idChecklist = $(this).data('id');
                 Swal.fire({
                     title: 'Tandai tugas selesai?',
                     text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
@@ -779,7 +779,8 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
-                        window.location = "/send-mail/".$idChecklist;
+                        // window.location = "/send-mail/".$idChecklist;
+                        window.location = "/send-mail/".$id;
                     }
                 })
             });

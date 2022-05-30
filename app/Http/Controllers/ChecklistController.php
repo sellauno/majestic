@@ -66,10 +66,15 @@ class ChecklistController extends Controller
             'idUser' => $request->idUser,
             'toDO' => $request->toDO,
             'checked' => null,
-            'tglStart' => $request->tglStart
+            'tglStart' => $request->tglStart,
             'deadline' => $request->deadline,
             'linkFile' => null
         ]);
+
+        $project = Project::find($request->idProject);
+        $project->todo = $project->todo + 1;
+        $project->save();
+
         // $user->notify(new WelcomeEmailNotification());
         // return $user;
         return redirect('/checklist' . '/' . $request->idProject);
@@ -96,8 +101,6 @@ class ChecklistController extends Controller
     public function updateChecklist(Request $request, $id)
     {
         $checklist = Checklist::find($id);
-        // $checklist->idProject = $request->idProject;
-        // $checklist->idUser = $request->idUser;
         $checklist->toDO = $request->todo;
         // $checklist->checked = $request->checked;
         // $string = str_replace('T', ' ', $checklist->deadline);
@@ -113,6 +116,17 @@ class ChecklistController extends Controller
     {
         $checklist = Checklist::find($id);
         $id = $checklist->idProject;
+
+        $project = Project::find($checklist->idProject);
+        if ($checklist->checked == true) {
+            $project->finished = $project->finished - 1;
+            $project->save();
+        } else {
+            $project->todo = $project->todo - 1;
+            $project->save();
+        }
+
+
         $checklist->delete();
         return redirect('/checklist' . '/' . $id);
     }
@@ -127,10 +141,13 @@ class ChecklistController extends Controller
             'body' => 'This is for testing email using smtp'
         ];
 
-        dd($checklist->toDO);
+        $project = Project::find($checklist->idProject);
+        $project->todo = $project->todo - 1;
+        $project->finished = $project->finished + 1;
+        $project->save();
 
         // Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
-        // return redirect('/dashboarduser');
+        return redirect('/dashboarduser');
     }
     public function sendMail2()
     {
