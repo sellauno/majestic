@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Checklist;
 use App\Project;
+use App\Subchecklist;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,11 +47,16 @@ class ChecklistController extends Controller
         } else if ($role == 'admin') {
             $hak = true;
         }
-
+        $subchecklist = DB::table('subchecklists')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->where('checklists.idProject', '=', $id)
+            ->get();
+        // dd($subchecklist);
 
         return view('project', [
             'id' => $id,
             'checklists' => $checklists,
+            'subchecklist' => $subchecklist,
             'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
@@ -146,7 +152,7 @@ class ChecklistController extends Controller
         $project->finished = $project->finished + 1;
         $project->save();
 
-        // Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+        Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
         return redirect('/dashboarduser');
     }
     public function sendMail2()
@@ -158,5 +164,67 @@ class ChecklistController extends Controller
 
         Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
         return redirect('/dashboarduser');
+    }
+
+    // SUB CHECKLLIST
+
+    public function createSubchecklist(Request $request)
+    {
+        Subchecklist::create([
+            'idChecklist' => $request->idChecklist,
+            'idUser' => $request->idUser,
+            'subTodo' => $request->subTodo,
+            'checked' => null,
+            'tglStart' => $request->tglStart,
+            'deadline' => $request->deadline
+        ]);
+
+        // $project = Project::find($request->idProject);
+        // $project->todo = $project->todo + 1;
+        // $project->save();
+
+        return redirect('/checklist' . '/' . $request->idProject);
+    }
+
+
+    public function editSubchecklist($id)
+    {
+        $checklist = Subchecklist::find($id);
+        $string = str_replace(' ', 'T', $checklist->deadline);
+        $checklist->deadline = $string;
+        return view('checklistedit', ['checklist' => $checklist]);
+    }
+
+    public function updateSubchecklist(Request $request, $id)
+    {
+        $checklist = Subchecklist::find($id);
+        $checklist->subTodo = $request->subTodo;
+        // $checklist->checked = $request->checked;
+        // $string = str_replace('T', ' ', $checklist->deadline);
+        // $checklist->deadline = $string;
+        $checklist->tglStart = $request->tglStart;
+        $checklist->deadline = $request->deadline;
+        // $checklist->linkFile = $request->linkFile;
+        $checklist->save();
+        return redirect('/checklist' . '/' . $checklist->idProject);
+    }
+
+    public function deleteSubchecklist($id)
+    {
+        $checklist = Subchecklist::find($id);
+        $id = $checklist->idProject;
+
+        // $project = Project::find($checklist->idProject);
+        // if ($checklist->checked == true) {
+        //     $project->finished = $project->finished - 1;
+        //     $project->save();
+        // } else {
+        //     $project->todo = $project->todo - 1;
+        //     $project->save();
+        // }
+
+
+        $checklist->delete();
+        return redirect('/checklist' . '/' . $id);
     }
 }
