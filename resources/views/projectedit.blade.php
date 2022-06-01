@@ -20,7 +20,7 @@
                     @foreach($projects as $project)
                     <form role="form text-left" action="{{route('updateProject', ['id' => $project->idProject])}}" method="POST">
                         @csrf
-                        <input type="hidden" name="status" value="New Project!">
+                        <input type="hidden" name="status" value="editby{{auth()->user()->id}}">
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Client</label></div>
                             <div class="col-12 col-md-6">
@@ -33,8 +33,8 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Harga</label></div>
-                            <div class="col-12 col-md-3">
-                                <input type="number" name="harga" class="form-control" value="{{$project->harga}}" placeholder="Harga" aria-label="Harga" required>
+                            <div class="col-12 col-md-6">
+                                <input type="number" name="harga" step="100000" class="form-control" value="{{$project->harga}}" placeholder="Harga" aria-label="Harga" required>
                             </div>
                         </div>
                         <div class="row form-group">

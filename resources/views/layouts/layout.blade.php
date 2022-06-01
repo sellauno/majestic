@@ -35,19 +35,16 @@
   <link id="pagestyle" href="{{asset('btsr/assets/css/soft-ui-dashboard.css?v=1.0.5')}}" rel="stylesheet" />
   <!-- <link href="{{asset('btsr/assets/css/soft-ui-dashboard.min.css')}}" rel="stylesheet" /> -->
   <!-- Sweet Alert -->
-    <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('sweetalert/animate.min.css')}}">
-  <script
-  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{asset('sweetalert/sweetalert2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('sweetalert/animate.min.css')}}">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <link href="cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-  
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -305,15 +302,15 @@
           <h6 class="font-weight-bolder mb-0">@yield('title')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">    
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <h6>{{auth()->user()->name}} &nbsp;
-              <i class="fa fa-user cursor-pointer"></i>
-              </h6>
-                
+                <!-- <h6>{{auth()->user()->name}} &nbsp; -->
+                <span class="nav-link-text ms-1">{{auth()->user()->name}} &nbsp;</span>
+                <i class="fa fa-user cursor-pointer"></i>
+                <!-- </h6> -->
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-0">
@@ -357,14 +354,14 @@
   <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
   <script>
-    $(document).ready( function () {
-    $('.datatables').DataTable();
-} );
+    $(document).ready(function() {
+      $('.datatables').DataTable();
+    });
 
-     $(".select2").select2()
+    $(".select2").select2()
     var ctx = document.getElementById("chart-bars").getContext("2d");
-   
-    
+
+
     new Chart(ctx, {
       type: "bar",
       data: {

@@ -58,6 +58,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 </li>
+                @if(auth()->user()->role == 'admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('allClient')}}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -118,6 +119,7 @@
                         <span class="nav-link-text ms-1">Account</span>
                     </a>
                 </li>
+                @endif
             </ul>
         </div>
     </aside>
@@ -167,8 +169,9 @@
                                                     <td>{{$link->judul}}</td>
                                                     <td>
                                                         <!-- {{$link->link}} -->
-                                                    <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
-                                                    <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button></td>
+                                                        <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
+                                                        <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button>
+                                                    </td>
                                                     <td>{{$link->name}}</td>
                                                 </tr>
                                                 @endforeach
@@ -254,7 +257,7 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" id="todocheck" onclick="document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
+                                                    <input class="form-check-input" type="checkbox" id="todocheck" data-id="{{$checklist->idChecklist}} onclick=" document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
 
 
                                                     <label class="custom-control-label <?php if (
@@ -320,6 +323,9 @@
                                                 </td>
                                                 <td>
                                                     <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
+                                                </td>
+                                                <td>
+                                                    <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div>
                                                 </td>
                                                 <td>
                                                     <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
@@ -397,15 +403,12 @@
                                                     <input type="hidden" name="idProject" value="{{$id}}">
                                                     <input type="hidden" name="idUser" value="{{$user->id}}">
                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($checklist->checked == true) checked  @endif disabled>
-
-
+                                                    <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($checklist->checked == true) checked @endif disabled> -->
                                                     <label class="custom-control-label <?php if (
                                                                                             $checklist->deadline < now()
                                                                                         ) {
                                                                                             echo "text-danger";
                                                                                         } ?>" for="todocheck">{{$checklist->toDO}}</label>
-
                                                     <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                         Confirm
                                                     </button>
@@ -438,6 +441,121 @@
                                                         </a>
                                                         @endif
                                                     </p>
+                                                </div>
+                                                <div>
+                                                    @foreach ($subchecklist as $sc)
+                                                    <?php if ($sc->idChecklist == $checklist->idChecklist) { ?>
+                                                        <div class="form-check">
+                                                            <input type="hidden" name="idProject" value="{{$id}}">
+                                                            <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                            <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
+                                                            <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
+                                                            <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->checked == true) checked @endif disabled>
+                                                            <label class="custom-control-label text-xs <?php if (
+                                                                                                            $checklist->deadline < now()
+                                                                                                        ) {
+                                                                                                            echo "text-danger";
+                                                                                                        } ?>" for="todocheck">{{$sc->subTodo}}</label>
+                                                            <button type="button" style="display:none" class="btn btn-primary" id="confirm">
+                                                                Confirm
+                                                            </button>
+                                                            <!-- <p class="text-xs">{{$sc->deadline}}
+                                                            &nbsp;
+                                                            @if($hak == true)
+                                                            <a href="{{route('addFile', ['id' => $sc->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                                                                <i class="fa fa-paperclip text-xs"></i>
+                                                            </a> &nbsp;
+                                                            <a href="{{route('editChecklist', ['id' => $sc->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                                                                <i class="fa fa-pencil text-xs"></i>
+                                                            </a> &nbsp;
+                                                            <a href="{{route('addFile', ['id' => $sc->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
+                                                                <i class="fa fa-trash text-xs"></i>
+                                                            </a>
+                                                            @endif
+                                                        </p> -->
+                                                        </div>
+                                                    <?php } ?>
+                                                    @endforeach
+                                                </div>
+                                                <!-- <div class="form-group"> -->
+                                                <form action="{{route('addSubchecklist')}}" method="POST">
+                                                    @csrf
+                                                    <table id="tickets{{$checklist->idChecklist}}">
+                                                        <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
+                                                        <input type="hidden" name="idUser" value="{{$checklist->idUser}}">
+                                                        <input type="hidden" name="idProject" value="{{$id}}">
+                                                        <!-- <tr>A
+                                                            <td>X</td>
+                                                            <td>Y</td>
+                                                        </tr>
+                                                        <tr>B
+                                                            <td>F</td>
+                                                            <td>G</td>
+                                                        </tr> -->
+                                                        <!-- <tr>B</tr>
+                                                        <tr>C</tr> -->
+                                                    </table>
+                                                </form>
+                                                <!-- </div> -->
+                                                <div id="create-ticket-buttons">
+                                                    <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$checklist->idChecklist}})">
+                                                        <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
+                                                    </button>
+                                                    <!-- <script>
+                                                        function createTicketComponent() {
+
+                                                            var elements = [],
+                                                                rootElement = document.createElement('tr')
+
+                                                            elements.push('<input type="hidden" name="idChecklist" value={{$checklist->idChecklist}}>');
+                                                            elements.push('<input type="hidden" name="idUser" value={{$checklist->idUser}}>');
+                                                            elements.push('<input type="hidden" name="idProject" value={{$id}}>');
+                                                            elements.push('<tr><div class="input-group input-group-sm text-xxs">Kegiatan</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="text" name="subTodo" value="{{$checklist->toDO}}"></div></tr>');
+                                                            elements.push('<tr><div class="input-group input-group-sm text-xxs">Tanggal Mulai</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div></tr>');
+                                                            elements.push('<tr><div class="input-group input-group-sm text-xxs">Deadline</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></tr>');
+                                                            elements.push('<tr><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-1" data-container="body" data-animation="true"> Save </button></div></tr>');
+
+                                                            rootElement.innerHTML = elements.join('');
+
+                                                            return rootElement;
+                                                        }
+
+                                                        function createFreeTicketComponent() {
+                                                            return createTicketComponent('FREE');
+                                                        }
+
+
+                                                        function onClickCreateTicketButton(event, $id) {
+                                                            $table = '#tickets'.$id;
+                                                            var button = event.target,
+                                                                container = document.querySelector('#tickets4'),
+                                                                component = createTicketComponent();
+
+                                                            container.appendChild(component);
+                                                        }
+
+
+                                                        function onClickSaveButton(event) {
+                                                            var button = event.target,
+                                                                container = document.querySelector('#tickets<?php echo $checklist->idChecklist ?>'),
+                                                                component;
+
+                                                            if (button.classList.contains('free')) {
+                                                                component = createFreeTicketComponent();
+                                                            } else {
+                                                                component = createTicketComponent();
+                                                            }
+
+                                                            container.appendChild(component);
+                                                        }
+
+
+                                                        var buttonsGroup = document.getElementById('create-ticket-buttons');
+                                                        buttonsGroup.addEventListener('click', onClickCreateTicketButton);
+
+                                                        var buttonSave = document.getElementById('button-save');
+                                                        buttonSave.addEventListener('click', onClickSaveButton);
+                                                    </script> -->
                                                 </div>
                                             <?php } ?>
                                             @endforeach
@@ -472,11 +590,11 @@
                                         </div>
                                     </form>
                                     @endif
-                                    <div id="create-ticket-buttons">
+                                    <!-- <div id="create-ticket-buttons">
                                         <button class="btn btn-link text-secondary mb-0 btn-tooltip create-ticket" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah List" data-container="body" data-animation="true">
                                             <i class="fa fa-plus-circle text-xs"></i> Tambah list
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -623,6 +741,69 @@
         <!-- End Table Files -->
 
     </main>
+    <script>
+        function createTicketComponent($idCheck) {
+
+            var elements = [],
+                rootElement = document.createElement('tr')
+            $a = 1;
+            // elements.push('<input type="hidden" name="idChecklist" value={{$checklist->idChecklist}}>');
+            // elements.push('<input type="hidden" name="idUser" value={{$checklist->idUser}}>');
+            // elements.push('<input type="hidden" name="idProject" value={{$id}}>');
+            // elements.push('<tr>Lalala' + $idCheck + '</tr>');
+            elements.push('<tr><div class="input-group input-group-sm text-xxs">Kegiatan</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="text" name="subTodo"></div></tr>');
+            elements.push('<tr><div class="input-group input-group-sm text-xxs">Tanggal Mulai</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div></tr>');
+            elements.push('<tr><div class="input-group input-group-sm text-xxs">Deadline</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></tr>');
+            elements.push('<tr><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-1" data-container="body" data-animation="true"> Save </button></div></tr>');
+
+            rootElement.innerHTML = elements.join('');
+
+            return rootElement;
+        }
+
+        function createFreeTicketComponent() {
+            return createTicketComponent('FREE');
+        }
+
+        function tambahTicket($idCheck) {
+            $table = '#tickets'+$idCheck;
+            container = document.querySelector($table),
+                component = createTicketComponent($idCheck);
+
+            container.appendChild(component);
+        }
+
+        function onClickCreateTicketButton(event, $idCheck) {
+            $table = '#tickets'.$idCheck;
+            var button = event.target,
+                container = document.querySelector('#tickets4'),
+                component = createTicketComponent($idCheck);
+
+            container.appendChild(component);
+        }
+
+
+        function onClickSaveButton(event) {
+            var button = event.target,
+                container = document.querySelector('#tickets4'),
+                component;
+
+            if (button.classList.contains('free')) {
+                component = createFreeTicketComponent();
+            } else {
+                component = createTicketComponent();
+            }
+
+            container.appendChild(component);
+        }
+
+
+        var buttonsGroup = document.getElementById('create-ticket-buttons');
+        // buttonsGroup.addEventListener('click', onClickCreateTicketButton);
+
+        var buttonSave = document.getElementById('button-save');
+        buttonSave.addEventListener('click', onClickSaveButton);
+    </script>
     <script src="{{asset('btsr/assets/js/core/popper.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/core/bootstrap.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/core/soft-ui-dashboard.min.js')}}"></script>
@@ -630,33 +811,11 @@
     <script src="{{asset('btsr/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('btsr/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
-    function copyToClipboard(id) {
-        document.getElementById(id).select();
-        document.execCommand('copy');
-    }
-</script>
-    @foreach ($checklists as $checklist)
-    <script>
-        // function checkedCheckbox() {
-        //     var checkBox = document.getElementById("todocheck{{$loop->iteration}}");
-        //     var text = document.getElementById("text{{$loop->iteration}}");
-        //     if (checkBox.checked == true) {
-        //         text.style.display = "block";
-        //     } else {
-        //         text.style.display = "none";
-        //     }
-        // }
-        // function checkedCheckbox() {
-        //     var checkBox = document.getElementById("todocheck");
-        //     var text = document.getElementById("text");
-        //     if (checkBox.checked == true) {
-        //         text.style.display = "block";
-        //     } else {
-        //         text.style.display = "none";
-        //     }
-        // }
+        function copyToClipboard(id) {
+            document.getElementById(id).select();
+            document.execCommand('copy');
+        }
     </script>
-    @endforeach
     <script src="{{asset('sweetalert/jquery.min.js.download')}}"></script>
     <script src="{{asset('sweetalert/bootstrap.min.js.download')}}"></script>
     <script src="{{asset('sweetalert/sweetalert2.min.js.download')}}"></script>
@@ -756,8 +915,8 @@
                 })
             });
 
-            $("#confirm").click(function() {
-                var idChecklist = $(this).data('id');
+            $("#confirm").click(function($id) {
+                // var idChecklist = $(this).data('id');
                 Swal.fire({
                     title: 'Tandai tugas selesai?',
                     text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
@@ -773,7 +932,8 @@
                             'Notifikasi telah terkirim',
                             'success'
                         )
-                        window.location="/send-mail/".$idChecklist;
+                        // window.location = "/send-mail/".$idChecklist;
+                        window.location = "/send-mail/".$id;
                     }
                 })
             });
@@ -949,7 +1109,7 @@
             });
         });
     </script>
-    <script>
+    <!-- <script>
         function createTicketComponent(type) {
             type = type || null;
 
@@ -1008,7 +1168,7 @@
 
         var buttonSave = document.getElementById('button-save');
         buttonSave.addEventListener('click', onClickSaveButton);
-    </script>
+    </script> -->
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
