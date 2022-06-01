@@ -56,26 +56,46 @@
                                 <input type="date" name="tglSelesai" class="form-control" required>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Reels</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="reels" class="form-control" placeholder="0">
-                            </div>
-                            <div class="col col-md-2"><label>Tiktok</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="tiktok" class="form-control" placeholder="0">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Feeds</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="feeds" class="form-control" placeholder="0">
-                            </div>
-                            <div class="col col-md-2"><label>Stories</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="text" name="stories" class="form-control" placeholder="0">
-                            </div>
-                        </div>
+                        <table class="table align-items-center mb-0 text-xs">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Kategori</th>
+                                                        <th>Jumlah</th>
+                                                    </tr>
+                                                </thead>
+                                                @foreach($clients as $client)
+                                                <tr>
+                                                    <td>{{$client->kategori}}</td>
+                                                    <td>{{$client->tglUpload}}</td>
+                                                </tr>
+                                                @endforeach
+                                            </table>
+                                <form action="{{route('createProject')}}" method="POST">
+                                @csrf
+                                 <div class="form-group">
+                                    <table id="links" class="mb-2">
+                                    <td>
+                                         <div class="input-group input-group-sm">
+                                              <select id="kategori" name="kategori" class="dropdown form-control" placeholder="Pilih Kategori">
+                                                  <option value="reels" id="inlineCheckbox1">Reels</option>
+                                                  <option value="tiktok" id="inlineCheckbox2">Tiktok</option>
+                                                  <option value="feeds" id="inlineCheckbox3">Feeds</option>
+                                                  <option value="stories" id="inlineCheckbox4">Stories</option>
+                                                  <option value="stories" id="inlineCheckbox4">Adsense</option>
+                                                  <option value="stories" id="inlineCheckbox4">Endorse</option>
+                                                  <option value="stories" id="inlineCheckbox4">Buzzer</option>
+                                     </select>
+                                </div>
+                                </td>
+                                             <td>
+                                                <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Judul" name="judul"></div>
+                                            </td>
+                                            <td>
+                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
+                                                        </td>
+                                                    </table>
+                                                </div>
+                                            </form>
                         <br>
 
                         <!-- TEAM -->
