@@ -47,6 +47,9 @@ Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProj
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject')->middleware('auth');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth');
 
+//Kategori
+Route::post('/createKategori', 'KategoriController@createKategori')->name('createKategori')->middleware('auth');
+
 // Checklist
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project')->middleware('auth');
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist')->middleware('auth');
@@ -72,10 +75,6 @@ Route::get('/deleteteam/{id}', 'TeamController@deleteTeam')->name('deleteTeam')-
 // File
 Route::get('/addfile/{id}', 'FileController@addFile')->name('addFile')->middleware('auth');
 Route::post('/uploadfile', 'FileController@uploadFile')->name('uploadFile')->middleware('auth');
-
-// Komentar
-Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
-Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middleware('auth');
 
 //Account 
 Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('auth');
@@ -133,10 +132,15 @@ Route::get('testfolder', function () {
 
 });
 
+// Komentar
+Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
+Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middleware('auth');
+
 Route::get('/post/create', 'PostController@create')->name('post.create')->middleware('auth');
 Route::post('/post/store', 'PostController@store')->name('post.store')->middleware('auth');
 Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middleware('auth');
+
 
 Route::get('cbx', function () {
     return view('cbxcoba');
