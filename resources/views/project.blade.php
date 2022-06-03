@@ -116,26 +116,25 @@
                     </a>
                 </li>
                 <li class="nav-item">
-          <a class="nav-link " href="{{route('addProject')}}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>credit-card</title>
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                    <g transform="translate(1716.000000, 291.000000)">
-                      <g id="office" transform="translate(153.000000, 2.000000)">
-                        <path class="color-background opacity-6" d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
-                        <path class="color-background" d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
-                      </g>
-                    </g>
-                  </g>
-                </g>
-              </svg>
-            </div>
-            <span class="nav-link-text ms-1">Project</span>
-          </a>
-        </li>
-                @endif
+                    <a class="nav-link " href="{{route('addProject')}}">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>credit-card</title>
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                        <g transform="translate(1716.000000, 291.000000)">
+                                            <g id="office" transform="translate(153.000000, 2.000000)">
+                                                <path class="color-background opacity-6" d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
+                                                <path class="color-background" d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Project</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>
@@ -194,19 +193,15 @@
             </div>
         </nav>
         <!-- End Navbar -->
+
         <!-- Top -->
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <!-- <div class="card-header pb-0">
-                            <h3>{{$project->namaClient}}</h3>
-                            <br>
-                        </div>
-            
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="accordion" id="accordionLink">
-                                <div class="accordion-item ">
+                                <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                             <h6>Link</h6>
@@ -293,21 +288,22 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid py-4">
+            <!-- End Top -->
+
+            <!-- Kategori  -->
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-        <div class="card-body px-0 pt-0 pb-2">
-            <div class="accordion" id="accordionLink">
-            <div class="accordion-item bg-gray-100">
-               <h2 class="accordion-header" id="headingOne">
-                            <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="accordion" id="accordionKategori">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKategori" aria-expanded="true" aria-controls="collapseKategori">
                                             <h6>Kategori</h6>
                                             <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                                         </div>
                                     </h2>
-                                    <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
+                                    <div id="collapseKategori" class="accordion-collapse collapse" aria-labelledby="headingKategori" data-bs-parent="#accordionKategori">
                                         <div class="accordion-body">
                                             <table class="table align-items-center mb-0 text-xs">
                                                 <thead>
@@ -317,9 +313,18 @@
                                                     </tr>
                                                 </thead>
                                                 @foreach($kategori as $kategoria)
-                                                <tr>
-                                                    <td>{{$kategoria->kategori}}</td>
-                                                    <td>{{$kategoria->jumlah}}</td>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{$kategoria->kategori}}</td>
+                                                        <td>{{$kategoria->jumlah}}</td>
+                                                        <td>
+                                                            <a class="btn btn-link text-dark text-xxs px-3 mb-0" href="{{route('editKategori', ['id' => $kategoria->id])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-link text-danger text-xxs text-gradient px-3 mb-0" href="{{route('deleteKategori', ['id' => $kategoria->id])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                                 @endforeach
                                             </table>
                                             <form action="{{route('createKategori')}}" method="POST">
@@ -343,10 +348,6 @@
                                                         <td>
                                                             <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
                                                         </td>
-                                                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                                            <li><a class="dropdown-item border-radius-md" href="{{route('editKategori', ['id' => $kategori->id])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                                                            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                                                            </ul>
                                                     </table>
                                                 </div>
                                             </form>
@@ -358,673 +359,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End Top -->
-
-        <!-- Teams Accordion -->
-        <div class="container-fluid py-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Teams</h6>
-                </div>
-                <div class="card-body pt-4 p-3">
-                    <div class="accordion" id="accordionExample">
-                        @if($myprofile != null)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    {{$myprofile->name}}
-                                    <div class="ms-auto text-end position-absolute end-3 me-3">
-                                        <p class="text-xs font-weight-bold mb-0">{{$myprofile->jabatan}}</p>
-                                        <p class="text-xs text-secondary mb-0">{{$myprofile->posisi}}</p>
-                                    </div>
-                                </div>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            @foreach ($checklists as $checklist)
-                                            <?php if ($checklist->idUser == $myprofile->id) { ?>
-                                                <div class="form-check">
-                                                    <input type="hidden" name="idProject" value="{{$id}}">
-                                                    <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                    <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" id="todocheck" data-id="{{$checklist->idChecklist}} onclick=" document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
-
-            <!-- To Do List for Each User -->
-
-            @if($myprofile != null)
-            <div class="row my-4">
-                <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
-                    <div class="card h-100 shadow-none">
-                        <div class="card-header pb-0">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h6>{{$myprofile->name}}</h6>
-                                </div>
-                                <div class="col-lg-6 col-5 my-auto text-end">
-                                    <p class="text-xs font-weight-bold mb-0">{{$myprofile->jabatan}}</p>
-                                    <p class="text-xs text-secondary mb-0">{{$myprofile->posisi}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive">
-                                <table class="table align-items-center mb-0">
-                                    @foreach ($checklists as $checklist)
-                                    <?php if ($checklist->idUser == auth()->user()->id) { ?>
-                                        <tr>
-                                            <td>
-                                                <div class="timeline-content">
-                                                    <h6 class="text-dark text-sm font-weight-bold mb-0">{{$checklist->toDO}}</h6>
-                                                    <p class="text-xs text-secondary mb-0">{{$checklist->deadline}}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center justify-content-center text-end">
-                                                    <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
-                                                        </div>
-                                                    </div>
-                                                    &nbsp;
-                                                    <span class="me-2 text-xs font-weight-bold">
-                                                        10%
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="timeline-content">
-                                                    @foreach ($subchecklist as $sc)
-                                                    <?php if ($sc->idChecklist == $checklist->idChecklist) { ?>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->subchecked == true) checked @endif>
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                            <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                            <label class="custom-control-label <?php if (
-                                                                                                    $sc->subdeadline < now()
-                                                                                                ) {
-                                                                                                    echo "text-danger";
-                                                                                                } ?>" for="todocheck">{{$sc->subTodo}}</label>
-                                                            <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                                Confirm
-                                                            </button>
-                                                            <p class="text-xs">{{$sc->subdeadline}}
-                                                                &nbsp;
-                                                                @if($hak == true)
-                                                                <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-paperclip text-xs"></i>
-                                                                </a>
-                                                                <!-- <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-pencil text-xs"></i>
-                                                                </a> &nbsp; -->
-                                                                <a class="btn-block btn-default mb-3" data-bs-toggle="modal" data-bs-target="#editsub-form{{$sc->idSubChecklist}}"><i class="fa fa-pencil text-xs"></i></a> &nbsp;
-                                                                <a href="{{route('deleteSubchecklist', ['idProject' => $checklist->idProject, 'id' => $sc->idSubChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-trash text-xs"></i>
-                                                                </a>
-                                                                @endif
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal fade" id="editsub-form{{$sc->idSubChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-body p-0">
-                                                                        <div class="card card-plain">
-                                                                            <div class="card-header pb-0 text-left">
-                                                                                <h6 class="font-weight-bolder text-info text-center text-gradient">Edit Sub Checklist</h6>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <form role="form text-left" action="{{route('updateSubchecklist', ['id' => $sc->idSubChecklist])}}" method="POST">
-                                                                                    @csrf
-                                                                                    <input type="hidden" name="idProject" value="{{$id}}">
-                                                                                    <label>Kegiatan</label>
-                                                                                    <div class="input-group-sm mb-3">
-                                                                                        <input type="text" class="form-control" placeholder="Kegiatan" name="subTodo" value="{{$sc->subTodo}}">
-                                                                                    </div>
-                                                                                    <label>Tanggal Start</label>
-                                                                                    <div class="input-group-sm mb-3">
-                                                                                        <?php $sctglStart = str_replace(' ', 'T', $sc->subtglStart); ?>
-                                                                                        <input type="datetime-local" class="form-control" name="subtglStart" value="{{$sctglStart}}">
-                                                                                    </div>
-                                                                                    <label>Deadline</label>
-                                                                                    <div class="input-group-sm mb-3">
-                                                                                        <?php $scdeadline = str_replace(' ', 'T', $sc->subdeadline); ?>
-                                                                                        <input type="datetime-local" class="form-control" name="subdeadline" value="{{$scdeadline}}">
-                                                                                    </div>
-                                                                                    <div class="text-center">
-                                                                                        <button type="submit" class="btn btn-round bg-gradient-info w-100 mt-4 mb-0">Simpan</button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php } ?>
-                                                    @endforeach
-                                                    <form action="{{route('addSubchecklist')}}" method="POST">
-                                                        @csrf
-                                                        <table id="tickets{{$checklist->idChecklist}}">
-                                                            <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
-                                                            <input type="hidden" name="idUser" value="{{$checklist->idUser}}">
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                        </table>
-                                                    </form>
-                                                    <!-- </div> -->
-
-                                                    <div id="create-ticket-buttons">
-                                                        <button class="btn btn-link text-secondary mb-0 " data-bs-toggle="modal" data-bs-target="#addsub-form{{$checklist->idChecklist}}">
-                                                            <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="modal fade" id="addsub-form{{$checklist->idChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-body p-0">
-                                                                    <div class="card card-plain">
-                                                                        <div class="card-header pb-0 text-left">
-                                                                            <h6 class="font-weight-bolder text-info text-center text-gradient">Tambah Sub Checklist</h6>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <form role="form text-left" action="{{route('addSubchecklist')}}" method="POST">
-                                                                                @csrf
-                                                                                <input type="hidden" name="idProject" value="{{$id}}">
-                                                                                <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
-                                                                                <input type="hidden" name="idUser" value="{{$checklist->idUser}}">
-                                                                                <label>Kegiatan</label>
-                                                                                <div class="input-group-sm mb-3">
-                                                                                    <input type="text" class="form-control" placeholder="Kegiatan" name="subTodo">
-                                                                                </div>
-                                                                                <label>Tanggal Start</label>
-                                                                                <div class="input-group-sm mb-3">
-                                                                                    <input type="datetime-local" class="form-control" name="subtglStart">
-                                                                                </div>
-                                                                                <label>Deadline</label>
-                                                                                <div class="input-group-sm mb-3">
-                                                                                    <input type="datetime-local" class="form-control" name="subdeadline">
-                                                                                </div>
-                                                                                <div class="text-center">
-                                                                                    <button type="submit" class="btn btn-round bg-gradient-info w-100 mt-4 mb-0">Simpan</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- <div id="create-ticket-buttons">
-                                                        <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$checklist->idChecklist}})">
-                                                            <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
-                                                        </button>
-                                                    </div> -->
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                    @endforeach
-                                    <tr>
-                                        <td colspan="2">
-
-                                            <div class="text-center">
-                                                <form action="{{route('addChecklist')}}" method="POST">
-                                                    <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                    <input type="hidden" name="idProject" value={{$id}}>
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <table>
-                                                            <td>
-                                                                <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Tambah List </button></div>
-                                                            </td>
-                                                        </table>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-none">
-                        <div class="card-header pb-0">
-                            <h6>Orders overview</h6>
-                            <p class="text-sm">
-                                <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                                <span class="font-weight-bold">24%</span> this month
-                            </p>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="timeline timeline-one-side">
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-bell-55 text-success text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-html5 text-danger text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-cart text-info text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-credit-card text-warning text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order #4395133</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block mb-3">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-key-25 text-primary text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-block">
-                                    <span class="timeline-step">
-                                        <i class="ni ni-money-coins text-dark text-gradient"></i>
-                                    </span>
-                                    <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                                        <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            <!-- End To Do List for Each User -->
-
-            <!-- Teams Accordion -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card  mb-4">
-                        <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">Teams</h6>
-                        </div>
-                        <div class="card-body pt-4 p-3">
-                            <div class="accordion" id="accordionExample">
-                                @if($myprofile != null)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            {{$myprofile->name}}
-                                            <div class="ms-auto text-end position-absolute end-3 me-3">
-                                                <p class="text-xs font-weight-bold mb-0">{{$myprofile->jabatan}}</p>
-                                                <p class="text-xs text-secondary mb-0">{{$myprofile->posisi}}</p>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    @foreach ($checklists as $checklist)
-                                                    <?php if ($checklist->idUser == $myprofile->id) { ?>
-                                                        <div class="form-check">
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                            <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                            <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                            <input class="form-check-input" type="checkbox" id="todocheck" data-id="{{$checklist->idChecklist}} onclick=" document.getElementById('confirm').click();" @if($checklist->checked == true) checked disabled @endif>
-
-
-                                                            <label class="custom-control-label <?php if (
-                                                                                                    $checklist->deadline < now()
-                                                                                                ) {
-                                                                                                    echo "text-danger";
-                                                                                                } ?>" for="todocheck">{{$checklist->toDO}} {{$loop->iteration}}</label>
-
-                                                            <p id="text" style="display:none">Checkbox is CHECKED!</p>
-                                                            <button type="button" data-id="{{$checklist->idChecklist}}" style="display:none" class="btn btn-primary" id="confirm">
-                                                                Confirm
-                                                            </button>
-                                                            <p class="text-xs">{{$checklist->deadline}}
-                                                                &nbsp;
-                                                                <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-paperclip text-xs"></i>
-                                                                </a> &nbsp;
-                                                                <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-pencil text-xs"></i>
-                                                                </a> &nbsp;
-                                                                <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-trash text-xs"></i>
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                    <?php } ?>
-                                                    @endforeach
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                                </div>
-                                            </div>
-                                            <form action="{{route('addChecklist')}}" method="POST">
-                                                <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <table>
-                                                        <input type="hidden" name="idProject" value={{$id}}>
-                                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            <div class="input-group input-group-sm">Tambah List &nbsp;</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
-                                                        </td>
-
-                                                    </table>
-                                                </div>
-                                            <?php } ?>
-                                            @endforeach
-                                        </div>
-                                        <div class="col-6">
-                                        <form method="post" action="{{ route('post.store') }}">
-                                             @csrf
-                                             <div class="form-group">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                            <textarea name="body" rows="10" cols="30" class="form-control" required></textarea>
-                        
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                        </div>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="card mb-4">
-                                                <div class="card-header pb-0">
-                                                    <h6>Authors table</h6>
-                                                </div>
-                                                <div class="card-body px-0 pt-0 pb-2">
-                                                    <div class="table-responsive p-0">
-                                                        <table class="table align-items-center mb-0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td width="15%" class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                                    </td>
-                                                                    <td width="85%" class="justify-content-end">
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                @foreach($users as $user)
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            {{$user->name}}
-                                            <div class="ms-auto text-end position-absolute end-3 me-3">
-                                                <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
-                                                <p class="text-xs text-secondary mb-0">{{$user->posisi}}</p>
-                                            </div>
-                                        </div>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    @foreach ($checklists as $checklist)
-                                                    <?php if ($checklist->idUser == $user->id) { ?>
-                                                        <div class="form-check">
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                            <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                            <label class="custom-control-label <?php if (
-                                                                                                    $checklist->deadline < now()
-                                                                                                ) {
-                                                                                                    echo "text-danger";
-                                                                                                } ?>" for="todocheck">{{$checklist->toDO}}</label>
-                                                            <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                                Confirm
-                                                            </button>
-                                                            <!-- <div class="mb-1">
-                                                        <div class="progress-wrapper">
-                                                            <div class="progress-info">
-                                                                <div class="progress-percentage">
-                                                                    <span class="text-sm font-weight-bold">60%</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="progress">
-                                                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-                                                            <p class="text-xs">{{$checklist->deadline}}
-                                                                &nbsp;
-                                                                @if($hak == true)
-                                                                <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-paperclip text-xs"></i>
-                                                                </a> &nbsp;
-                                                                <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-pencil text-xs"></i>
-                                                                </a> &nbsp;
-                                                                <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                    <i class="fa fa-trash text-xs"></i>
-                                                                </a>
-                                                                @endif
-                                                            </p>
-                                                        </div>
-                                                        <div>
-                                                            @foreach ($subchecklist as $sc)
-                                                            <?php if ($sc->idChecklist == $checklist->idChecklist) { ?>
-                                                                <div class="form-check">
-                                                                    <input type="hidden" name="idProject" value="{{$id}}">
-                                                                    <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                                    <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
-                                                                    <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->subchecked == true) checked @endif disabled>
-                                                                    <label class="custom-control-label text-xs <?php if (
-                                                                                                                    $checklist->deadline < now()
-                                                                                                                ) {
-                                                                                                                    echo "text-danger";
-                                                                                                                } ?>" for="todocheck">{{$sc->subTodo}}</label>
-                                                                    <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                                        Confirm
-                                                                    </button>
-                                                                </div>
-                                                            <?php } ?>
-                                                            @endforeach
-                                                        </div>
-                                                        <form action="{{route('addSubchecklist')}}" method="POST">
-                                                            @csrf
-                                                            <table id="tickets{{$checklist->idChecklist}}">
-                                                                <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
-                                                                <input type="hidden" name="idUser" value="{{$checklist->idUser}}">
-                                                                <input type="hidden" name="idProject" value="{{$id}}">
-                                                            </table>
-                                                        </form>
-                                                        <div id="create-ticket-buttons">
-                                                            <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$checklist->idChecklist}})">
-                                                                <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
-                                                            </button>
-                                                        </div>
-                                                    <?php } ?>
-                                                    @endforeach
-                                                </div>
-                                                <div class="col-6">
-                                                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                                </div>
-                                            </div>
-                                            @if($hak == true)
-                                            <form action="{{route('addChecklist')}}" method="POST">
-                                                <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <table>
-                                                        <input type="hidden" name="idProject" value={{$id}}>
-                                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            <div class="input-group input-group-sm">Tambah List</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
-                                                        </td>
-
-                                                    </table>
-                                                </div>
-                                            </form>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="card mb-4">
-                                                <div class="card-header pb-0">
-                                                    <h6>Authors table</h6>
-                                                </div>
-                                                <div class="card-body px-0 pt-0 pb-2">
-                                                    <div class="table-responsive p-0">
-                                                        <table class="table align-items-center mb-0">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td width="15%" class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                                    </td>
-                                                                    <td width="85%" class="justify-content-end">
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Teams Accordion -->
-
-            <!-- Table Files -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <h6>Files</h6>
-                        </div>
-                        <div class="card-body px-0 pt-0 pb-2 text-center">
-                            <div class="nav-wrapper position-relative end-0">
-                                <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-icons" role="tab" aria-controls="preview" aria-selected="true">
-                                            <i class="ni ni-badge text-sm me-2"></i> File
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                            <i class="ni ni-laptop text-sm me-2"></i> Video
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                            <i class="ni ni-laptop text-sm me-2"></i> Story
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                            <i class="ni ni-laptop text-sm me-2"></i> Reels
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Table Files -->
-
+            <!-- End Kategori -->
+            
         </div>
     </main>
     <script>

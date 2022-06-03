@@ -38,14 +38,14 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                           <div class="d-flex flex-column justify-content-center">
+                                            <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{$client->namaClient}}</h6>
                                             </div>
                                         </div>
                                     </td>
-                                <td>
-                                    <div class="text-xs text-secondary">{{$client->deskripsi}}</div>
-                                </td>
+                                    <td>
+                                        <div class="text-xs text-secondary">{{$client->deskripsi}}</div>
+                                    </td>
                                     <td class="align-middle">
                                         <a class="btn btn-link text-dark px-3 mb-0" href="{{route('editClient', ['id' => $client->idClient])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                     </td>

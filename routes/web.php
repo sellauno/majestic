@@ -48,7 +48,10 @@ Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('upd
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth');
 
 //Kategori
-Route::post('/createKategori', 'KategoriController@createKategori')->name('createKategori')->middleware('auth');
+Route::post('/createkategori', 'KategoriController@createKategori')->name('createKategori')->middleware('auth');
+Route::get('/editkategori/{id}', 'KategoriController@editKategori')->name('editKategori')->middleware('auth');
+Route::post('/updatekategori/{id}', 'KategoriController@updateKategori')->name('updateKategori')->middleware('auth');
+Route::get('/deletekategori/{id}', 'KategoriController@deleteKategori')->name('deleteKategori')->middleware('auth');
 
 // Checklist
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project')->middleware('auth');
