@@ -322,11 +322,11 @@
                                                     @foreach ($subchecklist as $sc)
                                                     <?php if ($sc->idChecklist == $checklist->idChecklist) { ?>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->checked == true) checked @endif>
+                                                            <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->subchecked == true) checked @endif>
                                                             <input type="hidden" name="idProject" value="{{$id}}">
                                                             <input type="hidden" name="idUser" value="{{$user->id}}">
                                                             <label class="custom-control-label <?php if (
-                                                                                                    $checklist->deadline < now()
+                                                                                                    $sc->subdeadline < now()
                                                                                                 ) {
                                                                                                     echo "text-danger";
                                                                                                 } ?>" for="todocheck">{{$sc->subTodo}}</label>
@@ -338,18 +338,18 @@
                                                                 @if($hak == true)
                                                                 <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                                                                     <i class="fa fa-paperclip text-xs"></i>
-                                                                </a> &nbsp;
+                                                                </a>
                                                                 <!-- <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                                                                     <i class="fa fa-pencil text-xs"></i>
                                                                 </a> &nbsp; -->
-                                                                <a class="btn-block btn-default mb-3" data-bs-toggle="modal" data-bs-target="#modal-form"><i class="fa fa-pencil text-xs"></i></a> &nbsp;
-                                                                <a href="{{route('deleteSubchecklist', ['id' => $sc->idSubChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
+                                                                <a class="btn-block btn-default mb-3" data-bs-toggle="modal" data-bs-target="#editsub-form{{$sc->idSubChecklist}}"><i class="fa fa-pencil text-xs"></i></a> &nbsp;
+                                                                <a href="{{route('deleteSubchecklist', ['idProject' => $checklist->idProject, 'id' => $sc->idSubChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
                                                                     <i class="fa fa-trash text-xs"></i>
                                                                 </a>
                                                                 @endif
                                                             </p>
                                                         </div>
-                                                        <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                                                        <div class="modal fade" id="editsub-form{{$sc->idSubChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-body p-0">
@@ -368,12 +368,12 @@
                                                                                     <label>Tanggal Start</label>
                                                                                     <div class="input-group-sm mb-3">
                                                                                         <?php $sctglStart = str_replace(' ', 'T', $sc->subtglStart); ?>
-                                                                                        <input type="datetime-local" class="form-control" name="tglStart" value="{{$sctglStart}}">
+                                                                                        <input type="datetime-local" class="form-control" name="subtglStart" value="{{$sctglStart}}">
                                                                                     </div>
                                                                                     <label>Deadline</label>
                                                                                     <div class="input-group-sm mb-3">
                                                                                         <?php $scdeadline = str_replace(' ', 'T', $sc->subdeadline); ?>
-                                                                                        <input type="datetime-local" class="form-control" name="deadline" value="{{$scdeadline}}">
+                                                                                        <input type="datetime-local" class="form-control" name="subdeadline" value="{{$scdeadline}}">
                                                                                     </div>
                                                                                     <div class="text-center">
                                                                                         <button type="submit" class="btn btn-round bg-gradient-info w-100 mt-4 mb-0">Simpan</button>
@@ -396,11 +396,55 @@
                                                         </table>
                                                     </form>
                                                     <!-- </div> -->
+
                                                     <div id="create-ticket-buttons">
-                                                        <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$checklist->idChecklist}})">
+                                                        <button class="btn btn-link text-secondary mb-0 " data-bs-toggle="modal" data-bs-target="#addsub-form{{$checklist->idChecklist}}">
                                                             <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
                                                         </button>
                                                     </div>
+
+                                                    <div class="modal fade" id="addsub-form{{$checklist->idChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body p-0">
+                                                                    <div class="card card-plain">
+                                                                        <div class="card-header pb-0 text-left">
+                                                                            <h6 class="font-weight-bolder text-info text-center text-gradient">Tambah Sub Checklist</h6>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <form role="form text-left" action="{{route('addSubchecklist')}}" method="POST">
+                                                                                @csrf
+                                                                                <input type="hidden" name="idProject" value="{{$id}}">
+                                                                                <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
+                                                                                <input type="hidden" name="idUser" value="{{$checklist->idUser}}">
+                                                                                <label>Kegiatan</label>
+                                                                                <div class="input-group-sm mb-3">
+                                                                                    <input type="text" class="form-control" placeholder="Kegiatan" name="subTodo">
+                                                                                </div>
+                                                                                <label>Tanggal Start</label>
+                                                                                <div class="input-group-sm mb-3">
+                                                                                    <input type="datetime-local" class="form-control" name="subtglStart">
+                                                                                </div>
+                                                                                <label>Deadline</label>
+                                                                                <div class="input-group-sm mb-3">
+                                                                                    <input type="datetime-local" class="form-control" name="subdeadline">
+                                                                                </div>
+                                                                                <div class="text-center">
+                                                                                    <button type="submit" class="btn btn-round bg-gradient-info w-100 mt-4 mb-0">Simpan</button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- <div id="create-ticket-buttons">
+                                                        <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$checklist->idChecklist}})">
+                                                            <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
+                                                        </button>
+                                                    </div> -->
                                                 </div>
                                             </td>
                                         </tr>
@@ -706,7 +750,7 @@
                                                                     <input type="hidden" name="idUser" value="{{$user->id}}">
                                                                     <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
                                                                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->checked == true) checked @endif disabled>
+                                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($sc->subchecked == true) checked @endif disabled>
                                                                     <label class="custom-control-label text-xs <?php if (
                                                                                                                     $checklist->deadline < now()
                                                                                                                 ) {

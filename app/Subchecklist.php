@@ -9,5 +9,5 @@ class Subchecklist extends Model
 {
     // use HasFactory;
     protected $fillable = ['idChecklist', 'idUser', 'subTodo', 'subtglStart', 'subdeadline'];
-    public $primaryKey = 'idSubchecklist';
+    public $primaryKey = 'idSubChecklist';
 }
