@@ -179,8 +179,8 @@ class ChecklistController extends Controller
             'idUser' => $request->idUser,
             'subTodo' => $request->subTodo,
             'checked' => null,
-            'tglStart' => $request->tglStart,
-            'deadline' => $request->deadline
+            'subtglStart' => $request->subtglStart,
+            'subdeadline' => $request->subdeadline
         ]);
 
         // $project = Project::find($request->idProject);
@@ -191,32 +191,25 @@ class ChecklistController extends Controller
     }
 
 
-    public function editSubchecklist($id)
-    {
-        $checklist = Subchecklist::find($id);
-        $string = str_replace(' ', 'T', $checklist->deadline);
-        $checklist->deadline = $string;
-        return view('checklistedit', ['checklist' => $checklist]);
-    }
-
     public function updateSubchecklist(Request $request, $id)
     {
-        $checklist = Subchecklist::find($id);
-        $checklist->subTodo = $request->subTodo;
+        $subchecklist = Subchecklist::find($id);
+        $subchecklist->subTodo = $request->subTodo;
         // $checklist->checked = $request->checked;
         // $string = str_replace('T', ' ', $checklist->deadline);
         // $checklist->deadline = $string;
-        $checklist->tglStart = $request->tglStart;
-        $checklist->deadline = $request->deadline;
+        $subchecklist->subtglStart = $request->subtglStart;
+        $subchecklist->subdeadline = $request->subdeadline;
         // $checklist->linkFile = $request->linkFile;
-        $checklist->save();
-        return redirect('/checklist' . '/' . $checklist->idProject);
+        $check = $subchecklist->save();
+        dd($check);
+        return redirect('/checklist' . '/' . $request->idProject);
     }
 
     public function deleteSubchecklist($id)
     {
-        $checklist = Subchecklist::find($id);
-        $id = $checklist->idProject;
+        $subchecklist = Subchecklist::find($id);
+        $id = $subchecklist->idProject;
 
         // $project = Project::find($checklist->idProject);
         // if ($checklist->checked == true) {
@@ -228,7 +221,7 @@ class ChecklistController extends Controller
         // }
 
 
-        $checklist->delete();
+        $subchecklist->delete();
         return redirect('/checklist' . '/' . $id);
     }
 }

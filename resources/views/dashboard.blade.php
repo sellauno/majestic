@@ -129,7 +129,7 @@
                       </span>
                       <div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$presentase}}" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $presentase?>%;"></div>
+                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$presentase}}" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $presentase ?>%;"></div>
                         </div>
                       </div>
                     </div>
