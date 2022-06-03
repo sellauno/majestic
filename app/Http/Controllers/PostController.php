@@ -24,7 +24,7 @@ class PostController extends Controller
 
         $post->save();
         // dd($post);
-        return redirect('/post/show/'.$post->id);
+        return redirect('/dashboard'.$post->id);
     }
     public function index()
 {

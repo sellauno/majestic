@@ -18,9 +18,9 @@
             <div class="col-6 d-flex align-items-center">
               <h6 class="mb-0">Projects</h6>
             </div>
-            <div class="col-6 text-end">
+            <!-- <div class="col-6 text-end">
               <a class="btn bg-gradient-primary mb-0" href="{{route('addProject')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -239,12 +239,12 @@
                   <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                     <i class="fa fa-paperclip text-xs"></i>
                   </a> &nbsp;
-                  <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                  <!-- <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                     <i class="fa fa-pencil text-xs"></i>
                   </a> &nbsp;
                   <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
                     <i class="fa fa-trash text-xs"></i>
-                  </a>
+                  </a> -->
                 </p>
               </div>
             <?php } ?>

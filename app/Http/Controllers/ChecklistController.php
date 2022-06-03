@@ -6,6 +6,7 @@ use App\Checklist;
 use App\Project;
 use App\Subchecklist;
 use App\User;
+use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -92,9 +93,12 @@ class ChecklistController extends Controller
 
         // dd($subchecklist);
 
+        $kategori = Kategori::all();
+
         return view('project', [
             'id' => $id,
             'checklists' => $checklists,
+            'kategori' => $kategori,
             'subchecklist' => $subchecklist,
             'myprofile' => $myprofile,
             'project' => $project,

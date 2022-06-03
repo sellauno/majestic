@@ -4,7 +4,7 @@
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-md-6">
               <div class="card">
                   <div class="card-header">Login</div>
                   <div class="card-body">
@@ -13,7 +13,7 @@
                           @csrf
                           <div class="form-group row">
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">Role</label>
-                              <div class="col-md-6">
+                              <div class="col-md-5">
                                 <div class="dropdown">
                                     <select id="role" name="role" class="form-control">
                                         <option value="admin">Admin</option>
@@ -25,7 +25,7 @@
                         </div>
                           <div class="form-group row">
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                              <div class="col-md-6">
+                              <div class="col-md-5">
                                   <input type="text" id="email_address" class="form-control" name="email" required autofocus>
                                   @if ($errors->has('email'))
                                       <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -35,7 +35,7 @@
   
                           <div class="form-group row">
                               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-                              <div class="col-md-6">
+                              <div class="col-md-5">
                                   <input type="password" id="password" class="form-control" name="password" required>
                                   @if ($errors->has('password'))
                                       <span class="text-danger">{{ $errors->first('password') }}</span>
