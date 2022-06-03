@@ -57,6 +57,7 @@ class ProfileController extends Controller
 
     public function deleteAccount($id)
     {
+        $user = User::find($id);
         $user->delete();
 
         return redirect('/account');

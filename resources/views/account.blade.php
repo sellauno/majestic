@@ -51,7 +51,12 @@
                         </button>
                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                           <li><a class="dropdown-item border-radius-md" href="{{route('editAccount', ['id' => $users->id])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                          <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                          @if($admin>1)
+                            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                          @endif
+                        @if($users->role=='user')
+                        <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                          @endif
                         </ul>
                         </td>   
                                 </tr>
