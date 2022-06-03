@@ -296,7 +296,7 @@
                                                             <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
                                                         </td>
                                                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                                                            <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
+                                                            <li><a class="dropdown-item border-radius-md" href="{{route('editKategori', ['id' => $kategori->id])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
                                                             <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
                                                             </ul>
                                                     </table>
