@@ -196,7 +196,7 @@
 
         <div class="container-fluid py-4">
 
-            <!-- Top -->
+            <!-- Link -->
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -269,6 +269,9 @@
                                                         <td>
                                                             <div class="input-group input-group-sm">
                                                                 <select id="idUser" name="idUser" class="form-control select2">
+                                                                    @if($myprofile != null)
+                                                                    <option value="{{$myprofile->id}}">{{$myprofile->name}}</option>
+                                                                    @endif
                                                                     @foreach($users as $user)
                                                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                                                     @endforeach
@@ -289,7 +292,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End Top -->
+            <!-- End Link -->
 
             <!-- Kategori  -->
             <div class="row">
@@ -362,7 +365,7 @@
             </div>
             <!-- End Kategori -->
 
-            <!-- To Do List for Each User -->
+            <!-- To Do List foe User -->
             @if($myprofile != null)
             <div class="row my-4">
                 <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
@@ -421,7 +424,7 @@
                                                             <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                                 Confirm
                                                             </button>
-                                                            <p class="text-xs">{{$sc->subdeadline}}
+                                                            <span class="text-xxs text-secondary">{{$sc->subdeadline}}
                                                                 &nbsp;
                                                                 @if($hak == true)
                                                                 <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
@@ -435,7 +438,7 @@
                                                                     <i class="fa fa-trash text-xs"></i>
                                                                 </a>
                                                                 @endif
-                                                            </p>
+                                                            </span>
                                                         </div>
                                                         <div class="modal fade" id="editsub-form{{$sc->idSubChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -540,7 +543,6 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="2">
-
                                             <div class="text-center">
                                                 <form action="{{route('addChecklist')}}" method="POST">
                                                     <input type="hidden" name="idUser" value="{{$myprofile->id}}">
@@ -642,7 +644,7 @@
                 </div>
             </div>
             @endif
-            <!-- End To Do List for Each User -->
+            <!-- End To Do List for User -->
 
             <!-- Teams Accordion -->
             <div class="row">
@@ -1080,66 +1082,6 @@
             });
         });
     </script>
-    <!-- <script>
-        function createTicketComponent(type) {
-            type = type || null;
-
-            var elements = [],
-                rootElement = document.createElement('tr'),
-                price = type === 'FREE' ? 0 : '';
-
-            elements.push('<input type="hidden" name="idProject" value={{$id}}>');
-            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div></td>');
-            elements.push('<td><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div></td>');
-            elements.push('<td><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div></td>');
-
-            rootElement.innerHTML = elements.join('');
-
-            return rootElement;
-        }
-
-
-        function createFreeTicketComponent() {
-            return createTicketComponent('FREE');
-        }
-
-
-        function onClickCreateTicketButton(event) {
-            var button = event.target,
-                container = document.querySelector('#tickets'),
-                component;
-
-            if (button.classList.contains('free')) {
-                component = createFreeTicketComponent();
-            } else {
-                component = createTicketComponent();
-            }
-
-            container.appendChild(component);
-        }
-
-
-        function onClickSaveButton(event) {
-            var button = event.target,
-                container = document.querySelector('#tickets'),
-                component;
-
-            if (button.classList.contains('free')) {
-                component = createFreeTicketComponent();
-            } else {
-                component = createTicketComponent();
-            }
-
-            container.appendChild(component);
-        }
-
-
-        var buttonsGroup = document.getElementById('create-ticket-buttons');
-        buttonsGroup.addEventListener('click', onClickCreateTicketButton);
-
-        var buttonSave = document.getElementById('button-save');
-        buttonSave.addEventListener('click', onClickSaveButton);
-    </script> -->
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
