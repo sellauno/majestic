@@ -51,7 +51,46 @@ class ChecklistController extends Controller
         $subchecklist = DB::table('subchecklists')
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
             ->where('checklists.idProject', '=', $id)
+            ->select('subchecklists.*')
             ->get();
+
+        // Progress
+
+        $sum = 100 / $checklists->count();
+        $a = DB::table('checklists')
+            ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO')
+            ->get();
+
+        $total = 0;
+        foreach ($a as $all) {
+            $total = $total + $all->total;
+        }
+
+        $percobaan = DB::table('checklists')
+            ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->where('subchecklists.subchecked', '=', true)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO')
+            ->get();
+
+        // dd($percobaan);
+
+        $x = DB::table('checklists')
+            ->where('idProject', '=', $id)
+            ->selectRaw('COUNT(*) AS total')
+            ->groupBy('idProject');
+
+        // $b = DB::table('projects')
+        //     ->leftJoinSub($x, 'checklists', function ($join) {
+        //         $join->on('checklists.idProject', '=', 'projects.idProject');
+        //     })->get();
+
+        // End Progress
+
         // dd($subchecklist);
 
         $kategori = Kategori::all();
@@ -178,7 +217,7 @@ class ChecklistController extends Controller
             'idChecklist' => $request->idChecklist,
             'idUser' => $request->idUser,
             'subTodo' => $request->subTodo,
-            'checked' => null,
+            'subchecked' => null,
             'subtglStart' => $request->subtglStart,
             'subdeadline' => $request->subdeadline
         ]);
@@ -195,33 +234,16 @@ class ChecklistController extends Controller
     {
         $subchecklist = Subchecklist::find($id);
         $subchecklist->subTodo = $request->subTodo;
-        // $checklist->checked = $request->checked;
-        // $string = str_replace('T', ' ', $checklist->deadline);
-        // $checklist->deadline = $string;
         $subchecklist->subtglStart = $request->subtglStart;
         $subchecklist->subdeadline = $request->subdeadline;
-        // $checklist->linkFile = $request->linkFile;
         $check = $subchecklist->save();
-        dd($check);
         return redirect('/checklist' . '/' . $request->idProject);
     }
 
-    public function deleteSubchecklist($id)
+    public function deleteSubchecklist($idProject, $id)
     {
         $subchecklist = Subchecklist::find($id);
-        $id = $subchecklist->idProject;
-
-        // $project = Project::find($checklist->idProject);
-        // if ($checklist->checked == true) {
-        //     $project->finished = $project->finished - 1;
-        //     $project->save();
-        // } else {
-        //     $project->todo = $project->todo - 1;
-        //     $project->save();
-        // }
-
-
         $subchecklist->delete();
-        return redirect('/checklist' . '/' . $id);
+        return redirect('/checklist' . '/' . $idProject);
     }
 }

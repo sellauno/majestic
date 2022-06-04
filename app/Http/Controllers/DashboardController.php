@@ -24,7 +24,27 @@ class DashboardController extends Controller
         $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
         $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
 
-        
+        // Progress
+
+        $a = DB::table('projects')
+            ->leftjoin('checklists', 'checklists.idProject', '=', 'projects.idProject')
+            ->selectRaw('COUNT(*) AS total')
+            ->groupBy('projects.idProject')
+            ->get();
+
+        $x = DB::table('projects')
+            ->leftjoin('checklists', 'checklists.idProject', '=', 'projects.idProject')
+            ->select('projects.idProject', DB::raw('COUNT(checklists.idChecklist) AS total'))
+            ->where('checked', true)
+            ->groupBy('projects.idProject');
+
+        $b = DB::table('projects')
+            ->leftJoinSub($x, 'checklists', function ($join) {
+                $join->on('checklists.idProject', '=', 'projects.idProject');
+            })->get();
+
+        // End Progress
+
         return view('dashboard', [
             'projects' => $projects,
             'clients' => $clients,
