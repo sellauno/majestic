@@ -1,12 +1,12 @@
 @extends('layouts.layout')
-@section('register', 'active')  
+@section('account', 'active')  
 @section('content')
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
           <div class="col-md-8">
               <div class="card">
-                  <div class="card-header">Register</div>
+                  <div class="card-header">Edit Account</div>
                   <div class="card-body">
   
                       <form action="{{ route('updateAccount', ['id' => $user->id]) }}" method="POST">
