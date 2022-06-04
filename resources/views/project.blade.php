@@ -321,9 +321,9 @@
                                                     <tr>
                                                         <td>{{$kategoria->kategori}}</td>
                                                         <td>{{$kategoria->jumlah}}</td>
-                                                        <td>
+                                                        <!-- <td>
                                                             <a class="btn btn-link text-dark text-xxs px-3 mb-0" href="{{route('editKategori', ['id' => $kategoria->id])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                                                        </td>
+                                                        </td> -->
                                                         <td>
                                                             <a class="btn btn-link text-danger text-xxs text-gradient px-3 mb-0" href="{{route('deleteKategori', ['id' => $kategoria->id])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                                         </td>
@@ -706,11 +706,7 @@
                                                     <?php } ?>
                                                     @endforeach
                                                 </div>
-                                                <div class="col-6">
-                                                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                                </div>
+                                              
                                             </div>
                                             <form action="{{route('addChecklist')}}" method="POST">
                                                 <input type="hidden" name="idUser" value="{{$myprofile->id}}">
@@ -739,7 +735,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <!-- <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <div class="card mb-4">
                                                 <div class="card-header pb-0">
@@ -773,13 +769,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 @endif
                                 @foreach($users as $user)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}"  aria-expanded="true" aria-controls="collapseOne">
                                             {{$user->name}}
                                             <div class="ms-auto text-end position-absolute end-3 me-3">
                                                 <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
@@ -787,7 +783,7 @@
                                             </div>
                                         </div>
                                     </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                             <div class="row">
@@ -870,8 +866,12 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="col-6">
+                                                <form method="post" action="{{ route('post.store') }}">
+                                                    <input type="hidden" name="iduser" value="{{$user->id}}">
+                                                    <input type="hidden" name="name" value="{{$user->name}}">
+                                                    @csrf
                                                     <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
                                                     <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
                                                 </div>
                                             </div>
@@ -899,10 +899,6 @@
                                                 </div>
                                             </form>
                                             @endif
-                                        </div>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
                                             <div class="card mb-4">
                                                 <div class="card-header pb-0">
                                                     <h6>Authors table</h6>
@@ -936,6 +932,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                
                                 </div>
                                 @endforeach
                             </div>

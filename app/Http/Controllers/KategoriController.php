@@ -25,7 +25,7 @@ class KategoriController extends Controller
         ]);
     }
 
-    public function updateProject(Request $request, $id)
+    public function updateKategori(Request $request, $id)
     {
         $kategori = Kategori::find($id);
         $kategori->kategori = $request->kategori;
@@ -36,10 +36,11 @@ class KategoriController extends Controller
         return redirect('/dashboard');
     }
 
+
     public function deleteKategori($id)
     {
         $kategori = Kategori::find($id);
         $kategori->delete();
-        return redirect('/dashboard');
+        return redirect()->back();
     }
 }
