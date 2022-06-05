@@ -110,13 +110,11 @@ class ChecklistController extends Controller
 
         $komentar = Comment::all();
 
-        // !!! NANTI DI UNCOMMENT !!!
-            if($project->progres != $jumlah){
-                $p = Project::find($id);
-                $p->progres = $jumlah;
-                $p->save();
-            }
-        // !!! END !!!
+        if ($project->progres != $jumlah) {
+            $p = Project::find($id);
+            $p->progres = $jumlah;
+            $p->save();
+        }
 
         // dd($total);
 

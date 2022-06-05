@@ -88,6 +88,23 @@ Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('au
 Route::get('/report', 'ReportController@generateReport');
 Route::get('/report1', 'ReportController@generateReport1');
 
+// Layanan
+Route::get('/layanan', 'LayananController@allLayanan')->name('allLayanan')->middleware('auth');
+Route::get('/addlayanan', 'LayananController@addLayanan')->name('addLayanan')->middleware('auth');
+Route::post('/createlayanan', 'LayananController@createLayanan')->name('createLayanan')->middleware('auth');
+Route::get('/editlayanan/{id}', 'LayananController@editLayanan')->name('editLayanan')->middleware('auth');
+Route::post('/updatelayanan/{id}', 'LayananController@updateLayanan')->name('updateLayanan')->middleware('auth');
+Route::get('/deletelayanan/{id}', 'LayananController@deleteLayanan')->name('deleteLayanan')->middleware('auth');
+
+// Jenis Layanan
+Route::get('/jenislayanan', 'LayananController@allJenisLayanan')->name('allJenisLayanan')->middleware('auth');
+Route::get('/addjenislayanan', 'LayananController@addJenisLayanan')->name('addJenisLayanan')->middleware('auth');
+Route::post('/createjenislayanan', 'LayananController@createJenisLayanan')->name('createJenisLayanan')->middleware('auth');
+Route::get('/editjenislayanan/{id}', 'LayananController@editJenisLayanan')->name('editJenisLayanan')->middleware('auth');
+Route::post('/updatejenislayanan/{id}', 'LayananController@updateJenisLayanan')->name('updateJenisLayanan')->middleware('auth');
+Route::get('/deletejenislayanan/{id}', 'LayananController@deleteJenisLayanan')->name('deleteJenisLayanan')->middleware('auth');
+
+
 // Authentication
 Route::get('login', 'AuthController@index')->name('login');
 Route::post('post-login', 'AuthController@postLogin')->name('login.post');
@@ -112,6 +129,7 @@ Route::get('change-password', 'ChangePasswordController@index')->name('change.pa
 Route::post('change-password', 'ChangePasswordController@store')->middleware('auth');
 
 // Percobaan
+
 Route::get('test', function () {
     // Storage::disk('google')->put('test.txt', 'Hello World');
     // $details = Storage::disk("google")->getMetadata('test.txt');
@@ -146,6 +164,23 @@ Route::post('/post/store', 'PostController@store')->name('post.store')->middlewa
 Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middleware('auth');
 
+//Email
+Route::get('send-mail/{id}', 'ChecklistController@sendMail')->name('send-mail');
+Route::get('send-mail2/', 'ChecklistController@sendMail2')->name('send-mail2');
+// Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from Majestic Creative',
+        'body' => 'Testing email'
+    ];
+   
+//     Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
+//    return redirect('/dashboarduser');
+//     dd("Email is Sent.");
+// });
+
+
+//Percobaan
 
 Route::get('cbx', function () {
     return view('cbxcoba');
@@ -173,20 +208,3 @@ Route::get('test1', function () {
         }
     }
 });
-
-
-
-//Email
-Route::get('send-mail/{id}', 'ChecklistController@sendMail')->name('send-mail');
-Route::get('send-mail2/', 'ChecklistController@sendMail2')->name('send-mail2');
-// Route::get('send-mail', function () {
-   
-    $details = [
-        'title' => 'Mail from Majestic Creative',
-        'body' => 'Testing email'
-    ];
-   
-//     Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
-//    return redirect('/dashboarduser');
-//     dd("Email is Sent.");
-// });
