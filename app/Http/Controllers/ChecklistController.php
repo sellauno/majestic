@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Checklist;
+use App\Comment;
 use App\Project;
 use App\Subchecklist;
 use App\User;
@@ -48,6 +49,7 @@ class ChecklistController extends Controller
         } else if ($role == 'admin') {
             $hak = true;
         }
+
         $subchecklist = DB::table('subchecklists')
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
             ->where('checklists.idProject', '=', $id)
@@ -57,43 +59,66 @@ class ChecklistController extends Controller
         // Progress
 
         $sum = 100 / $checklists->count();
+
         $a = DB::table('checklists')
             ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
-            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS total'))
+            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
             ->where('checklists.idProject', '=', $id)
             ->groupBy('checklists.idChecklist', 'checklists.toDO')
             ->get();
 
-        $total = 0;
-        foreach ($a as $all) {
-            $total = $total + $all->total;
+        $a = DB::table('checklists')
+            // ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->leftjoin(
+                DB::raw('(SELECT idChecklist, idSubChecklist, COUNT(idSubChecklist) finish 
+                FROM subchecklists
+                WHERE subchecked = true
+                GROUP BY idSubChecklist, idChecklist )
+                finished'),
+                function ($join) {
+                    $join->on('checklists.idChecklist', '=', 'finished.idChecklist');
+                }
+            )
+            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO', 'finished.finish')
+            ->get();
+
+        $total = [];
+        $jumlah = 0;
+        foreach ($a as $key => $all) {
+            $total[$key] = $all->finish * $all->nilai;
+            $jumlah += $total[$key];
         }
-
-        $percobaan = DB::table('checklists')
-            ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
-            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS total'))
-            ->where('checklists.idProject', '=', $id)
-            ->where('subchecklists.subchecked', '=', true)
-            ->groupBy('checklists.idChecklist', 'checklists.toDO')
-            ->get();
-
-        // dd($percobaan);
 
         $x = DB::table('checklists')
             ->where('idProject', '=', $id)
-            ->selectRaw('COUNT(*) AS total')
+            ->select('idProject', DB::raw('COUNT(*) AS finish'))
+            ->where('checked', true)
             ->groupBy('idProject');
 
-        // $b = DB::table('projects')
-        //     ->leftJoinSub($x, 'checklists', function ($join) {
-        //         $join->on('checklists.idProject', '=', 'projects.idProject');
-        //     })->get();
+        $b = DB::table('projects')
+            ->leftJoinSub($x, 'checklists', function ($join) {
+                $join->on('checklists.idProject', '=', 'projects.idProject');
+            })
+            ->select('finish')
+            ->get();
 
         // End Progress
 
-        // dd($subchecklist);
-
         $kategori = Kategori::all();
+
+        $komentar = Comment::all();
+
+        // !!! NANTI DI UNCOMMENT !!!
+            if($project->progres != $jumlah){
+                $p = Project::find($id);
+                $p->progres = $jumlah;
+                $p->save();
+            }
+        // !!! END !!!
+
+        // dd($total);
 
         return view('project', [
             'id' => $id,
@@ -104,7 +129,9 @@ class ChecklistController extends Controller
             'project' => $project,
             'links' => $links,
             'users' => $users,
-            'hak' => $hak
+            'hak' => $hak,
+            'komentar' => $komentar,
+            'total' => $total
         ]);
     }
 

@@ -119,17 +119,11 @@
                   <td class="align-middle text-center">
                     <div class="d-flex align-items-center justify-content-center">
                       <span class="me-2 text-xs font-weight-bold">
-                        <?php
-                        $presentase = 0;
-                        if ($project->todo != 0 && $project->finished != null) {
-                          $presentase = $project->finished / $project->todo * 100;
-                        }
-                        echo $presentase;
-                        ?>%
+                        {{$project->progres}}%
                       </span>
                       <div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$presentase}}" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $presentase ?>%;"></div>
+                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$project->progres}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$project->progres}}%;"></div>
                         </div>
                       </div>
                     </div>

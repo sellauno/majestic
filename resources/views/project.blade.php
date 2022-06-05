@@ -384,7 +384,7 @@
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive">
                                 <table class="table align-items-center mb-0">
-                                    @foreach ($checklists as $checklist)
+                                    @foreach ($checklists as $key => $checklist)
                                     <?php if ($checklist->idUser == auth()->user()->id) { ?>
                                         <tr>
                                             <td>
@@ -397,12 +397,12 @@
                                                 <div class="d-flex align-items-center justify-content-center text-end">
                                                     <div>
                                                         <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%;"></div>
+                                                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$total[$key]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$total[$key]}}%;"></div>
                                                         </div>
                                                     </div>
                                                     &nbsp;
                                                     <span class="me-2 text-xs font-weight-bold">
-                                                        10%
+                                                    {{$total[$key]}}%
                                                     </span>
                                                 </div>
                                             </td>
@@ -706,7 +706,7 @@
                                                     <?php } ?>
                                                     @endforeach
                                                 </div>
-                                              
+
                                             </div>
                                             <form action="{{route('addChecklist')}}" method="POST">
                                                 <input type="hidden" name="idUser" value="{{$myprofile->id}}">
@@ -775,7 +775,7 @@
                                 @foreach($users as $user)
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}"  aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}" aria-expanded="true" aria-controls="collapseOne">
                                             {{$user->name}}
                                             <div class="ms-auto text-end position-absolute end-3 me-3">
                                                 <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
@@ -866,13 +866,13 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="col-6">
-                                                <form method="post" action="{{ route('post.store') }}">
-                                                    <input type="hidden" name="iduser" value="{{$user->id}}">
-                                                    <input type="hidden" name="name" value="{{$user->name}}">
-                                                    @csrf
-                                                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
-                                                    <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
+                                                    <form method="post" action="{{ route('post.store') }}">
+                                                        <input type="hidden" name="iduser" value="{{$user->id}}">
+                                                        <input type="hidden" name="name" value="{{$user->name}}">
+                                                        @csrf
+                                                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                                                        <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
                                                 </div>
                                             </div>
                                             @if($hak == true)
@@ -901,30 +901,29 @@
                                             @endif
                                             <div class="card mb-4">
                                                 <div class="card-header pb-0">
-                                                    <h6>Authors table</h6>
+                                                    <h6>Komentar</h6>
                                                 </div>
                                                 <div class="card-body px-0 pt-0 pb-2">
                                                     <div class="table-responsive p-0">
                                                         <table class="table align-items-center mb-0">
                                                             <tbody>
+                                                                @foreach($komentar as $komen)
+                                                                @if($komen->iduser == $user->id)
                                                                 <tr>
                                                                     <td width="15%" class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                                        <span class="text-secondary text-xs font-weight-bold">{{$komen->created_at}}</span>
                                                                     </td>
-                                                                    <td width="85%" class="justify-content-end">
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
+                                                                    <td width="20%" class="justify-content-end">
+                                                                        <p class="text-xs font-weight-bold mb-0">{{$komen->name}}</p>
+                                                                        <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
                                                                     </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="align-middle text-center">
-                                                                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                        <p class="text-xs text-secondary mb-0">Organization</p>
+                                                                    <td width="65%" class="justify-content-end">
+                                                                        <p class="text-xs font-weight-bold mb-0">{{$komen->body}}</p>
+                                                                        <!-- <p class="text-xs text-secondary mb-0">Organization</p> -->
                                                                     </td>
                                                                 </tr>
+                                                                @endif
+                                                                @endforeach
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -932,7 +931,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                
                                 </div>
                                 @endforeach
                             </div>
