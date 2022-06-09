@@ -8,6 +8,7 @@ use App\Project;
 use App\Subchecklist;
 use App\User;
 use App\Kategori;
+use App\Subtodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -57,8 +58,10 @@ class ChecklistController extends Controller
             ->get();
 
         // Progress
-
-        $sum = 100 / $checklists->count();
+        $sum = 0;
+        if ($checklists->count() != 0) {
+            $sum = 100 / $checklists->count();
+        }
 
         $a = DB::table('checklists')
             ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
@@ -94,7 +97,7 @@ class ChecklistController extends Controller
         $x = DB::table('checklists')
             ->where('idProject', '=', $id)
             ->select('idProject', DB::raw('COUNT(*) AS finish'))
-            ->where('checked', true)
+            ->where('finish', true)
             ->groupBy('idProject');
 
         $b = DB::table('projects')
@@ -139,7 +142,7 @@ class ChecklistController extends Controller
             'idProject' => $request->idProject,
             'idUser' => $request->idUser,
             'toDO' => $request->toDO,
-            'checked' => null,
+            'finished' => null,
             'tglStart' => $request->tglStart,
             'deadline' => $request->deadline,
             'linkFile' => null
@@ -192,7 +195,7 @@ class ChecklistController extends Controller
         $id = $checklist->idProject;
 
         $project = Project::find($checklist->idProject);
-        if ($checklist->checked == true) {
+        if ($checklist->finished == true) {
             $project->finished = $project->finished - 1;
             $project->save();
         } else {
@@ -208,7 +211,7 @@ class ChecklistController extends Controller
     public function sendMail($id)
     {
         $checklist = Checklist::find($id);
-        $checklist->checked = true;
+        $checklist->finished = true;
         $checklist->save();
         $details = [
             'title' => 'Mail from ItSolutionStuff.com',
@@ -223,6 +226,7 @@ class ChecklistController extends Controller
         Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
         return redirect('/dashboarduser');
     }
+
     public function sendMail2()
     {
         $details = [
@@ -271,4 +275,33 @@ class ChecklistController extends Controller
         $subchecklist->delete();
         return redirect('/checklist' . '/' . $idProject);
     }
+
+
+    // SUB TO DO
+    public function createSubtodo(Request $request)
+    {
+        Subtodo::create($request->all());
+    }
+
+    public function editSubtodo(Request $request)
+    {
+        $subtodo = Subtodo::find($request->idsubtodo);
+        $subtodo->idChecklist = $request->idChecklist;
+        $subtodo->idUser = $request->idUser;
+        $subtodo->subtodo = $request->subtodo;
+        $subtodo->start = $request->start;
+        $subtodo->deadline = $request->deadline;
+        $subtodo->save();
+
+        return redirect()->back();
+    }
+
+    public function deleteSubtodo($id)
+    {
+        $subtodo = Subtodo::find($id);
+        $subtodo->delete();
+
+        return redirect()->back();
+    }
+    // END SUB TO DO
 }

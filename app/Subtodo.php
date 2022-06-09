@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subtodo extends Model
 {
-    use HasFactory;
+    protected $fillable = ['idChecklist', 'idUser', 'subtodo', 'start', 'deadline', 'checked'];
+    public $primaryKey = 'idsubtodo';
 }

@@ -40,40 +40,60 @@
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Mulai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglMulai" class="form-control" value="{{$project->tglMulai}}" placeholder="Name" aria-label="Tanggal Mulai"  required>
+                                <input type="date" name="tglMulai" class="form-control" value="{{$project->tglMulai}}" placeholder="Name" aria-label="Tanggal Mulai" required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label>Tanggal Selesai</label></div>
                             <div class="col-12 col-md-3">
-                                <input type="date" name="tglSelesai" class="form-control" value="{{$project->tglSelesai}}" placeholder="Name" aria-label="Tanggal Selesai"  required>
+                                <input type="date" name="tglSelesai" class="form-control" value="{{$project->tglSelesai}}" placeholder="Name" aria-label="Tanggal Selesai" required>
                             </div>
                         </div>
+
+
+                        <!-- Layanan -->
+
+                        <table id="layanan">
+                            <tr>
+                                <h6>Layanan</h6>
+                            </tr>
+                            @foreach($layanan as $l)
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="idLayanan[]" value="{{$l->idLayanan}}">
+                                    <div class="dropdown">
+                                        <select id="idKategori" name="idKategori[]" class="form-control">
+                                            @foreach($kategori as $kat)
+                                            <option value="{{$kat->idKategori}}">{{$kat->kategori}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="number" name="jumlah[]" value="{{$l->jumlah}}" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required>
+                                </td>
+                                <td>
+                                    <span><a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a></span>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </table>
+
                         <div class="row form-group">
-                            <div class="col col-md-2"><label>Reels</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="reels" class="form-control" value="{{$project->reels}}" placeholder="0" aria-label="Reels">
-                            </div>
-                            <div class="col col-md-2"><label>Tiktok</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="tiktok" class="form-control" value="{{$project->tiktok}}" placeholder="0" aria-label="Tiktok">
+                            <div id="create-input-buttons">
+                                <a class="btn btn-link text-secondary mb-0 btn-tooltip create-input" title="Tambah List">
+                                    <i class="fa fa-plus-circle text-xs"></i> Tambah list
+                                </a>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col col-md-2"><label>Feeds</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="number" name="feeds" class="form-control" value="{{$project->feeds}}" placeholder="0" aria-label="Feeds">
-                            </div>
-                            <div class="col col-md-2"><label>Stories</label></div>
-                            <div class="col-12 col-md-2">
-                                <input type="text" name="stories" class="form-control" value="{{$project->stories}}" placeholder="0" aria-label="Stories">
-                            </div>
-                        </div>
+                        <!-- End Layanan -->
                         <div class="text-center">
                             <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                         </div>
                     </form>
                     <br>
+
+
 
                     <!-- TEAM -->
                     <div class="row form-group">
@@ -127,36 +147,10 @@
                         </div>
                         <input type="hidden" name="idProject" value="{{$project->idProject}}">
                         <div class="row form-group">
-                        <div class="col col-md-2"><label>Nama</label></div>
-                        <div class="col-12 col-md-6">
-                            <div class="dropdown">
-                                <select id="idUser" name="idUser" class="form-control">
-                                    @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col col-md-2"><label>Jabatan</label></div>
-                    <div class="col-12 col-md-6">
-                        <div class="dropdown">
-                            <select id="jabatan" name="jabatan" class="form-control">
-                                <option value="Penanggung Jawab">Penanggung Jawab</option>
-                                <option value="Anggota">Anggota</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Tambah Anggota</button>
-                </div>
-                <!-- <div class="row form-group">
-                            <div class="col col-md-2"><label>Penanggung Jawab</label></div>
-                            <div class="col-12 col-md-6 nav-item">
+                            <div class="col col-md-2"><label>Nama</label></div>
+                            <div class="col-12 col-md-6">
                                 <div class="dropdown">
-                                    <select name="idPJ[]" class="dropdown form-control select2" multiple>
+                                    <select id="idUser" name="idUser" class="form-control">
                                         @foreach($users as $user)
                                         <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
@@ -165,26 +159,27 @@
                             </div>
                         </div>
                         <div class="row form-group">
-                            <div class="col col-md-2"><label>Anggota</label></div>
-                            <div class="col-12 col-md-6 nav-item">
+                            <div class="col col-md-2"><label>Jabatan</label></div>
+                            <div class="col-12 col-md-6">
                                 <div class="dropdown">
-                                    <select name="anggota[]" class="form-control select2" multiple>
-                                        @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                        @endforeach
+                                    <select id="jabatan" name="jabatan" class="form-control">
+                                        <option value="Penanggung Jawab">Penanggung Jawab</option>
+                                        <option value="Anggota">Anggota</option>
                                     </select>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Tambah Anggota</button>
+                        </div>
+                        <!-- END TEAM -->
+                    </form>
 
-                <!-- END TEAM -->
-                </form>
-
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <script>
     $("#inlineCheckbox1").click(function() {
@@ -195,5 +190,62 @@
         if ($('#inlineCheckbox1').is(":checked"))
             $(":checkbox").not($('#inlineCheckbox1')).prop("disabled", true);
     })
+</script>
+<script>
+    function createTicketComponent(type) {
+        type = type || null;
+
+        var elements = [],
+            rootElement = document.createElement('tr');
+
+        elements.push('<tr><td width="25%"><div class="dropdown"><select id="idKategori" name="idKategoriNew[]" class="form-control">@foreach($kategori as $kat)<option value="{{$kat->idKategori}}">{{$kat->kategori}}</option>@endforeach</select></div></td>');
+        elements.push('<td><input type="number" name="jumlahNew[]" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required></td></tr>');
+
+        rootElement.innerHTML = elements.join('');
+
+        return rootElement;
+    }
+
+
+    function createFreeTicketComponent() {
+        return createTicketComponent('FREE');
+    }
+
+
+    function onClickCreateTicketButton(event) {
+        var button = event.target,
+            container = document.querySelector('#layanan'),
+            component;
+
+        if (button.classList.contains('free')) {
+            component = createFreeTicketComponent();
+        } else {
+            component = createTicketComponent();
+        }
+
+        container.appendChild(component);
+    }
+
+
+    function onClickSaveButton(event) {
+        var button = event.target,
+            container = document.querySelector('#layanan'),
+            component;
+
+        if (button.classList.contains('free')) {
+            component = createFreeTicketComponent();
+        } else {
+            component = createTicketComponent();
+        }
+
+        container.appendChild(component);
+    }
+
+
+    var buttonsGroup = document.getElementById('create-input-buttons');
+    buttonsGroup.addEventListener('click', onClickCreateTicketButton);
+
+    var buttonSave = document.getElementById('button-save');
+    buttonSave.addEventListener('click', onClickSaveButton);
 </script>
 @endsection

@@ -107,33 +107,4 @@
     var buttonSave = document.getElementById('button-save');
     buttonSave.addEventListener('click', onClickSaveButton);
 </script>
-<!-- <script>
-    function createComponent() {
-
-        var elements = [],
-            rootElement = document.createElement('tr')
-        elements.push('<tr>AAAAAAAAAAAAAAAAAAAA</tr>');
-        // elements.push('<tr><div class="input-group input-group-sm text-xxs">Tanggal Mulai</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="subtglStart"></div></tr>');
-        // elements.push('<tr><div class="input-group input-group-sm text-xxs">Deadline</div></tr><tr><div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="subdeadline"></div></tr>');
-        // elements.push('<tr><div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-1" data-container="body" data-animation="true"> Save </button></div></tr>');
-
-        rootElement.innerHTML = elements.join('');
-
-        return rootElement;
-    }
-
-
-    function tambahData() {
-        container = document.querySelector('prosessadd'),
-            component = createComponent();
-
-        container.appendChild(component);
-    }
-
-    var buttonsGroup = document.getElementById('create-ticket-buttons');
-    // buttonsGroup.addEventListener('click', onClickCreateTicketButton);
-
-    var buttonSave = document.getElementById('button-save');
-    buttonSave.addEventListener('click', onClickSaveButton);
-</script> -->
 @endsection

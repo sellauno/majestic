@@ -37,8 +37,9 @@ class LayananController extends Controller
     public function deleteLayanan($id)
     {
         $layanan = Layanan::find($id);
+        $idProject = $layanan->idProject;
         $layanan->delete();
-        return redirect('/layanan');
+        return redirect('/editproject'. '/' . $idProject);
     }
 
     // Jenis Layanan
@@ -49,7 +50,6 @@ class LayananController extends Controller
 
         foreach ($layanan as $key => $value) {
             $layanan[$key]->proses = json_decode($layanan[$key]->proses);
-            // dd($layanan[$key]->proses);
         }
         return view('jenislayanan', ['layanan' => $layanan]);
     }

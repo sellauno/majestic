@@ -32,7 +32,12 @@
                                 <div class="col-12 col-md-6">
                                     <table id="proses">
                                         @foreach($layanan->proses as $proses)
-                                        <tr><td><input type="text" class="form-control" name="proses[]" placeholder="Nama Layanan" value="{{$proses['value']}}" aria-label="Layanan" required></td></tr>
+                                        <tr id="proses<?php echo $proses['id']; ?>">
+                                            <td><input type="text" class="form-control" name="proses[]" placeholder="Nama Layanan" value="{{$proses['value']}}" aria-label="Layanan" required></td>
+                                            <td>
+                                                <span><a class="btn btn-link text-danger text-gradient px-3 mb-0" onclick="removeDummy(<?php echo $proses['id']; ?>)"><i class="far fa-trash-alt me-2"></i></a></span>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </table>
                                     <div id="create-input-buttons">
@@ -108,5 +113,13 @@
 
     var buttonSave = document.getElementById('button-save');
     buttonSave.addEventListener('click', onClickSaveButton);
+</script>
+<script>
+    function removeDummy($id) {
+        $delete = 'proses' + $id;
+        var elem = document.getElementById($delete);
+        elem.parentNode.removeChild(elem);
+        return false;
+    }
 </script>
 @endsection
