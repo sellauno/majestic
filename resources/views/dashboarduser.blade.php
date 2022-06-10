@@ -29,10 +29,6 @@
               <thead>
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Client</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Reels</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tiktok</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Feeds</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stories</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
                   <th></th>
                 </tr>
@@ -51,70 +47,6 @@
                         </div>
                       </div>
                     </a>
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
-                        <p class="text-sm font-weight-bold mb-0">{{$project->reels}}</p>
-                      </div>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <?php $no = 0; ?>
-                        @foreach($reels as $reel)
-                        <?php $no++;
-                        if ($reel->idProject == $project->idProject) { ?>
-                          <li><a class="dropdown-item border-radius-md" href="{{$reel->link}}">{{$no}}. {{$reel->link}} </a></li>
-                        <?php } ?>
-                        @endforeach
-                      </ul>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
-                        <p class="text-sm font-weight-bold mb-0">{{$project->tiktok}}</p>
-                      </div>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <?php $no = 0; ?>
-                        @foreach($tiktoks as $tiktok)
-                        <?php $no++;
-                        if ($tiktok->idProject == $project->idProject) { ?>
-                          <li><a class="dropdown-item border-radius-md" href="{{$tiktok->link}}">{{$no}}. {{$tiktok->link}} </a></li>
-                        <?php } ?>
-                        @endforeach
-                      </ul>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
-                        <p class="text-sm font-weight-bold mb-0">{{$project->feeds}}</p>
-                      </div>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <?php $no = 0; ?>
-                        @foreach($feeds as $feed)
-                        <?php $no++;
-                        if ($feed->idProject == $project->idProject) { ?>
-                          <li><a class="dropdown-item border-radius-md" href="{{$feed->link}}">{{$no}}. {{$feed->link}} </a></li>
-                        <?php } ?>
-                        @endforeach
-                      </ul>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <div class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" data-color="dark" aria-haspopup="true" aria-expanded="false">
-                        <p class="text-sm font-weight-bold mb-0">{{$project->stories}}</p>
-                      </div>
-                      <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                        <?php $no = 0; ?>
-                        @foreach($stories as $story)
-                        <?php $no++;
-                        if ($story->idProject == $project->idProject) { ?>
-                          <li><a class="dropdown-item border-radius-md" href="{{$story->link}}">{{$no}}. {{$story->link}} </a></li>
-                        <?php } ?>
-                        @endforeach
-                      </ul>
-                    </div>
                   </td>
                   <td class="align-middle text-center">
                     <div class="d-flex align-items-center justify-content-center">
@@ -179,12 +111,12 @@
                 <input type="hidden" name="idProject" value="{{$project->idProject}}">
                 <input type="hidden" name="idUser" value="{{$idUser}}">
                 <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->checked == true) checked disabled @endif>
+                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->finish == true) checked disabled @endif>
                 <label class="custom-control-label <?php if (
                                                       $checklist->deadline < now()
                                                     ) {
                                                       echo "text-danger";
-                                                    } ?>" for="todocheck">{{$checklist->toDO}}</label>
+                                                    } ?>" for="todocheck">{{$checklist->subTodo}}</label>
                 <p id="text" style="display:none">Checkbox is CHECKED!</p>
                 <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
                     Confirm

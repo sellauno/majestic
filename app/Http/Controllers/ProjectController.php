@@ -174,16 +174,11 @@ class ProjectController extends Controller
     {
         $insert = Project::create([
             'idClient' => $request->idClient,
-            'reels' => $request->reels,
-            'tiktok' => $request->tiktok,
-            'feeds' => $request->feeds,
-            'stories' => $request->stories,
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
             'harga' => $request->harga,
             'status' => $request->status,
-            'todo' => 0,
-            'finished' => 0
+            'finished' => false
         ]);
 
         if ($request->input('idPJ') != null) {
