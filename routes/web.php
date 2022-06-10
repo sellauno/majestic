@@ -43,7 +43,7 @@ Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteC
 Route::get('/projects', 'ProjectController@allProject')->name('allProject')->middleware('auth');
 Route::get('/project/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth');
-Route::post('/createproject', 'ProjectController@createProject')->name('createProject')->middleware('auth');
+Route::post('/createproject', 'ProjectController@createProject')->name('createProject');
 Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProject')->middleware('auth');
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject')->middleware('auth');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth');
@@ -64,6 +64,7 @@ Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name
 
 
 Route::get('/checklist/user/{id}', 'ChecklistController@checklistsUser')->name('projectUser')->middleware('auth');
+
 // Sub To Do
 Route::post('/addtodo', 'ChecklistController@createSubtodo')->name('addSubtodo')->middleware('auth');
 Route::post('/updatetodo', 'ChecklistController@updateSubtodo')->name('updateSubtodo')->middleware('auth');
