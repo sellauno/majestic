@@ -57,12 +57,14 @@ class ProjectController extends Controller
             ->get();
         $checklists = DB::table('layanan')
             ->leftJoin('checklists', 'checklists.idLayanan', '=', 'layanan.idLayanan')
-            ->join('jenislayanan', 'jenislayanan.idKategori', '=', 'layanan.idKategori')
             ->where('layanan.idProject', '=', $id)
             ->get();
+        $jenis = [];
         foreach ($checklists as $key => $value) {
-            $checklists[$key]->proses = json_decode($checklists[$key]->proses);
+            $find = Jenislayanan::find($checklists[$key]->idKategori);
+            $jenis[$key] = json_decode($find->proses);
         }
+
         $hak = false;
         if ($myprofile != null) {
             if ($myprofile->jabatan == 'Penanggung Jawab') {
@@ -73,9 +75,11 @@ class ProjectController extends Controller
         }
         $subchecklist = DB::table('subchecklists')
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
-            ->where('checklists.idProject', '=', $id)
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
             ->select('subchecklists.*')
             ->get();
+            // dd($subchecklist);
 
         // Progress
 
@@ -129,7 +133,7 @@ class ProjectController extends Controller
             $p->save();
         }
 
-        // dd($layanan);
+        // dd($checklists);
 
         return view('projectdetail', [
             'id' => $id,
@@ -143,6 +147,7 @@ class ProjectController extends Controller
             'hak' => $hak,
             'komentar' => $komentar,
             'layanan' => $layanan,
+            'jenis' => $jenis,
             'total' => $total
         ]);
     }

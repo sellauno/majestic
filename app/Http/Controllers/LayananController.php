@@ -51,6 +51,7 @@ class LayananController extends Controller
         foreach ($layanan as $key => $value) {
             $layanan[$key]->proses = json_decode($layanan[$key]->proses);
         }
+        
         return view('jenislayanan', ['layanan' => $layanan]);
     }
 
