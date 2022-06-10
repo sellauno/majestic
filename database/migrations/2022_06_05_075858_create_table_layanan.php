@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableComment extends Migration
+class CreateTableLayanan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTableComment extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('idUser');
-            $table->string('name');
-            $table->text('body');
+        Schema::create('layanan', function (Blueprint $table) {
+            $table->bigIncrements('idLayanan');
+            $table->integer('idKategori');
+            $table->integer('jumlah');
+            $table->integer('idProject');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTableComment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('table_layanan');
     }
 }

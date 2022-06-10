@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checklist extends Model
 {
-    protected $fillable = ['idProject', 'idUser', 'toDO', 'checked', 'tglStart', 'deadline', 'linkFile'];
+    protected $fillable = ['idLayanan', 'toDO', 'finish', 'tglStart', 'deadline', 'linkFile', 'tglUpload'];
     public $primaryKey = 'idChecklist';
 }

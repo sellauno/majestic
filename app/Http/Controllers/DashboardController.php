@@ -23,6 +23,9 @@ class DashboardController extends Controller
         $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
         $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
         $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
+        $layanan = DB::table('layanan')
+            ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
+            ->get();
 
         // Progress
 
@@ -35,7 +38,7 @@ class DashboardController extends Controller
         $x = DB::table('projects')
             ->leftjoin('checklists', 'checklists.idProject', '=', 'projects.idProject')
             ->select('projects.idProject', DB::raw('COUNT(checklists.idChecklist) AS total'))
-            ->where('checked', true)
+            ->where('finished', true)
             ->groupBy('projects.idProject');
 
         $b = DB::table('projects')
@@ -53,7 +56,7 @@ class DashboardController extends Controller
             'tiktoks' => $tiktoks,
             'reels' => $reels,
             'stories' => $stories,
-
+            'layanan' => $layanan,
         ]);
     }
 
