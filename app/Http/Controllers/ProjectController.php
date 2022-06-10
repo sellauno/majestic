@@ -13,6 +13,7 @@ use App\Link;
 use App\Project;
 use App\Team;
 use App\User;
+use App\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -251,26 +252,25 @@ class ProjectController extends Controller
             'kategori' => 'gambar'
         ]);
 
-        if ($request->idKategori != null) {
-            foreach ($request->idKategori as $key => $value) {
-                $layananid = Layanan::create([
-                    'idKategori' => $request->idKategori[$key],
-                    'jumlah' => $request->jumlah[$key],
-                    'idProject' => $insert->idProject
-                ]);
+        // if ($request->input('idPJ') != null) {
+        //     foreach ($request->idPJ as $key => $value) {
+        //         Notification::create([
+        //             'idUser' => $value,
+        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+        //             'isRead' => 0
+        //         ]);
+        //     }
+        // }
 
-                for ($i = 1; $i <= $request->jumlah[$key]; $i++) {
-                    $layanan = Jenislayanan::find($request->idKategori[$key]);
-                    $nama = $layanan->kategori . ' ' . $i;
-                    Checklist::create([
-                        'idLayanan' => $layananid->idLayanan,
-                        'toDO' => $nama,
-                        'tglStart' => $request->tglMulai,
-                        'deadline' => $request->tglSelesai
-                    ]);
-                }
-            }
-        }
+        // if ($request->anggota != null) {
+        //     foreach ($request->anggota as $key => $value) {
+        //         Notification::create([
+        //             'idUser' => $value,
+        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+        //             'isRead' => 0
+        //         ]);
+        //     }
+        // }
 
         return redirect('/dashboard');
     }

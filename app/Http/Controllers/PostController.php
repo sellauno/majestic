@@ -22,7 +22,8 @@ class PostController extends Controller
         $post =  new Comment;
         $post->body = $request->post('body');
         $post->idUser = $request->post('iduser');
-        $post->name = $request->post('name');
+       
+        $post->komentator = $request->post('komentator');
         $post->save();
         // dd($post);
         return redirect()->back();

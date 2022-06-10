@@ -107,10 +107,21 @@ class ChecklistController extends Controller
             ->select('finish')
             ->get();
 
-        // End Progress
+        // End Progresss
 
         $kategori = Kategori::all();
 
+<<<<<<< HEAD
+        $komentar  = DB::table('comment')->join('users','comment.komentator','=','users.id')->get();
+            
+        // !!! NANTI DI UNCOMMENT !!!
+            if($project->progres != $jumlah){
+                $p = Project::find($id);
+                $p->progres = $jumlah;
+                $p->save();
+            }
+        // !!! END !!!
+=======
         $komentar = Comment::all();
 
         if ($project->progres != $jumlah) {
@@ -118,6 +129,7 @@ class ChecklistController extends Controller
             $p->progres = $jumlah;
             $p->save();
         }
+>>>>>>> affe8e96fd49881882b135b1cea3a789fb6a7474
 
         // dd($total);
 
@@ -135,7 +147,124 @@ class ChecklistController extends Controller
             'total' => $total
         ]);
     }
+    public function checklistsUser($id)
+    {
+        $idUser = auth()->user()->id;
+        $role = auth()->user()->role;
+        $project = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.idProject', '=', $id)
+            ->first();
+        $checklists = DB::table('checklists')
+            ->where('checklists.idProject', '=', $id)
+            ->get();
+        $links = DB::table('links')
+            ->join('users', 'users.id', '=', 'links.idUser')
+            ->where('links.idProject', '=', $id)
+            ->get();
+        $users = DB::table('users')
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->where('teams.idUser', '!=', $idUser)
+            ->get();
+        $myprofile = DB::table('users')
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->where('teams.idUser', '=', $idUser)
+            ->first();
+        $hak = false;
+        if ($myprofile != null) {
+            if ($myprofile->jabatan == 'Penanggung Jawab') {
+                $hak = true;
+            }
+        } else if ($role == 'admin') {
+            $hak = true;
+        }
 
+        $subchecklist = DB::table('subchecklists')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->where('checklists.idProject', '=', $id)
+            ->select('subchecklists.*')
+            ->get();
+
+        // Progress
+
+        $sum = 100 / $checklists->count();
+
+        $a = DB::table('checklists')
+            ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->select('checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO')
+            ->get();
+
+        $a = DB::table('checklists')
+            // ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->leftjoin(
+                DB::raw('(SELECT idChecklist, idSubChecklist, COUNT(idSubChecklist) finish 
+                FROM subchecklists
+                WHERE subchecked = true
+                GROUP BY idSubChecklist, idChecklist )
+                finished'),
+                function ($join) {
+                    $join->on('checklists.idChecklist', '=', 'finished.idChecklist');
+                }
+            )
+            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO', 'finished.finish')
+            ->get();
+
+        $total = [];
+        $jumlah = 0;
+        foreach ($a as $key => $all) {
+            $total[$key] = $all->finish * $all->nilai;
+            $jumlah += $total[$key];
+        }
+
+        $x = DB::table('checklists')
+            ->where('idProject', '=', $id)
+            ->select('idProject', DB::raw('COUNT(*) AS finish'))
+            ->where('checked', true)
+            ->groupBy('idProject');
+
+        $b = DB::table('projects')
+            ->leftJoinSub($x, 'checklists', function ($join) {
+                $join->on('checklists.idProject', '=', 'projects.idProject');
+            })
+            ->select('finish')
+            ->get();
+
+        // End Progresss
+
+        $kategori = Kategori::all();
+
+        $komentar  = DB::table('comment')->join('users','comment.komentator','=','users.id')->get();
+            
+        // !!! NANTI DI UNCOMMENT !!!
+            if($project->progres != $jumlah){
+                $p = Project::find($id);
+                $p->progres = $jumlah;
+                $p->save();
+            }
+        // !!! END !!!
+
+        // dd($total);
+
+        return view('projectuser', [
+            'id' => $id,
+            'checklists' => $checklists,
+            'kategori' => $kategori,
+            'subchecklist' => $subchecklist,
+            'myprofile' => $myprofile,
+            'project' => $project,
+            'links' => $links,
+            'users' => $users,
+            'hak' => $hak,
+            'komentar' => $komentar,
+            'total' => $total
+        ]);
+    }
     public function createChecklist(Request $request)
     {
         Checklist::create([

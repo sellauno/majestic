@@ -21,14 +21,14 @@
                               </div>
                           </div>
   
-                          <div class="form-group row">
+                          <!-- <div class="form-group row">
                               <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                               <div class="col-md-6">
                                   <input type="password" id="password" class="form-control" name="password" required>
                                   @if ($errors->has('password'))
                                       <span class="text-danger">{{ $errors->first('password') }}</span>
                                   @endif
-                              </div>
+                              </div> -->
                           </div>
   
                           <div class="form-group row">
@@ -53,5 +53,6 @@
           </div>
       </div>
   </div>
+  
 </main>
 @endsection
