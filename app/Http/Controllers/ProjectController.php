@@ -8,6 +8,7 @@ use App\Link;
 use App\Project;
 use App\Team;
 use App\User;
+use App\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,26 @@ class ProjectController extends Controller
             'idProject' => $insert->idProject,
             'kategori' => 'gambar'
         ]);
+
+        // if ($request->input('idPJ') != null) {
+        //     foreach ($request->idPJ as $key => $value) {
+        //         Notification::create([
+        //             'idUser' => $value,
+        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+        //             'isRead' => 0
+        //         ]);
+        //     }
+        // }
+
+        // if ($request->anggota != null) {
+        //     foreach ($request->anggota as $key => $value) {
+        //         Notification::create([
+        //             'idUser' => $value,
+        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+        //             'isRead' => 0
+        //         ]);
+        //     }
+        // }
 
         return redirect('/dashboard');
     }

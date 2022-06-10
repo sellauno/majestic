@@ -1,5 +1,4 @@
 @extends('layouts.layoutnomenu')
-  
 @section('content')
 <main class="login-form">
   <div class="cotainer">
@@ -65,5 +64,6 @@
           </div>
       </div>
   </div>
+  
 </main>
 @endsection

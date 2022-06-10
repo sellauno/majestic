@@ -61,6 +61,9 @@ Route::get('/editchecklist/{id}', 'ChecklistController@editChecklist')->name('ed
 Route::post('/updatechecklist/{id}', 'ChecklistController@updateChecklist')->name('updateChecklist')->middleware('auth');
 Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name('deleteChecklist')->middleware('auth');
 
+
+Route::get('/checklist/user/{id}', 'ChecklistController@checklistsUser')->name('projectUser')->middleware('auth');
+
 // Sub Checklist
 Route::post('/addsubchecklist', 'ChecklistController@createSubchecklist')->name('addSubchecklist')->middleware('auth');
 Route::post('/updatesubchecklist/{id}', 'ChecklistController@updateSubchecklist')->name('updateSubchecklist')->middleware('auth');
