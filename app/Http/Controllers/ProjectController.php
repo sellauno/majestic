@@ -174,16 +174,11 @@ class ProjectController extends Controller
     {
         $insert = Project::create([
             'idClient' => $request->idClient,
-            'reels' => $request->reels,
-            'tiktok' => $request->tiktok,
-            'feeds' => $request->feeds,
-            'stories' => $request->stories,
             'tglMulai' => $request->tglMulai,
             'tglSelesai' => $request->tglSelesai,
             'harga' => $request->harga,
             'status' => $request->status,
-            'todo' => 0,
-            'finished' => 0
+            'finished' => false
         ]);
 
         if ($request->input('idPJ') != null) {
@@ -256,7 +251,8 @@ class ProjectController extends Controller
             foreach ($request->idPJ as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$client->namaClient,
+                    'url' => '',
                     'isRead' => 0
                 ]);
             }
@@ -266,7 +262,8 @@ class ProjectController extends Controller
             foreach ($request->anggota as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$client->namaClient,
+                    'url' => '',
                     'isRead' => 0
                 ]);
             }
