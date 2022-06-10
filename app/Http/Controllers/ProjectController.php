@@ -247,25 +247,25 @@ class ProjectController extends Controller
             'kategori' => 'gambar'
         ]);
 
-        // if ($request->input('idPJ') != null) {
-        //     foreach ($request->idPJ as $key => $value) {
-        //         Notification::create([
-        //             'idUser' => $value,
-        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
-        //             'isRead' => 0
-        //         ]);
-        //     }
-        // }
+        if ($request->input('idPJ') != null) {
+            foreach ($request->idPJ as $key => $value) {
+                Notification::create([
+                    'idUser' => $value,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'isRead' => 0
+                ]);
+            }
+        }
 
-        // if ($request->anggota != null) {
-        //     foreach ($request->anggota as $key => $value) {
-        //         Notification::create([
-        //             'idUser' => $value,
-        //             'notif' => 'Anda telah ditambahkan kedalam project '.$name,
-        //             'isRead' => 0
-        //         ]);
-        //     }
-        // }
+        if ($request->anggota != null) {
+            foreach ($request->anggota as $key => $value) {
+                Notification::create([
+                    'idUser' => $value,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'isRead' => 0
+                ]);
+            }
+        }
 
         return redirect('/dashboard');
     }
