@@ -53,22 +53,7 @@
 
 
                         <!-- Layanan -->
-
-                        <!-- <div class="row form-group">
-                            <div class="col col-md-2"><label>Layanan</label></div>
-                            <div class="col col-md-3">
-                                <div class="dropdown">
-                                    <select id="idKategori" name="idKategori" class="form-control">
-                                        @foreach($kategori as $kat)
-                                        <option value="{{$kat->idKategori}}">{{$kat->kategori}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col col-md-3">
-                                <input type="number" name="jumlah" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required>
-                            </div>
-                        </div> -->
+                        
                         <table id="layanan">
                             <tr><h6>Layanan</h6></tr>
                             <tr>

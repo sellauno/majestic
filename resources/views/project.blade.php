@@ -210,10 +210,10 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$id}}">
                                                 <div class="input-group">
-                                                <span class="input-group-text text-body">
-                                                    <i class="fas fa-search" aria-hidden="true"></i>
-                                                </span>
-                                                <input type="text"  class="form-control" placeholder="Type here...">
+                                                    <span class="input-group-text text-body">
+                                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="Type here...">
                                                 </div>
                                                 <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value=""> -->
                                                 <input type="submit" value="CARI">
@@ -527,6 +527,25 @@
                                                                 </div>
                                                             <?php } ?>
                                                             @endforeach
+                                                            @foreach ($subtodos as $subtodo)
+                                                            <?php if ($subtodo->idChecklist == $checklist->idChecklist) { ?>
+                                                                <div class="form-check">
+                                                                    <input type="hidden" name="idProject" value="{{$id}}">
+                                                                    <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                                    <input type="hidden" name="idChecklist" value="{{$checklist->idChecklist}}">
+                                                                    <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
+                                                                    <input class="form-check-input" type="checkbox" value="" id="todocheck" @if($subtodo->checked == true) checked @endif disabled>
+                                                                    <label class="custom-control-label text-xs <?php if (
+                                                                                                                    $subtodo->deadline < now()
+                                                                                                                ) {
+                                                                                                                    echo "text-danger";
+                                                                                                                } ?>" for="todocheck">{{$subtodo->subTodo}}</label>
+                                                                    <button type="button" style="display:none" class="btn btn-primary" id="confirm">
+                                                                        Confirm
+                                                                    </button>
+                                                                </div>
+                                                            <?php } ?>
+                                                            @endforeach
                                                         </div>
                                                         <form action="{{route('addSubchecklist')}}" method="POST">
                                                             @csrf
@@ -554,7 +573,7 @@
                                                         <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
                                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
                                                         <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                                     </form>
+                                                    </form>
                                                 </div>
                                             </div>
                                             @if($hak == true)
@@ -597,11 +616,11 @@
                                                                     </td>
                                                                     <td width="20%" class="justify-content-end">
                                                                         <p class="text-xs font-weight-bold mb-0">{{$komen->name}}</p>
-                                                                        
+
                                                                     </td>
                                                                     <td width="65%" class="justify-content-end">
                                                                         <p class="text-xs font-weight-bold mb-0">{{$komen->body}}</p>
-                                                                       
+
                                                                     </td>
                                                                 </tr>
                                                                 @endif

@@ -66,21 +66,14 @@ class ProjectController extends Controller
             $jenis[$key] = json_decode($find->proses);
         }
 
-        $hak = false;
-        if ($myprofile != null) {
-            if ($myprofile->jabatan == 'Penanggung Jawab') {
-                $hak = true;
-            }
-        } else if ($role == 'admin') {
-            $hak = true;
-        }
-        $subchecklist = DB::table('subchecklists')
-            ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+        $subtodos = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->join('users', 'users.id', '=', 'subtodos.idUser')
             ->where('layanan.idProject', '=', $id)
-            ->select('subchecklists.*')
+            ->select('subtodos.*', 'users.*')
             ->get();
-            // dd($subchecklist);
+        
 
         // Progress
 
@@ -88,16 +81,16 @@ class ProjectController extends Controller
 
         $a = DB::table('checklists')
             ->leftjoin(
-                DB::raw('(SELECT idChecklist, idSubChecklist, COUNT(idSubChecklist) finish 
-                FROM subchecklists
-                WHERE subchecked = true
-                GROUP BY idSubChecklist, idChecklist )
+                DB::raw('(SELECT idChecklist, idsubtodo, COUNT(idsubtodo) finish 
+                FROM subtodos
+                WHERE checked = true
+                GROUP BY idsubtodo, idChecklist )
                 finished'),
                 function ($join) {
                     $join->on('checklists.idChecklist', '=', 'finished.idChecklist');
                 }
             )
-            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
+            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idsubtodo) AS nilai'), DB::raw('COUNT(idsubtodo) AS total'))
             ->where('checklists.idProject', '=', $id)
             ->groupBy('checklists.idChecklist', 'checklists.toDO', 'finished.finish')
             ->get();
@@ -140,12 +133,11 @@ class ProjectController extends Controller
             'id' => $id,
             'checklists' => $checklists,
             'kategori' => $kategori,
-            'subchecklist' => $subchecklist,
+            'subtodos' => $subtodos,
             'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
             'users' => $users,
-            'hak' => $hak,
             'komentar' => $komentar,
             'layanan' => $layanan,
             'jenis' => $jenis,
@@ -251,7 +243,7 @@ class ProjectController extends Controller
             foreach ($request->idPJ as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'notif' => 'Anda telah ditambahkan kedalam project ' . $name,
                     'isRead' => 0
                 ]);
             }
@@ -261,7 +253,7 @@ class ProjectController extends Controller
             foreach ($request->anggota as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project '.$name,
+                    'notif' => 'Anda telah ditambahkan kedalam project ' . $name,
                     'isRead' => 0
                 ]);
             }

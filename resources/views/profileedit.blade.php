@@ -1,10 +1,11 @@
-@if(auth()->user()->role == 'admin')
-@extends('layouts.layout')
-@endif
+<?php
+if (auth()->user()->role == 'admin') {
+    $extend = 'layouts.layout';
+} else if (auth()->user()->role == 'user') {
+    $extend = 'layouts.layoutuser';
+} ?>
 
-@if(auth()->user()->role == 'user')
-@extends('layouts.layoutuser')
-@endif
+@extends($extend)
 
 @section('content')
 <div class="container">

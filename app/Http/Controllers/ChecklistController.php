@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Checklist;
 use App\Comment;
+use App\Jenislayanan;
 use App\Project;
 use App\Subchecklist;
-use App\User;
+use App\Team;
 use App\Kategori;
 use App\Subtodo;
 use Illuminate\Http\Request;
@@ -55,6 +56,14 @@ class ChecklistController extends Controller
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
             ->where('checklists.idProject', '=', $id)
             ->select('subchecklists.*')
+            ->get();
+
+            $subtodos = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->join('users', 'users.id', '=', 'subtodos.idUser')
+            ->where('layanan.idProject', '=', $id)
+            ->select('subtodos.*')
             ->get();
 
         // Progress
@@ -111,17 +120,6 @@ class ChecklistController extends Controller
 
         $kategori = Kategori::all();
 
-<<<<<<< HEAD
-        $komentar  = DB::table('comment')->join('users','comment.komentator','=','users.id')->get();
-            
-        // !!! NANTI DI UNCOMMENT !!!
-            if($project->progres != $jumlah){
-                $p = Project::find($id);
-                $p->progres = $jumlah;
-                $p->save();
-            }
-        // !!! END !!!
-=======
         $komentar = Comment::all();
 
         if ($project->progres != $jumlah) {
@@ -129,15 +127,13 @@ class ChecklistController extends Controller
             $p->progres = $jumlah;
             $p->save();
         }
->>>>>>> affe8e96fd49881882b135b1cea3a789fb6a7474
-
-        // dd($total);
 
         return view('project', [
             'id' => $id,
             'checklists' => $checklists,
             'kategori' => $kategori,
             'subchecklist' => $subchecklist,
+            'subtodo' => $subtodos,
             'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
@@ -239,14 +235,14 @@ class ChecklistController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar  = DB::table('comment')->join('users','comment.komentator','=','users.id')->get();
-            
+        $komentar  = DB::table('comment')->join('users', 'comment.komentator', '=', 'users.id')->get();
+
         // !!! NANTI DI UNCOMMENT !!!
-            if($project->progres != $jumlah){
-                $p = Project::find($id);
-                $p->progres = $jumlah;
-                $p->save();
-            }
+        if ($project->progres != $jumlah) {
+            $p = Project::find($id);
+            $p->progres = $jumlah;
+            $p->save();
+        }
         // !!! END !!!
 
         // dd($total);
@@ -298,24 +294,78 @@ class ChecklistController extends Controller
 
     public function editChecklist($id)
     {
-        $checklist = Checklist::find($id);
-        $string = str_replace(' ', 'T', $checklist->deadline);
-        $checklist->deadline = $string;
-        return view('checklistedit', ['checklist' => $checklist]);
+        $checklist = DB::table('checklists')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('checklists.idChecklist', '=', $id)
+            ->first();
+        $deadline = str_replace(' ', 'T', $checklist->deadline);
+        $checklist->deadline = $deadline;
+        $tglStart = str_replace(' ', 'T', $checklist->tglStart);
+        $checklist->tglStart = $tglStart;
+
+        $proses = Jenislayanan::find($checklist->idKategori);
+        $proses = json_decode($proses->proses);
+
+        $subtodos = Subtodo::all()
+            ->where('idChecklist', '=', $id);
+        if ($subtodos != null) {
+            foreach ($subtodos as $subtodo) {
+                $subdeadline = str_replace(' ', 'T', $subtodo->deadline);
+                $subtodo->deadline = $subdeadline;
+                $substart = str_replace(' ', 'T', $subtodo->start);
+                $subtodo->start = $substart;
+            }
+        }
+
+        $teams = DB::table('teams')
+            ->join('users', 'users.id', '=', 'teams.idUser')
+            ->select('users.name', 'users.id', 'users.posisi')
+            ->where('teams.idProject', '=', $checklist->idProject)
+            ->get();
+
+        return view('checklistedit', ['checklist' => $checklist, 'proses' => $proses, 'teams' => $teams, 'subtodos' => $subtodos]);
     }
 
     public function updateChecklist(Request $request, $id)
     {
         $checklist = Checklist::find($id);
         $checklist->toDO = $request->todo;
+        $checklist->tglStart = $request->tglStart;
+        $checklist->deadline = $request->deadline;
+
         // $checklist->checked = $request->checked;
         // $string = str_replace('T', ' ', $checklist->deadline);
         // $checklist->deadline = $string;
-        $checklist->tglStart = $request->tglStart;
-        $checklist->deadline = $request->deadline;
         // $checklist->linkFile = $request->linkFile;
+
         $checklist->save();
-        return redirect('/checklist' . '/' . $checklist->idProject);
+
+        // edit sub todo yang sudah ada
+        if ($request->subtodo != null) {
+            foreach ($request->subtodo as $key => $value) {
+                $subtodo = Subtodo::find($request->idsubtodo[$key]);
+                $subtodo->subtodo = $request->subtodo[$key];
+                $subtodo->idUser = $request->idUser[$key];
+                $subtodo->start = $request->subtglStart[$key];
+                $subtodo->deadline = $request->subdeadline[$key];
+            }
+        }
+
+        // create subtodo baru
+        if ($request->subtodoNew != null) {
+            foreach ($request->subtodo as $key => $value) {
+                Subtodo::create([
+                    'idChecklist' => $id,
+                    'subtodo' => $request->subtodoNew[$key],
+                    'idUser' =>  $request->idUserNew[$key],
+                    'start' =>  $request->subtglStartNew[$key],
+                    'deadline' =>  $request->subdeadlineNew[$key],
+                    'checked' => false,
+                ]);
+            }
+        }
+
+        return redirect('/project' . '/' . $request->idProject);
     }
 
     public function deleteChecklist($id)

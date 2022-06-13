@@ -186,57 +186,133 @@
                                         <div class="d-flex px-2">
                                             <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></button>
                                             <h6 class="text-dark text-sm mt-1">{{$checklist->toDO}}</h6>
+                                            <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn btn-link mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class=" fas fa-pencil-alt me-2"></i>Edit</a>
+                                            <!-- <a class="btn btn-link mb-0 me-3 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#editchecklist{{$checklist->idChecklist}}"><i class=" fas fa-pencil-alt me-2"></i>Edit</a> -->
                                         </div>
-                                        <div class="table-responsive p-0 mb-4">
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="editchecklist{{$checklist->idChecklist}}" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body p-0">
+                                                        <div class="card card-plain">
+                                                            <div class="card-header pb-0 text-left">
+                                                                <h6 class="font-weight-bolder text-info text-center text-gradient">Edit Checklist</h6>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <!-- <form role="form text-left" action="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="idProject" value="{{$l->idProject}}">
+                                                                    <label>Judul</label>
+                                                                    <div class="input-group-sm mb-3">
+                                                                        <input type="text" class="form-control" placeholder="Judul" name="toDO" value="{{$checklist->toDO}}">
+                                                                    </div>
+                                                                    <div class="row form-group">
+                                                                        <label>Tanggal Start</label>
+                                                                        <div class="input-group-sm mb-3">
+                                                                            <input type="datetime-local" class="form-control" name="tglStart">
+                                                                        </div>
+                                                                        <label>Deadline</label>
+                                                                        <div class="input-group-sm mb-3">
+                                                                            <input type="datetime-local" class="form-control" name="deadline">
+                                                                        </div>
+                                                                    </div>
+                                                                    <label>Tanggal Start</label>
+                                                                    <div class="input-group-sm mb-3">
+                                                                        <input type="datetime-local" class="form-control" name="subtglStart">
+                                                                    </div>
+                                                                    <label>Deadline</label>
+                                                                    <div class="input-group-sm mb-3">
+                                                                        <input type="datetime-local" class="form-control" name="subdeadline">
+                                                                    </div>
+                                                                    <div class="text-center">
+                                                                        <button type="submit" class="btn btn-round bg-gradient-info w-100 mt-4 mb-0">Simpan</button>
+                                                                    </div>
+                                                                </form> -->
+                                                                <!-- <form>
+                                                                <h6 class="text-sm">Layanan</h6>
+                                                                    <div class="input-group-sm">
+                                                                        <label for="example-text-input" class="form-control-label">Judul</label>
+                                                                        <input class="form-control" type="text" name="toDO" value="{{$checklist->toDO}}">
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label for="example-search-input" class="form-control-label">Start</label>
+                                                                                <input class="form-control" name="tglStart" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label class="form-control-label">Deadline</label>
+                                                                                <input class="form-control" name="deadline" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <h6 class="text-sm">To Do List</h6>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label class="form-control-label">Start</label>
+                                                                                <input class="form-control" name="tglStart" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label class="form-control-label">Deadline</label>
+                                                                                <input class="form-control" name="deadline" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label class="form-control-label">Start</label>
+                                                                                <input class="form-control" name="tglStart" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="input-group-sm">
+                                                                                <label class="form-control-label">Deadline</label>
+                                                                                <input class="form-control" name="deadline" type="datetime-local">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Modal -->
+
+                                        <div class="table-responsive px-4 p-0 mb-3">
                                             <table class="table align-items-center justify-content-center mb-0">
-                                                <thead>
+                                                <!-- <thead>
                                                     <th class="text-xs">To do</th>
                                                     <th class="text-xs">Anggota</th>
                                                     <th class="text-xs">Start</th>
                                                     <th class="text-xs">Deadline</th>
-                                                </thead>
+                                                </thead> -->
                                                 <tbody>
-                                                    <!-- @foreach($jenis[$loop->index] as $proses)
+                                                    @foreach($subtodos as $subtodo)
+                                                    @if($subtodo->idChecklist == $checklist->idChecklist)
                                                     <tr>
-                                                        <td class="text-xs px-4">{{$proses->value}} </td>
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                        </td>
-                                                    </tr>
-                                                    @endforeach -->
-                                                    @foreach($subchecklist as $sc)
-                                                    @if($sc->idChecklist == $checklist->idChecklist)
-                                                    <tr>
-                                                        <td class="text-xs px-4">{{$sc->subTodo}} </td>
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                        </td>
-                                                        <td>
-                                                        </td>
+                                                        <td class="text-xs px-4">{{$subtodo->subtodo}} </td>
+                                                        <td class="text-xs px-4">{{$subtodo->name}} </td>
+                                                        <td class="text-xs px-4">{{$subtodo->start}} </td>
+                                                        <td class="text-xs px-4">{{$subtodo->deadline}} </td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center mb-5"><i class="fas fa-arrow-up"></i></button> Buat To do List
-                                        <!-- <ul class="list-group">
-                                            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-                                                <div class="d-flex align-items-center">
-                                                    <p class="text-sm">{{$proses->value}}</p>
-                                                </div>
-                                                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                                                    + $ 2,000
-                                                </div>
-                                                <div class="d-flex align-items-center text-success text-gradient text-sm font-weight-bold">
-                                                    + $ 2,000
-                                                </div>
-                                            </li>
-                                        </ul> -->
+                                        <!-- <div class="d-flex px-2">
+                                            <a class="btn btn-link mb-3" href="javascript:;">Reply</a>
+                                        </div> -->
+                                        <!-- <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 btn-sm d-flex align-items-center justify-content-center mb-5"><i class="fas fa-arrow-up"></i></button> Buat To do List -->
                                         @endif
                                         @endforeach
                                         <!-- <div class="table-responsive p-0">
