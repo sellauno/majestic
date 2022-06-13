@@ -243,7 +243,8 @@ class ProjectController extends Controller
             foreach ($request->idPJ as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project ' . $name,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$client->namaClient,
+                    'url' => '',
                     'isRead' => 0
                 ]);
             }
@@ -253,7 +254,8 @@ class ProjectController extends Controller
             foreach ($request->anggota as $key => $value) {
                 Notification::create([
                     'idUser' => $value,
-                    'notif' => 'Anda telah ditambahkan kedalam project ' . $name,
+                    'notif' => 'Anda telah ditambahkan kedalam project '.$client->namaClient,
+                    'url' => '',
                     'isRead' => 0
                 ]);
             }
