@@ -60,7 +60,7 @@ if (auth()->user()->role == 'admin') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($subtodos != null)
+                                    @if(!$subtodos->isEmpty())
                                     @foreach($subtodos as $subtodo)
                                     <input type="hidden" name="idsubtodo[]" value="{{$subtodo->idsubtodo}}">
                                     <tr>

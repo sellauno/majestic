@@ -37,7 +37,7 @@
                 @foreach($projects as $project)
                 <tr>
                   <td>
-                    <a href="{{route('projectUser', ['id' => $project->idProject])}}">
+                    <a href="{{route('project', ['id' => $project->idProject])}}">
                       <div class="d-flex px-2">
                         <!-- <div>
                         <img src="{{asset('btsr/assets/img/small-logos/logo-spotify.svg')}}" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
