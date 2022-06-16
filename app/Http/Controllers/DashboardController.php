@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Checklist;
 use App\Client;
-use App\Project;
 use App\Link;
 use Google\Service\ServiceControl\Auth;
 use Illuminate\Http\Request;

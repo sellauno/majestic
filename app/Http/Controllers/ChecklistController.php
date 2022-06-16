@@ -58,7 +58,7 @@ class ChecklistController extends Controller
             ->select('subchecklists.*')
             ->get();
 
-            $subtodos = DB::table('subtodos')
+        $subtodos = DB::table('subtodos')
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
             ->join('users', 'users.id', '=', 'subtodos.idUser')
@@ -323,7 +323,13 @@ class ChecklistController extends Controller
             ->where('teams.idProject', '=', $checklist->idProject)
             ->get();
 
-        return view('checklistedit', ['checklist' => $checklist, 'proses' => $proses, 'teams' => $teams, 'subtodos' => $subtodos]);
+        // dd($checklist, $proses, $teams, $subtodos);
+        return view('checklistedit', [
+            'checklist' => $checklist,
+            'proses' => $proses,
+            'teams' => $teams,
+            'subtodos' => $subtodos
+        ]);
     }
 
     public function updateChecklist(Request $request, $id)
@@ -365,7 +371,7 @@ class ChecklistController extends Controller
             }
         }
 
-        return redirect('/project' . '/' . $request->idProject);
+        return redirect('/detailproject' . '/' . $request->idProject);
     }
 
     public function deleteChecklist($id)
@@ -480,6 +486,16 @@ class ChecklistController extends Controller
         $subtodo = Subtodo::find($id);
         $subtodo->delete();
 
+        return redirect()->back();
+    }
+
+    public function checkedSubtodo($id, $idproject)
+    {
+        $subtodo = Subtodo::find($id);
+        dd($subtodo);
+        $subtodo->checked = true;
+        $subtodo->save();
+        
         return redirect()->back();
     }
     // END SUB TO DO

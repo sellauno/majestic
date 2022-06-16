@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Checklist;
 use App\File;
 use App\Folder;
+use App\Layanan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,11 @@ class FileController extends Controller
 {
     public function addFile($id)
     {
-        $todo = Checklist::find($id);
+        $todo = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->first();
+            
         $foldermain = DB::table('folders')
             ->where('idProject', '=', $todo->idProject)
             ->where('kategori', '=', 'main')
@@ -86,7 +91,7 @@ class FileController extends Controller
             ]);
         }
 
-        return redirect('/checklist' . '/' . $request->idProject);
+        return redirect('/project' . '/' . $request->idProject);
     }
 
     public function newFile()

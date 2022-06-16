@@ -32,7 +32,7 @@
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Kategori</label></div>
                                 <div class="col-12 col-md-6">
-                                    <select id="kategori" name="kategori" class="dropdown form-control"">
+                                    <select id="kategori" name="kategori" class="dropdown form-control" required>
                                     <option value="" disabled selected hidden>Pilih Kategori</option>
                                         <option value=" file" id="inlineCheckbox2">File</option>
                                         <option value="gambar" id="inlineCheckbox3">Gambar</option>
@@ -47,10 +47,10 @@
                                 <div class="col col-md-2"><label>File</label></div>
                                 <div class="col-12 col-md-6">
                                     <input type="file" class="form-control" name="fileUpload" placeholder="File" aria-label="File">
-                                    <!-- <p class="text-xs">Jika file terlalu besar (lebih dari 5MB), upload file ke folder di bawah sesuai dengan kategori. Salin link file, kemudian masukkan ke dalam form di bawah</p> -->
+                                    <p class="text-xs">Jika file terlalu besar (lebih dari 5MB), upload file ke folder di bawah sesuai dengan kategori. Salin link file, kemudian masukkan ke dalam form di bawah</p>
                                 </div>
                             </div>
-                            <!-- <div class="row form-group">
+                            <div class="row form-group">
                                 <div class="col col-md-2"><label>Folder</label></div>
                                 <div class="col-12 col-md-8">
                                     <div class="input-group">
@@ -63,9 +63,9 @@
                             <div class="row form-group">
                                 <div class="col col-md-2"><label>Link File</label></div>
                                 <div class="col-12 col-md-8">
-                                    <input type="text" class="form-control" name="linkFile" placeholder="Link File" required>
+                                    <input type="url" class="form-control" name="linkFile" placeholder="Link File">
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="text-end">
                                 <button type="submit" class="btn bg-gradient-dark w-30 my-4 mb-2">Simpan</button>
                             </div>
