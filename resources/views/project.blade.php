@@ -211,12 +211,13 @@
                                                 <input type="hidden" name="id" value="{{$id}}">
                                                 <div class="input-group">
                                                     <span class="input-group-text text-body">
-                                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                                        
+                                                        <i class="fas fa-search" aria-hidden="true" type="submit" value="CARI"></i>
                                                     </span>
-                                                    <input type="text" class="form-control" placeholder="Type here...">
+                                                    <input type="text" class="form-control col-4" placeholder="Type here...">
                                                 </div>
                                                 <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value=""> -->
-                                                <input type="submit" value="CARI">
+                                                <!-- <input type="submit" value="CARI"> -->
                                             </form>
                                             <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
                                         </div>
