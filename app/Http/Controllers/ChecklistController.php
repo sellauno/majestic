@@ -338,12 +338,6 @@ class ChecklistController extends Controller
         $checklist->toDO = $request->todo;
         $checklist->tglStart = $request->tglStart;
         $checklist->deadline = $request->deadline;
-
-        // $checklist->checked = $request->checked;
-        // $string = str_replace('T', ' ', $checklist->deadline);
-        // $checklist->deadline = $string;
-        // $checklist->linkFile = $request->linkFile;
-
         $checklist->save();
 
         // edit sub todo yang sudah ada
@@ -489,10 +483,10 @@ class ChecklistController extends Controller
         return redirect()->back();
     }
 
-    public function checkedSubtodo($id, $idproject)
+    public function checkedSubtodo($id)
     {
         $subtodo = Subtodo::find($id);
-        dd($subtodo);
+        // dd($subtodo);
         $subtodo->checked = true;
         $subtodo->save();
         

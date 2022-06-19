@@ -29,7 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard')->middleware('auth');
-Route::get('/dashboarduser', 'DashboardController@dashboardUser')->name('dashboardUser')->middleware('auth');
+Route::get('/dashboarduser', 'DashboardController@dashboardUser')->name('dashboarduser')->middleware('auth');
 
 // Client
 Route::get('/clients', 'ClientController@allClient')->name('allClient')->middleware('auth');
@@ -71,7 +71,7 @@ Route::get('/checklist/user/{id}', 'ChecklistController@checklistsUser')->name('
 Route::post('/addtodo', 'ChecklistController@createSubtodo')->name('addSubtodo')->middleware('auth');
 Route::post('/updatetodo', 'ChecklistController@updateSubtodo')->name('updateSubtodo')->middleware('auth');
 Route::get('/deletetodo/{id}', 'ChecklistController@deleteSubtodo')->name('deleteSubtodo')->middleware('auth');
-Route::get('/checked/{id}/{idproject}', 'ChecklistController@checkedSubtodo')->name('checked')->middleware('auth');
+Route::get('/checked/{id}', 'ChecklistController@checkedSubtodo')->name('checked')->middleware('auth');
 
 // Sub Checklist
 Route::post('/addsubchecklist', 'ChecklistController@createSubchecklist')->name('addSubchecklist')->middleware('auth');

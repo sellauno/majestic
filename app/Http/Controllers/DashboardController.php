@@ -72,11 +72,17 @@ class DashboardController extends Controller
         $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
         $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
         $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
-        $checklists = DB::table('subchecklists')
-            ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+        // $checklists = DB::table('subchecklists')
+        //     ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+        //     ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+        //     ->where('subchecklists.idUser', '=', $idUser)->get();
+
+        $checklists = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
-            ->where('subchecklists.idUser', '=', $idUser)->get();
-            
+            ->select('subtodos.*', 'layanan.idProject')
+            ->where('subtodos.idUser', '=', $idUser)->get();
+
         return view('dashboarduser', [
             'projects' => $projects,
             'clients' => $clients,

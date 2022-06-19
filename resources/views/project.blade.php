@@ -210,7 +210,7 @@ if (auth()->user()->role == 'admin') {
                                     </div>
                                 </div>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div id="collapseOne" class="accordion-collapse collapse show bg-blue" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                     <div class="row">
@@ -224,7 +224,7 @@ if (auth()->user()->role == 'admin') {
                                                         <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                                         <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
                                                         <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                        <input class="form-check-input todocheck" type="checkbox" data-id="{{$subtodo->idsubtodo}}" id="checkedSubtodo" onclick="checksubtodo(<?php $subtodo->idsubtodo?>,<?php $id?>)"@if($subtodo->checked == true) checked @endif>
+                                                        <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}})" @if($subtodo->checked == true) checked @endif>
                                                         <label class="custom-control-label text-xs <?php if (
                                                                                                         $subtodo->deadline < now()
                                                                                                     ) {
@@ -233,6 +233,28 @@ if (auth()->user()->role == 'admin') {
                                                         <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                             Confirm
                                                         </button>
+                                                        <script type="text/javascript">
+                                                            function confirm($id) {
+                                                                Swal.fire({
+                                                                    title: 'Tandai tugas selesai?',
+                                                                    text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai",
+                                                                    type: 'warning',
+                                                                    showCancelButton: true,
+                                                                    confirmButtonColor: '#3085d6',
+                                                                    cancelButtonColor: '#d33',
+                                                                    confirmButtonText: 'Ya'
+                                                                }).then((result) => {
+                                                                    if (result.value) {
+                                                                        Swal.fire(
+                                                                            'Berhasil!'.$idChecklist,
+                                                                            'Tugas selesai',
+                                                                            'success'
+                                                                        )
+                                                                        window.location = "/checked/" + $id;
+                                                                    }
+                                                                })
+                                                            };
+                                                        </script>
                                                         <p class="text-xs">{{$subtodo->deadline}}
                                                             &nbsp;
                                                             @if($hak == true)
@@ -321,7 +343,7 @@ if (auth()->user()->role == 'admin') {
                                     </div>
                                 </div>
                             </h2>
-                            <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show bg-gray-100 " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
                                     <div class="row">
@@ -414,6 +436,36 @@ if (auth()->user()->role == 'admin') {
                                                 </div>
                                             </form> -->
                                     @endif
+                                    <div class="card mb-4">
+                                        <div class="card-header pb-0">
+                                            <h6>Komentar</h6>
+                                        </div>
+                                        <div class="card-body px-0 pt-0 pb-2">
+                                            <div class="table-responsive p-0">
+                                                <table class="table align-items-center mb-0">
+                                                    <tbody>
+                                                        @foreach($komentar as $komen)
+                                                        @if($komen->iduser == $user->id)
+                                                        <tr>
+                                                            <td width="15%" class="align-middle text-center">
+                                                                <span class="text-secondary text-xs font-weight-bold">{{$komen->created_at}}</span>
+                                                            </td>
+                                                            <td width="20%" class="justify-content-end">
+                                                                <p class="text-xs font-weight-bold mb-0">{{$komen->name}}</p>
+
+                                                            </td>
+                                                            <td width="65%" class="justify-content-end">
+                                                                <p class="text-xs font-weight-bold mb-0">{{$komen->body}}</p>
+
+                                                            </td>
+                                                        </tr>
+                                                        @endif
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -532,21 +584,21 @@ if (auth()->user()->role == 'admin') {
 <script src="{{asset('sweetalert/bootstrap.min.js.download')}}"></script>
 <script src="{{asset('sweetalert/sweetalert2.min.js.download')}}"></script>
 <script type="text/javascript">
-    function checksubtodo($id, idProject) {
-        Swal.fire({
-            title: 'Tandai tugas selesai?',
-            text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai!" + $id,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya'
-        }).then((result) => {
-            if (result.value) {
-                window.location = "/checked/".$id;
-            }
-        })
-    }
+    // function checksubtodo($id) {
+    //     Swal.fire({
+    //         title: 'Tandai tugas selesaii?',
+    //         text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesaiiii!" + $id,
+    //         type: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Ya'
+    //     }).then((result) => {
+    //         if (result.value) {
+    //             window.location = "/checked/".$id;
+    //         }
+    //     })
+    // }
     $(document).ready(function() {
         $("#confirm").click(function($id) {
             Swal.fire({

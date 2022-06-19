@@ -72,14 +72,6 @@
                           <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
                           <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
                         </ul>
-                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
-                          Action
-                        </button>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                          <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                          <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                        </ul>
                         </div>
                   </td>
                 </tr>
@@ -111,12 +103,12 @@
                 <input type="hidden" name="idProject" value="{{$project->idProject}}">
                 <input type="hidden" name="idUser" value="{{$idUser}}">
                 <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->finish == true) checked disabled @endif>
+                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->checked == true) checked disabled @endif>
                 <label class="custom-control-label <?php if (
                                                       $checklist->deadline < now()
                                                     ) {
                                                       echo "text-danger";
-                                                    } ?>" for="todocheck">{{$checklist->subTodo}}</label>
+                                                    } ?>" for="todocheck">{{$checklist->subtodo}}</label>
                 <p id="text" style="display:none">Checkbox is CHECKED!</p>
                 <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
                     Confirm

@@ -10286,6 +10286,10 @@ fieldset:disabled .btn {
   background-color: #17c1e8 !important;
 }
 
+.bg-blue {
+  background-color: #EBF4FA !important;
+}
+
 .bg-warning {
   background-color: #fbcf33 !important;
 }
