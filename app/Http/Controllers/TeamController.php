@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subtodo;
 use App\Team;
 use App\User;
 use Illuminate\Http\Request;
@@ -33,9 +34,14 @@ class TeamController extends Controller
         return redirect('/editproject' . '/' . $request->idProject);
     }
 
-    public function deleteTeam($id)
+    public function deleteTeam(Request $request)
     {
-        $team = Team::find($id);
+        $team = Team::find($request->id);
+        $subtodos = Subtodo::all()->where('idUser', '=', $team->idUser);
+        foreach($subtodos as $subtodo){
+            $subtodo->idUser = $request->idUser;
+            $subtodo->save();
+        }
         $idProject = $team->idProject;
         $team->delete();
         return redirect('/editproject' . '/' . $idProject);

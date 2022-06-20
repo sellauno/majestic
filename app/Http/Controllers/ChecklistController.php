@@ -334,6 +334,7 @@ class ChecklistController extends Controller
 
     public function updateChecklist(Request $request, $id)
     {
+        // edit checklist
         $checklist = Checklist::find($id);
         $checklist->toDO = $request->todo;
         $checklist->tglStart = $request->tglStart;
@@ -353,7 +354,7 @@ class ChecklistController extends Controller
 
         // create subtodo baru
         if ($request->subtodoNew != null) {
-            foreach ($request->subtodo as $key => $value) {
+            foreach ($request->subtodoNew as $key => $value) {
                 Subtodo::create([
                     'idChecklist' => $id,
                     'subtodo' => $request->subtodoNew[$key],

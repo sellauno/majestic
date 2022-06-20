@@ -64,7 +64,7 @@
                                     <div class="dropdown">
                                         <select id="idKategori" name="idKategori[]" class="form-control">
                                             @foreach($kategori as $kat)
-                                            <option value="{{$kat->idKategori}}">{{$kat->kategori}}</option>
+                                            <option value="{{$kat->idKategori}}" @if($kat->idKategori == $l->idKategori) selected @endif>{{$kat->kategori}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -73,7 +73,7 @@
                                     <input type="number" name="jumlah[]" value="{{$l->jumlah}}" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required>
                                 </td>
                                 <td>
-                                    <span><a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a></span>
+                                    <span><a class="btn btn-link text-danger text-gradient px-3 mb-0" data-bs-toggle="modal" data-bs-target="#modal-notification" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a></span>
                                 </td>
                             </tr>
                             @endforeach
@@ -131,7 +131,43 @@
                                         <a class="btn btn-link text-dark px-3 mb-0" href="{{route('editTeam', ['id' => $team->idTeam])}}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
                                     </td>
                                     <td class="align-middle">
-                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteTeam', ['id' => $team->idTeam])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                        <button class="btn btn-link text-danger text-gradient px-3 mb-0" data-bs-toggle="modal" data-bs-target="#modal-notification{{$team->idTeam}}"><i class="far fa-trash-alt me-2"></i>Delete</button>
+                                        <form action="{{route('deleteTeam')}}" method="POST">
+                                            @csrf
+                                            <div class="modal fade" id="modal-notification{{$team->idTeam}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification{{$team->idTeam}}" aria-hidden="true">
+                                                <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                                                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="py-3 text-center">
+                                                                <i class="ni ni-bell-55 ni-3x"></i>
+                                                                <h4 class="text-gradient text-danger mt-4">Hapus Anggota?</h4>
+                                                                <span>Pindahkan pekerjaan user <b>{{$team->name}}</b> ke salah satu anggota</span>
+                                                                <div class="dropdown mt-1">
+                                                                    <input type="hidden" name="id" value="{{$team->idTeam}}">
+                                                                    <select name="idUser" class="form-control">
+                                                                        @foreach($teams as $t)
+                                                                        @if($t->idUser != $team->idUser)  
+                                                                        <option value="{{$t->idUser}}">{{$t->name}}</option>
+                                                                        @endif
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-white">Ok, Got it</button>
+                                                            <button type="button" class="btn btn-link" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -140,6 +176,8 @@
                     </div>
                     <!-- End Table Team -->
                     <br>
+
+                    <!-- Form Tambah Anggota -->
                     <form role="form text-left" action="{{route('addTeam')}}" method="POST">
                         @csrf
                         <div class="row form-group">
@@ -174,6 +212,7 @@
                         </div>
                         <!-- END TEAM -->
                     </form>
+                    <!-- End Form Tambah Anggota -->
 
                     @endforeach
                 </div>
@@ -181,6 +220,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $("#inlineCheckbox1").click(function() {
         $(":checkbox").not(this).prop("disabled", this.checked);
@@ -247,5 +287,44 @@
 
     var buttonSave = document.getElementById('button-save');
     buttonSave.addEventListener('click', onClickSaveButton);
+</script>
+<script type="text/javascript">
+    // function checksubtodo($id) {
+    //     Swal.fire({
+    //         title: 'Tandai tugas selesaii?',
+    //         text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesaiiii!" + $id,
+    //         type: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Ya'
+    //     }).then((result) => {
+    //         if (result.value) {
+    //             window.location = "/checked/".$id;
+    //         }
+    //     })
+    // }
+    $(document).ready(function() {
+        $("#deleteTeam").click(function($id) {
+            Swal.fire({
+                title: 'Hapus Anggota?',
+                text: "Tugas yang!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya'
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire(
+                        'Berhasil!',
+                        'Notifikasi telah terkirim',
+                        'success'
+                    )
+                    window.location = "/send-mail/".$id;
+                }
+            })
+        });
+    });
 </script>
 @endsection

@@ -273,28 +273,12 @@ class ProjectController extends Controller
 
     public function detailProject($id)
     {
-        $idUser = auth()->user()->id;
-        $role = auth()->user()->role;
         $project = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
             ->where('projects.idProject', '=', $id)
             ->first();
         $project->tglMulai = date('d/m/Y', strtotime($project->tglMulai));
         $project->tglSelesai = date('d/m/Y', strtotime($project->tglSelesai));
-        $links = DB::table('links')
-            ->join('users', 'users.id', '=', 'links.idUser')
-            ->where('links.idProject', '=', $id)
-            ->get();
-        $users = DB::table('users')
-            ->join('teams', 'users.id', '=', 'teams.idUser')
-            ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '!=', $idUser)
-            ->get();
-        $myprofile = DB::table('users')
-            ->join('teams', 'users.id', '=', 'teams.idUser')
-            ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '=', $idUser)
-            ->first();
         $layanan = DB::table('layanan')
             ->leftJoin('jenislayanan', 'jenislayanan.idKategori', '=', 'layanan.idKategori')
             ->where('layanan.idProject', '=', $id)
@@ -318,55 +302,66 @@ class ProjectController extends Controller
             ->get();
 
 
-        // Progress
+        // progress bar
 
-        $sum = 100 / $checklists->count();
+        $l = 100 / $layanan->count();
 
-        $a = DB::table('checklists')
+        $c = DB::table('checklists')
+            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select(DB::raw('COUNT(checklists.idChecklist) as c'), DB::raw($l . '/ COUNT(checklists.idChecklist) as pc'), 'layanan.idLayanan')
+            ->groupBy('layanan.idLayanan')
+            ->get();
+
+        foreach ($c as $key => $value) {
+            $c[$key]->presentaseL = 0;
+        }
+
+        $e = DB::table('checklists')
             ->leftjoin(
-                DB::raw('(SELECT idChecklist, idsubtodo, COUNT(idsubtodo) finish 
-                FROM subtodos
-                WHERE checked = true
-                GROUP BY idsubtodo, idChecklist )
-                finished'),
+                DB::raw('(SELECT idChecklist, COUNT(*) finish 
+            FROM subtodos
+            WHERE checked = true
+            GROUP BY idChecklist )
+            finished'),
                 function ($join) {
                     $join->on('checklists.idChecklist', '=', 'finished.idChecklist');
                 }
             )
-            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idsubtodo) AS nilai'), DB::raw('COUNT(idsubtodo) AS total'))
-            ->where('checklists.idProject', '=', $id)
-            ->groupBy('checklists.idChecklist', 'checklists.toDO', 'finished.finish')
+            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->leftjoin('subtodos', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->select('checklists.idChecklist', 'finished.finish', DB::raw('COUNT(idsubtodo) AS total'))
+            ->where('layanan.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'finished.finish')
             ->get();
 
-        $total = [];
-        $jumlah = 0;
-        foreach ($a as $key => $all) {
-            $total[$key] = $all->finish * $all->nilai;
-            $jumlah += $total[$key];
+        $sum = 0;
+        foreach ($checklists as $key => $value) {
+            $presentase = $e[$key]->total == 0 ? 0 : $e[$key]->finish / $e[$key]->total * 100;
+            foreach ($c as $d) {
+                if ($d->idLayanan == $checklists[$key]->idLayanan) {
+                    $sum += $presentase == 0 ? 0 : $l / $d->c * ($presentase  / 100);
+                    $d->presentaseL += $presentase / $d->c;
+                }
+            }
+            $checklists[$key]->presentase = round($presentase);
         }
 
-        $x = DB::table('checklists')
-            ->where('idProject', '=', $id)
-            ->select('idProject', DB::raw('COUNT(*) AS finish'))
-            ->where('finish', true)
-            ->groupBy('idProject');
+        foreach ($layanan as $key => $value) {
+            foreach ($c as $d) {
+                if ($d->idLayanan == $layanan[$key]->idLayanan) {
+                    $layanan[$key]->presentase = round($d->presentaseL);
+                }
+            }
+        }
 
-        $b = DB::table('projects')
-            ->leftJoinSub($x, 'checklists', function ($join) {
-                $join->on('checklists.idProject', '=', 'projects.idProject');
-            })
-            ->select('finish')
-            ->get();
+        // dd($l, $c, $e, $layanan, $sum);
+        // end progress bar
 
-        // End Progress
 
-        $kategori = Kategori::all();
-
-        $komentar = Comment::all();
-
-        if ($project->progres != $jumlah) {
+        if ($project->progres != $sum) {
             $p = Project::find($id);
-            $p->progres = $jumlah;
+            $p->progres = $sum;
             $p->save();
         }
 
@@ -375,16 +370,10 @@ class ProjectController extends Controller
         return view('projectdetail', [
             'id' => $id,
             'checklists' => $checklists,
-            'kategori' => $kategori,
             'subtodos' => $subtodos,
-            'myprofile' => $myprofile,
             'project' => $project,
-            'links' => $links,
-            'users' => $users,
-            'komentar' => $komentar,
             'layanan' => $layanan,
-            'jenis' => $jenis,
-            'total' => $total
+            'jenis' => $jenis
         ]);
     }
     public function addProject()

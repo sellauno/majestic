@@ -78,10 +78,10 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <div class="d-flex align-items-center justify-content-center">
-                                            <span class="me-2 text-xs font-weight-bold">60%</span>
+                                            <span class="me-2 text-xs font-weight-bold">{{$l->presentase}}%</span>
                                             <div>
                                                 <div class="progress">
-                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                                                    <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$l->presentase}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$l->presentase}}%;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,6 +188,16 @@
                                             <h6 class="text-dark text-sm mt-1">{{$checklist->toDO}}</h6>
                                             <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn btn-link mb-0 me-3 btn-sm d-flex align-items-center justify-content-center"><i class=" fas fa-pencil-alt me-2"></i>Edit</a>
                                             <!-- <a class="btn btn-link mb-0 me-3 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#editchecklist{{$checklist->idChecklist}}"><i class=" fas fa-pencil-alt me-2"></i>Edit</a> -->
+                                            <div class="progress-wrapper">
+                                                <div class="progress-info">
+                                                    <div class="progress-percentage">
+                                                        <span class="text-sm font-weight-bold">{{$checklist->presentase}}%</span>
+                                                    </div>
+                                                </div>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{$checklist->presentase}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$checklist->presentase}}%;"></div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <!-- Modal -->

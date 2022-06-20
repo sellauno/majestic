@@ -87,7 +87,7 @@ Route::post('/cari', 'ProjectController@cari')->name('cari')->middleware('auth')
 Route::post('/createteam', 'TeamController@createTeam')->name('addTeam')->middleware('auth');
 Route::get('/editteam/{id}', 'TeamController@editTeam')->name('editTeam')->middleware('auth');
 Route::post('/updateteam/{id}', 'TeamController@updateTeam')->name('updateTeam')->middleware('auth');
-Route::get('/deleteteam/{id}', 'TeamController@deleteTeam')->name('deleteTeam')->middleware('auth');
+Route::post('/deleteteam', 'TeamController@deleteTeam')->name('deleteTeam')->middleware('auth');
 
 // File
 Route::get('/addfile/{id}', 'FileController@addFile')->name('addFile')->middleware('auth');
