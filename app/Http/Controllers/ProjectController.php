@@ -670,12 +670,6 @@ class ProjectController extends Controller
 
         $komentar = Comment::all();
 
-        // if ($project->progres != $jumlah) {
-        //     $p = Project::find($id);
-        //     $p->progres = $jumlah;
-        //     $p->save();
-        // }
-
         return view('project', [
             'id' => $id,
             'checklists' => $checklists,
