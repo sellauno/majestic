@@ -79,6 +79,16 @@ class ProjectController extends Controller
             ->select('subtodos.*', 'checklists.toDO')
             ->get();
 
+        $files = DB::table('files')
+            ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('files.*');
+
+        $file = $files->where('kategori', '=', 'file')->get();
+        $video = $files->where('kategori', '=', 'video')->get();
+        $gambar = $files->where('kategori', '=', 'gambar')->get();
+
         // Progress
         $sum = 0;
         if ($checklists->count() != 0) {
@@ -146,7 +156,11 @@ class ProjectController extends Controller
             'users' => $users,
             'hak' => $hak,
             'komentar' => $komentar,
-            'total' => $total
+            'total' => $total,
+            'file' => $file,
+            'gambar' => $gambar,
+            'video' => $video,
+            'cari' => ''
         ]);
     }
 
@@ -199,6 +213,31 @@ class ProjectController extends Controller
             ->where('layanan.idProject', '=', $id)
             ->select('subtodos.*', 'checklists.toDO')
             ->get();
+
+        $files = DB::table('files')
+            ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('files.*')
+            ->get();
+
+        // $file = $files->where('kategori', '=', 'file')->get();
+        // $video = $files->where('kategori', '=', 'video')->get();
+        // $gambar = $files->where('kategori', '=', 'gambar')->get();
+
+        $file = array();
+        $video = array();
+        $gambar = array();
+
+        foreach($files as $f){
+            if($f->kategori == 'file'){
+                $file[] = $f;
+            }else if($f->kategori == 'video'){
+                $video[] = $f;
+            }else if($f->kategori == 'gambar'){
+                $gambar[] = $f;
+            }
+        }
 
         // Progress
         $sum = 0;
@@ -267,7 +306,11 @@ class ProjectController extends Controller
             'users' => $users,
             'hak' => $hak,
             'komentar' => $komentar,
-            'total' => $total
+            'total' => $total,
+            'file' => $file,
+            'gambar' => $gambar,
+            'video' => $video,
+            'cari' => ''
         ]);
     }
 
@@ -682,7 +725,8 @@ class ProjectController extends Controller
             'users' => $users,
             'hak' => $hak,
             'komentar' => $komentar,
-            'total' => $total
+            'total' => $total,
+            'cari' => 'show'
         ]);
     }
 }

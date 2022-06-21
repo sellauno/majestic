@@ -13,7 +13,7 @@
 
     @if($myprofile != null)
     <div class="row my-4">
-        <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+        <div class="col-lg-8 col-md-6 mb-md-0 mb-4 ">
             <div class="card h-100 shadow-none">
                 <div class="card-header pb-0">
                     <div class="row">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-2">
+                <div class="card-body px-5 pb-2">
                     <div>
                         @foreach ($subtodos as $subtodo)
                         <?php if ($subtodo->idUser == $myprofile->id) { ?>
@@ -124,87 +124,85 @@
     @endif
 
     <!-- Teams Accordion -->
-<div class="row">
-    <div class="col-12">
-        <div class="card  mb-4">
-            <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">Teams</h6>
-            </div>
-            <div class="card-body pt-4 p-3">
-                <div class="accordion" id="accordionExample">
-                    @foreach($users as $user)
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}" aria-expanded="true" aria-controls="collapseOne">
-                                {{$user->name}}
-                                <div class="ms-auto text-end position-absolute end-3 me-3">
-                                    <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
-                                    <p class="text-xs text-secondary mb-0">{{$user->posisi}}</p>
+    <div class="row">
+        <div class="col-12">
+            <div class="card  mb-4">
+                <div class="card-header pb-0 px-3">
+                    <h6 class="mb-0">Teams</h6>
+                </div>
+                <div class="card-body pt-4 p-3">
+                    <div class="accordion" id="accordionExample">
+                        @foreach($users as $user)
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}" aria-expanded="true" aria-controls="collapseOne">
+                                    {{$user->name}}
+                                    <div class="ms-auto text-end position-absolute end-3 me-3">
+                                        <p class="text-xs font-weight-bold mb-0">{{$user->jabatan}}</p>
+                                        <p class="text-xs text-secondary mb-0">{{$user->posisi}}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </h2>
-                        <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show bg-gray-100 " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div>
-                                            @foreach ($subtodos as $subtodo)
-                                            <?php if ($subtodo->idUser == $user->id) { ?>
-                                                <div class="form-check">
-                                                    <input type="hidden" name="idProject" value="{{$id}}">
-                                                    <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                    <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                                    <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                    <input class="form-check-input" type="checkbox" value="" @if($subtodo->checked == true) checked @endif disabled>
-                                                    <label class="custom-control-label text-xs <?php if (
-                                                                                                    $subtodo->deadline < now()
-                                                                                                ) {
-                                                                                                    echo "text-danger";
-                                                                                                } ?>" for="todocheck">{{$subtodo->subtodo}} {{$subtodo->toDO}}</label>
-                                                    <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                        Confirm
-                                                    </button>
-                                                    <p class="text-xs">{{$subtodo->deadline}}
-                                                        &nbsp;
-                                                        @if($hak == true)
-                                                        <a href="{{route('addFile', ['id' => $subtodo->idsubtodo])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                            <i class="fa fa-paperclip text-xs"></i>
-                                                        </a> &nbsp;
-                                                        <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                            </h2>
+                            <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show bg-gray-100 " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>
+                                                @foreach ($subtodos as $subtodo)
+                                                <?php if ($subtodo->idUser == $user->id) { ?>
+                                                    <div class="form-check">
+                                                        <input type="hidden" name="idProject" value="{{$id}}">
+                                                        <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                        <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
+                                                        <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
+                                                        <input class="form-check-input" type="checkbox" value="" @if($subtodo->checked == true) checked @endif disabled>
+                                                        <label class="custom-control-label text-xs <?php if (
+                                                                                                        $subtodo->deadline < now()
+                                                                                                    ) {
+                                                                                                        echo "text-danger";
+                                                                                                    } ?>" for="todocheck">{{$subtodo->subtodo}} {{$subtodo->toDO}}</label>
+                                                        <button type="button" style="display:none" class="btn btn-primary" id="confirm">
+                                                            Confirm
+                                                        </button>
+                                                        <p class="text-xs">{{$subtodo->deadline}}
+                                                            &nbsp;
+                                                            @if($hak == true)
+                                                            <a href="{{route('addFile', ['id' => $subtodo->idsubtodo])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                                                                <i class="fa fa-paperclip text-xs"></i>
+                                                            </a> &nbsp;
+                                                            <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                                                                         <i class="fa fa-pencil text-xs"></i>
                                                                     </a> &nbsp;
                                                                     <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
                                                                         <i class="fa fa-trash text-xs"></i>
                                                                     </a> -->
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                            <?php } ?>
-                                            @endforeach
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                <?php } ?>
+                                                @endforeach
+                                            </div>
                                         </div>
+                                        <!-- komentar -->
                                     </div>
-                                    <!-- komentar -->
                                 </div>
                             </div>
                         </div>
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- End Teams Accordion -->
+    <!-- End Teams Accordion -->
 
     <!-- Table Files -->
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Files</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2 text-center">
+                    <h6 class="mb-2">Files</h6>
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1" role="tablist">
                             <li class="nav-item">
@@ -214,21 +212,76 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Video
+                                    <i class="ni ni-album-2 text-sm me-2"></i> Gambar
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Story
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Reels
+                                    <i class="ni ni-button-play text-sm me-2"></i> Video
                                 </a>
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div class="card-body px-4 pt-0 pb-2 text-center">
+                    <div class="nav-wrapper position-relative">
+                        <ul class="nav nav-pills nav-fill p-1">
+                            <li class="nav-item">
+                                <!-- <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-icons" role="tab" aria-controls="preview" aria-selected="true">
+                                    <i class="ni ni-badge text-sm me-2"></i> File
+                                </a> -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($file as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($gambar as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($video as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <td>ABC</td>
+                            <td>DEF</td>
+                            <td>GHI</td>
+                            <td>JKL</td>
+                            <td>MNO</td>
+                        </table>
+                    </div> -->
                 </div>
             </div>
         </div>

@@ -19,7 +19,7 @@
                     <div class="accordion" id="accordionLink">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
+                                <div class="accordion-button collapsed {{$cari}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                     <h6>Link</h6>
                                     <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
                                         @csrf

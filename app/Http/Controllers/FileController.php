@@ -43,8 +43,8 @@ class FileController extends Controller
             ->first();
 
         $file = Storage::disk("google")->url($foldermain->folderId . '/' . $folderfile->folderId);
-        $gambar = Storage::disk("google")->url($foldermain->folderId . '/' . $folderfile->folderId);
-        $video = Storage::disk("google")->url($foldermain->folderId . '/' . $folderfile->folderId);
+        $gambar = Storage::disk("google")->url($foldermain->folderId . '/' . $foldergambar->folderId);
+        $video = Storage::disk("google")->url($foldermain->folderId . '/' . $foldervideo->folderId);
 
         return view('fileadd', [
             'todo' => $todo,
@@ -79,6 +79,7 @@ class FileController extends Controller
 
             File::create([
                 'idChecklist' => $request->idChecklist,
+                'kategori' => $request->kategori,
                 'url' => $link,
                 'namaFile' => $name
             ]);
@@ -86,6 +87,7 @@ class FileController extends Controller
             $name = $time . '' . $request->judul;
             File::create([
                 'idChecklist' => $request->idChecklist,
+                'kategori' => $request->kategori,
                 'url' => $request->linkFile,
                 'namaFile' => $name
             ]);

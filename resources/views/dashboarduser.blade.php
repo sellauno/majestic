@@ -50,10 +50,10 @@
                   </td>
                   <td class="align-middle text-center">
                     <div class="d-flex align-items-center justify-content-center">
-                      <span class="me-2 text-xs font-weight-bold">60%</span>
+                      <span class="me-2 text-xs font-weight-bold">{{$project->progres}}%</span>
                       <div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                          <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{$project->progres}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$project->progres}}%;"></div>
                         </div>
                       </div>
                     </div>
@@ -83,9 +83,75 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="container-fluid py-4">
+  <!-- <div class="row mt-4">
+    @foreach($projects as $project)
+    <div class="col-lg-4 mb-lg-0 mb-4">
+      <div class="card z-index-2 mb-2">
+        <div class="card-header pb-0 px-3">
+          <h6 class="mb-0">To Do List</h6>
+        </div>
+        <div class="card-body pt-4 p-3">
+          <ul class="list-group">
+            <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+              <div class="d-flex flex-column">
+                <h6 class="mb-3 text-sm">{{$project->namaClient}}</h6>
+                @foreach($checklists as $checklist)
+                <?php if ($project->idProject == $checklist->idProject) { ?>
+                  <div class="form-check">
+                    <input type="hidden" name="idProject" value="{{$project->idProject}}">
+                    <input type="hidden" name="idUser" value="{{$idUser}}">
+                    <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->checked == true) checked disabled @endif>
+                    <label class="custom-control-label <?php if (
+                                                          $checklist->deadline < now()
+                                                        ) {
+                                                          echo "text-danger";
+                                                        } ?>" for="todocheck">{{$checklist->subtodo}}</label>
+                    <p id="text" style="display:none">Checkbox is CHECKED!</p>
+                    <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
+                      Confirm
+                    </a>
+                    <script type="text/javascript">
+                      function confirm($id) {
+                        Swal.fire({
+                          title: 'Tandai tugas selesai?',
+                          text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
+                          type: 'warning',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Ya'
+                        }).then((result) => {
+                          if (result.value) {
+                            Swal.fire(
+                              'Berhasil!'.$idChecklist,
+                              'Notifikasi telah terkirim',
+                              'success'
+                            )
+                            window.location = "/send-mail/" + $id;
+                          }
+                        })
+                      };
+                    </script>
+                    <p class="text-xs">{{$checklist->deadline}}
+                      &nbsp;
+                      <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
+                        <i class="fa fa-paperclip text-xs"></i>
+                      </a> &nbsp;
+                    </p>
+                  </div>
+                <?php } ?>
+                @endforeach
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    @endforeach
+
+  </div> -->
+
   <div class="card">
     <div class="card-header pb-0 px-3">
       <h6 class="mb-0">To Do List</h6>
@@ -111,29 +177,29 @@
                                                     } ?>" for="todocheck">{{$checklist->subtodo}}</label>
                 <p id="text" style="display:none">Checkbox is CHECKED!</p>
                 <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
-                    Confirm
+                  Confirm
                 </a>
                 <script type="text/javascript">
-                    function confirm($id) {
-                      Swal.fire({
-                        title: 'Tandai tugas selesai?',
-                        text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya'
-                      }).then((result) => {
-                        if (result.value) {
-                          Swal.fire(
-                            'Berhasil!'.$idChecklist,
-                            'Notifikasi telah terkirim',
-                            'success'
-                          )
-                          window.location = "/send-mail/"+$id;
-                        }
-                      })
-                    };
+                  function confirm($id) {
+                    Swal.fire({
+                      title: 'Tandai tugas selesai?',
+                      text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Ya'
+                    }).then((result) => {
+                      if (result.value) {
+                        Swal.fire(
+                          'Berhasil!'.$idChecklist,
+                          'Notifikasi telah terkirim',
+                          'success'
+                        )
+                        window.location = "/send-mail/" + $id;
+                      }
+                    })
+                  };
                   // $(document).ready(function() {
                   //   $("#confirm").click(function($id) {
                   //     var idChecklist = $(this).data('id');
