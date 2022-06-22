@@ -40,7 +40,7 @@ Route::post('/updateclient/{id}', 'ClientController@updateClient')->name('update
 Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient')->middleware('auth');
 
 // Project
-Route::get('/projects', 'ProjectController@allProject')->name('allProject')->middleware('auth');
+Route::get('/projects', 'ProjectController@allProject')->name('projects')->middleware('auth');
 Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth');
 Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth');
@@ -98,6 +98,7 @@ Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('au
 
 // Report
 Route::get('/report', 'ReportController@generateReport');
+Route::get('/report/{id}', 'ReportController@report')->name('report')->middleware('auth');
 Route::get('/report1', 'ReportController@generateReport1');
 
 // Layanan
@@ -220,3 +221,7 @@ Route::get('test1', function () {
         }
     }
 });
+
+Route::get('/lapor', function () {
+    return view('laporan');
+})->name('lapor');

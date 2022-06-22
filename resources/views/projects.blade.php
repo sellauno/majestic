@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Project')
 
-@section('dashboard', 'active')
+@section('project', 'active')
 
 @section('breadcrumb')
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Project</li>
 @endsection
 
 @section('content')
@@ -18,9 +18,9 @@
             <div class="col-6 d-flex align-items-center">
               <h6 class="mb-0">Projects</h6>
             </div>
-            <!-- <div class="col-6 text-end">
+            <div class="col-6 text-end">
               <a class="btn bg-gradient-primary mb-0" href="{{route('addProject')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
-            </div> -->
+            </div>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -95,6 +95,9 @@
                           <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
                         </ul>
                         </div>
+                  </td>
+                  <td>
+                  <a href="{{route('report', ['id' => $project->idProject])}}" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4"><i class="fas fa-file-pdf text-lg me-1"></i>Report</a>
                   </td>
                 </tr>
                 @endforeach

@@ -59,7 +59,7 @@
                     </div>
                   </td>
                   <td class="align-middle">
-                    <?php if ($loop->iteration == count($projects)) { ?>
+                    <?php if ($loop->iteration == count($projects)  || $loop->iteration == count($projects) - 1) { ?>
                       <div class="dropup">
                       <?php } else { ?>
                         <div class="dropdown">
