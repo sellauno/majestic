@@ -11,6 +11,116 @@
 @section('content')
 <div class="container-fluid py-4">
 
+    <!-- Link -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="accordion" id="accordionLink">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <div class="accordion-button collapsed {{$cari}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
+                                    <h6>Link</h6>
+                                    <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{$id}}">
+                                        <!-- <form method="post" action="{{route('cari')}}"> -->
+                                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                                            <div class="input-group">
+                                                <span class="input-group-text text-body">
+                                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                                </span>
+                                                <input type="text" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
+                                            </div>
+                                        </div>
+                                        <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value="">
+                                        <input type="submit" value="CARI"> -->
+                                    </form>
+                                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                                </div>
+                                <!-- <input type="submit" value="CARI"> -->
+                                <!-- </form> -->
+                                <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
+                        </div>
+                        </h2>
+                        <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
+                            <div class="accordion-body">
+                                <table class="table align-items-center mb-0 text-xs">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal Upload</th>
+                                            <th>Kategori</th>
+                                            <th>Judul</th>
+                                            <th>Link</th>
+                                            <th>User</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($links as $link)
+                                    <tr>
+                                        <td>{{$link->tglUpload}}</td>
+                                        <td>{{$link->kategori}}</td>
+                                        <td>{{$link->judul}}</td>
+                                        <td>
+                                            <!-- {{$link->link}} -->
+                                            <input type="text" id="copy_{{ $link->link }}" value="{{ $link->link }}" readonly>
+                                            <button value="copy" onclick="copyToClipboard('copy_{{ $link->link }}')">Copy!</button>
+                                        </td>
+                                        <td>{{$link->name}}</td>
+                                    </tr>
+                                    @endforeach
+                                </table>
+                                <form action="{{route('createLink')}}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <table id="links" class="mb-2">
+                                            <input type="hidden" name="idProject" value={{$id}}>
+                                            <input type="hidden" name="idUser" value={{$id}}>
+                                            <td>
+                                                <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglUpload"></div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm">
+                                                    <select id="kategori" name="kategori" class="dropdown form-control" placeholder="Pilih Kategori">
+                                                        <option value="reels" id="inlineCheckbox1">Reels</option>
+                                                        <option value="tiktok" id="inlineCheckbox2">Tiktok</option>
+                                                        <option value="feeds" id="inlineCheckbox3">Feeds</option>
+                                                        <option value="stories" id="inlineCheckbox4">Stories</option>
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Judul" name="judul"></div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Link" name="link"></div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm">
+                                                    <select id="idUser" name="idUser" class="form-control select2">
+                                                        @if($myprofile != null)
+                                                        <option value="{{$myprofile->id}}">{{$myprofile->name}}</option>
+                                                        @endif
+                                                        @foreach($users as $user)
+                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
+                                            </td>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Link -->
+
     @if($myprofile != null)
     <div class="row my-4">
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4 ">
@@ -165,20 +275,7 @@
                                                         <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                             Confirm
                                                         </button>
-                                                        <p class="text-xs">{{$subtodo->deadline}}
-                                                            &nbsp;
-                                                            @if($hak == true)
-                                                            <a href="{{route('addFile', ['id' => $subtodo->idsubtodo])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                <i class="fa fa-paperclip text-xs"></i>
-                                                            </a> &nbsp;
-                                                            <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-pencil text-xs"></i>
-                                                                    </a> &nbsp;
-                                                                    <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-trash text-xs"></i>
-                                                                    </a> -->
-                                                            @endif
-                                                        </p>
+                                                        <p class="text-xs">{{$subtodo->deadline}}</p>
                                                     </div>
                                                 <?php } ?>
                                                 @endforeach
@@ -244,7 +341,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                            <div class="table-responsive">
+                                <div class="table-responsive">
                                     <table class="table mb-0">
                                         @foreach($gambar as $f)
                                         <tr>
@@ -258,7 +355,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                            <div class="table-responsive">
+                                <div class="table-responsive">
                                     <table class="table mb-0">
                                         @foreach($video as $f)
                                         <tr>

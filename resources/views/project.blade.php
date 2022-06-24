@@ -28,7 +28,7 @@
                                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                         <div class="input-group">
                                             <span class="input-group-text text-body">
-                                                <i class="fas fa-search" aria-hidden="true" ></i>
+                                                <i class="fas fa-search" aria-hidden="true"></i>
                                             </span>
                                             <input type="text" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
                                             </div>
@@ -36,7 +36,7 @@
                                         <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value="">
                                         <input type="submit" value="CARI"> -->
                                     </form>
-                                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
+                                    <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
                                 </div>
                                 <!-- <input type="submit" value="CARI"> -->
                                 <!-- </form> -->
@@ -254,20 +254,7 @@
                                                                 })
                                                             };
                                                         </script>
-                                                        <p class="text-xs">{{$subtodo->deadline}}
-                                                            &nbsp;
-                                                            @if($hak == true)
-                                                            <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                <i class="fa fa-paperclip text-xs"></i>
-                                                            </a> &nbsp;
-                                                            <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-pencil text-xs"></i>
-                                                                    </a> &nbsp;
-                                                                    <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-trash text-xs"></i>
-                                                                    </a> -->
-                                                            @endif
-                                                        </p>
+                                                        <p class="text-xs">{{$subtodo->deadline}}</p>
                                                     </div>
                                                 <?php } ?>
                                                 @endforeach
@@ -364,20 +351,7 @@
                                                         <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                             Confirm
                                                         </button>
-                                                        <p class="text-xs">{{$subtodo->deadline}}
-                                                            &nbsp;
-                                                            @if($hak == true)
-                                                            <a href="{{route('addFile', ['id' => $subtodo->idsubtodo])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                <i class="fa fa-paperclip text-xs"></i>
-                                                            </a> &nbsp;
-                                                            <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-pencil text-xs"></i>
-                                                                    </a> &nbsp;
-                                                                    <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-trash text-xs"></i>
-                                                                    </a> -->
-                                                            @endif
-                                                        </p>
+                                                        <p class="text-xs">{{$subtodo->deadline}}</p>
                                                     </div>
                                                 <?php } ?>
                                                 @endforeach
@@ -481,9 +455,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Files</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2 text-center">
+                    <h6 class="mb-2">Files</h6>
                     <div class="nav-wrapper position-relative end-0">
                         <ul class="nav nav-pills nav-fill p-1" role="tablist">
                             <li class="nav-item">
@@ -493,21 +465,76 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Video
+                                    <i class="ni ni-album-2 text-sm me-2"></i> Gambar
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Story
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#dashboard-tabs-icons" role="tab" aria-controls="code" aria-selected="false">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Reels
+                                    <i class="ni ni-button-play text-sm me-2"></i> Video
                                 </a>
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div class="card-body px-4 pt-0 pb-2 text-center">
+                    <div class="nav-wrapper position-relative">
+                        <ul class="nav nav-pills nav-fill p-1">
+                            <li class="nav-item">
+                                <!-- <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#profile-tabs-icons" role="tab" aria-controls="preview" aria-selected="true">
+                                    <i class="ni ni-badge text-sm me-2"></i> File
+                                </a> -->
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($file as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($gambar as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                            <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        @foreach($video as $f)
+                                        <tr>
+                                            <td>
+                                                <!-- <span class="text-xs font-weight-bold"></span> -->
+                                                <a href="{{$f->url}}" target="_blank" class="text-xs font-weight-bold">{{$f->namaFile}}</a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="table-responsive p-0">
+                        <table class="table align-items-center justify-content-center mb-0">
+                            <td>ABC</td>
+                            <td>DEF</td>
+                            <td>GHI</td>
+                            <td>JKL</td>
+                            <td>MNO</td>
+                        </table>
+                    </div> -->
                 </div>
             </div>
         </div>

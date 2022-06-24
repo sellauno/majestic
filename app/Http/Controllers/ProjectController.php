@@ -123,11 +123,22 @@ class ProjectController extends Controller
             ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
             ->where('layanan.idProject', '=', $id)
-            ->select('files.*');
+            ->select('files.*')
+            ->get();
 
-        $file = $files->where('kategori', '=', 'file')->get();
-        $video = $files->where('kategori', '=', 'video')->get();
-        $gambar = $files->where('kategori', '=', 'gambar')->get();
+        $file = array();
+        $video = array();
+        $gambar = array();
+
+        foreach ($files as $f) {
+            if ($f->kategori == 'file') {
+                $file[] = $f;
+            } else if ($f->kategori == 'video') {
+                $video[] = $f;
+            } else if ($f->kategori == 'gambar') {
+                $gambar[] = $f;
+            }
+        }
 
         // Progress
         $sum = 0;
@@ -269,12 +280,12 @@ class ProjectController extends Controller
         $video = array();
         $gambar = array();
 
-        foreach($files as $f){
-            if($f->kategori == 'file'){
+        foreach ($files as $f) {
+            if ($f->kategori == 'file') {
                 $file[] = $f;
-            }else if($f->kategori == 'video'){
+            } else if ($f->kategori == 'video') {
                 $video[] = $f;
-            }else if($f->kategori == 'gambar'){
+            } else if ($f->kategori == 'gambar') {
                 $gambar[] = $f;
             }
         }
