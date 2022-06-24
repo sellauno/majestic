@@ -51,15 +51,27 @@ class ReportController extends Controller
         ->first();
         $project->tglMulai = date('j F Y', strtotime($project->tglMulai));
         $project->tglSelesai = date('j F Y', strtotime($project->tglSelesai));
+        $project->harga = number_format($project->harga, 0, ',', '.');
 
         $layanan = DB::table('layanan')
             ->leftJoin('jenislayanan', 'jenislayanan.idKategori', '=', 'layanan.idKategori')
             ->where('layanan.idProject', '=', $id)
             ->get();
 
-        $teams = Team::all()->where('idProject', '=', $id);
+        $teams = DB::table('users')
+        ->join('teams', 'users.id', '=', 'teams.idUser')
+        ->where('teams.idProject', '=', $id)
+        ->get();
 
-        $pdf = PDF::loadView('laporan', compact('project', 'layanan', 'teams'))
+        $subtodos = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->join('users', 'users.id', '=', 'subtodos.idUser')
+            ->where('layanan.idProject', '=', $id)
+            ->select('subtodos.*', 'checklists.toDO')
+            ->get();
+
+        $pdf = PDF::loadView('laporan', compact('project', 'layanan', 'teams', 'subtodos'))
             ->setPaper('a4', 'potrait');;
 
         return $pdf->stream('itsolutionstuff.pdf');

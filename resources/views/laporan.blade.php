@@ -23,13 +23,24 @@
 
         .table-report {
             width: 100%;
-            margin-top: 150px;
-            margin-left: 50px;
-            margin-right: 50px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            /* margin-left: 50px;
+            margin-right: 50px; */
         }
 
-        h1, h4, span {
-            text-align : center;
+        .table-report td, th {
+            border: 1px solid;
+            border-color: black;
+            /* margin-top: 150px;
+            margin-left: 50px;
+            margin-right: 50px; */
+        }
+
+        h1,
+        h4,
+        span {
+            text-align: center;
         }
     </style>
 </head>
@@ -47,21 +58,38 @@
                 <td>{{$project->harga}}</td>
             </tr>
         </table>
-        <table id="table-report">
+        <table class="table-report">
             <thead>
-                <tr>
-                    <th>{{$project->namaClient}}</th>
-                </tr>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                </tr>
-
+                <th>No</th>
+                <th>Deskripsi</th>
+                <th>Jumlah</th>
             </thead>
             <tbody>
-                <td>1. </td>
-                <td>Project A</td>
+                @foreach($layanan as $l)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$l->kategori}}</td>
+                    <td>{{$l->jumlah}}</td>
+                </tr>
+                @endforeach
             </tbody>
+        </table>
+        <table class="table-report">
+            @foreach($teams as $team)
+            <thead>
+                <th text-align="left" colspan="2">{{$team->name}}</th>
+            </thead>
+            <tbody>
+                @foreach($subtodos as $todo)
+                @if($todo->idUser == $team->idUser)
+                <tr>
+                    <td>{{$todo->subtodo}}</td>
+                    <td>{{$todo->updated_at}}</td>
+                </tr>
+                @endif
+                @endforeach
+            </tbody>
+            @endforeach
         </table>
     </div>
 </body>
