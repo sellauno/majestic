@@ -225,3 +225,5 @@ Route::get('test1', function () {
 Route::get('/lapor', function () {
     return view('laporan');
 })->name('lapor');
+
+Route::post('/notifications/read', 'NotificationsController@read')->name('notifications')->middleware('auth');

@@ -18,6 +18,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('btsr/assets/img/logo/logo.png')}}">
   <link rel="icon" type="image/png" href="{{asset('btsr/assets/img/logo/logo.png')}}">
   <title>
@@ -43,7 +44,22 @@
   crossorigin="anonymous"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  
+  <style>
+    .notifications .badge {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 5px 10px;
+      border-radius: 50%;
+      background: red;
+      color: white;
+    }
+
+    .bg-lavender {
+      background-color: lavender
+    }
+
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -120,6 +136,7 @@
                 </li>
               </ul>
             </li>
+            <x-notifications></x-notifications>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">

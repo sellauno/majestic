@@ -521,49 +521,49 @@ class ProjectController extends Controller
 
         $client = Client::find($request->idClient);
         $name = $insert->idProject . '_' . $client->namaClient;
-        Storage::disk('google')->makeDirectory($name);
-        $details = Storage::disk("google")->getMetadata($name);
-        $idFolderProject = $details['path'];
+        // Storage::disk('google')->makeDirectory($name);
+        // $details = Storage::disk("google")->getMetadata($name);
+        // $idFolderProject = $details['path'];
 
-        Folder::create([
-            'folderId' => $idFolderProject,
-            'idProject' => $insert->idProject,
-            'kategori' => 'main'
-        ]);
+        // Folder::create([
+        //     'folderId' => $idFolderProject,
+        //     'idProject' => $insert->idProject,
+        //     'kategori' => 'main'
+        // ]);
 
         $file = 'file_' . $name;
         $video = 'video_' . $name;
         $gambar = 'gambar_' . $name;
 
-        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
-        $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
-        $idFolderFile = $fileDetail['path'];
+        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
+        // $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
+        // $idFolderFile = $fileDetail['path'];
 
-        Folder::create([
-            'folderId' => $idFolderFile,
-            'idProject' => $insert->idProject,
-            'kategori' => 'file'
-        ]);
+        // Folder::create([
+        //     'folderId' => $idFolderFile,
+        //     'idProject' => $insert->idProject,
+        //     'kategori' => 'file'
+        // ]);
 
-        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
-        $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
-        $idFolderVideo = $videoDetail['path'];
+        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
+        // $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
+        // $idFolderVideo = $videoDetail['path'];
 
-        Folder::create([
-            'folderId' => $idFolderVideo,
-            'idProject' => $insert->idProject,
-            'kategori' => 'video'
-        ]);
+        // Folder::create([
+        //     'folderId' => $idFolderVideo,
+        //     'idProject' => $insert->idProject,
+        //     'kategori' => 'video'
+        // ]);
 
-        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
-        $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
-        $idFolderGambar = $gambarDetail['path'];
+        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
+        // $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
+        // $idFolderGambar = $gambarDetail['path'];
 
-        Folder::create([
-            'folderId' => $idFolderGambar,
-            'idProject' => $insert->idProject,
-            'kategori' => 'gambar'
-        ]);
+        // Folder::create([
+        //     'folderId' => $idFolderGambar,
+        //     'idProject' => $insert->idProject,
+        //     'kategori' => 'gambar'
+        // ]);
 
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
