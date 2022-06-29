@@ -121,73 +121,7 @@
     </div>
     <!-- End Link -->
 
-    <!-- Kategori  -->
-    <!-- <div class="row">
-                <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="accordion" id="accordionKategori">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseKategori" aria-expanded="true" aria-controls="collapseKategori">
-                                            <h6>Kategori</h6>
-                                            <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
-                                        </div>
-                                    </h2>
-                                    <div id="collapseKategori" class="accordion-collapse collapse" aria-labelledby="headingKategori" data-bs-parent="#accordionKategori">
-                                        <div class="accordion-body">
-                                            <table class="table align-items-center mb-0 text-xs">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Kategori</th>
-                                                        <th>Jumlah</th>
-                                                    </tr>
-                                                </thead>
-                                                @foreach($kategori as $kategoria)
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{$kategoria->kategori}}</td>
-                                                        <td>{{$kategoria->jumlah}}</td>
-                                                        <td>
-                                                            <a class="btn btn-link text-danger text-xxs text-gradient px-3 mb-0" href="{{route('deleteKategori', ['id' => $kategoria->id])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                @endforeach
-                                            </table>
-                                            <form action="{{route('createKategori')}}" method="POST">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <table id="kategori" class="mb-2">
-                                                        <input type="hidden" value="{{$id}}" name="idProject">
-                                                        <td>
-                                                            <div class="input-group input-group-sm">
-                                                                <select id="kategori" name="kategori" class="dropdown form-control" placeholder="Pilih Kategori">
-                                                                    <option value="reels" id="inlineCheckbox1">Reels</option>
-                                                                    <option value="tiktok" id="inlineCheckbox2">Tiktok</option>
-                                                                    <option value="feeds" id="inlineCheckbox3">Feeds</option>
-                                                                    <option value="stories" id="inlineCheckbox4">Stories</option>
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Jumlah" name="jumlah"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
-                                                        </td>
-                                                    </table>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-    <!-- End Kategori -->
+    
 
     <!-- Teams Accordion -->
     <div class="row">
@@ -258,20 +192,7 @@
                                                     </div>
                                                 <?php } ?>
                                                 @endforeach
-                                            </div>
-                                            <!-- <form action="{{route('addSubchecklist')}}" method="POST">
-                                                        @csrf
-                                                        <table id="tickets{{$subtodo->idChecklist}}">
-                                                            <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                                            <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                        </table>
-                                                    </form>
-                                                    <div id="create-ticket-buttons">
-                                                        <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$subtodo->idChecklist}})">
-                                                            <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
-                                                        </button>
-                                                    </div> -->
+                                           
                                         </div>
                                         <!-- komentar -->
                                         @if($hak == true)
@@ -291,27 +212,7 @@
                                     <form action="{{route('addChecklist')}}" method="POST">
                                         <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                         @csrf
-                                        <!-- <div class="form-group">
-                                                    <table>
-                                                        <input type="hidden" name="idProject" value={{$id}}>
-                                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            <div class="input-group input-group-sm">Tambah List &nbsp;</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="tglStart"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
-                                                        </td>
-
-                                                    </table>
-                                                </div> -->
+                                      
                                     </form>
                                 </div>
                             </div>
@@ -356,19 +257,6 @@
                                                 <?php } ?>
                                                 @endforeach
                                             </div>
-                                            <!-- <form action="{{route('addSubchecklist')}}" method="POST">
-                                                        @csrf
-                                                        <table id="tickets{{$subtodo->idChecklist}}">
-                                                            <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                                            <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                            <input type="hidden" name="idProject" value="{{$id}}">
-                                                        </table>
-                                                    </form>
-                                                    <div id="create-ticket-buttons">
-                                                        <button class="btn btn-link text-secondary mb-0 " onclick="tambahTicket({{$subtodo->idChecklist}})">
-                                                            <i class="fa fa-plus-circle text-xs"></i> Tambah Sub list
-                                                        </button>
-                                                    </div> -->
                                         </div>
                                         <!-- komentar -->
                                         @if($hak == true)
@@ -386,28 +274,7 @@
                                         @endif
                                     </div>
                                     @if($hak == true)
-                                    <!-- <form action="{{route('addChecklist')}}" method="POST">
-                                                <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <table>
-                                                        <input type="hidden" name="idProject" value={{$id}}>
-                                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            <div class="input-group input-group-sm">Tambah List</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="text" name="toDO"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><input class="form-control" type="datetime-local" name="deadline"></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="input-group input-group-sm"><button type="submit" class="btn btn-outline-success text-secondary mb-0" data-container="body" data-animation="true"> Save </button></div>
-                                                        </td>
-
-                                                    </table>
-                                                </div>
-                                            </form> -->
+                                   
                                     @endif
                                     <div class="card mb-4">
                                         <div class="card-header pb-0">
