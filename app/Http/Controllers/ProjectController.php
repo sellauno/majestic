@@ -205,7 +205,9 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
 
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
@@ -784,7 +786,10 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
+            
         $files = DB::table('files')
             ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')

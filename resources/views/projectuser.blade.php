@@ -146,7 +146,7 @@
                                 <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                 <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
                                 <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}})" @if($subtodo->checked == true) checked @endif>
+                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}}); this.checked=!this.checked;" @if($subtodo->checked == true) checked @endif>
                                 <label class="custom-control-label text-xs <?php if (
                                                                                 $subtodo->deadline < now()
                                                                             ) {
@@ -269,32 +269,85 @@
                             <div id="collapseOne-{{$user->id}}" class="accordion-collapse collapse show bg-gray-100 " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div>
-                                                @foreach ($subtodos as $subtodo)
-                                                <?php if ($subtodo->idUser == $user->id) { ?>
-                                                    <div class="form-check">
-                                                        <input type="hidden" name="idProject" value="{{$id}}">
-                                                        <input type="hidden" name="idUser" value="{{$user->id}}">
-                                                        <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                                        <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                        <input class="form-check-input" type="checkbox" value="" @if($subtodo->checked == true) checked @endif disabled>
-                                                        <label class="custom-control-label text-xs <?php if (
-                                                                                                        $subtodo->deadline < now()
-                                                                                                    ) {
-                                                                                                        echo "text-danger";
-                                                                                                    } ?>" for="todocheck">{{$subtodo->subtodo}} {{$subtodo->toDO}}</label>
-                                                        <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                            Confirm
-                                                        </button>
-                                                        <p class="text-xs">{{$subtodo->deadline}}</p>
+                                    <div class="row my-4">
+                                        <div class="col-lg-8 col-md-6 mb-md-0 mb-4 ">
+                                            <div class="card h-100 shadow-none">
+                                                <div class="card-header pb-0">
+                                                    <h6>To Do List</h6>
+                                                </div>
+                                                <div class="card-body px-5 pb-2">
+                                                    <div>
+                                                        @foreach ($subtodos as $subtodo)
+                                                        <?php if ($subtodo->idUser == $user->id) { ?>
+                                                            <div class="form-check">
+                                                                <input type="hidden" name="idProject" value="{{$id}}">
+                                                                <input type="hidden" name="idsubtodo" id="idsubtodo" value="{{$subtodo->idsubtodo}}">
+                                                                <input type="hidden" name="idUser" value="{{$user->id}}">
+                                                                <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
+                                                                <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
+                                                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}})" @if($subtodo->checked == true) checked @endif disabled>
+                                                                <label class="custom-control-label text-xs <?php if (
+                                                                                                                $subtodo->deadline < now()
+                                                                                                            ) {
+                                                                                                                echo "text-danger";
+                                                                                                            } ?>" for="todocheck">{{$subtodo->subtodo}} </label>
+                                                                <button type="button" style="display:none" class="btn btn-primary" id="confirm">
+                                                                    Confirm
+                                                                </button>
+                                                                <script type="text/javascript">
+                                                                    function confirm($id) {
+                                                                        Swal.fire({
+                                                                            title: 'Tandai tugas selesai?',
+                                                                            text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai",
+                                                                            type: 'warning',
+                                                                            showCancelButton: true,
+                                                                            confirmButtonColor: '#3085d6',
+                                                                            cancelButtonColor: '#d33',
+                                                                            confirmButtonText: 'Ya'
+                                                                        }).then((result) => {
+                                                                            if (result.value) {
+                                                                                Swal.fire(
+                                                                                    'Berhasil!'.$idChecklist,
+                                                                                    'Tugas selesai',
+                                                                                    'success'
+                                                                                )
+                                                                                window.location = "/checked/" + $id;
+                                                                            }
+                                                                        })
+                                                                    };
+                                                                </script>
+                                                                <p class="text-xs">{{$subtodo->deadline}} </p>
+                                                            </div>
+                                                        <?php } ?>
+                                                        @endforeach
                                                     </div>
-                                                <?php } ?>
-                                                @endforeach
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- komentar -->
+
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="card h-100 shadow-none">
+                                                <div class="card-header pb-0">
+                                                    <h6>Komentar</h6>
+                                                </div>
+                                                <div class="card-body p-3">
+                                                    <ul class="list-group">
+                                                        @foreach($komentar as $komen)
+                                                        @if($komen->iduser == $user->id)
+                                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                                            <div class="d-flex align-items-start flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm">{{$komen->name}}</h6>
+                                                                <p class="mb-0 text-xs">{{$komen->body}}</p>
+                                                                <span class="text-secondary font-weight-bold text-xxs mt-1 mb-0">{{$komen->created_at}}</span>
+                                                            </div>
+                                                            <!-- <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a> -->
+                                                        </li>
+                                                        @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
