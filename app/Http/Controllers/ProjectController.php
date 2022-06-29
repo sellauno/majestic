@@ -785,6 +785,25 @@ class ProjectController extends Controller
         $kategori = Kategori::all();
 
         $komentar = Comment::all();
+        $files = DB::table('files')
+            ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('files.*')
+            ->get();
+        $file = array();
+        $video = array();
+        $gambar = array();
+
+        foreach ($files as $f) {
+            if ($f->kategori == 'file') {
+                $file[] = $f;
+            } else if ($f->kategori == 'video') {
+                $video[] = $f;
+            } else if ($f->kategori == 'gambar') {
+                $gambar[] = $f;
+            }
+        }
 
         return view('project', [
             'id' => $id,
@@ -794,6 +813,9 @@ class ProjectController extends Controller
             'subtodos' => $subtodos,
             'myprofile' => $myprofile,
             'project' => $project,
+            'file' => $file,
+            'gambar' => $gambar,
+            'video' => $video,
             'links' => $links,
             'users' => $users,
             'hak' => $hak,
