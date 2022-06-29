@@ -209,7 +209,21 @@
                             </p> -->
                 </div>
                 <div class="card-body p-3">
-                    <div class="timeline timeline-one-side">
+                    <ul class="list-group">
+                        @foreach($komentar as $komen)
+                        @if($komen->iduser == $myprofile->id)
+                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                            <div class="d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{$komen->name}}</h6>
+                                <p class="mb-0 text-xs">{{$komen->body}}</p>
+                                <span class="text-secondary font-weight-bold text-xxs mt-1 mb-0">{{$komen->created_at}}</span>
+                            </div>
+                            <!-- <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a> -->
+                        </li>
+                        @endif
+                        @endforeach
+                    </ul>
+                    <!-- <div class="timeline timeline-one-side">
                         @foreach($komentar as $komen)
                         @if($komen->iduser == $myprofile->id)
                         <div class="timeline-block mb-3">
@@ -223,10 +237,9 @@
                                 <span class="text-secondary font-weight-bold text-xxs mt-1 mb-0">{{$komen->created_at}}</span>
                             </div>
                         </div>
-
                         @endif
                         @endforeach
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

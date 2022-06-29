@@ -1,11 +1,11 @@
-@extends('layouts.layout')
+@extends('layouts.layoutuser')
 
-@section('title', 'Project')
+@section('title', 'Dashboard')
 
 @section('project', 'active')
 
 @section('breadcrumb')
-<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Project</li>
+<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
 @endsection
 
 @section('content')
@@ -18,6 +18,9 @@
             <div class="col-6 d-flex align-items-center">
               <h6 class="mb-0">Projects</h6>
             </div>
+            <!-- <div class="col-6 text-end">
+              <a class="btn bg-gradient-primary mb-0" href="{{route('addProject')}}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Project</a>
+            </div> -->
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -27,6 +30,9 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Client</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Layanan</th>
+                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tiktok</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Feeds</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stories</th> -->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
                   <th></th>
                 </tr>
@@ -35,7 +41,7 @@
                 @foreach($projects as $project)
                 <tr>
                   <td>
-                    <a href="{{route('project', ['id' => $project->idProject])}}">
+                    <a href="{{route('projectUser', ['id' => $project->idProject])}}">
                       <div class="d-flex px-2">
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">{{$project->namaClient}}</h6>
@@ -78,8 +84,7 @@
                           <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
                         </ul>
                         <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
-                          Action
+                         Action
                         </button>
                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                           <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
@@ -97,4 +102,32 @@
     </div>
   </div>
 </div>
+<script src="{{asset('sweetalert/jquery.min.js.download')}}"></script>
+<script src="{{asset('sweetalert/bootstrap.min.js.download')}}"></script>
+<script src="{{asset('sweetalert/sweetalert2.min.js.download')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // $("#confirm").click(function() {
+    //   var idChecklist = $(this).data('id');
+    //   Swal.fire({
+    //     title: 'Tandai tugas selesai?',
+    //     text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
+    //     type: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     confirmButtonText: 'Ya'
+    //   }).then((result) => {
+    //     if (result.value) {
+    //       Swal.fire(
+    //         'Berhasil!',
+    //         'Notifikasi telah terkirim',
+    //         'success'
+    //       )
+    //       window.location = "/send-mail/".$idChecklist;
+    //     }
+    //   })
+    // });
+  });
+</script>
 @endsection

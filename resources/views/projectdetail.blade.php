@@ -2,7 +2,7 @@
 
 @section('title', $project->namaClient)
 
-@section('dashboard', 'active')
+@section('project', 'active')
 
 @section('breadcrumb')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Project</a></li>

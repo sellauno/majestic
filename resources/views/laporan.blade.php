@@ -77,7 +77,7 @@
         <table class="table-report">
             @foreach($teams as $team)
             <thead>
-                <th text-align="left" colspan="2">{{$team->name}}</th>
+                <th text-align="left" colspan="3">{{$team->name}}</th>
             </thead>
             <tbody>
                 @foreach($subtodos as $todo)
@@ -85,6 +85,7 @@
                 <tr>
                     <td>{{$todo->subtodo}}</td>
                     <td>{{$todo->updated_at}}</td>
+                    <td>{{$todo->keterangan}}</td>
                 </tr>
                 @endif
                 @endforeach

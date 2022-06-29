@@ -41,6 +41,7 @@ Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteC
 
 // Project
 Route::get('/projects', 'ProjectController@allProject')->name('projects')->middleware('auth');
+Route::get('/projects/user', 'ProjectController@projectsUser')->name('projectsUser')->middleware('auth');
 Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth');
 Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth');

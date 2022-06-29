@@ -46,9 +46,9 @@ class ReportController extends Controller
         // ];
 
         $project = DB::table('projects')
-        ->join('clients', 'projects.idClient', '=', 'clients.idClient')
-        ->where('projects.idproject', '=', $id)
-        ->first();
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.idproject', '=', $id)
+            ->first();
         $project->tglMulai = date('j F Y', strtotime($project->tglMulai));
         $project->tglSelesai = date('j F Y', strtotime($project->tglSelesai));
         $project->harga = number_format($project->harga, 0, ',', '.');
@@ -59,9 +59,9 @@ class ReportController extends Controller
             ->get();
 
         $teams = DB::table('users')
-        ->join('teams', 'users.id', '=', 'teams.idUser')
-        ->where('teams.idProject', '=', $id)
-        ->get();
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->get();
 
         $subtodos = DB::table('subtodos')
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
@@ -70,6 +70,14 @@ class ReportController extends Controller
             ->where('layanan.idProject', '=', $id)
             ->select('subtodos.*', 'checklists.toDO')
             ->get();
+
+        foreach ($subtodos as $subtodo) {
+            if ($subtodo->updated_at > $subtodo->deadline) {
+                $subtodo->keterangan = 'Terlambat';
+            }else{
+                $subtodo->keterangan = '';
+            }
+        }
 
         $pdf = PDF::loadView('laporan', compact('project', 'layanan', 'teams', 'subtodos'))
             ->setPaper('a4', 'potrait');;

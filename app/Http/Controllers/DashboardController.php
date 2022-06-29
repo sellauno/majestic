@@ -72,6 +72,9 @@ class DashboardController extends Controller
         $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
         $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
         $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
+        $layanan = DB::table('layanan')
+            ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
+            ->get();
         // $checklists = DB::table('subchecklists')
         //     ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
         //     ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
@@ -93,6 +96,7 @@ class DashboardController extends Controller
             'stories' => $stories,
             'checklists' => $checklists,
             'idUser' => $idUser,
+            'layanan' => $layanan,
         ]);
     }
 }

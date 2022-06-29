@@ -1,4 +1,4 @@
-@extends('layouts.layoutnomenu')
+@extends('layouts.layoutuser')
 
 @section('title', 'Form File')
 
@@ -12,7 +12,7 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="d-flex justify-content-center mb-3">
-            <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="col-lg-10 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>File Baru</h5>

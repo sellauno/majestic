@@ -69,6 +69,24 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function projectsUser()
+    {
+        $idUser = auth()->user()->id;
+        $projects = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('teams.idUser', '=', $idUser)
+            ->get();
+        $layanan = DB::table('layanan')
+            ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
+            ->get();
+
+        return view('projectsuser', [
+            'projects' => $projects,
+            'layanan' => $layanan
+        ]);
+    }
+
     public function project($id)
     {
         $idUser = auth()->user()->id;
@@ -337,7 +355,10 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
+
 
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
@@ -470,6 +491,7 @@ class ProjectController extends Controller
             'jenis' => $jenis
         ]);
     }
+
     public function addProject()
     {
         $clients = Client::all();
