@@ -193,6 +193,8 @@ class ProjectController extends Controller
 
         $komentar = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.komentator')
+            ->select('comment.*', 'users.name')
+            ->where('comment.idProject', '=', $id)
             ->get();
 
         // if ($project->progres != $jumlah) {
@@ -327,8 +329,10 @@ class ProjectController extends Controller
 
         $komentar = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.komentator')
+            ->select('comment.*', 'users.name')
+            ->where('comment.idProject', '=', $id)
             ->get();
-
+        
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
         //     $p->progres = $jumlah;
@@ -477,6 +481,7 @@ class ProjectController extends Controller
 
         $komentar = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.komentator')
+            ->where('comment.idProject', '=', $id)
             ->get();
 
 

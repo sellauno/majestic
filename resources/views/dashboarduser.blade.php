@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="container-fluid py-4">
-  <div class="row my-4">
+  <!-- <div class="row my-4">
     <div class="col-lg-8 col-md-6 mb-md-0 mb-2">
       <div class="card h-100 shadow-none">
         <div class="card-header pb-0">
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
     <div class="col-12">

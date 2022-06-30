@@ -114,6 +114,8 @@ Route::get('/editjenislayanan/{id}', 'LayananController@editJenisLayanan')->name
 Route::post('/updatejenislayanan/{id}', 'LayananController@updateJenisLayanan')->name('updateJenisLayanan')->middleware('auth');
 Route::get('/deletejenislayanan/{id}', 'LayananController@deleteJenisLayanan')->name('deleteJenisLayanan')->middleware('auth', 'admin');
 
+// Posisi
+Route::post('/createposisi', 'PosisiController@createPosisi')->name('createPosisi')->middleware('auth', 'admin');
 
 // Authentication
 Route::get('login', 'AuthController@index')->name('login');
@@ -168,6 +170,7 @@ Route::get('testfolder', function () {
 // Komentar
 Route::get('/posts', 'PostController@index')->name('posts')->middleware('auth');
 Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middleware('auth');
+Route::get('/deletecomment/{id}', 'PostController@delete')->name('deleteComment')->middleware('auth', 'admin');
 
 Route::get('/post/create', 'PostController@create')->name('post.create')->middleware('auth');
 Route::post('/post/store', 'PostController@store')->name('post.store')->middleware('auth');
