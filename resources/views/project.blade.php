@@ -26,11 +26,19 @@
                                         <input type="hidden" name="id" value="{{$id}}">
                                         <!-- <form method="post" action="{{route('cari')}}"> -->
                                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+<<<<<<< HEAD
+                                        <div class="input-group">
+                                            <span class="input-group-text text-body">
+                                                <i class="fas fa-search" aria-hidden="true"></i>
+                                            </span>
+                                            <input type="text" name="cari" style="left:25px" class="form-control" placeholder="Type here...">
+=======
                                             <div class="input-group">
                                                 <span class="input-group-text text-body">
                                                     <i class="fas fa-search" aria-hidden="true"></i>
                                                 </span>
                                                 <input type="text" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
+>>>>>>> 382e81a62ddbe9e17585a589dde23a78179a138f
                                             </div>
                                         </div>
                                         <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value="">
