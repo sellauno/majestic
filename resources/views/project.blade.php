@@ -97,9 +97,6 @@
                                             <td>
                                                 <div class="input-group input-group-sm">
                                                     <select id="idUser" name="idUser" class="form-control select2">
-                                                        @if($myprofile != null)
-                                                        <option value="{{$myprofile->id}}">{{$myprofile->name}}</option>
-                                                        @endif
                                                         @foreach($users as $user)
                                                         <option value="{{$user->id}}">{{$user->name}}</option>
                                                         @endforeach
@@ -132,93 +129,7 @@
                 </div>
                 <div class="card-body pt-4 p-3">
                     <div class="accordion" id="accordionExample">
-                        @if($myprofile != null)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    {{$myprofile->name}}
-                                    <div class="ms-auto text-end position-absolute end-3 me-3">
-                                        <p class="text-xs font-weight-bold mb-0">{{$myprofile->jabatan}}</p>
-                                        <p class="text-xs text-secondary mb-0">{{$myprofile->posisi}}</p>
-                                    </div>
-                                </div>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show bg-blue" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <input type="hidden" name="_token" value="oFAk9ReDpXQmxme8U2le1i2v0l5gfWsTVh5zW1cf">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div>
-                                                @foreach ($subtodos as $subtodo)
-                                                <?php if ($subtodo->idUser == $myprofile->id) { ?>
-                                                    <div class="form-check">
-                                                        <input type="hidden" name="idProject" value="{{$id}}">
-                                                        <input type="hidden" name="idsubtodo" id="idsubtodo" value="{{$subtodo->idsubtodo}}">
-                                                        <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                                        <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                                        <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                                        <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}})" @if($subtodo->checked == true) checked @endif>
-                                                        <label class="custom-control-label text-xs <?php if (
-                                                                                                        $subtodo->deadline < now()
-                                                                                                    ) {
-                                                                                                        echo "text-danger";
-                                                                                                    } ?>" for="todocheck">{{$subtodo->subtodo}} </label>
-                                                        <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                                            Confirm
-                                                        </button>
-                                                        <script type="text/javascript">
-                                                            function confirm($id) {
-                                                                Swal.fire({
-                                                                    title: 'Tandai tugas selesai?',
-                                                                    text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai",
-                                                                    type: 'warning',
-                                                                    showCancelButton: true,
-                                                                    confirmButtonColor: '#3085d6',
-                                                                    cancelButtonColor: '#d33',
-                                                                    confirmButtonText: 'Ya'
-                                                                }).then((result) => {
-                                                                    if (result.value) {
-                                                                        Swal.fire(
-                                                                            'Berhasil!'.$idChecklist,
-                                                                            'Tugas selesai',
-                                                                            'success'
-                                                                        )
-                                                                        window.location = "/checked/" + $id;
-                                                                    }
-                                                                })
-                                                            };
-                                                        </script>
-                                                        <p class="text-xs">{{$subtodo->deadline}}</p>
-                                                    </div>
-                                                <?php } ?>
-                                                @endforeach
-
-                                            </div>
-                                            <!-- komentar -->
-                                            @if($hak == true)
-                                            <div class="col-6">
-                                                <form method="post" action="{{ route('post.store') }}">
-                                                    <input type="hidden" name="iduser" value="{{$myprofile->id}}">
-                                                    <input type="hidden" name="name" value="{{$myprofile->name}}">
-                                                    <input type="hidden" name="komentator" value="{{auth()->user()->id}}">
-                                                    @csrf
-                                                    <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
-                                                    <button type="submit" class="btn btn-primary mb-3 mt-1">Simpan</button>
-                                                </form>
-                                            </div>
-                                            @endif
-                                        </div>
-                                        <form action="{{route('addChecklist')}}" method="POST">
-                                            <input type="hidden" name="idUser" value="{{$myprofile->id}}">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </div>
-
-                            </div>
-                            @endif
-                            @foreach($users as $user)
+                        @foreach($users as $user)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne-{{$user->id}}" aria-expanded="true" aria-controls="collapseOne">

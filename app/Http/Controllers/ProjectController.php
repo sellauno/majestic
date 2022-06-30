@@ -107,21 +107,7 @@ class ProjectController extends Controller
         $users = DB::table('users')
             ->join('teams', 'users.id', '=', 'teams.idUser')
             ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '!=', $idUser)
             ->get();
-        $myprofile = DB::table('users')
-            ->join('teams', 'users.id', '=', 'teams.idUser')
-            ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '=', $idUser)
-            ->first();
-        $hak = false;
-        if ($myprofile != null) {
-            if ($myprofile->jabatan == 'Penanggung Jawab') {
-                $hak = true;
-            }
-        } else if ($role == 'admin') {
-            $hak = true;
-        }
 
         $subchecklist = DB::table('subchecklists')
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
@@ -221,11 +207,9 @@ class ProjectController extends Controller
             'kategori' => $kategori,
             'subchecklist' => $subchecklist,
             'subtodos' => $subtodos,
-            'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
             'users' => $users,
-            'hak' => $hak,
             'komentar' => $komentar,
             'total' => $total,
             'file' => $file,

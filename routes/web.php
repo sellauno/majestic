@@ -28,45 +28,42 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Dashboard
-Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard')->middleware('auth');
+Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard')->middleware('auth', 'admin');
 Route::get('/dashboarduser', 'DashboardController@dashboardUser')->name('dashboarduser')->middleware('auth');
 
 // Client
 Route::get('/clients', 'ClientController@allClient')->name('allClient')->middleware('auth');
-Route::get('/addclient', 'ClientController@addClient')->name('addClient')->middleware('auth');
+Route::get('/addclient', 'ClientController@addClient')->name('addClient')->middleware('auth', 'admin');
 Route::post('/createclient', 'ClientController@createClient')->name('createClient')->middleware('auth');
-Route::get('/editclient/{id}', 'ClientController@editClient')->name('editClient')->middleware('auth');
+Route::get('/editclient/{id}', 'ClientController@editClient')->name('editClient')->middleware('auth', 'admin');
 Route::post('/updateclient/{id}', 'ClientController@updateClient')->name('updateClient')->middleware('auth');
-Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient')->middleware('auth');
+Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteClient')->middleware('auth', 'admin');
 
 // Project
-Route::get('/projects', 'ProjectController@allProject')->name('projects')->middleware('auth');
+Route::get('/projects', 'ProjectController@allProject')->name('projects')->middleware('auth', 'admin');
 Route::get('/projects/user', 'ProjectController@projectsUser')->name('projectsUser')->middleware('auth');
-Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth');
-Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth');
-Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth');
+Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth', 'admin');
+Route::get('/project/user/{id}', 'ProjectController@projectUser')->name('projectUser')->middleware('auth');
+Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth', 'admin');
+Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth', 'admin');
 Route::post('/createproject', 'ProjectController@createProject')->name('createProject');
-Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProject')->middleware('auth');
+Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProject')->middleware('auth', 'admin');
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject')->middleware('auth');
-Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth');
+Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth', 'admin');
 
 //Kategori
 Route::post('/createkategori', 'KategoriController@createKategori')->name('createKategori')->middleware('auth');
-Route::get('/editkategori/{id}', 'KategoriController@editKategori')->name('editKategori')->middleware('auth');
+Route::get('/editkategori/{id}', 'KategoriController@editKategori')->name('editKategori')->middleware('auth', 'admin');
 Route::post('/updatekategori/{id}', 'KategoriController@updateKategori')->name('updateKategori')->middleware('auth');
-Route::get('/deletekategori/{id}', 'KategoriController@deleteKategori')->name('deleteKategori')->middleware('auth');
+Route::get('/deletekategori/{id}', 'KategoriController@deleteKategori')->name('deleteKategori')->middleware('auth', 'admin');
 
 // Checklist
-// Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('project')->middleware('auth');
 Route::get('/checklist/{id}', 'ChecklistController@checklists')->name('checklist')->middleware('auth');
 Route::post('/addchecklist', 'ChecklistController@createChecklist')->name('addChecklist')->middleware('auth');
 Route::post('/addfile', 'ChecklistController@addFile')->name('addFile')->middleware('auth');
 Route::get('/editchecklist/{id}', 'ChecklistController@editChecklist')->name('editChecklist')->middleware('auth');
 Route::post('/updatechecklist/{id}', 'ChecklistController@updateChecklist')->name('updateChecklist')->middleware('auth');
 Route::get('/deletechecklist/{id}', 'ChecklistController@deleteChecklist')->name('deleteChecklist')->middleware('auth');
-
-
-Route::get('/project/user/{id}', 'ProjectController@projectUser')->name('projectUser')->middleware('auth');
 
 // Sub To Do
 Route::post('/addtodo', 'ChecklistController@createSubtodo')->name('addSubtodo')->middleware('auth');
@@ -86,7 +83,7 @@ Route::post('/cari', 'ProjectController@cari')->name('cari')->middleware('auth')
 
 // Teams
 Route::post('/createteam', 'TeamController@createTeam')->name('addTeam')->middleware('auth');
-Route::get('/editteam/{id}', 'TeamController@editTeam')->name('editTeam')->middleware('auth');
+Route::get('/editteam/{id}', 'TeamController@editTeam')->name('editTeam')->middleware('auth', 'admin');
 Route::post('/updateteam/{id}', 'TeamController@updateTeam')->name('updateTeam')->middleware('auth');
 Route::post('/deleteteam', 'TeamController@deleteTeam')->name('deleteTeam')->middleware('auth');
 
@@ -95,28 +92,26 @@ Route::get('/addfile/{id}', 'FileController@addFile')->name('addFile')->middlewa
 Route::post('/uploadfile', 'FileController@uploadFile')->name('uploadFile')->middleware('auth');
 
 //Account 
-Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('auth');
+Route::get('/account', 'AccountController@allUser')->name('acc')->middleware('auth', 'admin');
 
 // Report
-Route::get('/report', 'ReportController@generateReport');
 Route::get('/report/{id}', 'ReportController@report')->name('report')->middleware('auth');
-Route::get('/report1', 'ReportController@generateReport1');
 
 // Layanan
 Route::get('/layanan', 'LayananController@allLayanan')->name('allLayanan')->middleware('auth');
-Route::get('/addlayanan', 'LayananController@addLayanan')->name('addLayanan')->middleware('auth');
+Route::get('/addlayanan', 'LayananController@addLayanan')->name('addLayanan')->middleware('auth', 'admin');
 Route::post('/createlayanan', 'LayananController@createLayanan')->name('createLayanan')->middleware('auth');
-Route::get('/editlayanan/{id}', 'LayananController@editLayanan')->name('editLayanan')->middleware('auth');
+Route::get('/editlayanan/{id}', 'LayananController@editLayanan')->name('editLayanan')->middleware('auth', 'admin');
 Route::post('/updatelayanan/{id}', 'LayananController@updateLayanan')->name('updateLayanan')->middleware('auth');
-Route::get('/deletelayanan/{id}', 'LayananController@deleteLayanan')->name('deleteLayanan')->middleware('auth');
+Route::get('/deletelayanan/{id}', 'LayananController@deleteLayanan')->name('deleteLayanan')->middleware('auth', 'admin');
 
 // Jenis Layanan
 Route::get('/jenislayanan', 'LayananController@allJenisLayanan')->name('allJenisLayanan')->middleware('auth');
-Route::get('/addjenislayanan', 'LayananController@addJenisLayanan')->name('addJenisLayanan')->middleware('auth');
+Route::get('/addjenislayanan', 'LayananController@addJenisLayanan')->name('addJenisLayanan')->middleware('auth', 'admin');
 Route::post('/createjenislayanan', 'LayananController@createJenisLayanan')->name('createJenisLayanan')->middleware('auth');
-Route::get('/editjenislayanan/{id}', 'LayananController@editJenisLayanan')->name('editJenisLayanan')->middleware('auth');
+Route::get('/editjenislayanan/{id}', 'LayananController@editJenisLayanan')->name('editJenisLayanan')->middleware('auth', 'admin');
 Route::post('/updatejenislayanan/{id}', 'LayananController@updateJenisLayanan')->name('updateJenisLayanan')->middleware('auth');
-Route::get('/deletejenislayanan/{id}', 'LayananController@deleteJenisLayanan')->name('deleteJenisLayanan')->middleware('auth');
+Route::get('/deletejenislayanan/{id}', 'LayananController@deleteJenisLayanan')->name('deleteJenisLayanan')->middleware('auth', 'admin');
 
 
 // Authentication
@@ -126,9 +121,9 @@ Route::get('registration', 'AuthController@registration')->name('register')->mid
 Route::post('post-registration', 'AuthController@postRegistration')->name('register.post')->middleware('auth');
 
 //accountedit
-Route::get('accountedit/{id}', 'ProfileController@editAccount')->name('editAccount')->middleware('auth');
+Route::get('accountedit/{id}', 'ProfileController@editAccount')->name('editAccount')->middleware('auth', 'admin');
 Route::post('updateaccount/{id}', 'ProfileController@updateAccount')->name('updateAccount')->middleware('auth');
-Route::get('deleteedit/{id}', 'ProfileController@deleteAccount')->name('deleteAccount')->middleware('auth');
+Route::get('deleteedit/{id}', 'ProfileController@deleteAccount')->name('deleteAccount')->middleware('auth', 'admin');
 
 // Route::get('dashboard', 'AuthController@dashboard')->middleware('auth'); 
 Route::get('logout', 'AuthController@logout')->name('logout')->middleware('auth');
