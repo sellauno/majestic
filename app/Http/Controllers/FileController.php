@@ -15,6 +15,7 @@ use Google_Service_Drive;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class FileController extends Controller
 {
@@ -24,7 +25,7 @@ class FileController extends Controller
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
             ->first();
-            
+
         $foldermain = DB::table('folders')
             ->where('idProject', '=', $todo->idProject)
             ->where('kategori', '=', 'main')
@@ -56,8 +57,44 @@ class FileController extends Controller
 
     public function uploadFile(Request $request)
     {
+        // dd($request->all());
         $time = Carbon::now();
         if ($request->fileUpload != null) {
+            if ($request->kategori == 'file') {
+                $validator = Validator::make($request->all(), array(
+                    'fileUpload' => 'max:10000|mimes:application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                ));
+
+                $validator->validate();
+                // $request->validate([
+                //     'email' => 'required',
+                //     'password' => 'required',
+                //     'fileUpload' => 'required|max:10000|mimes:application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                // ]);
+            } else if ($request->kategori == 'video') {
+                $validator = Validator::make($request->all(), array(
+                    'fileUpload' => 'max:10000|mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4'
+                ));
+
+                $validator->validate();
+                // $request->validate([
+                //     'email' => 'required',
+                //     'password' => 'required',
+                //     'fileUpload' => 'required|max:10000|mimetypes:video/avi,video/mpeg,video/quicktime'
+                // ]);
+            } else if ($request->kategori == 'gambar') {
+                $validator = Validator::make($request->all(), array(
+                    'fileUpload' => 'required|max:10000|image'
+                ));
+
+                $validator->validate();
+
+                // $request->validate([
+                //     'email' => 'required',
+                //     'password' => 'required',
+                //     'fileUpload' => 'required|max:10000|image'
+                // ]);
+            }
             $extension = $request->file('fileUpload')->extension();
             $name = $time . '' . $request->judul . '.' . $extension;
             $foldermain = DB::table('folders')
@@ -93,7 +130,7 @@ class FileController extends Controller
             ]);
         }
 
-        return redirect('/project' . '/' . $request->idProject);
+        return redirect('/project' . '/user' .  '/' . $request->idProject);
     }
 
     public function newFile()

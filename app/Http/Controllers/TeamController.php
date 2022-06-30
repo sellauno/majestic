@@ -38,7 +38,7 @@ class TeamController extends Controller
     {
         $team = Team::find($request->id);
         $subtodos = Subtodo::all()->where('idUser', '=', $team->idUser);
-        foreach($subtodos as $subtodo){
+        foreach ($subtodos as $subtodo) {
             $subtodo->idUser = $request->idUser;
             $subtodo->save();
         }

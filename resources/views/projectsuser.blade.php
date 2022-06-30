@@ -2,7 +2,7 @@
 
 @section('title', 'Dashboard')
 
-@section('dashboard', 'active')
+@section('project', 'active')
 
 @section('breadcrumb')
 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
@@ -12,7 +12,7 @@
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
-      <div class="card mb-4">
+    <div class="card mb-4">
         <div class="card-header pb-0">
           <div class="row">
             <div class="col-6 d-flex align-items-center">
@@ -30,6 +30,9 @@
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Client</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Layanan</th>
+                  <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Tiktok</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Feeds</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Stories</th> -->
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
                   <th></th>
                 </tr>
@@ -81,8 +84,7 @@
                           <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
                         </ul>
                         <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
-                          Action
+                         Action
                         </button>
                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                           <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
@@ -97,100 +99,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header pb-0 px-3">
-      <h6 class="mb-0">To Do List</h6>
-    </div>
-    <div class="card-body pt-4 p-3">
-      <ul class="list-group">
-        @foreach($projects as $project)
-        <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
-          <div class="d-flex flex-column">
-            <h6 class="mb-3 text-sm">{{$project->namaClient}}</h6>
-            @foreach($checklists as $checklist)
-            <?php if ($project->idProject == $checklist->idProject) { ?>
-              <!-- <span class="mb-2 text-xs">Company Name: <span class="text-dark font-weight-bold ms-sm-2">Stone Tech Zone</span></span> -->
-              <div class="form-check">
-                <input type="hidden" name="idProject" value="{{$project->idProject}}">
-                <input type="hidden" name="idUser" value="{{$idUser}}">
-                <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idChecklist}})" @if($checklist->checked == true) checked disabled @endif>
-                <label class="custom-control-label <?php if (
-                                                      $checklist->deadline < now()
-                                                    ) {
-                                                      echo "text-danger";
-                                                    } ?>" for="todocheck">{{$checklist->subtodo}}</label>
-                <p id="text" style="display:none">Checkbox is CHECKED!</p>
-                <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
-                  Confirm
-                </a>
-                <script type="text/javascript">
-                  function confirm($id) {
-                    Swal.fire({
-                      title: 'Tandai tugas selesai?',
-                      text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
-                      type: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Ya'
-                    }).then((result) => {
-                      if (result.value) {
-                        Swal.fire(
-                          'Berhasil!'.$idChecklist,
-                          'Notifikasi telah terkirim',
-                          'success'
-                        )
-                        window.location = "/send-mail/" + $id;
-                      }
-                    })
-                  };
-                  // $(document).ready(function() {
-                  //   $("#confirm").click(function($id) {
-                  //     var idChecklist = $(this).data('id');
-                  //     Swal.fire({
-                  //       title: 'Tandai tugas selesai?',
-                  //       text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
-                  //       type: 'warning',
-                  //       showCancelButton: true,
-                  //       confirmButtonColor: '#3085d6',
-                  //       cancelButtonColor: '#d33',
-                  //       confirmButtonText: 'Ya'
-                  //     }).then((result) => {
-                  //       if (result.value) {
-                  //         Swal.fire(
-                  //           'Berhasil!'.$idChecklist,
-                  //           'Notifikasi telah terkirim',
-                  //           'success'
-                  //         )
-                  //         window.location = "/send-mail/".$id;
-                  //       }
-                  //     })
-                  //   });
-                  // });
-                </script>
-                <p class="text-xs">{{$checklist->deadline}}
-                  &nbsp;
-                  <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                    <i class="fa fa-paperclip text-xs"></i>
-                  </a> &nbsp;
-                  <!-- <a href="{{route('editChecklist', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                    <i class="fa fa-pencil text-xs"></i>
-                  </a> &nbsp;
-                  <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                    <i class="fa fa-trash text-xs"></i>
-                  </a> -->
-                </p>
-              </div>
-            <?php } ?>
-            @endforeach
-          </div>
-        </li>
-        @endforeach
-      </ul>
     </div>
   </div>
 </div>

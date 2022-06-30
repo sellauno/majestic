@@ -29,12 +29,27 @@
             margin-right: 50px; */
         }
 
-        .table-report td, th {
-            border: 1px solid;
+        .table-report th {
+            background-color: #af984f;
+        }
+
+        .table-report td,
+        th {
+            /* border: 1px solid;
             border-color: black;
-            /* margin-top: 150px;
+            margin-top: 150px;
             margin-left: 50px;
             margin-right: 50px; */
+        }
+
+        .table-team {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-team th {
+            background-color: #cec092;
         }
 
         h1,
@@ -57,40 +72,47 @@
                 <td>Harga : </td>
                 <td>{{$project->harga}}</td>
             </tr>
+            <tr>
+                <td>Status : </td>
+                <td>{{$project->status}}</td>
+            </tr>
         </table>
         <table class="table-report">
             <thead>
-                <th>No</th>
+                <th style="width: 5%">No</th>
                 <th>Deskripsi</th>
                 <th>Jumlah</th>
             </thead>
             <tbody>
                 @foreach($layanan as $l)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$l->kategori}}</td>
-                    <td>{{$l->jumlah}}</td>
+                    <td style="text-align:center">{{$loop->iteration}}</td>
+                    <td style="text-align:center">{{$l->kategori}}</td>
+                    <td style="text-align:center">{{$l->jumlah}}</td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-        <table class="table-report">
-            @foreach($teams as $team)
+
+        <h3 style="margin-top: 50px">Anggota Team</h3>
+        @foreach($teams as $team)
+        <table class="table-team">
             <thead>
-                <th text-align="left" colspan="2">{{$team->name}}</th>
+                <th colspan="3">{{$team->name}}</th>
             </thead>
             <tbody>
                 @foreach($subtodos as $todo)
                 @if($todo->idUser == $team->idUser)
                 <tr>
-                    <td>{{$todo->subtodo}}</td>
+                    <td style="width: 35%">{{$todo->subtodo}}</td>
                     <td>{{$todo->updated_at}}</td>
+                    <td>{{$todo->keterangan}}</td>
                 </tr>
                 @endif
                 @endforeach
             </tbody>
-            @endforeach
         </table>
+        @endforeach
     </div>
 </body>
 

@@ -69,6 +69,24 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function projectsUser()
+    {
+        $idUser = auth()->user()->id;
+        $projects = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('teams.idUser', '=', $idUser)
+            ->get();
+        $layanan = DB::table('layanan')
+            ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
+            ->get();
+
+        return view('projectsuser', [
+            'projects' => $projects,
+            'layanan' => $layanan
+        ]);
+    }
+
     public function project($id)
     {
         $idUser = auth()->user()->id;
@@ -89,21 +107,7 @@ class ProjectController extends Controller
         $users = DB::table('users')
             ->join('teams', 'users.id', '=', 'teams.idUser')
             ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '!=', $idUser)
             ->get();
-        $myprofile = DB::table('users')
-            ->join('teams', 'users.id', '=', 'teams.idUser')
-            ->where('teams.idProject', '=', $id)
-            ->where('teams.idUser', '=', $idUser)
-            ->first();
-        $hak = false;
-        if ($myprofile != null) {
-            if ($myprofile->jabatan == 'Penanggung Jawab') {
-                $hak = true;
-            }
-        } else if ($role == 'admin') {
-            $hak = true;
-        }
 
         $subchecklist = DB::table('subchecklists')
             ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
@@ -187,7 +191,9 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
 
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
@@ -201,11 +207,9 @@ class ProjectController extends Controller
             'kategori' => $kategori,
             'subchecklist' => $subchecklist,
             'subtodos' => $subtodos,
-            'myprofile' => $myprofile,
             'project' => $project,
             'links' => $links,
             'users' => $users,
-            'hak' => $hak,
             'komentar' => $komentar,
             'total' => $total,
             'file' => $file,
@@ -337,7 +341,10 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
+
 
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
@@ -470,6 +477,7 @@ class ProjectController extends Controller
             'jenis' => $jenis
         ]);
     }
+
     public function addProject()
     {
         $clients = Client::all();
@@ -762,7 +770,29 @@ class ProjectController extends Controller
 
         $kategori = Kategori::all();
 
-        $komentar = Comment::all();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
+            
+        $files = DB::table('files')
+            ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('files.*')
+            ->get();
+        $file = array();
+        $video = array();
+        $gambar = array();
+
+        foreach ($files as $f) {
+            if ($f->kategori == 'file') {
+                $file[] = $f;
+            } else if ($f->kategori == 'video') {
+                $video[] = $f;
+            } else if ($f->kategori == 'gambar') {
+                $gambar[] = $f;
+            }
+        }
 
         return view('project', [
             'id' => $id,
@@ -772,6 +802,9 @@ class ProjectController extends Controller
             'subtodos' => $subtodos,
             'myprofile' => $myprofile,
             'project' => $project,
+            'file' => $file,
+            'gambar' => $gambar,
+            'video' => $video,
             'links' => $links,
             'users' => $users,
             'hak' => $hak,
