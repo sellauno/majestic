@@ -43,7 +43,8 @@ Route::get('/deleteclient/{id}', 'ClientController@deleteClient')->name('deleteC
 Route::get('/projects', 'ProjectController@allProject')->name('projects')->middleware('auth', 'admin');
 Route::get('/projects/user', 'ProjectController@projectsUser')->name('projectsUser')->middleware('auth');
 Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth', 'admin');
-Route::get('/project/user/{id}', 'ProjectController@projectUser')->name('projectUser')->middleware('auth');
+Route::get('/project/{id}/{cari}', 'ProjectController@projectCari')->name('projectCari')->middleware('auth', 'admin');
+Route::get('/projectuser/{id}', 'ProjectController@projectUser')->name('projectUser')->middleware('auth');
 Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth', 'admin');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth', 'admin');
 Route::post('/createproject', 'ProjectController@createProject')->name('createProject');

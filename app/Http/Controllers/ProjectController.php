@@ -219,6 +219,140 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function projectCari($id, $cari)
+    {
+        $idUser = auth()->user()->id;
+        $role = auth()->user()->role;
+        $project = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.idProject', '=', $id)
+            ->first();
+        $checklists = DB::table('checklists')
+            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('checklists.*')
+            ->get();
+
+        $links = DB::table('links')
+            ->join('users', 'users.id', '=', 'links.idUser')
+            ->where('links.idProject', '=', $id)
+            ->where('kategori', 'like', "%" . $cari . "%")
+            ->get();
+        $users = DB::table('users')
+            ->join('teams', 'users.id', '=', 'teams.idUser')
+            ->where('teams.idProject', '=', $id)
+            ->get();
+
+        $subchecklist = DB::table('subchecklists')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->where('checklists.idProject', '=', $id)
+            ->select('subchecklists.*')
+            ->get();
+
+        $subtodos = DB::table('subtodos')
+            ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->join('users', 'users.id', '=', 'subtodos.idUser')
+            ->where('layanan.idProject', '=', $id)
+            ->select('subtodos.*', 'checklists.toDO')
+            ->get();
+
+        $files = DB::table('files')
+            ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
+            ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('layanan.idProject', '=', $id)
+            ->select('files.*')
+            ->get();
+
+        $file = array();
+        $video = array();
+        $gambar = array();
+
+        foreach ($files as $f) {
+            if ($f->kategori == 'file') {
+                $file[] = $f;
+            } else if ($f->kategori == 'video') {
+                $video[] = $f;
+            } else if ($f->kategori == 'gambar') {
+                $gambar[] = $f;
+            }
+        }
+
+        // Progress
+        $sum = 0;
+        if ($checklists->count() != 0) {
+            $sum = 100 / $checklists->count();
+        }
+
+        $a = DB::table('checklists')
+            // ->leftjoin('subchecklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
+            ->leftjoin(
+                DB::raw('(SELECT idChecklist, idSubChecklist, COUNT(idSubChecklist) finish 
+                FROM subchecklists
+                WHERE subchecked = true
+                GROUP BY idSubChecklist, idChecklist )
+                finished'),
+                function ($join) {
+                    $join->on('checklists.idChecklist', '=', 'finished.idChecklist');
+                }
+            )
+            ->select('finished.finish', 'checklists.toDO', DB::raw($sum . ' / COUNT(idSubChecklist) AS nilai'), DB::raw('COUNT(idSubChecklist) AS total'))
+            ->where('checklists.idProject', '=', $id)
+            ->groupBy('checklists.idChecklist', 'checklists.toDO', 'finished.finish')
+            ->get();
+
+        $total = [];
+        $jumlah = 0;
+        foreach ($a as $key => $all) {
+            $total[$key] = $all->finish * $all->nilai;
+            $jumlah += $total[$key];
+        }
+
+        $x = DB::table('checklists')
+            ->where('idProject', '=', $id)
+            ->select('idProject', DB::raw('COUNT(*) AS finish'))
+            ->where('finish', true)
+            ->groupBy('idProject');
+
+        $b = DB::table('projects')
+            ->leftJoinSub($x, 'checklists', function ($join) {
+                $join->on('checklists.idProject', '=', 'projects.idProject');
+            })
+            ->select('finish')
+            ->get();
+
+        // End Progresss
+
+        $kategori = Kategori::all();
+
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->get();
+
+        // if ($project->progres != $jumlah) {
+        //     $p = Project::find($id);
+        //     $p->progres = $jumlah;
+        //     $p->save();
+        // }
+
+        return view('project', [
+            'id' => $id,
+            'checklists' => $checklists,
+            'kategori' => $kategori,
+            'subchecklist' => $subchecklist,
+            'subtodos' => $subtodos,
+            'project' => $project,
+            'links' => $links,
+            'users' => $users,
+            'komentar' => $komentar,
+            'total' => $total,
+            'file' => $file,
+            'gambar' => $gambar,
+            'video' => $video,
+            'cari' => ''
+        ]);
+    }
+
     public function projectUser($id)
     {
         $idUser = auth()->user()->id;
@@ -672,6 +806,7 @@ class ProjectController extends Controller
 
     public function cari(Request $request)
     {
+        return redirect('project' . '/' . $request->id . '/' . $request->cari);
         $keyword = $request->cari;
         $id = $request->id;
         $links = DB::table('links')
@@ -773,7 +908,7 @@ class ProjectController extends Controller
         $komentar = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.komentator')
             ->get();
-            
+
         $files = DB::table('files')
             ->join('checklists', 'checklists.idChecklist', '=', 'files.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')

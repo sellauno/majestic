@@ -75,16 +75,16 @@ class DashboardController extends Controller
         $layanan = DB::table('layanan')
             ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
             ->get();
-        // $checklists = DB::table('subchecklists')
-        //     ->join('checklists', 'checklists.idChecklist', '=', 'subchecklists.idChecklist')
-        //     ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
-        //     ->where('subchecklists.idUser', '=', $idUser)->get();
 
         $checklists = DB::table('subtodos')
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
             ->select('subtodos.*', 'layanan.idProject')
             ->where('subtodos.idUser', '=', $idUser)->get();
+        $komentar = DB::table('comment')
+            ->join('users', 'users.id', '=', 'comment.komentator')
+            ->where('comment.iduser', '=', $idUser)
+            ->get();
 
         return view('dashboarduser', [
             'projects' => $projects,
@@ -96,6 +96,7 @@ class DashboardController extends Controller
             'stories' => $stories,
             'checklists' => $checklists,
             'idUser' => $idUser,
+            'komentar' => $komentar,
             'layanan' => $layanan,
         ]);
     }
