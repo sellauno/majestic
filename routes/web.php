@@ -45,6 +45,7 @@ Route::get('/projects/user', 'ProjectController@projectsUser')->name('projectsUs
 Route::get('/project/{id}', 'ProjectController@project')->name('project')->middleware('auth', 'admin');
 Route::get('/project/{id}/{cari}', 'ProjectController@projectCari')->name('projectCari')->middleware('auth', 'admin');
 Route::get('/projectuser/{id}', 'ProjectController@projectUser')->name('projectUser')->middleware('auth');
+Route::get('/projectuser/{id}/{cari}', 'ProjectController@projectUserCari')->name('projectUserCari')->middleware('auth');
 Route::get('/detailproject/{id}', 'ProjectController@detailProject')->name('detailProject')->middleware('auth', 'admin');
 Route::get('/addproject', 'ProjectController@addProject')->name('addProject')->middleware('auth', 'admin');
 Route::post('/createproject', 'ProjectController@createProject')->name('createProject');

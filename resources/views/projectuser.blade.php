@@ -2,7 +2,7 @@
 
 @section('title', $project->namaClient)
 
-@section('dashboard', 'active')
+@section('project', 'active')
 
 @section('breadcrumb')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Project</a></li>
@@ -43,7 +43,7 @@
                                 <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
                         </div>
                         </h2>
-                        <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
+                        <div id="collapseLink" class="accordion-collapse collapse {{$cari}}" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
                             <div class="accordion-body">
                                 <table class="table align-items-center mb-0 text-xs">
                                     <thead>
@@ -146,7 +146,7 @@
                                 <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                 <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
                                 <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}}); this.checked=!this.checked;" @if($subtodo->checked == true) checked @endif>
+                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}}); this.checked=!this.checked;" @if($subtodo->checked == true) checked disabled @endif>
                                 <label class="custom-control-label text-xs <?php if (
                                                                                 $subtodo->deadline < now()
                                                                             ) {

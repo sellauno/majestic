@@ -43,7 +43,7 @@
                                 <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
                         </div>
                         </h2>
-                        <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
+                        <div id="collapseLink" class="accordion-collapse collapse  {{$cari}}" aria-labelledby="headingLink" data-bs-parent="#accordionLink">
                             <div class="accordion-body">
                                 <table class="table align-items-center mb-0 text-xs">
                                     <thead>

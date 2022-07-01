@@ -14,6 +14,7 @@ class DashboardController extends Controller
     {
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.finished', '!=', true)
             ->get();
         $clients = Client::all();
         $links = Link::all();
@@ -64,6 +65,7 @@ class DashboardController extends Controller
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
             ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('projects.finished', '!=', true)
             ->where('teams.idUser', '=', $idUser)
             ->get();
         $clients = Client::all();
@@ -80,7 +82,9 @@ class DashboardController extends Controller
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
             ->select('subtodos.*', 'layanan.idProject')
-            ->where('subtodos.idUser', '=', $idUser)->get();
+            ->where('subtodos.checked', '!=', true)
+            ->where('subtodos.idUser', '=', $idUser)
+            ->get();
         $komentar = DB::table('comment')
             ->join('users', 'users.id', '=', 'comment.komentator')
             ->where('comment.iduser', '=', $idUser)
