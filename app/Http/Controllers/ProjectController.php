@@ -679,7 +679,7 @@ class ProjectController extends Controller
             ->where('layanan.idProject', '=', $id)
             ->get();
         $checklists = DB::table('layanan')
-            ->leftJoin('checklists', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->join('checklists', 'checklists.idLayanan', '=', 'layanan.idLayanan')
             ->where('layanan.idProject', '=', $id)
             ->get();
         $jenis = [];
@@ -699,7 +699,7 @@ class ProjectController extends Controller
 
         // progress bar
 
-        $l = 100 / $layanan->count();
+        $l = $layanan->count() !=0? 100 / $layanan->count() : 0;
 
         $c = DB::table('checklists')
             ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
@@ -749,6 +749,8 @@ class ProjectController extends Controller
                 }
             }
         }
+
+        // dd($c, $layanan);
 
         // dd($l, $c, $e, $layanan, $sum);
         // end progress bar
@@ -801,6 +803,13 @@ class ProjectController extends Controller
             'finished' => false
         ]);
 
+        foreach ($request->idLayanan as $key => $value) {
+            $layanan = Layanan::find($request->idLayanan[$key]);
+            $layanan->idKategori = $request->idKategori[$key];
+            $layanan->jumlah = $request->jumlah[$key];
+            $layanan->save();
+        }
+        
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
                 Team::create([

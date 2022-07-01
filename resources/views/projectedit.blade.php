@@ -73,7 +73,7 @@
                                     <input type="number" name="jumlah[]" value="{{$l->jumlah}}" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required>
                                 </td>
                                 <td>
-                                    <span><a class="btn btn-link text-danger text-gradient px-3 mb-0" data-bs-toggle="modal" data-bs-target="#modal-notification" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a></span>
+                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -31,7 +31,7 @@
                                 <div class="col col-md-2"><label>Checklist Pengerjaan</label></div>
                                 <div class="col-12 col-md-6">
                                     <table id="proses">
-                                        <td><input type="text" class="form-control" name="proses[]" placeholder="Nama Layanan" aria-label="Layanan" required></td>
+                                        <td><input type="text" class="form-control" name="proses[]" placeholder="Tahap Pengerjaan" aria-label="Tahap Pengerjaan" required></td>
                                     </table>
                                     <div id="create-input-buttons">
                                         <a class="btn btn-link text-secondary mb-0 btn-tooltip create-input" title="Tambah List">

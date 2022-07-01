@@ -34,31 +34,31 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
-                                           <div class="d-flex flex-column justify-content-center">
+                                            <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{$users->name}}</h6>
                                             </div>
                                         </div>
                                     </td>
-                                <td>
-                                    <div class="text-xs text-secondary">{{$users->role}}</div>
-                                </td>
-                                <td>
-                                    <div class="text-xs text-secondary">{{$users->posisi}}</div>
-                                </td>
-                                <td>
-                                <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Action
-                        </button>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                          <li><a class="dropdown-item border-radius-md" href="{{route('editAccount', ['id' => $users->id])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                          @if($admin>1)
-                            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                          @endif
-                        @if($users->role=='user')
-                        <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                          @endif
-                        </ul>
-                        </td>   
+                                    <td>
+                                        <div class="text-xs text-secondary">{{$users->role}}</div>
+                                    </td>
+                                    <td>
+                                        <div class="text-xs text-secondary">{{$users->posisi}}</div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
+                                            <li><a class="dropdown-item border-radius-md" href="{{route('editAccount', ['id' => $users->id])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
+                                            @if($users->role=='admin' && $admin>1)
+                                            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                                            @endif
+                                            @if($users->role=='user')
+                                            <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteAccount', ['id' => $users->id])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
+                                            @endif
+                                        </ul>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

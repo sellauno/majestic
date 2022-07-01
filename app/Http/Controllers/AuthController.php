@@ -94,7 +94,7 @@ class AuthController extends Controller
             'role' => $request->role,
             'idClient' => $request->idClient
         ]);
-        return redirect('/dashboard');
+        return redirect('/account');
         // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 

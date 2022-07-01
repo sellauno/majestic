@@ -39,7 +39,7 @@
                 @foreach($projects as $project)
                 <tr>
                   <td>
-                    <a href="{{route('project', ['id' => $project->idProject])}}">
+                    <a href="{{route('detailProject', ['id' => $project->idProject])}}">
                       <div class="d-flex px-2">
                         <div class="my-auto">
                           <h6 class="mb-0 text-sm">{{$project->namaClient}}</h6>
