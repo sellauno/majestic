@@ -1,4 +1,4 @@
-@extends('layouts.layoutnomenu')
+@extends('layouts.layout')
 
 @section('title', 'Form Client')
 
@@ -21,13 +21,13 @@
                         <form role="form text-left" action="{{route('createClient')}}" method="POST">
                             @csrf
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Nama client</label></div>
+                                <div class="col col-md-4"><label>Nama client</label></div>
                                 <div class="col-12 col-md-6">
                                     <input type="text" class="form-control" name="namaClient" placeholder="Name" aria-label="Name"  required>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Deskripsi</label></div>
+                                <div class="col col-md-4"><label>Deskripsi</label></div>
                                 <div class="col-12 col-md-6">
                                     <textarea class="form-control" name="deskripsi" placeholder="Deskripsi" aria-label="Deskripsi"></textarea>
                                 </div>

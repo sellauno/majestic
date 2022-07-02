@@ -20,27 +20,26 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <div class="accordion-button collapsed {{$cari}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
-                                    <h6>Link</h6>
+                                <h6>Link</h6>
                                     <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$id}}">
                                         <!-- <form method="post" action="{{route('cari')}}"> -->
-                                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                                             <div class="input-group">
-                                                <span class="input-group-text text-body">
-                                                    <i class="fas fa-search" aria-hidden="true"></i>
-                                                </span>
-                                                <input type="text" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
+                                            <span class="input-group-text text-body">
+                                                <i class="fas fa-search" aria-hidden="true"></i>
+                                            </span>
+                                        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                                        <div class="input-group">
+                                            <span class="input-group-text text-body">
+                                                <i class="fas fa-search" aria-hidden="true"></i>
+                                            </span>
+                                            <input type="text" name="cari" style="padding-left:35px !important" class="form-control" placeholder="Type here...">
                                             </div>
                                         </div>
-                                        <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value="">
-                                        <input type="submit" value="CARI"> -->
+                            
                                     </form>
-                                    <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i>
-                                </div>
-                                <!-- <input type="submit" value="CARI"> -->
-                                <!-- </form> -->
-                                <!-- <i class="collapse-close fa fa-plus text-xs pt-1 position-absolute end-0 me-3" aria-hidden="true"></i> -->
+                                   
                         </div>
                         </h2>
                         <div id="collapseLink" class="accordion-collapse collapse" aria-labelledby="headingLink" data-bs-parent="#accordionLink">

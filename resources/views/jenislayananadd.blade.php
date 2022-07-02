@@ -10,10 +10,10 @@
 @endsection
 
 @section('content')
-<div class="container-fluid py-4">
+<div class="container-fluid py-6">
     <div class="row">
         <div class="d-flex justify-content-center mb-3">
-            <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="col-lg-8 mb-lg-0 mb-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Data Baru</h5>
@@ -22,13 +22,13 @@
                         <form role="form text-left" action="{{route('createJenisLayanan')}}" method="POST">
                             @csrf
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Kategori Layanan</label></div>
+                                <div class="col col-md-4"><label>Kategori Layanan</label></div>
                                 <div class="col-12 col-md-6">
                                     <input type="text" class="form-control" name="kategori" placeholder="Nama Layanan" aria-label="Layanan" required>
                                 </div>
                             </div>
                             <div class="row form-group">
-                                <div class="col col-md-2"><label>Checklist Pengerjaan</label></div>
+                                <div class="col col-md-4"><label>Checklist Pengerjaan</label></div>
                                 <div class="col-12 col-md-6">
                                     <table id="proses">
                                         <td><input type="text" class="form-control" name="proses[]" placeholder="Nama Layanan" aria-label="Layanan" required></td>

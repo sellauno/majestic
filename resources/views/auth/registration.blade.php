@@ -57,7 +57,7 @@
                                     <select id="role-regist" name="role" class="form-control">
                                         <option value="admin">Admin</option>
                                         <option value="user">User</option>
-                                        <option value="client">Client</option>
+                                        
                                     </select>
                                 </div>
                             </div>
