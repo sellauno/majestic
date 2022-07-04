@@ -81,7 +81,7 @@ class DashboardController extends Controller
         $checklists = DB::table('subtodos')
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
-            ->select('subtodos.*', 'layanan.idProject')
+            ->select('subtodos.*', 'layanan.idProject', 'checklists.toDO')
             ->where('subtodos.checked', '!=', true)
             ->where('subtodos.idUser', '=', $idUser)
             ->get();

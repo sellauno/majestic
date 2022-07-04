@@ -21,7 +21,7 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <div class="accordion-button collapsed {{$cari}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                     <h6>Link</h6>
-                                    <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
+                                    <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$id}}">
                                         <!-- <form method="post" action="{{route('cari')}}"> -->
@@ -151,7 +151,7 @@
                                                                                 $subtodo->deadline < now()
                                                                             ) {
                                                                                 echo "text-danger";
-                                                                            } ?>" for="todocheck">{{$subtodo->subtodo}} </label>
+                                                                            } ?>" for="todocheck">{{$subtodo->toDO}} {{$subtodo->subtodo}} </label>
                                 <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                     Confirm
                                 </button>
@@ -177,19 +177,11 @@
                                         })
                                     };
                                 </script>
-                                <p class="text-xs">{{$subtodo->deadline}}
+                                <p class="text-xs">{{$subtodo->deadline}} {{$subtodo->idChecklist}}
                                     &nbsp;
-                                    @if($hak == true)
                                     <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
                                         <i class="fa fa-paperclip text-xs"></i>
                                     </a> &nbsp;
-                                    <!-- <a href="{{route('editChecklist', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-pencil text-xs"></i>
-                                                                    </a> &nbsp;
-                                                                    <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-danger mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-trash text-xs"></i>
-                                                                    </a> -->
-                                    @endif
                                 </p>
                             </div>
                         <?php } ?>
@@ -290,7 +282,7 @@
                                                                                                                 $subtodo->deadline < now()
                                                                                                             ) {
                                                                                                                 echo "text-danger";
-                                                                                                            } ?>" for="todocheck">{{$subtodo->subtodo}} </label>
+                                                                                                            } ?>" for="todocheck">{{$subtodo->toDO}} {{$subtodo->subtodo}} </label>
                                                                 <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                                     Confirm
                                                                 </button>
@@ -316,7 +308,7 @@
                                                                         })
                                                                     };
                                                                 </script>
-                                                                <p class="text-xs">{{$subtodo->deadline}} </p>
+                                                                <p class="text-xs">{{$subtodo->deadline}}
                                                             </div>
                                                         <?php } ?>
                                                         @endforeach

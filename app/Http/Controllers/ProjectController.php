@@ -702,7 +702,7 @@ class ProjectController extends Controller
         $l = $layanan->count() !=0? 100 / $layanan->count() : 0;
 
         $c = DB::table('checklists')
-            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->rightjoin('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
             ->where('layanan.idProject', '=', $id)
             ->select(DB::raw('COUNT(checklists.idChecklist) as c'), DB::raw($l . '/ COUNT(checklists.idChecklist) as pc'), 'layanan.idLayanan')
             ->groupBy('layanan.idLayanan')
@@ -803,11 +803,23 @@ class ProjectController extends Controller
             'finished' => false
         ]);
 
-        foreach ($request->idLayanan as $key => $value) {
-            $layanan = Layanan::find($request->idLayanan[$key]);
-            $layanan->idKategori = $request->idKategori[$key];
-            $layanan->jumlah = $request->jumlah[$key];
-            $layanan->save();
+        foreach ($request->idKategori as $key => $value) {
+            $layananid = Layanan::create([
+                'idProject' => $insert->idProject,
+                'idKategori' => $value,
+                'jumlah' => $request->jumlah[$key]
+            ]);
+
+            for ($i = 1; $i <= $request->jumlah[$key]; $i++) {
+                $layanan = Jenislayanan::find($request->idKategori[$key]);
+                $nama = $layanan->kategori . ' ' . $i;
+                Checklist::create([
+                    'idLayanan' => $layananid->idLayanan,
+                    'toDO' => $nama,
+                    'tglStart' => $request->tglMulai,
+                    'deadline' => $request->tglSelesai
+                ]);
+            }
         }
         
         if ($request->input('idPJ') != null) {
@@ -832,49 +844,49 @@ class ProjectController extends Controller
 
         $client = Client::find($request->idClient);
         $name = $insert->idProject . '_' . $client->namaClient;
-        // Storage::disk('google')->makeDirectory($name);
-        // $details = Storage::disk("google")->getMetadata($name);
-        // $idFolderProject = $details['path'];
+        Storage::disk('google')->makeDirectory($name);
+        $details = Storage::disk("google")->getMetadata($name);
+        $idFolderProject = $details['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderProject,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'main'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderProject,
+            'idProject' => $insert->idProject,
+            'kategori' => 'main'
+        ]);
 
         $file = 'file_' . $name;
         $video = 'video_' . $name;
         $gambar = 'gambar_' . $name;
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
-        // $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
-        // $idFolderFile = $fileDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
+        $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
+        $idFolderFile = $fileDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderFile,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'file'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderFile,
+            'idProject' => $insert->idProject,
+            'kategori' => 'file'
+        ]);
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
-        // $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
-        // $idFolderVideo = $videoDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
+        $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
+        $idFolderVideo = $videoDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderVideo,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'video'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderVideo,
+            'idProject' => $insert->idProject,
+            'kategori' => 'video'
+        ]);
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
-        // $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
-        // $idFolderGambar = $gambarDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
+        $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
+        $idFolderGambar = $gambarDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderGambar,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'gambar'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderGambar,
+            'idProject' => $insert->idProject,
+            'kategori' => 'gambar'
+        ]);
 
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
@@ -898,7 +910,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('/dashboard');
+        return redirect('/projects');
     }
 
     public function editProject($id)

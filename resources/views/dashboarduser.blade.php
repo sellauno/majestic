@@ -114,7 +114,7 @@
                                                           $checklist->deadline < now()
                                                         ) {
                                                           echo "text-danger";
-                                                        } ?>" for="todocheck">{{$checklist->subtodo}}</label>
+                                                        } ?>" for="todocheck">{{$checklist->toDO}} {{$checklist->subtodo}} </label>
                     <p id="text" style="display:none">Checkbox is CHECKED!</p>
                     <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
                       Confirm
