@@ -145,17 +145,40 @@
                                 <input type="hidden" name="idsubtodo" id="idsubtodo" value="{{$subtodo->idsubtodo}}">
                                 <input type="hidden" name="idUser" value="{{$myprofile->id}}">
                                 <input type="hidden" name="idChecklist" value="{{$subtodo->idChecklist}}">
-                                <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="confirm({{$subtodo->idsubtodo}}); this.checked=!this.checked;" @if($subtodo->checked == true) checked disabled @endif>
+                                <input class="form-check-input" type="checkbox" data-id="{{$subtodo->idsubtodo}}" onclick="document.getElementById('confirm-{{$subtodo->idsubtodo}}').click(); this.checked=!this.checked;" @if($subtodo->checked == true) checked disabled @endif>
                                 <label class="custom-control-label text-xs <?php if (
                                                                                 $subtodo->deadline < now()
                                                                             ) {
                                                                                 echo "text-danger";
                                                                             } ?>" for="todocheck">{{$subtodo->toDO}} {{$subtodo->subtodo}} </label>
-                                <button type="button" style="display:none" class="btn btn-primary" id="confirm">
-                                    Confirm
-                                </button>
-                                <script type="text/javascript">
+                                <!-- Modal Confirm Check -->
+                                <button type="button" style="display:none" id="confirm-{{$subtodo->idsubtodo}}" data-bs-toggle="modal" data-bs-target="#modal-notification-{{$subtodo->idsubtodo}}">Notification</button>
+                                <div class="modal fade" id="modal-notification-{{$subtodo->idsubtodo}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                                    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="py-3 text-center">
+                                                    <i class="ni ni-bell-55 ni-3x"></i>
+                                                    <h4 class="text-gradient text-danger mt-4">Tandai tugas {{$subtodo->toDO}} {{$subtodo->subtodo}} selesai?</h4>
+                                                    <p>Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai</p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{route('checked', ['id' => $subtodo->idsubtodo])}}" class="btn btn-info">Ya</a>
+                                                <button type="button" class="btn btn-danger ml-auto" data-bs-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Modal Confirm Check -->
+
+                                <!-- <script type="text/javascript">
                                     function confirm($id) {
                                         Swal.fire({
                                             title: 'Tandai tugas selesai?',
@@ -176,7 +199,8 @@
                                             }
                                         })
                                     };
-                                </script>
+                                </script> -->
+
                                 <p class="text-xs">{{$subtodo->deadline}} {{$subtodo->idChecklist}}
                                     &nbsp;
                                     <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
@@ -286,28 +310,6 @@
                                                                 <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                                     Confirm
                                                                 </button>
-                                                                <script type="text/javascript">
-                                                                    function confirm($id) {
-                                                                        Swal.fire({
-                                                                            title: 'Tandai tugas selesai?',
-                                                                            text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai",
-                                                                            type: 'warning',
-                                                                            showCancelButton: true,
-                                                                            confirmButtonColor: '#3085d6',
-                                                                            cancelButtonColor: '#d33',
-                                                                            confirmButtonText: 'Ya'
-                                                                        }).then((result) => {
-                                                                            if (result.value) {
-                                                                                Swal.fire(
-                                                                                    'Berhasil!'.$idChecklist,
-                                                                                    'Tugas selesai',
-                                                                                    'success'
-                                                                                )
-                                                                                window.location = "/checked/" + $id;
-                                                                            }
-                                                                        })
-                                                                    };
-                                                                </script>
                                                                 <p class="text-xs">{{$subtodo->deadline}}
                                                             </div>
                                                         <?php } ?>
@@ -428,15 +430,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- <div class="table-responsive p-0">
-                        <table class="table align-items-center justify-content-center mb-0">
-                            <td>ABC</td>
-                            <td>DEF</td>
-                            <td>GHI</td>
-                            <td>JKL</td>
-                            <td>MNO</td>
-                        </table>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -511,61 +504,6 @@
 <script src="{{asset('sweetalert/jquery.min.js.download')}}"></script>
 <script src="{{asset('sweetalert/bootstrap.min.js.download')}}"></script>
 <script src="{{asset('sweetalert/sweetalert2.min.js.download')}}"></script>
-<script type="text/javascript">
-    // function checksubtodo($id) {
-    //     Swal.fire({
-    //         title: 'Tandai tugas selesaii?',
-    //         text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesaiiii!" + $id,
-    //         type: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Ya'
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             window.location = "/checked/".$id;
-    //         }
-    //     })
-    // }
-    $(document).ready(function() {
-        $("#confirm").click(function($id) {
-            Swal.fire({
-                title: 'Tandai tugas selesai?',
-                text: "Notifikasi akan muncul melalui email Anda dan Penanggung Jawab Project!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya'
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire(
-                        'Berhasil!',
-                        'Notifikasi telah terkirim',
-                        'success'
-                    )
-                    window.location = "/send-mail/".$id;
-                }
-            })
-        });
-
-        $("#checkedSubtodo").click(function($id) {
-            Swal.fire({
-                title: 'Tandai tugas selesai?',
-                text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai!" + $id,
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya'
-            }).then((result) => {
-                if (result.value) {
-                    window.location = "/checked/".$id;
-                }
-            })
-        });
-    });
-</script>
 <script>
     $(document).ready(function() {
         // $(document).on('click', '.todocheck', function(e){

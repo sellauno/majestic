@@ -109,38 +109,38 @@
                     <input type="hidden" name="idProject" value="{{$project->idProject}}">
                     <input type="hidden" name="idUser" value="{{$idUser}}">
                     <!-- <input class="form-check-input" type="checkbox" value="" id="todocheck" onclick="checkedCheckbox()"> -->
-                    <input class="form-check-input" type="checkbox" id="confirm" onclick="confirm({{$checklist->idsubtodo}}); this.checked=!this.checked;" @if($checklist->checked == true) checked disabled @endif>
+                    <input class="form-check-input" type="checkbox" data-id="{{$checklist->idsubtodo}}" onclick="document.getElementById('confirm-{{$checklist->idsubtodo}}').click(); this.checked=!this.checked;" @if($checklist->checked == true) checked disabled @endif>
                     <label class="custom-control-label <?php if (
                                                           $checklist->deadline < now()
                                                         ) {
                                                           echo "text-danger";
                                                         } ?>" for="todocheck">{{$checklist->toDO}} {{$checklist->subtodo}} </label>
-                    <p id="text" style="display:none">Checkbox is CHECKED!</p>
-                    <a data-id="{{$checklist->idChecklist}}" type="button" style="display:none" class="btn btn-primary" id="confirm">
-                      Confirm
-                    </a>
-                    <script type="text/javascript">
-                      function confirm($id) {
-                        Swal.fire({
-                          title: 'Tandai tugas selesai?',
-                          text: "Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai",
-                          type: 'warning',
-                          showCancelButton: true,
-                          confirmButtonColor: '#3085d6',
-                          cancelButtonColor: '#d33',
-                          confirmButtonText: 'Ya'
-                        }).then((result) => {
-                          if (result.value) {
-                            Swal.fire(
-                              'Berhasil!'.$idChecklist,
-                              'Tugas selesai',
-                              'success'
-                            )
-                            window.location = "/checked/" + $id;
-                          }
-                        })
-                      };
-                    </script>
+                    <!-- Modal Confirm Check -->
+                    <button type="button" style="display:none" id="confirm-{{$checklist->idsubtodo}}" data-bs-toggle="modal" data-bs-target="#modal-notification-{{$checklist->idsubtodo}}">Notification</button>
+                    <div class="modal fade" id="modal-notification-{{$checklist->idsubtodo}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                      <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="py-3 text-center">
+                              <i class="ni ni-bell-55 ni-3x"></i>
+                              <h4 class="text-gradient text-danger mt-4">Tandai tugas {{$checklist->toDO}} {{$checklist->subtodo}} selesai?</h4>
+                              <p>Seluruh anggota dalam proyek dapat melihat tugas ini telah selesai</p>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="{{route('checked', ['id' => $checklist->idsubtodo])}}" class="btn btn-info">Ya</a>
+                            <button type="button" class="btn btn-danger ml-auto" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Modal Confirm Check -->
                     <p class="text-xs">{{$checklist->deadline}}
                       &nbsp;
                       <a href="{{route('addFile', ['id' => $checklist->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
