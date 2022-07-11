@@ -69,21 +69,6 @@
                       </div>
                     </div>
                   </td>
-                  <td class="align-middle">
-                    <?php if ($loop->iteration != 1 && ($loop->iteration == count($projects) || $loop->iteration == count($projects) - 1)) { ?>
-                      <div class="dropup">
-                      <?php } else { ?>
-                        <div class="dropdown">
-                        <?php } ?>
-                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Action
-                        </button>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
-                          <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
-                          <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
-                        </ul>
-                        </div>
-                  </td>
                 </tr>
                 @endforeach
               </tbody>

@@ -58,7 +58,7 @@
         var elements = [],
             rootElement = document.createElement('tr');
 
-        elements.push('<td><input type="text" class="form-control" name="proses[]" placeholder="Nama Layanan" aria-label="Layanan" required></td>');
+        elements.push('<td><input type="text" class="form-control" name="proses[]" placeholder="Tahap Pengerjaan" aria-label="Tahap Pengerjaan" required></td>');
 
         rootElement.innerHTML = elements.join('');
 

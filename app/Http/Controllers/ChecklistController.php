@@ -523,6 +523,8 @@ class ChecklistController extends Controller
         $addprogres = $l / $c->c / $sub->total;
         $project = Project::find($idProject->idProject);
         $progres = $project->progres + $addprogres;
+        $project->progres = $progres;
+        $project->save();
         
         return redirect()->back();
     }

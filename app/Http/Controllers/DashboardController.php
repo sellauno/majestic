@@ -17,11 +17,6 @@ class DashboardController extends Controller
             ->where('projects.finished', '!=', true)
             ->get();
         $clients = Client::all();
-        $links = Link::all();
-        $reels = DB::table('links')->where('kategori', '=', 'reels')->get();
-        $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
-        $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
-        $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
         $layanan = DB::table('layanan')
             ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
             ->get();
@@ -50,11 +45,6 @@ class DashboardController extends Controller
         return view('dashboard', [
             'projects' => $projects,
             'clients' => $clients,
-            'links' => $links,
-            'feeds' => $feeds,
-            'tiktoks' => $tiktoks,
-            'reels' => $reels,
-            'stories' => $stories,
             'layanan' => $layanan,
         ]);
     }
@@ -69,11 +59,6 @@ class DashboardController extends Controller
             ->where('teams.idUser', '=', $idUser)
             ->get();
         $clients = Client::all();
-        $links = Link::all();
-        $reels = DB::table('links')->where('kategori', '=', 'reels')->get();
-        $feeds = DB::table('links')->where('kategori', '=', 'feeds')->get();
-        $tiktoks = DB::table('links')->where('kategori', '=', 'tiktok')->get();
-        $stories = DB::table('links')->where('kategori', '=', 'stories')->get();
         $layanan = DB::table('layanan')
             ->join('jenislayanan', 'layanan.idKategori', '=', 'jenislayanan.idKategori')
             ->get();
@@ -93,11 +78,6 @@ class DashboardController extends Controller
         return view('dashboarduser', [
             'projects' => $projects,
             'clients' => $clients,
-            'links' => $links,
-            'feeds' => $feeds,
-            'tiktoks' => $tiktoks,
-            'reels' => $reels,
-            'stories' => $stories,
             'checklists' => $checklists,
             'idUser' => $idUser,
             'komentar' => $komentar,
