@@ -52,6 +52,7 @@ Route::post('/createproject', 'ProjectController@createProject')->name('createPr
 Route::get('/editproject/{id}', 'ProjectController@editProject')->name('editProject')->middleware('auth', 'admin');
 Route::post('/updateproject/{id}', 'ProjectController@updateProject')->name('updateProject')->middleware('auth');
 Route::get('/deleteproject/{id}', 'ProjectController@deleteProject')->name('deleteProject')->middleware('auth', 'admin');
+Route::get('/finishproject/{id}', 'ProjectController@finishProject')->name('finishProject')->middleware('auth', 'admin');
 
 //Kategori
 Route::post('/createkategori', 'KategoriController@createKategori')->name('createKategori')->middleware('auth');

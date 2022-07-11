@@ -78,22 +78,50 @@
                       <?php } else { ?>
                         <div class="dropdown">
                         <?php } ?>
-                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-exclamation-circle text-xs"></i>
-                        </button>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable1">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
-                        </ul>
+
                         <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <!-- <i class="fa fa-exclamation-circle text-xs"></i> -->
                           Action
                         </button>
                         <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable">
                           <li><a class="dropdown-item border-radius-md" href="{{route('editProject', ['id' => $project->idProject])}}"><i class="fa fa-pencil text-xs"></i> Edit</a></li>
                           <li><a class="dropdown-item border-radius-md text-danger text-gradient" href="{{route('deleteProject', ['id' => $project->idProject])}}"><i class="fa fa-trash text-xs"></i> Delete</a></li>
                         </ul>
+
+                        <!-- <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-exclamation-circle text-xs"></i>
+                        </button>
+                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable1">
+                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
+                          <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
+                        </ul> -->
+                        @if($project->progres == 100)
+                        <button class="btn btn-outline-success text-success mb-0 cursor-pointer" id="confirm-{{$project->idProject}}" data-bs-toggle="modal" data-bs-target="#modal-notification-{{$project->idProject}}">
+                          <i class="fa fa-exclamation-circle text-xs"></i> Selesai
+                        </button>
+                        <div class="modal fade" id="modal-notification-{{$project->idProject}}" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                          <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="py-3 text-center">
+                                  <i class="ni ni-bell-55 ni-3x"></i>
+                                  <h4 class="text-gradient text-danger mt-4">Tandai {{$project->namaClient}} selesai?</h4>
+                                  <p>Project yang sudah ditandai selesai tidak dapat di edit lagi</p>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <a href="{{route('finishProject', ['id' => $project->idProject])}}" class="btn btn-info">Ya</a>
+                                <button type="button" class="btn btn-danger ml-auto" data-bs-dismiss="modal">Cancel</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        @endif
                         </div>
                   </td>
                 </tr>

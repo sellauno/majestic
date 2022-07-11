@@ -332,7 +332,7 @@ class ProjectController extends Controller
             ->select('comment.*', 'users.name')
             ->where('comment.idProject', '=', $id)
             ->get();
-        
+
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
         //     $p->progres = $jumlah;
@@ -699,7 +699,7 @@ class ProjectController extends Controller
 
         // progress bar
 
-        $l = $layanan->count() !=0? 100 / $layanan->count() : 0;
+        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0;
 
         $c = DB::table('checklists')
             ->rightjoin('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
@@ -821,7 +821,7 @@ class ProjectController extends Controller
                 ]);
             }
         }
-        
+
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
                 Team::create([
@@ -988,11 +988,10 @@ class ProjectController extends Controller
     public function cari(Request $request)
     {
         $role = auth()->user()->role;
-        if($role == 'admin'){
+        if ($role == 'admin') {
             return redirect('project' . '/' . $request->id . '/' . $request->cari);
-        }else{
+        } else {
             return redirect('projectuser' . '/' . $request->id . '/' . $request->cari);
-
         }
         $keyword = $request->cari;
         $id = $request->id;
@@ -1134,5 +1133,20 @@ class ProjectController extends Controller
             'total' => $total,
             'cari' => 'show'
         ]);
+    }
+
+    public function finishProject($id)
+    {
+        $project = Project::find($id);
+        $status = '';
+        if($project->tglSelesai >= now()){
+            $status = 'Selesai';
+        }else{
+            $status = 'Terlambat';
+        }
+        $project->finished = true;
+        $project->status = $status;
+        $project->save();
+        return redirect()->back();
     }
 }
