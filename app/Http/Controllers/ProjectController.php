@@ -703,10 +703,12 @@ class ProjectController extends Controller
             ->get();
 
 
-        // progress bar
+        // PROGRESS BAR
 
-        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0;
+        // jumlah layanan 
+        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0; 
 
+        // jumlah seluruh checklist, presentase per checklist
         $c = DB::table('checklists')
             ->rightjoin('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
             ->where('layanan.idProject', '=', $id)
@@ -714,10 +716,12 @@ class ProjectController extends Controller
             ->groupBy('layanan.idLayanan')
             ->get();
 
+        // presentaseL = untuk presentase perlayanan
         foreach ($c as $key => $value) {
             $c[$key]->presentaseL = 0;
         }
 
+        // perchecklist : jumlah subtodo selesai, jumlah subtodo keseluruhan
         $e = DB::table('checklists')
             ->leftjoin(
                 DB::raw('(SELECT idChecklist, COUNT(*) finish 
@@ -737,12 +741,15 @@ class ProjectController extends Controller
             ->get();
 
         $sum = 0;
+
+        // presentase perchecklist
         foreach ($checklists as $key => $value) {
-            $presentase = $e[$key]->total == 0 ? 0 : $e[$key]->finish / $e[$key]->total * 100;
+            $presentase = $e[$key]->total == 0 ? 0 : $e[$key]->finish / $e[$key]->total * 100; // p checklist = subtodo selesai / subtodo total * 100
+            // per layanan
             foreach ($c as $d) {
-                if ($d->idLayanan == $checklists[$key]->idLayanan) {
-                    $sum += $presentase == 0 ? 0 : $l / $d->c * ($presentase  / 100);
-                    $d->presentaseL += $presentase / $d->c;
+                if ($d->idLayanan == $checklists[$key]->idLayanan) { // checklist dalam satu layanan
+                    $sum += $presentase == 0 ? 0 : $l / $d->c * ($presentase  / 100); // p project +=  jml layanan / jml checklist * (p subtodo / 100)
+                    $d->presentaseL += $presentase / $d->c; // p layanan = p subtodo / jml checklist
                 }
             }
             $checklists[$key]->presentase = round($presentase);
@@ -797,7 +804,8 @@ class ProjectController extends Controller
             'tglSelesai' => $request->tglSelesai,
             'harga' => $request->harga,
             'status' => $request->status,
-            'finished' => false
+            'finished' => false,
+            'progres' => 0
         ]);
 
         foreach ($request->idKategori as $key => $value) {
