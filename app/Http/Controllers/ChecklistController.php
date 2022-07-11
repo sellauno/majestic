@@ -487,9 +487,17 @@ class ChecklistController extends Controller
     public function checkedSubtodo($id)
     {
         $subtodo = Subtodo::find($id);
-        // dd($subtodo);
         $subtodo->checked = true;
         $subtodo->save();
+
+        // progress bar
+
+        $idProject = DB::table('subtodos')
+            ->join('checklists', 'subtodos.idChecklist', '=', 'checklists.idChecklist')
+            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->select('layanan.idProject')
+            ->where('subtodos.idsubtodo', '=', $id)
+            ->get();
         
         return redirect()->back();
     }

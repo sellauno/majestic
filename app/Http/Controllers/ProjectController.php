@@ -25,6 +25,11 @@ class ProjectController extends Controller
     {
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.finished', '!=', true)
+            ->get();
+        $projectsfinish = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.finished', true)
             ->get();
         $clients = Client::all();
         $links = Link::all();
@@ -59,6 +64,7 @@ class ProjectController extends Controller
 
         return view('projects', [
             'projects' => $projects,
+            'projectsfinish' => $projectsfinish,
             'clients' => $clients,
             'links' => $links,
             'feeds' => $feeds,
@@ -749,20 +755,11 @@ class ProjectController extends Controller
                 }
             }
         }
-
-        // dd($c, $layanan);
-
-        // dd($l, $c, $e, $layanan, $sum);
-        // end progress bar
-
-
         if ($project->progres != $sum) {
             $p = Project::find($id);
             $p->progres = $sum;
             $p->save();
         }
-
-        // dd($checklists);
 
         return view('projectdetail', [
             'id' => $id,
@@ -1139,9 +1136,9 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $status = '';
-        if($project->tglSelesai >= now()){
+        if ($project->tglSelesai >= now()) {
             $status = 'Selesai';
-        }else{
+        } else {
             $status = 'Terlambat';
         }
         $project->finished = true;
