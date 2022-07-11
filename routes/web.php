@@ -20,12 +20,12 @@ Route::get('/', function () {
     $user = App\User::first();
     // $user->notify(new Newvisit("A new user has visited on your application."));
     //    return view('welcome');
-});
+})->middleware('guest');
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard')->middleware('auth', 'admin');
