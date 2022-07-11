@@ -75,14 +75,6 @@
                       <?php } else { ?>
                         <div class="dropdown">
                         <?php } ?>
-                        <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-exclamation-circle text-xs"></i>
-                        </button>
-                        <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5" aria-labelledby="dropdownTable1">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Start : 10/10/2022</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;"><b> 10 Konten<b></a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Finish : 10/11/2022</a></li>
-                        </ul>
                         <button class="btn btn-link text-secondary mb-0 cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          Action
                         </button>

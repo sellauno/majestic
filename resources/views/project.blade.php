@@ -190,12 +190,7 @@
                                                                         })
                                                                     };
                                                                 </script>
-                                                                <p class="text-xs">{{$subtodo->deadline}}
-                                                                    &nbsp;
-                                                                    <a href="{{route('addFile', ['id' => $subtodo->idChecklist])}}" class="btn-link text-secondary mb-1" data-container="body" data-animation="true">
-                                                                        <i class="fa fa-paperclip text-xs"></i>
-                                                                    </a> &nbsp;
-                                                                </p>
+                                                                <p class="text-xs">{{$subtodo->deadline}}</p>
                                                             </div>
                                                         <?php } ?>
                                                         @endforeach
