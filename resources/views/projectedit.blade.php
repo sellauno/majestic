@@ -60,7 +60,7 @@
                             @foreach($layanan as $l)
                             <tr>
                                 <td>
-                                    <input type="hidden" name="idLayanan[]" value="{{$l->idLayanan}}">
+                                    <input type="hidden" name="idLayanan[]" value="{{$l->idLayanan}}" readonly>
                                     <div class="dropdown">
                                         <select id="idKategori" name="idKategori[]" class="form-control">
                                             @foreach($kategori as $kat)
@@ -70,10 +70,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="number" name="jumlah[]" value="{{$l->jumlah}}" class="form-control" placeholder="Jumlah" aria-label="Jumlah" required>
-                                </td>
-                                <td>
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{route('deleteLayanan', ['id' => $l->idLayanan])}}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    <input type="number" name="jumlah[]" value="{{$l->jumlah}}" class="form-control" placeholder="Jumlah" aria-label="Jumlah" readonly>
                                 </td>
                             </tr>
                             @endforeach

@@ -81,6 +81,13 @@ class ProjectController extends Controller
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
             ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('projects.finished', '!=', true)
+            ->where('teams.idUser', '=', $idUser)
+            ->get();
+        $projectsfinish = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('projects.finished', true)
             ->where('teams.idUser', '=', $idUser)
             ->get();
         $layanan = DB::table('layanan')
@@ -89,6 +96,7 @@ class ProjectController extends Controller
 
         return view('projectsuser', [
             'projects' => $projects,
+            'projectsfinish' => $projectsfinish,
             'layanan' => $layanan
         ]);
     }
@@ -706,7 +714,7 @@ class ProjectController extends Controller
         // PROGRESS BAR
 
         // jumlah layanan 
-        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0; 
+        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0;
 
         // jumlah seluruh checklist, presentase per checklist
         $c = DB::table('checklists')
