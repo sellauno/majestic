@@ -26,6 +26,6 @@ class notifications extends Component
         $user = auth()->user();
         $unReadCount = Notification::where("idUser", $user->id)->where("isRead", 0)->get()->count();
 
-        return view('components.notifications', ["count" => $unReadCount]);
+        return view('components.notifications', ["counts" => $unReadCount]);
     }
 }

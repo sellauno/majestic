@@ -30,7 +30,7 @@
                                                 <span class="input-group-text text-body">
                                                     <i class="fas fa-search" aria-hidden="true"></i>
                                                 </span>
-                                                <input type="text" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
+                                                <input type="text" style="padding-left:35px !important" name="cari" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
                                             </div>
                                         </div>
                                         <!-- <input type="text" name="cari" placeholder="Cari Kategori .." value="">
