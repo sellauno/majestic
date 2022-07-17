@@ -39,7 +39,7 @@ class LayananController extends Controller
         $layanan = Layanan::find($id);
         $idProject = $layanan->idProject;
         $layanan->delete();
-        return redirect('/editproject'. '/' . $idProject);
+        return redirect('/editproject' . '/' . $idProject);
     }
 
     // Jenis Layanan
@@ -51,7 +51,7 @@ class LayananController extends Controller
         foreach ($layanan as $key => $value) {
             $layanan[$key]->proses = json_decode($layanan[$key]->proses);
         }
-        
+
         return view('jenislayanan', ['layanan' => $layanan]);
     }
 
@@ -106,7 +106,12 @@ class LayananController extends Controller
     public function deleteJenisLayanan($id)
     {
         $layanan = Jenislayanan::find($id);
-        $layanan->delete();
-        return redirect('/jenislayanan');
+        $l = Layanan::where('idKategori', '=', $id);
+        if ($l->count() < 1) {
+            $layanan->delete();
+            return redirect('/jenislayanan');
+        } else {
+            return redirect('/jenislayanan')->with('error', 'Gagal dihapus!');;
+        }
     }
 }

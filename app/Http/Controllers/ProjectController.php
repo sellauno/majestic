@@ -994,8 +994,13 @@ class ProjectController extends Controller
     public function deleteProject($id)
     {
         $project = Project::find($id);
-        $project->delete();
-        return redirect('/dashboard');
+        $layanan = Layanan::where('idProject', '=', $id);
+        if ($layanan->count() < 1) {
+            $project->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Gagal dihapus!');;
+        }
     }
 
     public function cari(Request $request)
