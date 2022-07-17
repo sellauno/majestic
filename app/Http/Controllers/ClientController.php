@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -28,7 +29,7 @@ class ClientController extends Controller
     }
 
     public function editClient($id)
-    {        
+    {
         $client = Client::find($id);
         return view('clientedit', ['client' => $client]);
     }
@@ -45,7 +46,12 @@ class ClientController extends Controller
     public function deleteClient($id)
     {
         $client = Client::find($id);
-        $client->delete();
-        return redirect('/clients');
+        $p = Project::where('idClient', '=', $id);
+        if ($p->count() < 1) {
+            $client->delete();
+            return redirect('/clients');
+        } else {
+            return redirect('/clients')->with('error', 'Gagal dihapus!');;
+        }
     }
 }

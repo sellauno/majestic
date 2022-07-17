@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Illuminate\Http\Request;
 use App\User;
 use App\Posisi;
+use App\Team;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -17,11 +19,11 @@ class ProfileController extends Controller
     }
     public function update(Request $request)
     {
-    $request->user()->update(
-        $request->all()
-    );
+        $request->user()->update(
+            $request->all()
+        );
 
-    return redirect()->route('profiledit');
+        return redirect()->route('profiledit');
     }
 
     //account
@@ -35,7 +37,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function updateAccount(Request $request,$id)
+    public function updateAccount(Request $request, $id)
     {
         // $request->validate([
         //     'name' => 'required',
@@ -58,9 +60,23 @@ class ProfileController extends Controller
     public function deleteAccount($id)
     {
         $user = User::find($id);
-        $user->delete();
-
-        return redirect('/account');
+        if ($user->role == 'user') {
+            $team = Team::where('idUser', '=', $id);
+            if ($team->count() < 1) {
+                $user->delete();
+                return redirect('/account');
+            } else {
+                return redirect('/account')->with('error', 'Gagal dihapus!');;
+            }
+        } else {
+            $komen = Comment::where('idUser', '=', $id);
+            foreach ($komen as $k) {
+                $delkom = Comment::find($k->id);
+                $delkom->delete();
+            }
+            $user->delete();
+            return redirect('/account');
+        }
         // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 }

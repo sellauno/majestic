@@ -86,11 +86,6 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle">
-                                        <button class="btn btn-link text-secondary mb-0">
-                                            <i class="fa fa-ellipsis-v text-xs"></i>
-                                        </button>
-                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

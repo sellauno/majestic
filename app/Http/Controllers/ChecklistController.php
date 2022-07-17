@@ -487,9 +487,44 @@ class ChecklistController extends Controller
     public function checkedSubtodo($id)
     {
         $subtodo = Subtodo::find($id);
-        // dd($subtodo);
         $subtodo->checked = true;
         $subtodo->save();
+
+        // progress bar
+
+        $idProject = DB::table('subtodos')
+            ->join('checklists', 'subtodos.idChecklist', '=', 'checklists.idChecklist')
+            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->select('layanan.idProject', 'layanan.idKategori')
+            ->where('subtodos.idsubtodo', '=', $id)
+            ->first();
+
+        $layanan = DB::table('layanan')
+            ->where('layanan.idProject', '=', $idProject->idProject)
+            ->get();
+
+        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0;
+
+        $c = DB::table('checklists')
+            ->rightjoin('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->where('layanan.idProject', '=', $idProject->idProject)
+            ->where('layanan.idKategori', '=', $idProject->idKategori)
+            ->select(DB::raw('COUNT(checklists.idChecklist) as c'), DB::raw($l . '/ COUNT(checklists.idChecklist) as pc'), 'layanan.idLayanan')
+            ->groupBy('layanan.idLayanan')
+            ->first();
+
+        $sub = DB::table('checklists')
+            ->join('subtodos', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
+            ->select(DB::raw('COUNT(idsubtodo) AS total'))
+            ->where('checklists.idChecklist', '=', $subtodo->idChecklist)
+            ->first();
+
+        // p project +=  jml layanan / jml checklist * (p subtodo / 100)
+        $addprogres = $l / $c->c / $sub->total;
+        $project = Project::find($idProject->idProject);
+        $progres = $project->progres + $addprogres;
+        $project->progres = $progres;
+        $project->save();
         
         return redirect()->back();
     }

@@ -2,13 +2,13 @@
     <a href="javascript:;" class="nav-link text-body p-0 notifications" id="dropdownMenuButton" data-bs-toggle="dropdown"
         aria-expanded="false">
         <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
-        <span class="badge">{{ $count ? $count : ""}}</span>
+        <span class="badge">{{ $counts ?? '' }}</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" id="dropdown-notification"
         aria-labelledby="dropdownMenuButton">
     </ul>
 </li>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script>
     const getNotifications = () => {
         let _token = $('meta[name="csrf-token"]').attr('content');

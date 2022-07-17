@@ -24,8 +24,8 @@ class FileController extends Controller
         $todo = DB::table('subtodos')
             ->join('checklists', 'checklists.idChecklist', '=', 'subtodos.idChecklist')
             ->join('layanan', 'layanan.idLayanan', '=', 'checklists.idLayanan')
+            ->where('checklists.idChecklist', '=', $id)
             ->first();
-
         $foldermain = DB::table('folders')
             ->where('idProject', '=', $todo->idProject)
             ->where('kategori', '=', 'main')
@@ -62,7 +62,7 @@ class FileController extends Controller
         if ($request->fileUpload != null) {
             if ($request->kategori == 'file') {
                 $validator = Validator::make($request->all(), array(
-                    'fileUpload' => 'max:10000|mimes:application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                    'fileUpload' => 'max:10000'
                 ));
 
                 $validator->validate();
@@ -130,7 +130,7 @@ class FileController extends Controller
             ]);
         }
 
-        return redirect('/project' . '/user' .  '/' . $request->idProject);
+        return redirect('/projectuser' .  '/' . $request->idProject);
     }
 
     public function newFile()

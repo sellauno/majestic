@@ -25,6 +25,11 @@ class ProjectController extends Controller
     {
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.finished', '!=', true)
+            ->get();
+        $projectsfinish = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->where('projects.finished', true)
             ->get();
         $clients = Client::all();
         $links = Link::all();
@@ -59,6 +64,7 @@ class ProjectController extends Controller
 
         return view('projects', [
             'projects' => $projects,
+            'projectsfinish' => $projectsfinish,
             'clients' => $clients,
             'links' => $links,
             'feeds' => $feeds,
@@ -75,6 +81,13 @@ class ProjectController extends Controller
         $projects = DB::table('projects')
             ->join('clients', 'projects.idClient', '=', 'clients.idClient')
             ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('projects.finished', '!=', true)
+            ->where('teams.idUser', '=', $idUser)
+            ->get();
+        $projectsfinish = DB::table('projects')
+            ->join('clients', 'projects.idClient', '=', 'clients.idClient')
+            ->join('teams', 'projects.idProject', '=', 'teams.idProject')
+            ->where('projects.finished', true)
             ->where('teams.idUser', '=', $idUser)
             ->get();
         $layanan = DB::table('layanan')
@@ -83,6 +96,7 @@ class ProjectController extends Controller
 
         return view('projectsuser', [
             'projects' => $projects,
+            'projectsfinish' => $projectsfinish,
             'layanan' => $layanan
         ]);
     }
@@ -332,7 +346,7 @@ class ProjectController extends Controller
             ->select('comment.*', 'users.name')
             ->where('comment.idProject', '=', $id)
             ->get();
-        
+
         // if ($project->progres != $jumlah) {
         //     $p = Project::find($id);
         //     $p->progres = $jumlah;
@@ -697,21 +711,25 @@ class ProjectController extends Controller
             ->get();
 
 
-        // progress bar
+        // PROGRESS BAR
 
-        $l = $layanan->count() !=0? 100 / $layanan->count() : 0;
+        // jumlah layanan 
+        $l = $layanan->count() != 0 ? 100 / $layanan->count() : 0;
 
+        // jumlah seluruh checklist, presentase per checklist
         $c = DB::table('checklists')
-            ->join('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
+            ->rightjoin('layanan', 'checklists.idLayanan', '=', 'layanan.idLayanan')
             ->where('layanan.idProject', '=', $id)
             ->select(DB::raw('COUNT(checklists.idChecklist) as c'), DB::raw($l . '/ COUNT(checklists.idChecklist) as pc'), 'layanan.idLayanan')
             ->groupBy('layanan.idLayanan')
             ->get();
 
+        // presentaseL = untuk presentase perlayanan
         foreach ($c as $key => $value) {
             $c[$key]->presentaseL = 0;
         }
 
+        // perchecklist : jumlah subtodo selesai, jumlah subtodo keseluruhan
         $e = DB::table('checklists')
             ->leftjoin(
                 DB::raw('(SELECT idChecklist, COUNT(*) finish 
@@ -731,12 +749,15 @@ class ProjectController extends Controller
             ->get();
 
         $sum = 0;
+
+        // presentase perchecklist
         foreach ($checklists as $key => $value) {
-            $presentase = $e[$key]->total == 0 ? 0 : $e[$key]->finish / $e[$key]->total * 100;
+            $presentase = $e[$key]->total == 0 ? 0 : $e[$key]->finish / $e[$key]->total * 100; // p checklist = subtodo selesai / subtodo total * 100
+            // per layanan
             foreach ($c as $d) {
-                if ($d->idLayanan == $checklists[$key]->idLayanan) {
-                    $sum += $presentase == 0 ? 0 : $l / $d->c * ($presentase  / 100);
-                    $d->presentaseL += $presentase / $d->c;
+                if ($d->idLayanan == $checklists[$key]->idLayanan) { // checklist dalam satu layanan
+                    $sum += $presentase == 0 ? 0 : $l / $d->c * ($presentase  / 100); // p project +=  jml layanan / jml checklist * (p subtodo / 100)
+                    $d->presentaseL += $presentase / $d->c; // p layanan = p subtodo / jml checklist
                 }
             }
             $checklists[$key]->presentase = round($presentase);
@@ -749,20 +770,11 @@ class ProjectController extends Controller
                 }
             }
         }
-
-        // dd($c, $layanan);
-
-        // dd($l, $c, $e, $layanan, $sum);
-        // end progress bar
-
-
         if ($project->progres != $sum) {
             $p = Project::find($id);
             $p->progres = $sum;
             $p->save();
         }
-
-        // dd($checklists);
 
         return view('projectdetail', [
             'id' => $id,
@@ -800,16 +812,29 @@ class ProjectController extends Controller
             'tglSelesai' => $request->tglSelesai,
             'harga' => $request->harga,
             'status' => $request->status,
-            'finished' => false
+            'finished' => false,
+            'progres' => 0
         ]);
 
-        foreach ($request->idLayanan as $key => $value) {
-            $layanan = Layanan::find($request->idLayanan[$key]);
-            $layanan->idKategori = $request->idKategori[$key];
-            $layanan->jumlah = $request->jumlah[$key];
-            $layanan->save();
+        foreach ($request->idKategori as $key => $value) {
+            $layananid = Layanan::create([
+                'idProject' => $insert->idProject,
+                'idKategori' => $value,
+                'jumlah' => $request->jumlah[$key]
+            ]);
+
+            for ($i = 1; $i <= $request->jumlah[$key]; $i++) {
+                $layanan = Jenislayanan::find($request->idKategori[$key]);
+                $nama = $layanan->kategori . ' ' . $i;
+                Checklist::create([
+                    'idLayanan' => $layananid->idLayanan,
+                    'toDO' => $nama,
+                    'tglStart' => $request->tglMulai,
+                    'deadline' => $request->tglSelesai
+                ]);
+            }
         }
-        
+
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
                 Team::create([
@@ -832,49 +857,49 @@ class ProjectController extends Controller
 
         $client = Client::find($request->idClient);
         $name = $insert->idProject . '_' . $client->namaClient;
-        // Storage::disk('google')->makeDirectory($name);
-        // $details = Storage::disk("google")->getMetadata($name);
-        // $idFolderProject = $details['path'];
+        Storage::disk('google')->makeDirectory($name);
+        $details = Storage::disk("google")->getMetadata($name);
+        $idFolderProject = $details['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderProject,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'main'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderProject,
+            'idProject' => $insert->idProject,
+            'kategori' => 'main'
+        ]);
 
         $file = 'file_' . $name;
         $video = 'video_' . $name;
         $gambar = 'gambar_' . $name;
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
-        // $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
-        // $idFolderFile = $fileDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $file);
+        $fileDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $file);
+        $idFolderFile = $fileDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderFile,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'file'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderFile,
+            'idProject' => $insert->idProject,
+            'kategori' => 'file'
+        ]);
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
-        // $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
-        // $idFolderVideo = $videoDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $video);
+        $videoDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $video);
+        $idFolderVideo = $videoDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderVideo,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'video'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderVideo,
+            'idProject' => $insert->idProject,
+            'kategori' => 'video'
+        ]);
 
-        // Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
-        // $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
-        // $idFolderGambar = $gambarDetail['path'];
+        Storage::disk('google')->makeDirectory($idFolderProject . '/' . $gambar);
+        $gambarDetail = Storage::disk("google")->getMetadata($idFolderProject . '/' . $gambar);
+        $idFolderGambar = $gambarDetail['path'];
 
-        // Folder::create([
-        //     'folderId' => $idFolderGambar,
-        //     'idProject' => $insert->idProject,
-        //     'kategori' => 'gambar'
-        // ]);
+        Folder::create([
+            'folderId' => $idFolderGambar,
+            'idProject' => $insert->idProject,
+            'kategori' => 'gambar'
+        ]);
 
         if ($request->input('idPJ') != null) {
             foreach ($request->idPJ as $key => $value) {
@@ -898,7 +923,7 @@ class ProjectController extends Controller
             }
         }
 
-        return redirect('/dashboard');
+        return redirect('/projects');
     }
 
     public function editProject($id)
@@ -969,18 +994,22 @@ class ProjectController extends Controller
     public function deleteProject($id)
     {
         $project = Project::find($id);
-        $project->delete();
-        return redirect('/dashboard');
+        $layanan = Layanan::where('idProject', '=', $id);
+        if ($layanan->count() < 1) {
+            $project->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Gagal dihapus!');;
+        }
     }
 
     public function cari(Request $request)
     {
         $role = auth()->user()->role;
-        if($role == 'admin'){
+        if ($role == 'admin') {
             return redirect('project' . '/' . $request->id . '/' . $request->cari);
-        }else{
+        } else {
             return redirect('projectuser' . '/' . $request->id . '/' . $request->cari);
-
         }
         $keyword = $request->cari;
         $id = $request->id;
@@ -1122,5 +1151,20 @@ class ProjectController extends Controller
             'total' => $total,
             'cari' => 'show'
         ]);
+    }
+
+    public function finishProject($id)
+    {
+        $project = Project::find($id);
+        $status = '';
+        if ($project->tglSelesai >= now()) {
+            $status = 'Selesai';
+        } else {
+            $status = 'Terlambat';
+        }
+        $project->finished = true;
+        $project->status = $status;
+        $project->save();
+        return redirect()->back();
     }
 }

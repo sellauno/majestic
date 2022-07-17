@@ -21,7 +21,7 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <div class="accordion-button collapsed {{$cari}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLink" aria-expanded="true" aria-controls="collapseLink">
                                     <h6>Link</h6>
-                                    <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3 select2">
+                                    <form action="{{route('cari')}}" method="POST" class="position-absolute end-3 me-3">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$id}}">
                                         <!-- <form method="post" action="{{route('cari')}}"> -->
@@ -168,7 +168,7 @@
                                                                                                                 $subtodo->deadline < now()
                                                                                                             ) {
                                                                                                                 echo "text-danger";
-                                                                                                            } ?>" for="todocheck">{{$subtodo->subtodo}} </label>
+                                                                                                            } ?>" for="todocheck">{{$subtodo->toDO}} {{$subtodo->subtodo}} </label>
                                                                 <button type="button" style="display:none" class="btn btn-primary" id="confirm">
                                                                     Confirm
                                                                 </button>
@@ -194,7 +194,7 @@
                                                                         })
                                                                     };
                                                                 </script>
-                                                                <p class="text-xs">{{$subtodo->deadline}} </p>
+                                                                <p class="text-xs">{{$subtodo->deadline}}</p>
                                                             </div>
                                                         <?php } ?>
                                                         @endforeach
@@ -229,6 +229,7 @@
                                                     </ul>
                                                     <form method="post" action="{{ route('post.store') }}">
                                                         <input type="hidden" name="iduser" value="{{$user->id}}">
+                                                        <input type="hidden" name="idProject" value="{{$project->idProject}}">
                                                         <input type="hidden" name="name" value="{{$user->name}}">
                                                         <input type="hidden" name="komentator" value="{{auth()->user()->id}}">
                                                         @csrf

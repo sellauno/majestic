@@ -19,7 +19,11 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('auth.login');
+        if (auth()->user() == null) {
+            return view('auth.login');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
@@ -56,7 +60,7 @@ class AuthController extends Controller
                     ->withSuccess('You have Successfully loggedin');
             } else {
                 return redirect()->intended('client')
-                ->withSuccess('You have Successfully loggedin');
+                    ->withSuccess('You have Successfully loggedin');
             }
         }
 
@@ -78,12 +82,12 @@ class AuthController extends Controller
 
         $data = $request->all();
         // $check = $this->create($data);
-        $posisi ='';
+        $posisi = '';
         foreach ($request->posisi as $key => $value) {
-            if($key>0){
-                $posisi = $posisi.' & '.$value;
-            }else{
-                $posisi = $posisi.$value;
+            if ($key > 0) {
+                $posisi = $posisi . ' & ' . $value;
+            } else {
+                $posisi = $posisi . $value;
             }
         }
         User::create([
