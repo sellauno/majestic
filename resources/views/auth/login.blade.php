@@ -26,11 +26,21 @@
                 @endif
             </div>
 
+            <div class="form-group row">
+                              <div class="col-md-6 offset-md-4">
+                                  <div class="checkbox">
+                                      <label>
+                                          <a href="{{ route('forget.password.get') }}">Reset Password</a>
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>
+                          
             <!-- Checkbox -->
-            <div class="form-check d-flex justify-content-start mb-4">
+            <!-- <div class="form-check d-flex justify-content-start mb-4">
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
               <label class="form-check-label" for="form1Example3"> Remember password </label>
-            </div>
+            </div> -->
 
             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
 
