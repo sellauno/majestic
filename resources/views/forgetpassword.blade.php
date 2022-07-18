@@ -12,7 +12,7 @@
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
-                    <a href="http://customlaravelauth.co/{{$token}}/reset-password">Click Here</a>.
+                    <a href="http://localhost:8000/reset-password/{{$token}}">Click Here</a>.
                 </div>
             </div>
         </div>
