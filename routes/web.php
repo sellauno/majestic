@@ -142,6 +142,12 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('change-password', 'ChangePasswordController@index')->name('change.password')->middleware('auth');
 Route::post('change-password', 'ChangePasswordController@store')->middleware('auth');
 
+Route::get('/forget-password', 'ForgotPasswordController@getEmail')->name('forget.password.get');
+Route::post('/forget-password', 'ForgotPasswordController@postEmail')->name('change.password');
+
+Route::get('/reset-password/{token}', 'ResetPasswordController@getPassword');
+Route::post('/reset-password', 'ResetPasswordController@updatePassword');
+
 // Percobaan
 
 Route::get('test', function () {
@@ -153,7 +159,6 @@ Route::get('test', function () {
     $details = Storage::disk("google")->getMetadata('new');
     $cek = $details['path'];
     dd($cek);
-
 });
 
 Route::get('testfolder', function () {
@@ -162,11 +167,10 @@ Route::get('testfolder', function () {
     // $cek = $details['path'];
     // dd($cek);
     $id = '1BWpIR7YLfnDCh-bV1U9psaz5ZQjXnsib';
-    Storage::disk('google')->makeDirectory($id.'/folderbaru');
-    $details = Storage::disk("google")->getMetadata($id.'/folderbaru');
+    Storage::disk('google')->makeDirectory($id . '/folderbaru');
+    $details = Storage::disk("google")->getMetadata($id . '/folderbaru');
     $cek = $details['path'];
     dd($cek);
-
 });
 
 // Komentar
@@ -183,12 +187,12 @@ Route::get('/post/show/{id}', 'PostController@show')->name('post.show')->middlew
 Route::get('send-mail/{id}', 'ChecklistController@sendMail')->name('send-mail');
 Route::get('send-mail2/', 'ChecklistController@sendMail2')->name('send-mail2');
 // Route::get('send-mail', function () {
-   
-    $details = [
-        'title' => 'Mail from Majestic Creative',
-        'body' => 'Testing email'
-    ];
-   
+
+$details = [
+    'title' => 'Mail from Majestic Creative',
+    'body' => 'Testing email'
+];
+
 //     Mail::to('balqisatiq@gmail.com')->send(new \App\Mail\MyTestMail($details));
 //    return redirect('/dashboarduser');
 //     dd("Email is Sent.");
